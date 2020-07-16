@@ -1,0 +1,93 @@
+{
+  "name": "inconnect-chat-ui",
+  "version": "1.0.0",
+  "description": "Inconnect Chat UI Library",
+  "main": "build/index.js",
+  "module": "build/index.es.js",
+  "jsnext:main": "build/index.es.js",
+  "homepage": "",
+  "github": "",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "standard",
+    "format": "prettier-standard --format",
+    "test": "jest --coverage",
+    "storybook": "start-storybook",
+    "build-storybook": "build-storybook -c .storybook -o .storybook-site"
+  },
+  "keywords": [],
+  "author": "Sazzad Sazib",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/react": "^5.3.17",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@types/jest": "^24.0.24",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/storybook__addon-info": "^5.2.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "glamor": "^2.20.40",
+    "husky": "^4.2.3",
+    "jest": "^24.9.0",
+    "lint-staged": "^10.0.8",
+    "node-sass": "^4.13.1",
+    "prettier": "^1.19.1",
+    "prettier-standard": "^16.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "rollup": "^1.27.13",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "standard": "^14.3.1",
+    "standard-prettier": "^1.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
+  },
+  "peerDependencies": {
+    "react": "^16",
+    "react-dom": "^16"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "build/"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "node_modules/",
+      "build/"
+    ],
+    "globals": [
+      "describe",
+      "it",
+      "test",
+      "expect",
+      "afterAll",
+      "jest"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,html,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {}
+}
