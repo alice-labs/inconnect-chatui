@@ -7,25 +7,26 @@
 
 ## How to Use
 
-Install **[inconnect-chatui](https://github.com/alice-labs/inconnect-chatui)** as dependency
+Install **[inconnect-chat-ui](https://github.com/alice-labs/inconnect-chatui)** as dependency
 
 ```js
-npm i library-name --save
+npm i inconnect-chat-ui --save
 ```
 
 or if you use yarn
 
 ```js
-yarn install library-name
+yarn install inconnect-chat-ui
 ```
 
 In your component first import
 
 ```jsx
-import { ChatContainer } from 'library-name';
+import { TextMessage } from 'inconnect-chat-ui';
 ```
 
 ## API Documentation
+See Storybook
 
 | Prop           | Type                | Details                                                                                                                   |
 | -------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -66,3 +67,9 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 ### 16 July 2020 - v 1.0.0-alpha 
 - [x] Updated ChatUI Container
+
+### 19 July 2020 - v1.0.1
+- [x] Removed Container
+- [x] Add TextMessage
+- [x] Add NoteMessage
+

@@ -1,12 +1,15 @@
 {
   "name": "inconnect-chat-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inconnect Chat UI Library",
   "main": "build/index.js",
+  "files": [
+    "/build"
+  ],
   "module": "build/index.es.js",
   "jsnext:main": "build/index.es.js",
-  "homepage": "",
-  "github": "",
+  "homepage": "https://www.npmjs.com/package/inconnect-chat-ui",
+  "github": "https://github.com/alice-labs/inconnect-chatui",
   "scripts": {
     "build": "rollup -c",
     "lint": "standard",
