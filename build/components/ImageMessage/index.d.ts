@@ -9,6 +9,7 @@ interface Props {
     repliedBy?: string;
     showRepliedBy?: boolean;
     imagesWidth?: number | string;
+    showPreview?: boolean;
     [key: string]: any;
 }
 declare const ImageMessage: React.FC<Props>;

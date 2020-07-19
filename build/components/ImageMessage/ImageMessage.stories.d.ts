@@ -27,3 +27,14 @@ export declare const MulipleImages: {
         };
     };
 };
+export declare const WithPreview: {
+    (): JSX.Element;
+    story: {
+        parameters: {
+            info: {
+                inline: boolean;
+                text: string;
+            };
+        };
+    };
+};

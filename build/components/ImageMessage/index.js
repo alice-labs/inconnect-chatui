@@ -65,28 +65,30 @@ var msgTimeClass = css({
     marginTop: 3,
     color: '#c0cbd0',
 });
-var photoGrid = css({
-    display: 'grid',
-    gap: '1rem',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-    minWidth: '55%',
-    gridAutoRows: window.innerWidth > 1000 ? '300px' : window.innerWidth > 600 ? '200px' : '150px',
-});
-var card = css({
-    position: 'relative',
-    cursor: 'pointer',
-    overflow: 'hidden',
-});
-var cardElement = css({
-    backgroundSize: 'cover',
-    width: '100%',
-    height: '100%',
-    transition: 'all 0.2s ease-in',
-    borderRadius: 16,
-    position: 'relative',
-    ':hover': {
-        transform: 'scale(1.1)',
+var flexImageContainer = css({
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxWidth: '65%',
+    '@media(max-width: 600px)': {
+        maxWidth: '85%',
     },
+});
+var flexImageContainerDiv = css({
+    height: '200px',
+    flexGrow: 1,
+    cursor: 'pointer',
+    margin: '5px 5px 5px 0',
+    display: 'flex',
+    ':last-child': {
+        flexGrow: 10,
+    },
+});
+var flexImageContainerElement = css({
+    maxHeight: '100%',
+    minWidth: '100%',
+    objectFit: 'cover',
+    verticalAlign: 'bottom',
+    borderRadius: 5,
 });
 var imageViewerStyle = css({
     alignItems: 'center',
@@ -163,22 +165,20 @@ var closeOnClickStyle = css({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview"]);
     var _b = React.useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = React.useState(false), isShown = _c[0], setIsShown = _c[1];
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer : adminContainer) + className }, rest),
         !!text && (React.createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text)),
-        React.createElement("div", { className: "" + photoGrid }, !!images &&
+        React.createElement("div", { className: "" + flexImageContainer }, !!images &&
             images.length > 0 &&
-            images.map(function (imageItem, i) { return (React.createElement("div", { key: i, className: "" + card },
-                React.createElement("div", { className: "" + cardElement, onClick: function () {
+            images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, onClick: function () {
+                    if (showPreview) {
                         setCurrentImage(i);
                         setIsShown(true);
-                    }, style: {
-                        backgroundImage: "url('" + (!!imageItem
-                            ? imageItem
-                            : 'https://i.ibb.co/rkCBGSG/Artboard-1.png') + "')",
-                    } }))); })),
+                    }
+                } },
+                React.createElement("img", { className: "" + flexImageContainerElement, src: imageItem, key: i, width: '250px' }))); })),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
@@ -233,12 +233,14 @@ ImageMessage.propTypes = {
     msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     repliedBy: PropTypes.string,
     showRepliedBy: PropTypes.bool,
+    showPreview: PropTypes.bool,
 };
 ImageMessage.defaultProps = {
     style: {},
     className: '',
     text: '',
     showRepliedBy: false,
+    showPreview: false,
 };
 export default ImageMessage;
 //# sourceMappingURL=index.js.map
