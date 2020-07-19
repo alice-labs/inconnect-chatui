@@ -1,4 +1,5 @@
-import ChatContainer from './components/TextMessage';
+import TextMessage from './components/TextMessage';
+import NoteMessage from './components/NoteMessage';
 
 
-export { ChatContainer }
+export { TextMessage,NoteMessage }

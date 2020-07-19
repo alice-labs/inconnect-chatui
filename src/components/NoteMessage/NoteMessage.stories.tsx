@@ -1,6 +1,5 @@
 import * as React from 'react';
 import NoteMessage from './index';
-import TextMessage from './../TextMessage/index';
 
 import { withInfo } from '@storybook/addon-info';
 
@@ -16,13 +15,16 @@ export default { title: 'NoteMessage', decorators: [withInfo] };
 
 export const Container = () => (
   <div style={styleOfStoryContainer}>
-      <TextMessage type='user' text='hello admin' msgTime={'4h ago'}/>
-    <NoteMessage
-      note='Redirected to Product Team! please fix this As soon as possible'
-      msgTime={'4h ago'}
-      takenBy={'Mehran Kader'}
-    />
-      <TextMessage type='admin' text='hello User' msgTime={'4h ago'}/>
+      <NoteMessage
+          note='Redirected to Product Team! please fix this As soon as possible'
+          msgTime={'4h ago'}
+          takenBy={'Mehran Kader'}
+      />
+      <NoteMessage
+          note='Redirected to Product Team! please fix this As soon as possible,Redirected to Product Team! please fix this As soon as possible'
+          msgTime={'4h ago'}
+          takenBy={'Mehran Kader'}
+      />
   </div>
 );
 

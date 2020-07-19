@@ -7,6 +7,7 @@ const noteContainer = css({
   flexDirection: 'column',
   alignItems: 'center',
 });
+
 const noteColor = css({
   background: '#feefc3',
   padding: '10px 15px',

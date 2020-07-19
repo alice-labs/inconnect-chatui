@@ -4045,5 +4045,51 @@ TextMessage.defaultProps = {
     showRepliedBy: false,
 };
 
-export { TextMessage as ChatContainer };
+var noteContainer = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+});
+var noteColor = lib_18({
+    background: '#feefc3',
+    padding: '10px 15px',
+    borderRadius: 5,
+    textAlign: 'center',
+    width: '50%',
+    marginBottom: '10px',
+});
+var noteInfo = lib_18({
+    textAlign: 'right',
+    margin: '10px 0px 5px',
+    fontSize: '0.7rem',
+    textTransform: 'uppercase',
+    color: '#9e9067',
+});
+var TextMessage$1 = function (_a) {
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
+        createElement("div", { className: "" + noteColor },
+            note,
+            createElement("p", { className: "" + noteInfo },
+                "Note by: ",
+                !!takenBy ? takenBy : 'Unknown Admin',
+                !!msgTime && createElement("span", null,
+                    " \u2022 ",
+                    msgTime)))));
+};
+TextMessage$1.propTypes = {
+    style: propTypes.object,
+    className: propTypes.string,
+    note: propTypes.string,
+    type: propTypes.oneOf(['user', 'admin', 'bot']),
+    msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    takenBy: propTypes.string,
+};
+TextMessage$1.defaultProps = {
+    style: {},
+    className: '',
+    note: '',
+};
+
+export { TextMessage$1 as NoteMessage, TextMessage };
 //# sourceMappingURL=index.es.js.map

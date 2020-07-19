@@ -73,3 +73,6 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 - [x] Add TextMessage
 - [x] Add NoteMessage
 
+### 19 July 2020 - v1.0.2
+- [x] Fixed Import
+
