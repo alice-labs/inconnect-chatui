@@ -1,4 +1,4 @@
-import { createElement, Fragment } from 'react';
+import { createElement, Fragment, useState } from 'react';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3988,7 +3988,7 @@ var textBlockAdmin = lib_18({
     background: '#184D47',
     color: 'white',
     cursor: 'pointer',
-    borderRadius: 5,
+    borderRadius: 16,
     ':hover': {
         background: '#143f3a',
     },
@@ -3996,16 +3996,16 @@ var textBlockAdmin = lib_18({
 var textBlockUser = lib_18({
     background: '#e5e9ee',
     color: '#232c41',
-    borderRadius: 5,
+    borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
         background: '#e1e5ea',
     },
 });
 var globalTextBlock = lib_18({
-    maxWidth: '65%',
+    maxWidth: '60%',
     wordWrap: 'break-word',
-    padding: '6px 12px 7px',
+    padding: '8px 16px 8px',
     fontSize: '1rem',
     width: 'fit-content',
     marginBottom: 2,
@@ -4017,15 +4017,15 @@ var msgTimeClass = lib_18({
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, type = _a.type, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "type", "text", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (type === 'user' ? userContainer : adminContainer) + className }, rest),
-        createElement("div", { className: globalTextBlock + " " + (type === 'user' ? textBlockUser : textBlockAdmin) }, text),
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "text", "msgTime", "repliedBy", "showRepliedBy"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer : adminContainer) + className }, rest),
+        createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text),
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
                 " \u00A0 "),
             ' ',
-            type === 'admin' && showRepliedBy && createElement(Fragment, null,
+            userType === 'admin' && showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy)))));
 };
@@ -4033,7 +4033,7 @@ TextMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
     text: propTypes.string,
-    type: propTypes.oneOf(['user', 'admin', 'bot']),
+    userType: propTypes.oneOf(['user', 'admin', 'bot']),
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
@@ -4091,5 +4091,223 @@ TextMessage$1.defaultProps = {
     note: '',
 };
 
-export { TextMessage$1 as NoteMessage, TextMessage };
+var userContainer$1 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+});
+var adminContainer$1 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+});
+var textBlockAdmin$1 = lib_18({
+    background: '#184D47',
+    color: 'white',
+    cursor: 'pointer',
+    borderRadius: 16,
+    ':hover': {
+        background: '#143f3a',
+    },
+});
+var textBlockUser$1 = lib_18({
+    background: '#e5e9ee',
+    color: '#232c41',
+    borderRadius: 16,
+    cursor: 'pointer',
+    ':hover': {
+        background: '#e1e5ea',
+    },
+});
+var globalTextBlock$1 = lib_18({
+    maxWidth: '60%',
+    wordWrap: 'break-word',
+    padding: '8px 16px 8px',
+    fontSize: '1rem',
+    width: 'fit-content',
+    marginBottom: 6,
+});
+var msgTimeClass$1 = lib_18({
+    fontSize: '0.8rem',
+    marginBottom: 10,
+    marginTop: 3,
+    color: '#c0cbd0',
+});
+var photoGrid = lib_18({
+    display: 'grid',
+    gap: '1rem',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+    minWidth: '55%',
+    gridAutoRows: window.innerWidth > 1000 ? '300px' : window.innerWidth > 600 ? '200px' : '150px',
+});
+var card = lib_18({
+    position: 'relative',
+    cursor: 'pointer',
+    overflow: 'hidden',
+});
+var cardElement = lib_18({
+    backgroundSize: 'cover',
+    width: '100%',
+    height: '100%',
+    transition: 'all 0.2s ease-in',
+    borderRadius: 16,
+    position: 'relative',
+    ':hover': {
+        transform: 'scale(1.1)',
+    },
+});
+var imageViewerStyle = lib_18({
+    alignItems: 'center',
+    boxSizing: 'border-box',
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    left: '0px',
+    padding: 10,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: 2001,
+    flexDirection: 'column',
+});
+var imagePreview = lib_18({
+    width: 'auto',
+    height: '70vh',
+    marginTop: '-10vh',
+    borderRadius: 5,
+    zIndex: 999,
+    '@media(max-width: 600px)': {
+        width: '65%',
+        height: 'auto',
+    },
+});
+var closeButton = lib_18({
+    height: 30,
+    width: 30,
+    position: 'absolute',
+    top: 30,
+    right: 40,
+    cursor: 'pointer',
+    transform: 'scale(1.0)',
+    transition: 'all 0.2s ease-in',
+    zIndex: 999,
+    ':hover': {
+        transform: 'scale(1.2)',
+    },
+});
+var arrowLeft = lib_18({
+    height: 30,
+    width: 30,
+    position: 'absolute',
+    left: 30,
+    top: '48%',
+    cursor: 'pointer',
+    transform: 'scale(1.0)',
+    transition: 'all 0.1s ease-in',
+    zIndex: 999,
+    ':hover': {
+        transform: 'scale(1.1)',
+    },
+});
+var arrowRight = lib_18({
+    height: 30,
+    width: 30,
+    position: 'absolute',
+    right: 30,
+    top: '48%',
+    cursor: 'pointer',
+    transform: 'scale(1.0)',
+    transition: 'all 0.1s ease-in',
+    zIndex: 999,
+    ':hover': {
+        transform: 'scale(1.1)',
+    },
+});
+var closeOnClickStyle = lib_18({
+    background: 'transparent',
+    height: '100%',
+    width: '100%',
+    position: 'fixed',
+    zIndex: 1,
+});
+var ImageMessage = function (_a) {
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth"]);
+    var _b = useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
+    var _c = useState(false), isShown = _c[0], setIsShown = _c[1];
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer$1 : adminContainer$1) + className }, rest),
+        !!text && (createElement("div", { className: globalTextBlock$1 + " " + (userType === 'user' ? textBlockUser$1 : textBlockAdmin$1) }, text)),
+        createElement("div", { className: "" + photoGrid }, !!images &&
+            images.length > 0 &&
+            images.map(function (imageItem, i) { return (createElement("div", { key: i, className: "" + card },
+                createElement("div", { className: "" + cardElement, onClick: function () {
+                        setCurrentImage(i);
+                        setIsShown(true);
+                    }, style: {
+                        backgroundImage: "url('" + (!!imageItem
+                            ? imageItem
+                            : 'https://i.ibb.co/rkCBGSG/Artboard-1.png') + "')",
+                    } }))); })),
+        (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$1 },
+            !!msgTime && createElement(Fragment, null,
+                msgTime,
+                " \u00A0 "),
+            ' ',
+            userType === 'admin' && showRepliedBy && createElement(Fragment, null,
+                "\u2022 \u00A0 ",
+                repliedBy))),
+        isShown && currentImage >= 0 && (createElement("div", { className: "" + imageViewerStyle, style: { background: "rgba(0, 0, 0, 0.8)" } },
+            createElement("img", { className: "" + imagePreview, src: (!!images && images[currentImage]) ||
+                    'https://i.ibb.co/rkCBGSG/Artboard-1.png', alt: 'image-preview' }),
+            createElement("svg", { className: "" + closeButton, onClick: function () {
+                    setIsShown(false);
+                    setCurrentImage(-1);
+                }, viewBox: '0 0 512 512' },
+                createElement("path", { d: 'm416 512h-320c-53.023438 0-96-42.976562-96-96v-320c0-53.023438 42.976562-96 96-96h320c53.023438 0 96 42.976562 96 96v320c0 53.023438-42.976562 96-96 96zm0 0', fill: 'rgba(255,255,255,0.5)' }),
+                createElement("g", { fill: 'rgba(255,255,255,0.9)' },
+                    createElement("path", { d: 'm342.734375 312.574219-143.308594-143.308594c-6.257812-6.257813-16.386719-6.257813-22.625 0l-7.535156 7.535156c-6.257813 6.253907-6.257813 16.382813 0 22.625l143.308594 143.308594c6.257812 6.257813 16.386719 6.257813 22.625 0l7.535156-7.535156c6.257813-6.253907 6.257813-16.382813 0-22.625zm0 0' }),
+                    createElement("path", { d: 'm312.574219 169.265625-143.308594 143.308594c-6.257813 6.257812-6.257813 16.386719 0 22.625l7.535156 7.535156c6.253907 6.257813 16.382813 6.257813 22.625 0l143.308594-143.308594c6.257813-6.257812 6.257813-16.386719 0-22.625l-7.535156-7.535156c-6.253907-6.257813-16.382813-6.257813-22.625 0zm0 0' }))),
+            createElement("svg", { "aria-hidden": 'true', focusable: 'false', onClick: function () {
+                    if (currentImage > 0) {
+                        setCurrentImage(currentImage - 1);
+                    }
+                }, role: 'img', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 448 512', className: "" + arrowLeft },
+                createElement("g", null,
+                    createElement("path", { fill: 'rgba(255,255,255,0.5)', d: 'M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48zM288 372.6c0 10.14-14.07 15.21-22.29 8L131.82 264a10.38 10.38 0 0 1 0-16.08l133.89-116.57c8.22-7.16 22.29-2.09 22.29 8.05z' }),
+                    createElement("path", { fill: 'rgba(255,255,255,0.9)', d: 'M288 372.6c0 10.14-14.07 15.21-22.29 8L131.82 264a10.38 10.38 0 0 1 0-16.08l133.89-116.57c8.22-7.16 22.29-2.09 22.29 8.05z' }))),
+            createElement("svg", { "aria-hidden": 'true', focusable: 'false', onClick: function () {
+                    var _a;
+                    var max = ((_a = images) === null || _a === void 0 ? void 0 : _a.length) || 0;
+                    if (currentImage < max - 1) {
+                        setCurrentImage(currentImage + 1);
+                    }
+                }, role: 'img', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 448 512', className: "" + arrowRight },
+                createElement("g", null,
+                    createElement("path", { fill: 'rgba(255,255,255,0.5)', d: 'M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48zm-83.82 232L182.29 380.65c-8.22 7.16-22.29 2.09-22.29-8V139.4c0-10.14 14.06-15.21 22.29-8.05L316.18 248a10.38 10.38 0 0 1 0 16z' }),
+                    createElement("path", { fill: 'rgba(255,255,255,0.9)', d: 'M316.18 264L182.29 380.65c-8.22 7.16-22.29 2.09-22.29-8V139.4c0-10.14 14.07-15.21 22.29-8.05L316.18 248a10.38 10.38 0 0 1 0 16z' }))),
+            createElement("div", { onClick: function () {
+                    {
+                        setIsShown(false);
+                        setCurrentImage(-1);
+                    }
+                }, className: "" + closeOnClickStyle })))));
+};
+ImageMessage.propTypes = {
+    style: propTypes.object,
+    className: propTypes.string,
+    text: propTypes.string,
+    image: propTypes.array,
+    imagesWidth: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    userType: propTypes.oneOf(['user', 'admin', 'bot']),
+    msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    repliedBy: propTypes.string,
+    showRepliedBy: propTypes.bool,
+};
+ImageMessage.defaultProps = {
+    style: {},
+    className: '',
+    text: '',
+    showRepliedBy: false,
+};
+
+export { ImageMessage, TextMessage$1 as NoteMessage, TextMessage };
 //# sourceMappingURL=index.es.js.map

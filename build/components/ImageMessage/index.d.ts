@@ -4,10 +4,12 @@ interface Props {
     className?: string;
     userType?: 'user' | 'admin' | 'bot';
     text?: string;
+    images?: string[];
     msgTime?: string | number;
     repliedBy?: string;
     showRepliedBy?: boolean;
+    imagesWidth?: number | string;
     [key: string]: any;
 }
-declare const TextMessage: React.FC<Props>;
-export default TextMessage;
+declare const ImageMessage: React.FC<Props>;
+export default ImageMessage;

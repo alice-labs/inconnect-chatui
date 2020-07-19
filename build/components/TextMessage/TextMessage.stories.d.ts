@@ -5,7 +5,7 @@ declare const _default: {
     decorators: (typeof withInfo)[];
 };
 export default _default;
-export declare const Container: {
+export declare const Example: {
     (): JSX.Element;
     story: {
         parameters: {

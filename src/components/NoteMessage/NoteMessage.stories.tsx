@@ -13,7 +13,7 @@ const styleOfStoryContainer = {
 
 export default { title: 'NoteMessage', decorators: [withInfo] };
 
-export const Container = () => (
+export const Example = () => (
   <div style={styleOfStoryContainer}>
       <NoteMessage
           note='Redirected to Product Team! please fix this As soon as possible'
@@ -28,7 +28,7 @@ export const Container = () => (
   </div>
 );
 
-Container.story = {
+Example.story = {
   parameters: {
     info: {
       inline: true,

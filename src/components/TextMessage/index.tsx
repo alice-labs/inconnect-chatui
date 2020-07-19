@@ -17,7 +17,7 @@ const textBlockAdmin = css({
   background: '#184D47',
   color: 'white',
   cursor: 'pointer',
-  borderRadius: 5,
+  borderRadius: 16,
   ':hover': {
     background: '#143f3a',
   },
@@ -25,7 +25,7 @@ const textBlockAdmin = css({
 const textBlockUser = css({
   background: '#e5e9ee',
   color: '#232c41',
-  borderRadius: 5,
+  borderRadius: 16,
   cursor: 'pointer',
   ':hover': {
     background: '#e1e5ea',
@@ -33,9 +33,9 @@ const textBlockUser = css({
 });
 
 const globalTextBlock = css({
-  maxWidth: '65%',
+  maxWidth: '60%',
   wordWrap: 'break-word',
-  padding: '6px 12px 7px',
+  padding: '8px 16px 8px',
   fontSize: '1rem',
   width: 'fit-content',
   marginBottom: 2,
@@ -51,7 +51,7 @@ const msgTimeClass = css({
 interface Props {
   style?: object;
   className?: string;
-  type?: 'user' | 'admin' | 'bot';
+  userType?: 'user' | 'admin' | 'bot';
   text?: string;
   msgTime?: string | number;
   repliedBy?: string;
@@ -62,7 +62,7 @@ interface Props {
 const TextMessage: React.FC<Props> = ({
   style,
   className,
-  type,
+  userType,
   text,
   msgTime,
   repliedBy,
@@ -73,13 +73,13 @@ const TextMessage: React.FC<Props> = ({
     <div
       style={{ ...style }}
       className={`${
-        type === 'user' ? userContainer : adminContainer
+        userType === 'user' ? userContainer : adminContainer
       }${className}`}
       {...rest}
     >
       <div
         className={`${globalTextBlock} ${
-          type === 'user' ? textBlockUser : textBlockAdmin
+          userType === 'user' ? textBlockUser : textBlockAdmin
         }`}
       >
         {text}
@@ -87,7 +87,7 @@ const TextMessage: React.FC<Props> = ({
       {(showRepliedBy || !!msgTime) && (
         <p className={`${msgTimeClass}`}>
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
-          {type === 'admin' && showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {userType === 'admin' && showRepliedBy && <>• &nbsp; {repliedBy}</>}
         </p>
       )}
     </div>
@@ -98,7 +98,7 @@ TextMessage.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   text: PropTypes.string,
-  type: PropTypes.oneOf(['user', 'admin', 'bot']),
+  userType: PropTypes.oneOf(['user', 'admin', 'bot']),
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
