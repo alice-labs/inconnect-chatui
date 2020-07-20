@@ -4315,6 +4315,109 @@ ImageMessage.defaultProps = {
     showPreview: false,
 };
 
+var adminContainer$2 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+});
+var textBlockAdmin$2 = lib_18({
+    background: '#184D47',
+    color: 'white',
+    cursor: 'pointer',
+    borderRadius: 16,
+    marginBottom: 10,
+    ':hover': {
+        background: '#143f3a',
+    },
+});
+var buttonBlockAdmin = lib_18({
+    background: '#e5e9ee',
+    color: '#232c41',
+    borderRadius: 16,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minWidth: '200px',
+    marginTop: 6,
+    ':hover': {
+        background: '#e1e5ea',
+    },
+});
+var btnElement = lib_18({
+    textAlign: 'center',
+    width: '100%',
+    margin: 3,
+    padding: '5px',
+    background: 'white',
+    boxShadow: '0px 0px 0px 1px #d2d2d2',
+    font: '400 13.3333px Arial',
+    ':hover': {
+        background: 'white',
+        boxShadow: '0px 0px 7px 1px #d2d2d2',
+    },
+    borderRadius: 5,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: 'none',
+    color: 'black',
+    fontSize: '0.88rem',
+    ':disabled': {
+        cursor: 'not-allowed',
+        background: '#eff3f8'
+    }
+});
+var aLinkWidthFix = lib_18({
+    width: '96%!important',
+});
+var globalTextBlock$2 = lib_18({
+    maxWidth: '60%',
+    wordWrap: 'break-word',
+    padding: '8px 16px 8px',
+    fontSize: '1rem',
+    width: 'fit-content',
+    marginBottom: 2,
+});
+var msgTimeClass$2 = lib_18({
+    fontSize: '0.8rem',
+    marginBottom: 5,
+    marginTop: 3,
+    color: '#c0cbd0',
+});
+var ButtonMessage = function (_a) {
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy"]);
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + adminContainer$2 + className }, rest),
+        React.createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 }, text),
+        !!buttonData && buttonData.length > 0 && React.createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
+            var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
+            return methodType === 'url' && !!!isDisabled ? React.createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title) : React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title);
+        })),
+        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$2 },
+            !!msgTime && React.createElement(React.Fragment, null,
+                msgTime,
+                " \u00A0 "),
+            ' ',
+            showRepliedBy && React.createElement(React.Fragment, null,
+                "\u2022 \u00A0 ",
+                repliedBy)))));
+};
+ButtonMessage.propTypes = {
+    style: propTypes.object,
+    className: propTypes.string,
+    text: propTypes.string,
+    msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    repliedBy: propTypes.string,
+    showRepliedBy: propTypes.bool,
+    buttonData: propTypes.any
+};
+ButtonMessage.defaultProps = {
+    style: {},
+    className: '',
+    text: '',
+    showRepliedBy: false,
+};
+
+exports.ButtonMessage = ButtonMessage;
 exports.ImageMessage = ImageMessage;
 exports.NoteMessage = TextMessage$1;
 exports.TextMessage = TextMessage;

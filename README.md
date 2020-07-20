@@ -1,5 +1,6 @@
 - banner
--badge
+
+- badge
 
 ## Demo
 
@@ -75,4 +76,10 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 ### 19 July 2020 - v1.0.2
 - [x] Fixed Import
+
+### 20 July 2020 - v1.0.3
+- [x] Image Message
+- [x] Button Message
+
+
 
