@@ -172,7 +172,7 @@ var ImageMessage = function (_a) {
         !!text && (React.createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text)),
         React.createElement("div", { className: "" + flexImageContainer }, !!images &&
             images.length > 0 &&
-            images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, onClick: function () {
+            images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
                     if (showPreview) {
                         setCurrentImage(i);
                         setIsShown(true);

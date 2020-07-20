@@ -4240,7 +4240,7 @@ var ImageMessage = function (_a) {
         !!text && (createElement("div", { className: globalTextBlock$1 + " " + (userType === 'user' ? textBlockUser$1 : textBlockAdmin$1) }, text)),
         createElement("div", { className: "" + flexImageContainer }, !!images &&
             images.length > 0 &&
-            images.map(function (imageItem, i) { return (createElement("div", { className: "" + flexImageContainerDiv, onClick: function () {
+            images.map(function (imageItem, i) { return (createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
                     if (showPreview) {
                         setCurrentImage(i);
                         setIsShown(true);
@@ -4413,5 +4413,111 @@ ButtonMessage.defaultProps = {
     showRepliedBy: false,
 };
 
-export { ButtonMessage, ImageMessage, TextMessage$1 as NoteMessage, TextMessage };
+var adminContainer$3 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+});
+var textBlockAdmin$3 = lib_18({
+    background: '#184D47',
+    color: 'white',
+    cursor: 'pointer',
+    borderRadius: 16,
+    marginBottom: 10,
+    ':hover': {
+        background: '#143f3a',
+    },
+});
+var buttonBlockAdmin$1 = lib_18({
+    background: '#e5e9ee',
+    color: '#232c41',
+    borderRadius: 16,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    minWidth: '200px',
+    marginTop: 6,
+    flexWrap: 'wrap',
+    ':hover': {
+        background: '#e1e5ea',
+    },
+});
+var btnElement$1 = lib_18({
+    textAlign: 'center',
+    width: '100%',
+    margin: 3,
+    padding: '5px 10px',
+    background: 'white',
+    boxShadow: '0px 0px 0px 1px #d2d2d2',
+    font: '400 13.3333px Arial',
+    flex: 1,
+    ':hover': {
+        background: 'white',
+        boxShadow: '0px 0px 7px 1px #d2d2d2',
+    },
+    borderRadius: 5,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: 'none',
+    color: 'black',
+    fontSize: '0.88rem',
+    whiteSpace: 'nowrap',
+    ':disabled': {
+        cursor: 'not-allowed',
+        background: '#eff3f8'
+    }
+});
+var aLinkWidthFix$1 = lib_18({
+    width: '96%!important',
+    whiteSpace: 'no-wrap',
+});
+var globalTextBlock$3 = lib_18({
+    maxWidth: '60%',
+    wordWrap: 'break-word',
+    padding: '8px 16px 8px',
+    fontSize: '1rem',
+    width: 'fit-content',
+    marginBottom: 2,
+});
+var msgTimeClass$3 = lib_18({
+    fontSize: '0.8rem',
+    marginBottom: 5,
+    marginTop: 3,
+    color: '#c0cbd0',
+});
+var QuickReplyMessage = function (_a) {
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + adminContainer$3 + className }, rest),
+        createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 }, text),
+        !!buttonData && buttonData.length > 0 && createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1 }, buttonData.map(function (_a, i) {
+            var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
+            return methodType === 'url' && !!!isDisabled ? createElement("a", __assign({ href: url, className: btnElement$1 + " " + aLinkWidthFix$1 + " " + className, style: style, target: '_blank', key: i }, rest), title) : createElement("button", __assign({ disabled: isDisabled, className: btnElement$1 + " " + className, style: style, onClick: action, key: i }, rest), title);
+        })),
+        (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$3 },
+            !!msgTime && createElement(Fragment, null,
+                msgTime,
+                " \u00A0 "),
+            ' ',
+            showRepliedBy && createElement(Fragment, null,
+                "\u2022 \u00A0 ",
+                repliedBy)))));
+};
+QuickReplyMessage.propTypes = {
+    style: propTypes.object,
+    className: propTypes.string,
+    text: propTypes.string,
+    msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    repliedBy: propTypes.string,
+    showRepliedBy: propTypes.bool,
+    buttonData: propTypes.any
+};
+QuickReplyMessage.defaultProps = {
+    style: {},
+    className: '',
+    text: '',
+    showRepliedBy: false,
+};
+
+export { ButtonMessage, ImageMessage, TextMessage$1 as NoteMessage, QuickReplyMessage, TextMessage };
 //# sourceMappingURL=index.es.js.map

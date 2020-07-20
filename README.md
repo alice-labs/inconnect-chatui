@@ -1,8 +1,7 @@
-- banner
 
-- badge
 
 ## Demo
+http://chatui.dev.inconnect.ai/
 
 [**See Demo Here**](https://inconnect.ai/component/demo)
 
@@ -27,11 +26,7 @@ import { TextMessage } from 'inconnect-chat-ui';
 ```
 
 ## API Documentation
-See Storybook
-
-| Prop           | Type                | Details                                                                                                                   |
-| -------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| x           | y | z |
+[**See Storybook**]('http://chatui.dev.inconnect.ai/')
 
 
 ## Develop
@@ -80,6 +75,13 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 ### 20 July 2020 - v1.0.3
 - [x] Image Message
 - [x] Button Message
+
+
+
+### 21 July 2020 - v1.0.3
+- [x] QuickReply Message
+
+
 
 
 

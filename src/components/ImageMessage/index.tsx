@@ -204,7 +204,7 @@ const ImageMessage: React.FC<Props> = ({
         {!!images &&
           images.length > 0 &&
           images.map((imageItem: string, i: number) => (
-            <div className={`${flexImageContainerDiv}`} onClick={()=>{
+            <div className={`${flexImageContainerDiv}`} key={i} onClick={()=>{
               if(showPreview){
                   setCurrentImage(i);
                   setIsShown(true);
