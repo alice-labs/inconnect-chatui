@@ -1,4 +1,4 @@
-
+<img src="https://github.com/alice-labs/inconnect-chatui/blob/master/src/assets/inconnect_logo.png?raw=true" width="60%">
 
 ## Demo
 http://chatui.dev.inconnect.ai/
