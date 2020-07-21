@@ -7,5 +7,5 @@ interface Props {
     takenBy?: string;
     [key: string]: any;
 }
-declare const TextMessage: React.FC<Props>;
-export default TextMessage;
+declare const NoteMessage: React.FC<Props>;
+export default NoteMessage;

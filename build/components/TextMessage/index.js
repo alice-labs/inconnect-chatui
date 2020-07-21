@@ -55,18 +55,18 @@ var globalTextBlock = css({
     maxWidth: '60%',
     wordWrap: 'break-word',
     padding: '8px 16px 8px',
-    fontSize: '1rem',
+    fontSize: '0.88rem',
     width: 'fit-content',
     marginBottom: 2,
 });
 var msgTimeClass = css({
-    fontSize: '0.8rem',
+    fontSize: '0.7rem',
     marginBottom: 10,
     marginTop: 3,
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showRepliedBy"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
             ? userType === 'user'
                 ? adminContainer
@@ -81,7 +81,7 @@ var TextMessage = function (_a) {
                 : userType === 'user'
                     ? textBlockUser
                     : textBlockAdmin) + " " + elementClassName }, text),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
+        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -101,12 +101,14 @@ TextMessage.propTypes = {
     consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
     elementStyle: PropTypes.object,
     elementClassName: PropTypes.string,
+    showInfo: PropTypes.bool,
 };
 TextMessage.defaultProps = {
     style: {},
     className: '',
     text: '',
     showRepliedBy: false,
+    showInfo: true,
 };
 export default TextMessage;
 //# sourceMappingURL=index.js.map

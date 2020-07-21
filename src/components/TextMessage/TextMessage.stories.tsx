@@ -30,6 +30,7 @@ export const ExampleAdmin = () => (
       text='How Can we help you?'
       consumer={'admin'}
       msgTime={'3h ago'}
+      showInfo={false}
     />
     <TextMessage
       userType='admin'
@@ -39,6 +40,7 @@ export const ExampleAdmin = () => (
       msgTime={'3h ago'}
       showRepliedBy={true}
       repliedBy={'John Doe'}
+      showInfo={true}
     />
     <TextMessage
       userType='user'

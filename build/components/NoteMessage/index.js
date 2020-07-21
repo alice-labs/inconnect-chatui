@@ -46,19 +46,18 @@ var noteInfo = css({
     textTransform: 'uppercase',
     color: '#9e9067',
 });
-var TextMessage = function (_a) {
+var NoteMessage = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
         React.createElement("div", { className: "" + noteColor },
             note,
             React.createElement("p", { className: "" + noteInfo },
-                "Note by: ",
-                !!takenBy ? takenBy : 'Unknown Admin',
-                !!msgTime && React.createElement("span", null,
+                !!msgTime && React.createElement("span", null, msgTime),
+                !!takenBy && React.createElement("span", null,
                     " \u2022 ",
-                    msgTime)))));
+                    takenBy)))));
 };
-TextMessage.propTypes = {
+NoteMessage.propTypes = {
     style: PropTypes.object,
     className: PropTypes.string,
     note: PropTypes.string,
@@ -66,10 +65,10 @@ TextMessage.propTypes = {
     msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     takenBy: PropTypes.string,
 };
-TextMessage.defaultProps = {
+NoteMessage.defaultProps = {
     style: {},
     className: '',
     note: '',
 };
-export default TextMessage;
+export default NoteMessage;
 //# sourceMappingURL=index.js.map

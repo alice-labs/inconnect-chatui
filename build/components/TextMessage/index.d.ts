@@ -10,6 +10,7 @@ interface Props {
     showRepliedBy?: boolean;
     elementStyle?: object;
     elementClassName?: string;
+    showInfo?: boolean;
     [key: string]: any;
 }
 declare const TextMessage: React.FC<Props>;

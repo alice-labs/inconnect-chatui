@@ -36,13 +36,13 @@ const globalTextBlock = css({
   maxWidth: '60%',
   wordWrap: 'break-word',
   padding: '8px 16px 8px',
-  fontSize: '1rem',
+  fontSize: '0.88rem',
   width: 'fit-content',
   marginBottom: 2,
 });
 
 const msgTimeClass = css({
-  fontSize: '0.8rem',
+  fontSize: '0.7rem',
   marginBottom: 10,
   marginTop: 3,
   color: '#c0cbd0',
@@ -59,6 +59,7 @@ interface Props {
   showRepliedBy?: boolean;
   elementStyle?: object;
   elementClassName?: string;
+  showInfo?: boolean;
   [key: string]: any;
 }
 
@@ -72,6 +73,7 @@ const TextMessage: React.FC<Props> = ({
   repliedBy,
   elementStyle,
   elementClassName,
+                                          showInfo,
   showRepliedBy,
   ...rest
 }) => {
@@ -103,7 +105,7 @@ const TextMessage: React.FC<Props> = ({
       >
         {text}
       </div>
-      {(showRepliedBy || !!msgTime) && (
+      {showInfo && (showRepliedBy || !!msgTime) && (
         <p className={`${msgTimeClass}`}>
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
           {userType === 'admin' && showRepliedBy && <>• &nbsp; {repliedBy}</>}
@@ -124,6 +126,7 @@ TextMessage.propTypes = {
   consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
+    showInfo: PropTypes.bool,
 };
 
 TextMessage.defaultProps = {
@@ -131,6 +134,7 @@ TextMessage.defaultProps = {
   className: '',
   text: '',
   showRepliedBy: false,
+    showInfo: true,
 };
 
 export default TextMessage;

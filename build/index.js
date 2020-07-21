@@ -4010,18 +4010,18 @@ var globalTextBlock = lib_18({
     maxWidth: '60%',
     wordWrap: 'break-word',
     padding: '8px 16px 8px',
-    fontSize: '1rem',
+    fontSize: '0.88rem',
     width: 'fit-content',
     marginBottom: 2,
 });
 var msgTimeClass = lib_18({
-    fontSize: '0.8rem',
+    fontSize: '0.7rem',
     marginBottom: 10,
     marginTop: 3,
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showRepliedBy"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
             ? userType === 'user'
                 ? adminContainer
@@ -4036,7 +4036,7 @@ var TextMessage = function (_a) {
                 : userType === 'user'
                     ? textBlockUser
                     : textBlockAdmin) + " " + elementClassName }, text),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
+        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -4056,12 +4056,14 @@ TextMessage.propTypes = {
     consumer: propTypes.oneOf(['user', 'admin', 'bot']),
     elementStyle: propTypes.object,
     elementClassName: propTypes.string,
+    showInfo: propTypes.bool,
 };
 TextMessage.defaultProps = {
     style: {},
     className: '',
     text: '',
     showRepliedBy: false,
+    showInfo: true,
 };
 
 var noteContainer = lib_18({
@@ -4087,19 +4089,18 @@ var noteInfo = lib_18({
     textTransform: 'uppercase',
     color: '#9e9067',
 });
-var TextMessage$1 = function (_a) {
+var NoteMessage = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
         React.createElement("div", { className: "" + noteColor },
             note,
             React.createElement("p", { className: "" + noteInfo },
-                "Note by: ",
-                !!takenBy ? takenBy : 'Unknown Admin',
-                !!msgTime && React.createElement("span", null,
+                !!msgTime && React.createElement("span", null, msgTime),
+                !!takenBy && React.createElement("span", null,
                     " \u2022 ",
-                    msgTime)))));
+                    takenBy)))));
 };
-TextMessage$1.propTypes = {
+NoteMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
     note: propTypes.string,
@@ -4107,7 +4108,7 @@ TextMessage$1.propTypes = {
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     takenBy: propTypes.string,
 };
-TextMessage$1.defaultProps = {
+NoteMessage.defaultProps = {
     style: {},
     className: '',
     note: '',
@@ -4557,7 +4558,7 @@ QuickReplyMessage.defaultProps = {
 
 exports.ButtonMessage = ButtonMessage;
 exports.ImageMessage = ImageMessage;
-exports.NoteMessage = TextMessage$1;
+exports.NoteMessage = NoteMessage;
 exports.QuickReplyMessage = QuickReplyMessage;
 exports.TextMessage = TextMessage;
 //# sourceMappingURL=index.js.map

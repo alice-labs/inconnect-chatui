@@ -37,7 +37,7 @@ interface Props {
   [key: string]: any;
 }
 
-const TextMessage: React.FC<Props> = ({
+const NoteMessage: React.FC<Props> = ({
   style,
   className,
   note,
@@ -53,16 +53,16 @@ const TextMessage: React.FC<Props> = ({
     >
       <div className={`${noteColor}`}>
         {note}
-        <p className={`${noteInfo}`}>
-          Note by: {!!takenBy ? takenBy : 'Unknown Admin'}
-          {!!msgTime && <span> • {msgTime}</span>}
+          <p className={`${noteInfo}`}>
+          {!!msgTime && <span>{msgTime}</span>}
+          {!!takenBy && <span> • {takenBy}</span> }
         </p>
       </div>
     </div>
   );
 };
 
-TextMessage.propTypes = {
+NoteMessage.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   note: PropTypes.string,
@@ -71,10 +71,10 @@ TextMessage.propTypes = {
   takenBy: PropTypes.string,
 };
 
-TextMessage.defaultProps = {
+NoteMessage.defaultProps = {
   style: {},
   className: '',
   note: '',
 };
 
-export default TextMessage;
+export default NoteMessage;

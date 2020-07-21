@@ -85,6 +85,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 - [x] Added Consumer - this is chat window from perspective of user or admin (user | admin)
 - [x] Added element style and element class name for all chat bubble . using it for manual design override
 
+### 22 July 2020 - v1.0.6
+- [x] Minor Style Fixes
 
 
 

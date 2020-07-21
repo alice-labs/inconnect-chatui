@@ -11,7 +11,7 @@ var styleOfStoryContainer = {
 export default { title: 'NoteMessage', decorators: [withInfo] };
 export var Example = function () { return (React.createElement("div", { style: styleOfStoryContainer },
     React.createElement(NoteMessage, { note: 'Redirected to Product Team! please fix this As soon as possible', msgTime: '4h ago', takenBy: 'Mehran Kader' }),
-    React.createElement(NoteMessage, { note: 'Redirected to Product Team! please fix this As soon as possible,Redirected to Product Team! please fix this As soon as possible', msgTime: '4h ago', takenBy: 'Mehran Kader' }))); };
+    React.createElement(NoteMessage, { note: 'Redirected to Product Team! please fix this As soon as possible,Redirected to Product Team! please fix this As soon as possible', msgTime: '4h ago' }))); };
 Example.story = {
     parameters: {
         info: {
