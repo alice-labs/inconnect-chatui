@@ -39,7 +39,7 @@ var textBlockAdmin = css({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var textBlockUser = css({
@@ -48,7 +48,7 @@ var textBlockUser = css({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        background: '#e1e5ea',
+        filter: 'brightness(0.95)'
     },
 });
 var globalTextBlock = css({
@@ -66,9 +66,21 @@ var msgTimeClass = css({
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "text", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer : adminContainer) + className }, rest),
-        React.createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text),
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showRepliedBy"]);
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
+            ? userType === 'user'
+                ? adminContainer
+                : userContainer
+            : userType === 'user'
+                ? userContainer
+                : adminContainer) + className }, rest),
+        React.createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
+                ? userType === 'user'
+                    ? textBlockAdmin
+                    : textBlockUser
+                : userType === 'user'
+                    ? textBlockUser
+                    : textBlockAdmin) + " " + elementClassName }, text),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
@@ -86,6 +98,9 @@ TextMessage.propTypes = {
     msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     repliedBy: PropTypes.string,
     showRepliedBy: PropTypes.bool,
+    consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: PropTypes.object,
+    elementClassName: PropTypes.string,
 };
 TextMessage.defaultProps = {
     style: {},

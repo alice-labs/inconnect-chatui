@@ -8,55 +8,61 @@ const adminContainer = css({
   alignItems: 'flex-end',
 });
 
+const userContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
+
 const textBlockAdmin = css({
   background: '#184D47',
   color: 'white',
   cursor: 'pointer',
   borderRadius: 16,
-    marginBottom : 10,
+  marginBottom: 10,
   ':hover': {
-    background: '#143f3a',
+      filter: 'brightness(0.95)'
   },
 });
 const buttonBlockAdmin = css({
-    background: '#e5e9ee',
-    color: '#232c41',
-    borderRadius: 16,
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    minWidth: '200px',
-    marginTop:6,
-    ':hover': {
-        background: '#e1e5ea',
-    },
+  background: '#e5e9ee',
+  color: '#232c41',
+  borderRadius: 16,
+  cursor: 'pointer',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  minWidth: '200px',
+  marginTop: 0,
+  ':hover': {
+    background: '#e1e5ea',
+  },
 });
 const btnElement = css({
-    textAlign: 'center',
-    width: '100%',
-    margin: 3,
-    padding: '5px',
+  textAlign: 'center',
+  width: '100%',
+  margin: 3,
+  padding: '5px',
+  background: 'white',
+  boxShadow: '0px 0px 0px 1px #d2d2d2',
+  font: '400 13.3333px Arial',
+  ':hover': {
     background: 'white',
-    boxShadow: '0px 0px 0px 1px #d2d2d2',
-    font: '400 13.3333px Arial',
-    ':hover': {
-        background: 'white',
-        boxShadow: '0px 0px 7px 1px #d2d2d2',
-    },
-    borderRadius: 5,
-    textDecoration: 'none',
-    cursor: 'pointer',
-    border: 'none',
-    color: 'black',
-    fontSize: '0.88rem',
-    ':disabled':{
-      cursor: 'not-allowed',
-        background: '#eff3f8'
-    }
+    boxShadow: '0px 0px 7px 1px #d2d2d2',
+  },
+  borderRadius: 5,
+  textDecoration: 'none',
+  cursor: 'pointer',
+  border: 'none',
+  color: 'black',
+  fontSize: '0.88rem',
+  ':disabled': {
+    cursor: 'not-allowed',
+    background: '#eff3f8',
+  },
 });
-const aLinkWidthFix= css({
-    width: '96%!important',
+const aLinkWidthFix = css({
+  width: '96%!important',
 });
 
 const globalTextBlock = css({
@@ -74,24 +80,27 @@ const msgTimeClass = css({
   marginTop: 3,
   color: '#c0cbd0',
 });
-interface buttonDataProps{
+interface buttonDataProps {
   title: string;
-  methodType?: ('url' | 'function');
+  methodType?: 'url' | 'function';
   url?: string;
   action?: any;
   isDisabled?: boolean;
   className?: string;
   style?: object;
-    [key: string]: any;
-};
+  [key: string]: any;
+}
 interface Props {
   style?: object;
   className?: string;
   text?: string;
-    buttonData?: buttonDataProps[];
+  buttonData?: buttonDataProps[];
   msgTime?: string | number;
   repliedBy?: string;
   showRepliedBy?: boolean;
+  consumer?: 'user' | 'admin' | 'bot';
+  elementStyle?: object;
+  elementClassName?: string;
   [key: string]: any;
 }
 
@@ -99,29 +108,71 @@ const ButtonMessage: React.FC<Props> = ({
   style,
   className,
   text,
-    buttonData,
+  buttonData,
+  consumer,
   msgTime,
   repliedBy,
+  elementClassName,
+  elementStyle,
   showRepliedBy,
   ...rest
 }) => {
   return (
     <div
       style={{ ...style }}
-      className={`${adminContainer}${className}`}
+      className={`${
+        consumer === 'user' ? userContainer : adminContainer
+      }${className}`}
       {...rest}
     >
       <div
-        className={`${globalTextBlock} ${textBlockAdmin}`}
+        className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
+        style={elementStyle}
       >
         {text}
       </div>
-        {!!buttonData && buttonData.length > 0 && <div
-            className={`${globalTextBlock} ${buttonBlockAdmin}`}
-        >
-            {buttonData.map(({title,methodType,url,action,className,style,isDisabled,...rest}:buttonDataProps,i:number)=>methodType === 'url' && !!!isDisabled ? <a href={url} className={`${btnElement} ${aLinkWidthFix} ${className}`} style={style} target='_blank' key={i} {...rest}>{title}</a>:<button disabled={isDisabled} className={`${btnElement} ${className}`} style={style} onClick={action} key={i} {...rest}>{title}</button>)}
+      {!!buttonData && buttonData.length > 0 && (
+        <div className={`${globalTextBlock} ${buttonBlockAdmin}`}>
+          {buttonData.map(
+            (
+              {
+                title,
+                methodType,
+                url,
+                action,
+                className,
+                style,
+                isDisabled,
+                ...rest
+              }: buttonDataProps,
+              i: number
+            ) =>
+              methodType === 'url' && !!!isDisabled ? (
+                <a
+                  href={url}
+                  className={`${btnElement} ${aLinkWidthFix} ${className}`}
+                  style={style}
+                  target='_blank'
+                  key={i}
+                  {...rest}
+                >
+                  {title}
+                </a>
+              ) : (
+                <button
+                  disabled={isDisabled}
+                  className={`${btnElement} ${className}`}
+                  style={style}
+                  onClick={action}
+                  key={i}
+                  {...rest}
+                >
+                  {title}
+                </button>
+              )
+          )}
         </div>
-        }
+      )}
       {(showRepliedBy || !!msgTime) && (
         <p className={`${msgTimeClass}`}>
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
@@ -139,7 +190,10 @@ ButtonMessage.propTypes = {
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
-    buttonData: PropTypes.any
+  buttonData: PropTypes.any,
+  consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+  elementStyle: PropTypes.object,
+  elementClassName: PropTypes.string,
 };
 
 ButtonMessage.defaultProps = {

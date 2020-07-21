@@ -5,7 +5,18 @@ declare const _default: {
     decorators: (typeof withInfo)[];
 };
 export default _default;
-export declare const Example: {
+export declare const ExampleAdmin: {
+    (): JSX.Element;
+    story: {
+        parameters: {
+            info: {
+                inline: boolean;
+                text: string;
+            };
+        };
+    };
+};
+export declare const ExampleUser: {
     (): JSX.Element;
     story: {
         parameters: {

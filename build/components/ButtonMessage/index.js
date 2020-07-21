@@ -28,6 +28,11 @@ var adminContainer = css({
     flexDirection: 'column',
     alignItems: 'flex-end',
 });
+var userContainer = css({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+});
 var textBlockAdmin = css({
     background: '#184D47',
     color: 'white',
@@ -35,7 +40,7 @@ var textBlockAdmin = css({
     borderRadius: 16,
     marginBottom: 10,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var buttonBlockAdmin = css({
@@ -47,7 +52,7 @@ var buttonBlockAdmin = css({
     flexDirection: 'column',
     alignItems: 'center',
     minWidth: '200px',
-    marginTop: 6,
+    marginTop: 0,
     ':hover': {
         background: '#e1e5ea',
     },
@@ -72,8 +77,8 @@ var btnElement = css({
     fontSize: '0.88rem',
     ':disabled': {
         cursor: 'not-allowed',
-        background: '#eff3f8'
-    }
+        background: '#eff3f8',
+    },
 });
 var aLinkWidthFix = css({
     width: '96%!important',
@@ -92,15 +97,14 @@ var msgTimeClass = css({
     marginTop: 3,
     color: '#c0cbd0',
 });
-;
 var ButtonMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + adminContainer + className }, rest),
-        React.createElement("div", { className: globalTextBlock + " " + textBlockAdmin }, text),
-        !!buttonData && buttonData.length > 0 && React.createElement("div", { className: globalTextBlock + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy"]);
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer : adminContainer) + className }, rest),
+        React.createElement("div", { className: globalTextBlock + " " + textBlockAdmin + " " + elementClassName, style: elementStyle }, text),
+        !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
-            return methodType === 'url' && !!!isDisabled ? React.createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title) : React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title);
-        })),
+            return methodType === 'url' && !!!isDisabled ? (React.createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title));
+        }))),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
@@ -117,7 +121,10 @@ ButtonMessage.propTypes = {
     msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     repliedBy: PropTypes.string,
     showRepliedBy: PropTypes.bool,
-    buttonData: PropTypes.any
+    buttonData: PropTypes.any,
+    consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: PropTypes.object,
+    elementClassName: PropTypes.string,
 };
 ButtonMessage.defaultProps = {
     style: {},

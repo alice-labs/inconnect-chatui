@@ -10,80 +10,67 @@ var styleOfStoryContainer = {
 };
 export default { title: 'QuickReplyMessage', decorators: [withInfo] };
 export var Example = function () { return (React.createElement("div", { style: styleOfStoryContainer },
-    React.createElement(QuickReplyMessage, { text: 'hello user this are our product list', msgTime: '4h ago', buttonData: [{
+    React.createElement(QuickReplyMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'user', elementStyle: { background: 'red' }, buttonData: [
+            {
                 title: 'Button One',
                 methodType: 'url',
                 url: 'https://getalice.ai',
-            }, {
+            },
+            {
                 title: 'Button Two',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-            }, {
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+            },
+            {
                 title: 'Button Three',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+                isDisabled: false,
+            },
+            {
+                title: 'Button Four',
+                methodType: 'function',
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+                isDisabled: false,
+            },
+        ] }),
+    React.createElement(QuickReplyMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'admin', buttonData: [
+            {
+                title: 'Button One',
+                methodType: 'url',
+                url: 'https://getalice.ai',
+            },
+            {
+                title: 'Button Two',
+                methodType: 'function',
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+            },
+            {
                 title: 'Button Three',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
+                action: function () {
+                    console.log('clicked on  button two');
+                },
                 isDisabled: true,
-            }, {
-                title: 'Button Three',
+            },
+            {
+                title: 'Button Four',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }, {
-                title: 'Button Three',
-                methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-                isDisabled: true,
-            }] }))); };
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+                isDisabled: false,
+                style: { background: 'purple', color: 'white' },
+            },
+        ] }))); };
 Example.story = {
     parameters: {
         info: {

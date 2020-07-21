@@ -14,80 +14,78 @@ export default { title: 'QuickReplyMessage', decorators: [withInfo] };
 
 export const Example = () => (
   <div style={styleOfStoryContainer}>
-    <QuickReplyMessage  text='hello user this are our product list' msgTime={'4h ago'} buttonData={[{
-        title: 'Button One',
-        methodType: 'url',
-        url: 'https://getalice.ai',
-    },{
-        title: 'Button Two',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    }]} />
+      <QuickReplyMessage
+          text='hello user this are our product list'
+          msgTime={'4h ago'}
+          consumer={'user'}
+          elementStyle={{background: 'red'}}
+          buttonData={[
+              {
+                  title: 'Button One',
+                  methodType: 'url',
+                  url: 'https://getalice.ai',
+              },
+              {
+                  title: 'Button Two',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+              },
+              {
+                  title: 'Button Three',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+                  isDisabled: false,
+              },
+              {
+                  title: 'Button Four',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+                  isDisabled: false,
+              },
+          ]}
+      />
+      <QuickReplyMessage
+          text='hello user this are our product list'
+          msgTime={'4h ago'}
+          consumer={'admin'}
+          buttonData={[
+              {
+                  title: 'Button One',
+                  methodType: 'url',
+                  url: 'https://getalice.ai',
+              },
+              {
+                  title: 'Button Two',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+              },
+              {
+                  title: 'Button Three',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+                  isDisabled: true,
+              },
+              {
+                  title: 'Button Four',
+                  methodType: 'function',
+                  action: () => {
+                      console.log('clicked on  button two');
+                  },
+                  isDisabled: false,
+                  style: { background: 'purple', color: 'white' },
+              },
+          ]}
+      />
   </div>
 );
 

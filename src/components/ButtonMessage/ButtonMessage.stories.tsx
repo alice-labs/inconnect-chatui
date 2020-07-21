@@ -14,20 +14,62 @@ export default { title: 'ButtonMessage', decorators: [withInfo] };
 
 export const Example = () => (
   <div style={styleOfStoryContainer}>
-    <ButtonMessage  text='hello user this are our product list' msgTime={'4h ago'} buttonData={[{
-        title: 'Button One',
-        methodType: 'url',
-        url: 'https://getalice.ai',
-    },{
-        title: 'Button Two',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-    },{
-        title: 'Button Three',
-        methodType: 'function',
-        action: ()=>{console.log('clicked on  button two')},
-        isDisabled: true,
-    }]} />
+    <ButtonMessage
+      text='hello user this are our product list'
+      msgTime={'4h ago'}
+      consumer={'admin'}
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+    />
+    <ButtonMessage
+      text='hello user this are our product list'
+      msgTime={'4h ago'}
+      consumer={'user'}
+      elementStyle={{background: '#c0cbd0',color: 'white'}}
+      elementClassName={'some-style'}
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+    />
   </div>
 );
 

@@ -4,9 +4,12 @@ interface Props {
     className?: string;
     userType?: 'user' | 'admin' | 'bot';
     text?: string;
+    consumer?: 'user' | 'admin' | 'bot';
     msgTime?: string | number;
     repliedBy?: string;
     showRepliedBy?: boolean;
+    elementStyle?: object;
+    elementClassName?: string;
     [key: string]: any;
 }
 declare const TextMessage: React.FC<Props>;

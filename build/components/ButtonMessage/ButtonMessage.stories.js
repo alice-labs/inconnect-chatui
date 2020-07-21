@@ -10,20 +10,50 @@ var styleOfStoryContainer = {
 };
 export default { title: 'ButtonMessage', decorators: [withInfo] };
 export var Example = function () { return (React.createElement("div", { style: styleOfStoryContainer },
-    React.createElement(ButtonMessage, { text: 'hello user this are our product list', msgTime: '4h ago', buttonData: [{
+    React.createElement(ButtonMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'admin', buttonData: [
+            {
                 title: 'Button One',
                 methodType: 'url',
                 url: 'https://getalice.ai',
-            }, {
+            },
+            {
                 title: 'Button Two',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
-            }, {
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+            },
+            {
                 title: 'Button Three',
                 methodType: 'function',
-                action: function () { console.log('clicked on  button two'); },
+                action: function () {
+                    console.log('clicked on  button two');
+                },
                 isDisabled: true,
-            }] }))); };
+            },
+        ] }),
+    React.createElement(ButtonMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'user', elementStyle: { background: '#c0cbd0', color: 'white' }, elementClassName: 'some-style', buttonData: [
+            {
+                title: 'Button One',
+                methodType: 'url',
+                url: 'https://getalice.ai',
+            },
+            {
+                title: 'Button Two',
+                methodType: 'function',
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+            },
+            {
+                title: 'Button Three',
+                methodType: 'function',
+                action: function () {
+                    console.log('clicked on  button two');
+                },
+                isDisabled: true,
+            },
+        ] }))); };
 Example.story = {
     parameters: {
         info: {

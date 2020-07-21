@@ -19,7 +19,7 @@ const textBlockAdmin = css({
   cursor: 'pointer',
   borderRadius: 16,
   ':hover': {
-    background: '#143f3a',
+    filter: 'brightness(0.95)'
   },
 });
 const textBlockUser = css({
@@ -28,7 +28,7 @@ const textBlockUser = css({
   borderRadius: 16,
   cursor: 'pointer',
   ':hover': {
-    background: '#e1e5ea',
+      filter: 'brightness(0.95)'
   },
 });
 
@@ -53,9 +53,12 @@ interface Props {
   className?: string;
   userType?: 'user' | 'admin' | 'bot';
   text?: string;
+  consumer?: 'user' | 'admin' | 'bot';
   msgTime?: string | number;
   repliedBy?: string;
   showRepliedBy?: boolean;
+  elementStyle?: object;
+  elementClassName?: string;
   [key: string]: any;
 }
 
@@ -63,9 +66,12 @@ const TextMessage: React.FC<Props> = ({
   style,
   className,
   userType,
+  consumer,
   text,
   msgTime,
   repliedBy,
+  elementStyle,
+  elementClassName,
   showRepliedBy,
   ...rest
 }) => {
@@ -73,14 +79,27 @@ const TextMessage: React.FC<Props> = ({
     <div
       style={{ ...style }}
       className={`${
-        userType === 'user' ? userContainer : adminContainer
+        consumer === 'user'
+          ? userType === 'user'
+            ? adminContainer
+            : userContainer
+          : userType === 'user'
+          ? userContainer
+          : adminContainer
       }${className}`}
       {...rest}
     >
       <div
+        style={elementStyle}
         className={`${globalTextBlock} ${
-          userType === 'user' ? textBlockUser : textBlockAdmin
-        }`}
+          consumer === 'user'
+            ? userType === 'user'
+              ? textBlockAdmin
+              : textBlockUser
+            : userType === 'user'
+            ? textBlockUser
+            : textBlockAdmin
+        } ${elementClassName}`}
       >
         {text}
       </div>
@@ -102,6 +121,9 @@ TextMessage.propTypes = {
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
+  consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+  elementStyle: PropTypes.object,
+  elementClassName: PropTypes.string,
 };
 
 TextMessage.defaultProps = {

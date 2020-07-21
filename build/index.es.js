@@ -3990,7 +3990,7 @@ var textBlockAdmin = lib_18({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var textBlockUser = lib_18({
@@ -3999,7 +3999,7 @@ var textBlockUser = lib_18({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        background: '#e1e5ea',
+        filter: 'brightness(0.95)'
     },
 });
 var globalTextBlock = lib_18({
@@ -4017,9 +4017,21 @@ var msgTimeClass = lib_18({
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "text", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer : adminContainer) + className }, rest),
-        createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text),
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showRepliedBy"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
+            ? userType === 'user'
+                ? adminContainer
+                : userContainer
+            : userType === 'user'
+                ? userContainer
+                : adminContainer) + className }, rest),
+        createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
+                ? userType === 'user'
+                    ? textBlockAdmin
+                    : textBlockUser
+                : userType === 'user'
+                    ? textBlockUser
+                    : textBlockAdmin) + " " + elementClassName }, text),
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
@@ -4037,6 +4049,9 @@ TextMessage.propTypes = {
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
+    consumer: propTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: propTypes.object,
+    elementClassName: propTypes.string,
 };
 TextMessage.defaultProps = {
     style: {},
@@ -4057,6 +4072,9 @@ var noteColor = lib_18({
     textAlign: 'center',
     width: '50%',
     marginBottom: '10px',
+    ':hover': {
+        filter: 'brightness(0.98)',
+    },
 });
 var noteInfo = lib_18({
     textAlign: 'right',
@@ -4107,7 +4125,7 @@ var textBlockAdmin$1 = lib_18({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var textBlockUser$1 = lib_18({
@@ -4116,7 +4134,7 @@ var textBlockUser$1 = lib_18({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        background: '#e1e5ea',
+        filter: 'brightness(0.95)'
     },
 });
 var globalTextBlock$1 = lib_18({
@@ -4233,11 +4251,11 @@ var closeOnClickStyle = lib_18({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName"]);
     var _b = useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = useState(false), isShown = _c[0], setIsShown = _c[1];
-    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer$1 : adminContainer$1) + className }, rest),
-        !!text && (createElement("div", { className: globalTextBlock$1 + " " + (userType === 'user' ? textBlockUser$1 : textBlockAdmin$1) }, text)),
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userType === 'user' ? adminContainer$1 : userContainer$1 : userType === 'user' ? userContainer$1 : adminContainer$1) + className }, rest),
+        !!text && (createElement("div", { className: globalTextBlock$1 + " " + (consumer === 'user' ? userType === 'user' ? textBlockAdmin$1 : textBlockUser$1 : userType === 'user' ? textBlockUser$1 : textBlockAdmin$1) + " " + elementClassName, style: elementStyle }, text)),
         createElement("div", { className: "" + flexImageContainer }, !!images &&
             images.length > 0 &&
             images.map(function (imageItem, i) { return (createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
@@ -4302,6 +4320,9 @@ ImageMessage.propTypes = {
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
     showPreview: propTypes.bool,
+    consumer: propTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: propTypes.object,
+    elementClassName: propTypes.string,
 };
 ImageMessage.defaultProps = {
     style: {},
@@ -4316,6 +4337,11 @@ var adminContainer$2 = lib_18({
     flexDirection: 'column',
     alignItems: 'flex-end',
 });
+var userContainer$2 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+});
 var textBlockAdmin$2 = lib_18({
     background: '#184D47',
     color: 'white',
@@ -4323,7 +4349,7 @@ var textBlockAdmin$2 = lib_18({
     borderRadius: 16,
     marginBottom: 10,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var buttonBlockAdmin = lib_18({
@@ -4335,7 +4361,7 @@ var buttonBlockAdmin = lib_18({
     flexDirection: 'column',
     alignItems: 'center',
     minWidth: '200px',
-    marginTop: 6,
+    marginTop: 0,
     ':hover': {
         background: '#e1e5ea',
     },
@@ -4360,8 +4386,8 @@ var btnElement = lib_18({
     fontSize: '0.88rem',
     ':disabled': {
         cursor: 'not-allowed',
-        background: '#eff3f8'
-    }
+        background: '#eff3f8',
+    },
 });
 var aLinkWidthFix = lib_18({
     width: '96%!important',
@@ -4381,13 +4407,13 @@ var msgTimeClass$2 = lib_18({
     color: '#c0cbd0',
 });
 var ButtonMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (createElement("div", __assign({ style: __assign({}, style), className: "" + adminContainer$2 + className }, rest),
-        createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 }, text),
-        !!buttonData && buttonData.length > 0 && createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$2 : adminContainer$2) + className }, rest),
+        createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 + " " + elementClassName, style: elementStyle }, text),
+        !!buttonData && buttonData.length > 0 && (createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
-            return methodType === 'url' && !!!isDisabled ? createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title) : createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title);
-        })),
+            return methodType === 'url' && !!!isDisabled ? (createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title));
+        }))),
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$2 },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
@@ -4404,7 +4430,10 @@ ButtonMessage.propTypes = {
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
-    buttonData: propTypes.any
+    buttonData: propTypes.any,
+    consumer: propTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: propTypes.object,
+    elementClassName: propTypes.string,
 };
 ButtonMessage.defaultProps = {
     style: {},
@@ -4418,6 +4447,11 @@ var adminContainer$3 = lib_18({
     flexDirection: 'column',
     alignItems: 'flex-end',
 });
+var userContainer$3 = lib_18({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+});
 var textBlockAdmin$3 = lib_18({
     background: '#184D47',
     color: 'white',
@@ -4425,11 +4459,10 @@ var textBlockAdmin$3 = lib_18({
     borderRadius: 16,
     marginBottom: 10,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)',
     },
 });
 var buttonBlockAdmin$1 = lib_18({
-    background: '#e5e9ee',
     color: '#232c41',
     borderRadius: 16,
     cursor: 'pointer',
@@ -4437,36 +4470,35 @@ var buttonBlockAdmin$1 = lib_18({
     flexDirection: 'row',
     alignItems: 'center',
     minWidth: '200px',
-    marginTop: 6,
+    marginTop: 3,
     flexWrap: 'wrap',
-    ':hover': {
-        background: '#e1e5ea',
-    },
+    padding: 0,
 });
 var btnElement$1 = lib_18({
     textAlign: 'center',
     width: '100%',
     margin: 3,
     padding: '5px 10px',
-    background: 'white',
+    background: '#184D47',
     boxShadow: '0px 0px 0px 1px #d2d2d2',
     font: '400 13.3333px Arial',
     flex: 1,
     ':hover': {
-        background: 'white',
+        filter: 'brightness(0.95)',
         boxShadow: '0px 0px 7px 1px #d2d2d2',
     },
-    borderRadius: 5,
+    borderRadius: 50,
     textDecoration: 'none',
     cursor: 'pointer',
     border: 'none',
-    color: 'black',
+    color: 'white',
     fontSize: '0.88rem',
     whiteSpace: 'nowrap',
     ':disabled': {
         cursor: 'not-allowed',
-        background: '#eff3f8'
-    }
+        background: '#c0cbd0',
+        color: '#7c8386',
+    },
 });
 var aLinkWidthFix$1 = lib_18({
     width: '96%!important',
@@ -4487,13 +4519,13 @@ var msgTimeClass$3 = lib_18({
     color: '#c0cbd0',
 });
 var QuickReplyMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy"]);
-    return (createElement("div", __assign({ style: __assign({}, style), className: "" + adminContainer$3 + className }, rest),
-        createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 }, text),
-        !!buttonData && buttonData.length > 0 && createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1 }, buttonData.map(function (_a, i) {
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle"]);
+    return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$3 : adminContainer$3) + className }, rest),
+        createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 + " " + elementClassName, style: elementStyle }, text),
+        !!buttonData && buttonData.length > 0 && (createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1 }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
-            return methodType === 'url' && !!!isDisabled ? createElement("a", __assign({ href: url, className: btnElement$1 + " " + aLinkWidthFix$1 + " " + className, style: style, target: '_blank', key: i }, rest), title) : createElement("button", __assign({ disabled: isDisabled, className: btnElement$1 + " " + className, style: style, onClick: action, key: i }, rest), title);
-        })),
+            return methodType === 'url' && !!!isDisabled ? (createElement("a", __assign({ href: url, className: btnElement$1 + " " + aLinkWidthFix$1 + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (createElement("button", __assign({ disabled: isDisabled, className: btnElement$1 + " " + className, style: style, onClick: action, key: i }, rest), title));
+        }))),
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$3 },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
@@ -4510,7 +4542,7 @@ QuickReplyMessage.propTypes = {
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
-    buttonData: propTypes.any
+    buttonData: propTypes.any,
 };
 QuickReplyMessage.defaultProps = {
     style: {},

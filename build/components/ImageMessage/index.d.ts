@@ -10,6 +10,9 @@ interface Props {
     showRepliedBy?: boolean;
     imagesWidth?: number | string;
     showPreview?: boolean;
+    consumer?: 'user' | 'admin' | 'bot';
+    elementStyle?: object;
+    elementClassName?: string;
     [key: string]: any;
 }
 declare const ImageMessage: React.FC<Props>;

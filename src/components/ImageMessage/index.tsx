@@ -19,7 +19,7 @@ const textBlockAdmin = css({
   cursor: 'pointer',
   borderRadius: 16,
   ':hover': {
-    background: '#143f3a',
+      filter: 'brightness(0.95)'
   },
 });
 const textBlockUser = css({
@@ -28,7 +28,7 @@ const textBlockUser = css({
   borderRadius: 16,
   cursor: 'pointer',
   ':hover': {
-    background: '#e1e5ea',
+      filter: 'brightness(0.95)'
   },
 });
 
@@ -50,18 +50,18 @@ const msgTimeClass = css({
 const flexImageContainer = css({
   display: 'flex',
   flexWrap: 'wrap',
-    maxWidth: '65%',
-    '@media(max-width: 600px)': {
-        maxWidth: '85%',
-    },
+  maxWidth: '65%',
+  '@media(max-width: 600px)': {
+    maxWidth: '85%',
+  },
 });
 
 const flexImageContainerDiv = css({
   height: '200px',
   flexGrow: 1,
-    cursor: 'pointer',
-    margin: '5px 5px 5px 0',
-    display: 'flex',
+  cursor: 'pointer',
+  margin: '5px 5px 5px 0',
+  display: 'flex',
   ':last-child': {
     flexGrow: 10,
   },
@@ -72,7 +72,7 @@ const flexImageContainerElement = css({
   minWidth: '100%',
   objectFit: 'cover',
   verticalAlign: 'bottom',
-    borderRadius: 5,
+  borderRadius: 5,
 });
 
 const imageViewerStyle = css({
@@ -164,7 +164,10 @@ interface Props {
   repliedBy?: string;
   showRepliedBy?: boolean;
   imagesWidth?: number | string;
-    showPreview?: boolean;
+  showPreview?: boolean;
+  consumer?: 'user' | 'admin' | 'bot';
+    elementStyle?: object;
+    elementClassName?: string;
   [key: string]: any;
 }
 
@@ -178,7 +181,10 @@ const ImageMessage: React.FC<Props> = ({
   repliedBy,
   showRepliedBy,
   imagesWidth,
-                                           showPreview,
+  showPreview,
+  consumer,
+    elementStyle,
+    elementClassName,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = React.useState<number>(-1);
@@ -187,15 +193,15 @@ const ImageMessage: React.FC<Props> = ({
     <div
       style={{ ...style }}
       className={`${
-        userType === 'user' ? userContainer : adminContainer
+        consumer === 'user'? userType === 'user' ? adminContainer : userContainer : userType === 'user' ? userContainer : adminContainer
       }${className}`}
       {...rest}
     >
       {!!text && (
         <div
           className={`${globalTextBlock} ${
-            userType === 'user' ? textBlockUser : textBlockAdmin
-          }`}
+            consumer === 'user' ?  userType === 'user' ? textBlockAdmin : textBlockUser : userType === 'user' ? textBlockUser : textBlockAdmin
+          } ${elementClassName}`} style={elementStyle}
         >
           {text}
         </div>
@@ -204,13 +210,22 @@ const ImageMessage: React.FC<Props> = ({
         {!!images &&
           images.length > 0 &&
           images.map((imageItem: string, i: number) => (
-            <div className={`${flexImageContainerDiv}`} key={i} onClick={()=>{
-              if(showPreview){
+            <div
+              className={`${flexImageContainerDiv}`}
+              key={i}
+              onClick={() => {
+                if (showPreview) {
                   setCurrentImage(i);
                   setIsShown(true);
-              }
-            }}>
-              <img className={`${flexImageContainerElement}`} src={imageItem} key={i} width={'250px'} />
+                }
+              }}
+            >
+              <img
+                className={`${flexImageContainerElement}`}
+                src={imageItem}
+                key={i}
+                width={'250px'}
+              />
             </div>
           ))}
       </div>
@@ -327,6 +342,9 @@ ImageMessage.propTypes = {
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
   showPreview: PropTypes.bool,
+    consumer:PropTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: PropTypes.object,
+    elementClassName: PropTypes.string,
 };
 
 ImageMessage.defaultProps = {

@@ -35,6 +35,9 @@ var noteColor = css({
     textAlign: 'center',
     width: '50%',
     marginBottom: '10px',
+    ':hover': {
+        filter: 'brightness(0.98)',
+    },
 });
 var noteInfo = css({
     textAlign: 'right',

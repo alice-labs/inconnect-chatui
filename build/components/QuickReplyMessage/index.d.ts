@@ -1,7 +1,7 @@
 import * as React from 'react';
 interface buttonDataProps {
     title: string;
-    methodType?: ('url' | 'function');
+    methodType?: 'url' | 'function';
     url?: string;
     action?: any;
     isDisabled?: boolean;
@@ -17,6 +17,9 @@ interface Props {
     msgTime?: string | number;
     repliedBy?: string;
     showRepliedBy?: boolean;
+    consumer?: 'user' | 'admin' | 'bot';
+    elementStyle?: object;
+    elementClassName?: string;
     [key: string]: any;
 }
 declare const QuickReplyMessage: React.FC<Props>;

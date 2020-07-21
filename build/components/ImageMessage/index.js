@@ -39,7 +39,7 @@ var textBlockAdmin = css({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        background: '#143f3a',
+        filter: 'brightness(0.95)'
     },
 });
 var textBlockUser = css({
@@ -48,7 +48,7 @@ var textBlockUser = css({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        background: '#e1e5ea',
+        filter: 'brightness(0.95)'
     },
 });
 var globalTextBlock = css({
@@ -165,11 +165,11 @@ var closeOnClickStyle = css({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName"]);
     var _b = React.useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = React.useState(false), isShown = _c[0], setIsShown = _c[1];
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (userType === 'user' ? userContainer : adminContainer) + className }, rest),
-        !!text && (React.createElement("div", { className: globalTextBlock + " " + (userType === 'user' ? textBlockUser : textBlockAdmin) }, text)),
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userType === 'user' ? adminContainer : userContainer : userType === 'user' ? userContainer : adminContainer) + className }, rest),
+        !!text && (React.createElement("div", { className: globalTextBlock + " " + (consumer === 'user' ? userType === 'user' ? textBlockAdmin : textBlockUser : userType === 'user' ? textBlockUser : textBlockAdmin) + " " + elementClassName, style: elementStyle }, text)),
         React.createElement("div", { className: "" + flexImageContainer }, !!images &&
             images.length > 0 &&
             images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
@@ -234,6 +234,9 @@ ImageMessage.propTypes = {
     repliedBy: PropTypes.string,
     showRepliedBy: PropTypes.bool,
     showPreview: PropTypes.bool,
+    consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+    elementStyle: PropTypes.object,
+    elementClassName: PropTypes.string,
 };
 ImageMessage.defaultProps = {
     style: {},

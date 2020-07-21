@@ -15,6 +15,9 @@ const noteColor = css({
   textAlign: 'center',
   width: '50%',
   marginBottom: '10px',
+  ':hover': {
+    filter: 'brightness(0.98)',
+  },
 });
 
 const noteInfo = css({
@@ -50,7 +53,10 @@ const TextMessage: React.FC<Props> = ({
     >
       <div className={`${noteColor}`}>
         {note}
-        <p className={`${noteInfo}`}>Note by: {!!takenBy? takenBy : 'Unknown Admin'}{!!msgTime && <span> • {msgTime}</span>}</p>
+        <p className={`${noteInfo}`}>
+          Note by: {!!takenBy ? takenBy : 'Unknown Admin'}
+          {!!msgTime && <span> • {msgTime}</span>}
+        </p>
       </div>
     </div>
   );

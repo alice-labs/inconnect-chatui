@@ -49,6 +49,7 @@ export const MulipleImages = () => (
     <div style={styleOfStoryContainer}>
         <ImageMessage
             userType='user'
+            consumer={'user'}
             text={'With Text, 80% width'}
             imagesWidth={'80%'}
             images={[
@@ -58,6 +59,7 @@ export const MulipleImages = () => (
         />
         <ImageMessage
             userType='admin'
+            consumer={'user'}
             images={[
                 'https://images.unsplash.com/photo-1494967990034-6a28085f9ed0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
                 'https://images.unsplash.com/photo-1584367369853-8b966cf223f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
@@ -67,6 +69,8 @@ export const MulipleImages = () => (
         <ImageMessage
             userType='user'
             text={'hello'}
+            elementStyle={{background: 'teal', color: 'white'}}
+            consumer={'user'}
             images={[
                 'https://images.unsplash.com/photo-1595079559940-4474acea712a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
                 'https://images.unsplash.com/photo-1594886801338-b81548345f77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80',
@@ -83,6 +87,7 @@ export const WithPreview = () => (
         <ImageMessage
             userType='user'
             text={'hello'}
+            consumer={'user'}
             showPreview
             images={[
                 'https://images.unsplash.com/photo-1595079559940-4474acea712a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
