@@ -89,5 +89,9 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 - [x] Minor Style Fixes
 
 
+### 22 July 2020 - v1.0.7
+- [x] Note Style Fixe
+
+
 
 

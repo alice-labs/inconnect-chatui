@@ -4069,18 +4069,20 @@ var noteContainer = lib_18({
 });
 var noteColor = lib_18({
     background: '#feefc3',
-    padding: '10px 15px',
-    borderRadius: 5,
+    padding: '10px 30px',
+    borderRadius: 16,
     textAlign: 'center',
-    width: '50%',
-    marginBottom: '10px',
+    width: 'fit-content',
+    marginBottom: 5,
+    marginTop: 20,
+    maxWidth: '50%',
     ':hover': {
         filter: 'brightness(0.98)',
     },
 });
 var noteInfo = lib_18({
     textAlign: 'right',
-    margin: '10px 0px 5px',
+    margin: '0px 0px 5px',
     fontSize: '0.7rem',
     textTransform: 'uppercase',
     color: '#9e9067',
@@ -4088,13 +4090,12 @@ var noteInfo = lib_18({
 var NoteMessage = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
-        createElement("div", { className: "" + noteColor },
-            note,
-            createElement("p", { className: "" + noteInfo },
-                !!msgTime && createElement("span", null, msgTime),
-                !!takenBy && createElement("span", null,
-                    " \u2022 ",
-                    takenBy)))));
+        createElement("div", { className: "" + noteColor }, note),
+        createElement("p", { className: "" + noteInfo },
+            !!msgTime && createElement("span", null, msgTime),
+            !!takenBy && createElement("span", null,
+                " \u2022 ",
+                takenBy))));
 };
 NoteMessage.propTypes = {
     style: propTypes.object,
