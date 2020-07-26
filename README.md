@@ -90,8 +90,13 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 
 ### 22 July 2020 - v1.0.7
-- [x] Note Style Fixe
+- [x] Note Style Fixes
 
+### 22 July 2020 - v1.0.7
+- [x] Note Style Fixes
 
+### 27 July 2020 - 1.0.8
+
+- [x]  Feed Post for Feed Type CRM
 
 

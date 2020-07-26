@@ -3994,7 +3994,7 @@ var textBlockAdmin = lib_18({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var textBlockUser = lib_18({
@@ -4003,7 +4003,7 @@ var textBlockUser = lib_18({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var globalTextBlock = lib_18({
@@ -4012,6 +4012,7 @@ var globalTextBlock = lib_18({
     padding: '8px 16px 8px',
     fontSize: '0.88rem',
     width: 'fit-content',
+    whiteSpace: 'pre-line',
     marginBottom: 2,
 });
 var msgTimeClass = lib_18({
