@@ -39,7 +39,7 @@ var textBlockAdmin = css({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var textBlockUser = css({
@@ -48,7 +48,7 @@ var textBlockUser = css({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var globalTextBlock = css({
@@ -57,6 +57,7 @@ var globalTextBlock = css({
     padding: '8px 16px 8px',
     fontSize: '0.88rem',
     width: 'fit-content',
+    whiteSpace: 'pre-line',
     marginBottom: 2,
 });
 var msgTimeClass = css({

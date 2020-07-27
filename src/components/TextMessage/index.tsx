@@ -19,7 +19,7 @@ const textBlockAdmin = css({
   cursor: 'pointer',
   borderRadius: 16,
   ':hover': {
-    filter: 'brightness(0.95)'
+    filter: 'brightness(0.95)',
   },
 });
 const textBlockUser = css({
@@ -28,7 +28,7 @@ const textBlockUser = css({
   borderRadius: 16,
   cursor: 'pointer',
   ':hover': {
-      filter: 'brightness(0.95)'
+    filter: 'brightness(0.95)',
   },
 });
 
@@ -38,6 +38,7 @@ const globalTextBlock = css({
   padding: '8px 16px 8px',
   fontSize: '0.88rem',
   width: 'fit-content',
+  whiteSpace: 'pre-line',
   marginBottom: 2,
 });
 
@@ -73,7 +74,7 @@ const TextMessage: React.FC<Props> = ({
   repliedBy,
   elementStyle,
   elementClassName,
-                                          showInfo,
+  showInfo,
   showRepliedBy,
   ...rest
 }) => {
@@ -126,7 +127,7 @@ TextMessage.propTypes = {
   consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
-    showInfo: PropTypes.bool,
+  showInfo: PropTypes.bool,
 };
 
 TextMessage.defaultProps = {
@@ -134,7 +135,7 @@ TextMessage.defaultProps = {
   className: '',
   text: '',
   showRepliedBy: false,
-    showInfo: true,
+  showInfo: true,
 };
 
 export default TextMessage;
