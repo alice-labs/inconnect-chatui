@@ -2,10 +2,12 @@ import * as React from 'react';
 interface replyProps {
     id: null | number;
     name: string;
-    avatar: string | null | undefined;
+    avatar: any;
     time: string;
     contentType: string;
     content: any;
+    source: string;
+    link?: string;
 }
 interface Props {
     style?: object;
@@ -16,6 +18,8 @@ interface Props {
     content?: any;
     contentType?: string;
     replyContent: replyProps[];
+    pageLink: string;
+    commentData: replyProps;
     [key: string]: any;
 }
 declare const FeedPost: React.FC<Props>;

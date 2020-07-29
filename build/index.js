@@ -4563,6 +4563,7 @@ var feedContainer = lib_18({
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 30,
+    background: 'white',
 });
 var feedPostContainer = lib_18({
     minWidth: 500,
@@ -4582,7 +4583,7 @@ var postInfoContainer = lib_18({
     alignItems: 'center',
     width: '100%',
 });
-var replyInfoContainer = lib_18({
+var commentInfoContainer = lib_18({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -4591,30 +4592,38 @@ var replyInfoContainer = lib_18({
     marginBottom: 10,
     ':not(:last-child)': {
         borderBottom: '0.5px solid #DFE8F0',
-    }
+    },
+});
+var replyInfoContainer = lib_18({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    width: 'calc(100% - 50px)',
+    paddingBottom: 5,
+    marginBottom: 10,
+    marginLeft: 50,
+    ':not(:last-child)': {
+        borderBottom: '0.5px solid #DFE8F0',
+    },
 });
 var avatarStyle = lib_18({
-    clipPath: 'circle(45% at 50% 50%)',
-    background: 'red',
     width: 50,
     height: 50,
-    backgroundSize: 'cover!important',
-    flex: 1,
+    borderRadius: 50,
+    border: '1px solid rgba(0,0,0,0.08)',
 });
 var avatarSmallStyle = lib_18({
-    clipPath: 'circle(40% at 50% 50%)',
-    background: 'red',
     width: 40,
     height: 40,
-    backgroundSize: 'cover!important',
-    flex: 1,
+    borderRadius: 40,
+    border: '1px solid rgba(0,0,0,0.08)',
 });
 var postNameStyle = lib_18({
     fontWeight: 'bold',
     fontSize: '1rem',
     textTransform: 'capitalize',
-    margin: '0px 0px 5px 0px',
-    color: '#213240',
+    margin: 0,
+    color: '#184D47',
 });
 var postTimeStyle = lib_18({
     fontSize: '0.7rem',
@@ -4630,8 +4639,29 @@ var postContentStyle = lib_18({
 var replyContentText = lib_18({
     marginTop: 5,
 });
+var replyContentNote = lib_18({
+    background: '#feefc3',
+    padding: '10px 15px',
+    marginTop: 10,
+    width: 'fit-content',
+    borderRadius: '0.88rem',
+    transform: 'translateX(-5px)',
+    color: '#333',
+});
+var replyContentImage = lib_18({
+    borderRadius: 5,
+    width: '50%',
+    marginTop: 10,
+});
+var linkStyle = lib_18({
+    textDecoration: 'none',
+    color: '#184D47',
+    ':hover': {
+        textDecoration: 'underline',
+    },
+});
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData"]);
     var getContents = function () {
         switch (contentType) {
             case 'text':
@@ -4644,6 +4674,10 @@ var FeedPost = function (_a) {
         switch (reply.contentType) {
             case 'text':
                 return React.createElement("p", { className: "" + replyContentText }, reply.content);
+            case 'note':
+                return React.createElement("div", { className: "" + replyContentNote }, reply.content);
+            case 'image':
+                return React.createElement("img", { className: "" + replyContentImage, src: reply.content, alt: 'image-note' });
             default:
                 return 'No contentType matched';
         }
@@ -4651,15 +4685,25 @@ var FeedPost = function (_a) {
     return (React.createElement("div", __assign({ style: __assign({}, style), className: feedContainer + " " + className }, rest),
         React.createElement("div", { className: "" + feedPostContainer },
             React.createElement("div", { className: "" + postInfoContainer },
-                React.createElement("img", { className: "" + avatarStyle, style: { background: "url('" + postAvatar + "')" } }),
+                React.createElement("img", { src: postAvatar, className: "" + avatarStyle }),
                 React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    React.createElement("p", { className: "" + postNameStyle }, postName),
+                    !!pageLink ? (React.createElement("a", { href: pageLink, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                        ' ',
+                        React.createElement("p", { className: "" + postNameStyle }, postName))) : (React.createElement("p", { className: "" + postNameStyle }, postName)),
                     React.createElement("p", { className: "" + postTimeStyle }, postTime))),
             React.createElement("div", { className: "" + postContentStyle }, getContents()),
-            replyContent.map(function (reply, i) { return (React.createElement("div", { className: "" + replyInfoContainer, key: i },
-                React.createElement("img", { className: "" + avatarSmallStyle, style: { background: "url('" + reply.avatar + "')" } }),
+            React.createElement("div", { className: "" + commentInfoContainer, key: 'reply-comment' },
+                React.createElement("img", { src: commentData.avatar, className: "" + avatarSmallStyle }),
                 React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    React.createElement("p", { className: "" + postNameStyle }, reply.name),
+                    !!commentData.link ? (React.createElement("a", { href: pageLink, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                        React.createElement("p", { className: "" + postNameStyle }, commentData.name))) : (React.createElement("p", { className: "" + postNameStyle }, commentData.name)),
+                    React.createElement("p", { className: "" + postTimeStyle }, commentData.time),
+                    getReplyContent(commentData))),
+            replyContent.map(function (reply, i) { return (React.createElement("div", { className: "" + replyInfoContainer, key: i },
+                React.createElement("img", { src: reply.avatar, className: "" + avatarSmallStyle }),
+                React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
+                    !!reply.link ? (React.createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                        React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
                     React.createElement("p", { className: "" + postTimeStyle }, reply.time),
                     getReplyContent(reply)))); }))));
 };
