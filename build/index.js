@@ -4698,7 +4698,7 @@ var FeedPost = function (_a) {
             React.createElement("div", { className: "" + commentInfoContainer, key: 'reply-comment' },
                 React.createElement("img", { src: commentData.avatar, className: "" + avatarSmallStyle }),
                 React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    !!commentData.link ? (React.createElement("a", { href: pageLink, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                    !!commentData.link ? (React.createElement("a", { href: commentData.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                         React.createElement("p", { className: "" + postNameStyle }, commentData.name))) : (React.createElement("p", { className: "" + postNameStyle }, commentData.name)),
                     React.createElement("p", { className: "" + postTimeStyle }, commentData.time),
                     getReplyContent(commentData))),

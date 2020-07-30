@@ -4694,7 +4694,7 @@ var FeedPost = function (_a) {
             createElement("div", { className: "" + commentInfoContainer, key: 'reply-comment' },
                 createElement("img", { src: commentData.avatar, className: "" + avatarSmallStyle }),
                 createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    !!commentData.link ? (createElement("a", { href: pageLink, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                    !!commentData.link ? (createElement("a", { href: commentData.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                         createElement("p", { className: "" + postNameStyle }, commentData.name))) : (createElement("p", { className: "" + postNameStyle }, commentData.name)),
                     createElement("p", { className: "" + postTimeStyle }, commentData.time),
                     getReplyContent(commentData))),

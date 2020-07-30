@@ -213,7 +213,7 @@ const FeedPost: React.FC<Props> = ({
           <div style={{ marginLeft: 10, flex: 10 }}>
             {!!commentData.link ? (
               <a
-                href={pageLink}
+                href={commentData.link}
                 className={`${linkStyle}`}
                 target='_blank'
                 rel='noreferrer noopener'
