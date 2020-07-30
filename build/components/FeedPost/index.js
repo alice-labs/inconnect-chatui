@@ -28,7 +28,6 @@ var feedContainer = css({
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 30,
-    background: 'white',
 });
 var feedPostContainer = css({
     minWidth: 500,
@@ -37,6 +36,7 @@ var feedPostContainer = css({
     borderRadius: 10,
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
     transition: 'all 0.3s ease 0s',
+    background: 'white',
     ':hover': {
         boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.15)',
         transform: 'translateY(-3x)',
@@ -84,7 +84,7 @@ var avatarSmallStyle = css({
     border: '1px solid rgba(0,0,0,0.08)',
 });
 var postNameStyle = css({
-    fontWeight: 'bold',
+    fontWeight: 600,
     fontSize: '1rem',
     textTransform: 'capitalize',
     margin: 0,
@@ -103,6 +103,7 @@ var postContentStyle = css({
 });
 var replyContentText = css({
     marginTop: 5,
+    marginBottom: '1rem',
 });
 var replyContentNote = css({
     background: '#feefc3',
@@ -112,11 +113,13 @@ var replyContentNote = css({
     borderRadius: '0.88rem',
     transform: 'translateX(-5px)',
     color: '#333',
+    marginBottom: '1rem',
 });
 var replyContentImage = css({
     borderRadius: 5,
     width: '50%',
     marginTop: 10,
+    marginBottom: '1rem',
 });
 var linkStyle = css({
     textDecoration: 'none',
