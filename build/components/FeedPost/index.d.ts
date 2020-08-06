@@ -8,6 +8,8 @@ interface replyProps {
     content: any;
     source: string;
     link?: string;
+    isHighlighted?: boolean;
+    messageType?: string;
 }
 interface Props {
     style?: object;

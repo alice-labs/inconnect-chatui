@@ -16,7 +16,7 @@ const feedPostContainer = css({
   borderRadius: 10,
   boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
   transition: 'all 0.3s ease 0s',
-    background: 'white',
+  background: 'white',
   ':hover': {
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.15)',
     transform: 'translateY(-3x)',
@@ -37,6 +37,7 @@ const commentInfoContainer = css({
   width: '100%',
   paddingBottom: 5,
   marginBottom: 10,
+  position: 'relative',
   ':not(:last-child)': {
     borderBottom: '0.5px solid #DFE8F0',
   },
@@ -49,6 +50,7 @@ const replyInfoContainer = css({
   paddingBottom: 5,
   marginBottom: 10,
   marginLeft: 50,
+  position: 'relative',
   ':not(:last-child)': {
     borderBottom: '0.5px solid #DFE8F0',
   },
@@ -63,7 +65,7 @@ const avatarStyle = css({
 const avatarSmallStyle = css({
   width: 40,
   height: 40,
-    borderRadius: 40,
+  borderRadius: 40,
   border: '1px solid rgba(0,0,0,0.08)',
 });
 
@@ -89,7 +91,7 @@ const postContentStyle = css({
 
 const replyContentText = css({
   marginTop: 5,
-    marginBottom: '1rem',
+  marginBottom: '1rem',
 });
 
 const replyContentNote = css({
@@ -100,14 +102,14 @@ const replyContentNote = css({
   borderRadius: '0.88rem',
   transform: 'translateX(-5px)',
   color: '#333',
-    marginBottom: '1rem',
+  marginBottom: '1rem',
 });
 
 const replyContentImage = css({
-    borderRadius: 5,
-    width: '50%',
-    marginTop: 10,
-    marginBottom: '1rem',
+  borderRadius: 5,
+  width: '50%',
+  marginTop: 10,
+  marginBottom: '1rem',
 });
 
 const linkStyle = css({
@@ -116,6 +118,19 @@ const linkStyle = css({
   ':hover': {
     textDecoration: 'underline',
   },
+});
+
+const highLighted = css({
+  background: '#d0e43b2e',
+  borderRadius: '20px',
+  fontSize: '0.6rem',
+  padding: '2px 8px',
+  border: '1px solid #184d47',
+  color: '#184d47',
+  textTranform: 'uppercase',
+  position: 'absolute',
+  right: 0,
+  top: 3,
 });
 
 interface replyProps {
@@ -127,6 +142,8 @@ interface replyProps {
   content: any;
   source: string;
   link?: string;
+  isHighlighted?: boolean;
+  messageType?: string;
 }
 interface Props {
   style?: object;
@@ -173,8 +190,14 @@ const FeedPost: React.FC<Props> = ({
         return <p className={`${replyContentText}`}>{reply.content}</p>;
       case 'note':
         return <div className={`${replyContentNote}`}>{reply.content}</div>;
-        case 'image':
-            return <img className={`${replyContentImage}`} src={reply.content} alt={'image-note'} />;
+      case 'image':
+        return (
+          <img
+            className={`${replyContentImage}`}
+            src={reply.content}
+            alt={'image-note'}
+          />
+        );
       default:
         return 'No contentType matched';
     }
@@ -223,7 +246,12 @@ const FeedPost: React.FC<Props> = ({
             ) : (
               <p className={`${postNameStyle}`}>{commentData.name}</p>
             )}
-            <p className={`${postTimeStyle}`}>{commentData.time}</p>
+            <p className={`${postTimeStyle}`}>
+              {commentData.time}
+              {commentData.isHighlighted && (
+                <span className={`${highLighted}`}>Highlighted</span>
+              )}
+            </p>
             {getReplyContent(commentData)}
           </div>
         </div>
@@ -244,7 +272,13 @@ const FeedPost: React.FC<Props> = ({
               ) : (
                 <p className={`${postNameStyle}`}>{reply.name}</p>
               )}
-              <p className={`${postTimeStyle}`}>{reply.time}</p>
+              <p className={`${postTimeStyle}`}>{reply.time}   {!!reply.messageType && (
+                  <span> • {reply.messageType}</span>
+              )}
+              </p>
+              {!!reply.isHighlighted && (
+                <span className={`${highLighted}`}>Highlighted</span>
+              )}
               {getReplyContent(reply)}
             </div>
           </div>

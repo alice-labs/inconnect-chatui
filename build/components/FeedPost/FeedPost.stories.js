@@ -20,6 +20,7 @@ export var Example = function () { return (React.createElement("div", { style: s
             content: 'I want to Buy ! What is The price?',
             source: 'customer',
             link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+            isHighlighted: true,
         }, replyContent: [{
                 id: 0,
                 name: 'A Ranodom User',
@@ -29,6 +30,8 @@ export var Example = function () { return (React.createElement("div", { style: s
                 content: 'I want to Buy ! What is The price?',
                 source: 'customer',
                 link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                isHighlighted: true,
+                messageType: 'comment',
             }, {
                 id: 1,
                 name: 'A Ranodom User',
@@ -36,7 +39,8 @@ export var Example = function () { return (React.createElement("div", { style: s
                 time: '2h ago',
                 contentType: 'note',
                 content: 'Note Created by Bot from the system',
-                source: 'bot'
+                source: 'bot',
+                isHighlighted: false,
             }, {
                 id: 2,
                 name: 'A Ranodom User',
@@ -44,7 +48,8 @@ export var Example = function () { return (React.createElement("div", { style: s
                 time: '1h ago',
                 contentType: 'image',
                 content: 'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
-                source: 'bot'
+                source: 'bot',
+                messageType: 'Message'
             }] }))); };
 Example.story = {
     parameters: {

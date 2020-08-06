@@ -55,6 +55,7 @@ var commentInfoContainer = css({
     width: '100%',
     paddingBottom: 5,
     marginBottom: 10,
+    position: 'relative',
     ':not(:last-child)': {
         borderBottom: '0.5px solid #DFE8F0',
     },
@@ -67,6 +68,7 @@ var replyInfoContainer = css({
     paddingBottom: 5,
     marginBottom: 10,
     marginLeft: 50,
+    position: 'relative',
     ':not(:last-child)': {
         borderBottom: '0.5px solid #DFE8F0',
     },
@@ -128,6 +130,18 @@ var linkStyle = css({
         textDecoration: 'underline',
     },
 });
+var highLighted = css({
+    background: '#d0e43b2e',
+    borderRadius: '20px',
+    fontSize: '0.6rem',
+    padding: '2px 8px',
+    border: '1px solid #184d47',
+    color: '#184d47',
+    textTranform: 'uppercase',
+    position: 'absolute',
+    right: 0,
+    top: 3,
+});
 var FeedPost = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData"]);
     var getContents = function () {
@@ -145,7 +159,7 @@ var FeedPost = function (_a) {
             case 'note':
                 return React.createElement("div", { className: "" + replyContentNote }, reply.content);
             case 'image':
-                return React.createElement("img", { className: "" + replyContentImage, src: reply.content, alt: 'image-note' });
+                return (React.createElement("img", { className: "" + replyContentImage, src: reply.content, alt: 'image-note' }));
             default:
                 return 'No contentType matched';
         }
@@ -165,14 +179,22 @@ var FeedPost = function (_a) {
                 React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
                     !!commentData.link ? (React.createElement("a", { href: commentData.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                         React.createElement("p", { className: "" + postNameStyle }, commentData.name))) : (React.createElement("p", { className: "" + postNameStyle }, commentData.name)),
-                    React.createElement("p", { className: "" + postTimeStyle }, commentData.time),
+                    React.createElement("p", { className: "" + postTimeStyle },
+                        commentData.time,
+                        commentData.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted"))),
                     getReplyContent(commentData))),
             replyContent.map(function (reply, i) { return (React.createElement("div", { className: "" + replyInfoContainer, key: i },
                 React.createElement("img", { src: reply.avatar, className: "" + avatarSmallStyle }),
                 React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
                     !!reply.link ? (React.createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                         React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
-                    React.createElement("p", { className: "" + postTimeStyle }, reply.time),
+                    React.createElement("p", { className: "" + postTimeStyle },
+                        reply.time,
+                        "   ",
+                        !!reply.messageType && (React.createElement("span", null,
+                            " \u2022 ",
+                            reply.messageType))),
+                    !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
                     getReplyContent(reply)))); }))));
 };
 FeedPost.propTypes = {
