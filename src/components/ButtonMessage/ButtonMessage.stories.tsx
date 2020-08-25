@@ -45,7 +45,7 @@ export const Example = () => (
       text='hello user this are our product list'
       msgTime={'4h ago'}
       consumer={'user'}
-      elementStyle={{background: '#c0cbd0',color: 'white'}}
+      elementStyle={{ background: '#c0cbd0', color: 'white' }}
       elementClassName={'some-style'}
       buttonData={[
         {

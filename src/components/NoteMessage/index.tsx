@@ -15,7 +15,7 @@ const noteColor = css({
   textAlign: 'center',
   width: 'fit-content',
   marginBottom: 5,
-    marginTop: 20,
+  marginTop: 20,
   maxWidth: '50%',
   ':hover': {
     filter: 'brightness(0.98)',
@@ -53,13 +53,11 @@ const NoteMessage: React.FC<Props> = ({
       className={`${noteContainer} ${className}`}
       {...rest}
     >
-      <div className={`${noteColor}`}>
-        {note}
-      </div>
-        <p className={`${noteInfo}`}>
-            {!!msgTime && <span>{msgTime}</span>}
-            {!!takenBy && <span> • {takenBy}</span>}
-        </p>
+      <div className={`${noteColor}`}>{note}</div>
+      <p className={`${noteInfo}`}>
+        {!!msgTime && <span>{msgTime}</span>}
+        {!!takenBy && <span> • {takenBy}</span>}
+      </p>
     </div>
   );
 };

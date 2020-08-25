@@ -21,7 +21,7 @@ const textBlockAdmin = css({
   borderRadius: 16,
   marginBottom: 10,
   ':hover': {
-      filter: 'brightness(0.95)'
+    filter: 'brightness(0.95)',
   },
 });
 const buttonBlockAdmin = css({
