@@ -19,7 +19,7 @@ const textBlockAdmin = css({
   cursor: 'pointer',
   borderRadius: 16,
   ':hover': {
-      filter: 'brightness(0.95)'
+    filter: 'brightness(0.95)',
   },
 });
 const textBlockUser = css({
@@ -28,7 +28,7 @@ const textBlockUser = css({
   borderRadius: 16,
   cursor: 'pointer',
   ':hover': {
-      filter: 'brightness(0.95)'
+    filter: 'brightness(0.95)',
   },
 });
 
@@ -166,8 +166,8 @@ interface Props {
   imagesWidth?: number | string;
   showPreview?: boolean;
   consumer?: 'user' | 'admin' | 'bot';
-    elementStyle?: object;
-    elementClassName?: string;
+  elementStyle?: object;
+  elementClassName?: string;
   [key: string]: any;
 }
 
@@ -183,8 +183,8 @@ const ImageMessage: React.FC<Props> = ({
   imagesWidth,
   showPreview,
   consumer,
-    elementStyle,
-    elementClassName,
+  elementStyle,
+  elementClassName,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = React.useState<number>(-1);
@@ -193,15 +193,28 @@ const ImageMessage: React.FC<Props> = ({
     <div
       style={{ ...style }}
       className={`${
-        consumer === 'user'? userType === 'user' ? adminContainer : userContainer : userType === 'user' ? userContainer : adminContainer
+        consumer === 'user'
+          ? userType === 'user'
+            ? adminContainer
+            : userContainer
+          : userType === 'user'
+          ? userContainer
+          : adminContainer
       }${className}`}
       {...rest}
     >
       {!!text && (
         <div
           className={`${globalTextBlock} ${
-            consumer === 'user' ?  userType === 'user' ? textBlockAdmin : textBlockUser : userType === 'user' ? textBlockUser : textBlockAdmin
-          } ${elementClassName}`} style={elementStyle}
+            consumer === 'user'
+              ? userType === 'user'
+                ? textBlockAdmin
+                : textBlockUser
+              : userType === 'user'
+              ? textBlockUser
+              : textBlockAdmin
+          } ${elementClassName}`}
+          style={elementStyle}
         >
           {text}
         </div>
@@ -342,9 +355,9 @@ ImageMessage.propTypes = {
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
   showPreview: PropTypes.bool,
-    consumer:PropTypes.oneOf(['user', 'admin', 'bot']),
-    elementStyle: PropTypes.object,
-    elementClassName: PropTypes.string,
+  consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
+  elementStyle: PropTypes.object,
+  elementClassName: PropTypes.string,
 };
 
 ImageMessage.defaultProps = {

@@ -272,9 +272,9 @@ const FeedPost: React.FC<Props> = ({
               ) : (
                 <p className={`${postNameStyle}`}>{reply.name}</p>
               )}
-              <p className={`${postTimeStyle}`}>{reply.time}   {!!reply.messageType && (
-                  <span> • {reply.messageType}</span>
-              )}
+              <p className={`${postTimeStyle}`}>
+                {reply.time}{' '}
+                {!!reply.messageType && <span> • {reply.messageType}</span>}
               </p>
               {!!reply.isHighlighted && (
                 <span className={`${highLighted}`}>Highlighted</span>
