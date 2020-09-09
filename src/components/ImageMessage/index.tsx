@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 
 const userContainer = css({
   display: 'flex',
@@ -50,7 +51,7 @@ const msgTimeClass = css({
 const flexImageContainer = css({
   display: 'flex',
   flexWrap: 'wrap',
-  maxWidth: '65%',
+  maxWidth: '250px',
   '@media(max-width: 600px)': {
     maxWidth: '85%',
   },
@@ -168,6 +169,7 @@ interface Props {
   consumer?: 'user' | 'admin' | 'bot';
   elementStyle?: object;
   elementClassName?: string;
+  avatar?: string | React.ReactNode;
   [key: string]: any;
 }
 
@@ -185,6 +187,7 @@ const ImageMessage: React.FC<Props> = ({
   consumer,
   elementStyle,
   elementClassName,
+  avatar,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = React.useState<number>(-1);
@@ -204,44 +207,52 @@ const ImageMessage: React.FC<Props> = ({
       {...rest}
     >
       {!!text && (
-        <div
-          className={`${globalTextBlock} ${
-            consumer === 'user'
-              ? userType === 'user'
-                ? textBlockAdmin
-                : textBlockUser
-              : userType === 'user'
-              ? textBlockUser
-              : textBlockAdmin
-          } ${elementClassName}`}
-          style={elementStyle}
+        <AvatarContainer
+          avatar={avatar}
+          userType={userType}
+          consumer={consumer}
         >
-          {text}
-        </div>
+          <div
+            className={`${globalTextBlock} ${
+              consumer === 'user'
+                ? userType === 'user'
+                  ? textBlockAdmin
+                  : textBlockUser
+                : userType === 'user'
+                ? textBlockUser
+                : textBlockAdmin
+            } ${elementClassName}`}
+            style={elementStyle}
+          >
+            {text}
+          </div>
+        </AvatarContainer>
       )}
-      <div className={`${flexImageContainer}`}>
-        {!!images &&
-          images.length > 0 &&
-          images.map((imageItem: string, i: number) => (
-            <div
-              className={`${flexImageContainerDiv}`}
-              key={i}
-              onClick={() => {
-                if (showPreview) {
-                  setCurrentImage(i);
-                  setIsShown(true);
-                }
-              }}
-            >
-              <img
-                className={`${flexImageContainerElement}`}
-                src={imageItem}
+      <AvatarContainer avatar={avatar} userType={userType} consumer={consumer}>
+        <div className={`${flexImageContainer}`}>
+          {!!images &&
+            images.length > 0 &&
+            images.map((imageItem: string, i: number) => (
+              <div
+                className={`${flexImageContainerDiv}`}
                 key={i}
-                width={'250px'}
-              />
-            </div>
-          ))}
-      </div>
+                onClick={() => {
+                  if (showPreview) {
+                    setCurrentImage(i);
+                    setIsShown(true);
+                  }
+                }}
+              >
+                <img
+                  className={`${flexImageContainerElement}`}
+                  src={imageItem}
+                  key={i}
+                  width={'250px'}
+                />
+              </div>
+            ))}
+        </div>
+      </AvatarContainer>
       {(showRepliedBy || !!msgTime) && (
         <p className={`${msgTimeClass}`}>
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
@@ -358,6 +369,7 @@ ImageMessage.propTypes = {
   consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
+  avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 ImageMessage.defaultProps = {
@@ -366,6 +378,7 @@ ImageMessage.defaultProps = {
   text: '',
   showRepliedBy: false,
   showPreview: false,
+  avatar: '',
 };
 
 export default ImageMessage;

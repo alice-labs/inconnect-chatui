@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 
 const adminContainer = css({
   display: 'flex',
@@ -62,7 +63,7 @@ const btnElement = css({
   },
 });
 const aLinkWidthFix = css({
-  width: '96%!important',
+  width: '96% !important',
   whiteSpace: 'no-wrap',
 });
 
@@ -102,6 +103,7 @@ interface Props {
   consumer?: 'user' | 'admin' | 'bot';
   elementStyle?: object;
   elementClassName?: string;
+  avatar?: string | React.ReactNode;
   [key: string]: any;
 }
 
@@ -116,6 +118,7 @@ const QuickReplyMessage: React.FC<Props> = ({
   consumer,
   elementClassName,
   elementStyle,
+  avatar,
   ...rest
 }) => {
   return (
@@ -126,12 +129,14 @@ const QuickReplyMessage: React.FC<Props> = ({
       }${className}`}
       {...rest}
     >
-      <div
-        className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
-        style={elementStyle}
-      >
-        {text}
-      </div>
+      <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
+        <div
+          className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
+          style={elementStyle}
+        >
+          {text}
+        </div>
+      </AvatarContainer>
       {!!buttonData && buttonData.length > 0 && (
         <div className={`${globalTextBlock} ${buttonBlockAdmin}`}>
           {buttonData.map(
@@ -192,6 +197,7 @@ QuickReplyMessage.propTypes = {
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,
   buttonData: PropTypes.any,
+  avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 QuickReplyMessage.defaultProps = {
@@ -199,6 +205,7 @@ QuickReplyMessage.defaultProps = {
   className: '',
   text: '',
   showRepliedBy: false,
+  avatar: '',
 };
 
 export default QuickReplyMessage;
