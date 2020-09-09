@@ -138,7 +138,16 @@ const QuickReplyMessage: React.FC<Props> = ({
         </div>
       </AvatarContainer>
       {!!buttonData && buttonData.length > 0 && (
-        <div className={`${globalTextBlock} ${buttonBlockAdmin}`}>
+        <div
+          className={`${globalTextBlock} ${buttonBlockAdmin}`}
+          style={
+            avatar
+              ? consumer === 'user'
+                ? { marginLeft: '30px' }
+                : { marginRight: '30px' }
+              : {}
+          }
+        >
           {buttonData.map(
             (
               {
@@ -180,7 +189,16 @@ const QuickReplyMessage: React.FC<Props> = ({
         </div>
       )}
       {(showRepliedBy || !!msgTime) && (
-        <p className={`${msgTimeClass}`}>
+        <p
+          className={`${msgTimeClass}`}
+          style={
+            avatar
+              ? consumer === 'user'
+                ? { marginLeft: '30px' }
+                : { marginRight: '30px' }
+              : {}
+          }
+        >
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
           {showRepliedBy && <>• &nbsp; {repliedBy}</>}
         </p>

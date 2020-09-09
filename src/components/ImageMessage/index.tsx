@@ -254,7 +254,20 @@ const ImageMessage: React.FC<Props> = ({
         </div>
       </AvatarContainer>
       {(showRepliedBy || !!msgTime) && (
-        <p className={`${msgTimeClass}`}>
+        <p
+          className={`${msgTimeClass}`}
+          style={
+            avatar
+              ? consumer === 'user'
+                ? userType === 'user'
+                  ? { marginRight: '30px' }
+                  : { marginLeft: '30px' }
+                : userType === 'user'
+                ? { marginLeft: '30px' }
+                : { marginRight: '30px' }
+              : {}
+          }
+        >
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
           {userType === 'admin' && showRepliedBy && <>• &nbsp; {repliedBy}</>}
         </p>
