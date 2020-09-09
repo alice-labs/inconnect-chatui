@@ -40,6 +40,7 @@ export const Example = () => (
           isDisabled: true,
         },
       ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
     />
     <ButtonMessage
       text='hello user this are our product list'
@@ -69,6 +70,7 @@ export const Example = () => (
           isDisabled: true,
         },
       ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
     />
   </div>
 );

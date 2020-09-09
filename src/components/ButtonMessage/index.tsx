@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 
 const adminContainer = css({
   display: 'flex',
@@ -101,6 +102,7 @@ interface Props {
   consumer?: 'user' | 'admin' | 'bot';
   elementStyle?: object;
   elementClassName?: string;
+  avatar?: string | React.ReactNode;
   [key: string]: any;
 }
 
@@ -115,6 +117,7 @@ const ButtonMessage: React.FC<Props> = ({
   elementClassName,
   elementStyle,
   showRepliedBy,
+  avatar,
   ...rest
 }) => {
   return (
@@ -125,12 +128,14 @@ const ButtonMessage: React.FC<Props> = ({
       }${className}`}
       {...rest}
     >
-      <div
-        className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
-        style={elementStyle}
-      >
-        {text}
-      </div>
+      <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
+        <div
+          className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
+          style={elementStyle}
+        >
+          {text}
+        </div>
+      </AvatarContainer>
       {!!buttonData && buttonData.length > 0 && (
         <div className={`${globalTextBlock} ${buttonBlockAdmin}`}>
           {buttonData.map(
@@ -194,6 +199,7 @@ ButtonMessage.propTypes = {
   consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
+  avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 ButtonMessage.defaultProps = {
@@ -201,6 +207,7 @@ ButtonMessage.defaultProps = {
   className: '',
   text: '',
   showRepliedBy: false,
+  avatar: '',
 };
 
 export default ButtonMessage;

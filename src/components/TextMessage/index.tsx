@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 
 const userContainer = css({
   display: 'flex',
@@ -61,6 +62,7 @@ interface Props {
   elementStyle?: object;
   elementClassName?: string;
   showInfo?: boolean;
+  avatar?: string | React.ReactNode;
   [key: string]: any;
 }
 
@@ -76,6 +78,7 @@ const TextMessage: React.FC<Props> = ({
   elementClassName,
   showInfo,
   showRepliedBy,
+  avatar,
   ...rest
 }) => {
   return (
@@ -92,20 +95,22 @@ const TextMessage: React.FC<Props> = ({
       }${className}`}
       {...rest}
     >
-      <div
-        style={elementStyle}
-        className={`${globalTextBlock} ${
-          consumer === 'user'
-            ? userType === 'user'
-              ? textBlockAdmin
-              : textBlockUser
-            : userType === 'user'
-            ? textBlockUser
-            : textBlockAdmin
-        } ${elementClassName}`}
-      >
-        {text}
-      </div>
+      <AvatarContainer avatar={avatar} userType={userType} consumer={consumer}>
+        <div
+          style={elementStyle}
+          className={`${globalTextBlock} ${
+            consumer === 'user'
+              ? userType === 'user'
+                ? textBlockAdmin
+                : textBlockUser
+              : userType === 'user'
+              ? textBlockUser
+              : textBlockAdmin
+          } ${elementClassName}`}
+        >
+          {text}
+        </div>
+      </AvatarContainer>
       {showInfo && (showRepliedBy || !!msgTime) && (
         <p className={`${msgTimeClass}`}>
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
@@ -128,6 +133,7 @@ TextMessage.propTypes = {
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
   showInfo: PropTypes.bool,
+  avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 TextMessage.defaultProps = {
@@ -136,6 +142,7 @@ TextMessage.defaultProps = {
   text: '',
   showRepliedBy: false,
   showInfo: true,
+  avatar: '',
 };
 
 export default TextMessage;
