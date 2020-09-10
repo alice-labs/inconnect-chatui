@@ -1,10 +1,10 @@
-<img src="https://github.com/alice-labs/inconnect-chatui/blob/master/src/assets/inconnect_logo.png?raw=true" width="60%">
+<img src="https://github.com/alice-labs/inconnect-chatui/blob/master/src/assets/logo.png?raw=true" width="60%">
 
 ## Demo
 
-http://chatui.dev.inconnect.ai/
+https://chatui.dev.getalice.ai/
 
-[**See Demo Here**](https://inconnect.ai/component/demo)
+[**See Demo Here**](https://chatui.dev.getalice.ai)
 
 ## How to Use
 
