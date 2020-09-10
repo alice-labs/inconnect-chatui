@@ -20,6 +20,7 @@ interface Props {
     consumer?: 'user' | 'admin' | 'bot';
     elementStyle?: object;
     elementClassName?: string;
+    avatar?: string | React.ReactNode;
     [key: string]: any;
 }
 declare const ButtonMessage: React.FC<Props>;

@@ -3978,6 +3978,34 @@ if (process.env.NODE_ENV !== 'production') {
 }
 });
 
+var AvatarContainer = function (_a) {
+    var userType = _a.userType, consumer = _a.consumer, avatar = _a.avatar, children = _a.children;
+    return avatar ? (React.createElement("div", { style: {
+            display: 'flex',
+            flexDirection: consumer === 'user'
+                ? userType === 'user'
+                    ? 'row-reverse'
+                    : 'row'
+                : userType === 'user'
+                    ? 'row'
+                    : 'row-reverse',
+        } },
+        typeof avatar === 'string' ? (React.createElement("img", { width: '25', height: '25', style: consumer === 'user'
+                ? userType === 'user'
+                    ? { marginLeft: '5px' }
+                    : { marginRight: '5px' }
+                : userType === 'user'
+                    ? { marginRight: '5px' }
+                    : { marginLeft: '5px' }, src: avatar, alt: 'Avatar' })) : (React.createElement("span", { style: __assign({ width: '25px', height: '25px' }, (consumer === 'user'
+                ? userType === 'user'
+                    ? { marginLeft: '5px' }
+                    : { marginRight: '5px' }
+                : userType === 'user'
+                    ? { marginRight: '5px' }
+                    : { marginLeft: '5px' })) }, avatar)),
+        children)) : (React.createElement(React.Fragment, null, children));
+};
+
 var userContainer = lib_18({
     display: 'flex',
     flexDirection: 'column',
@@ -4022,7 +4050,7 @@ var msgTimeClass = lib_18({
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy", "avatar"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
             ? userType === 'user'
                 ? adminContainer
@@ -4030,14 +4058,23 @@ var TextMessage = function (_a) {
             : userType === 'user'
                 ? userContainer
                 : adminContainer) + className }, rest),
-        React.createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
-                ? userType === 'user'
-                    ? textBlockAdmin
-                    : textBlockUser
-                : userType === 'user'
-                    ? textBlockUser
-                    : textBlockAdmin) + " " + elementClassName }, text),
-        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
+        React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
+                    ? userType === 'user'
+                        ? textBlockAdmin
+                        : textBlockUser
+                    : userType === 'user'
+                        ? textBlockUser
+                        : textBlockAdmin) + " " + elementClassName }, text)),
+        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass, style: avatar
+                ? consumer === 'user'
+                    ? userType === 'user'
+                        ? { marginRight: '30px' }
+                        : { marginLeft: '30px' }
+                    : userType === 'user'
+                        ? { marginLeft: '30px' }
+                        : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -4058,6 +4095,7 @@ TextMessage.propTypes = {
     elementStyle: propTypes.object,
     elementClassName: propTypes.string,
     showInfo: propTypes.bool,
+    avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
 };
 TextMessage.defaultProps = {
     style: {},
@@ -4065,6 +4103,7 @@ TextMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     showInfo: true,
+    avatar: '',
 };
 
 var noteContainer = lib_18({
@@ -4132,7 +4171,7 @@ var textBlockAdmin$1 = lib_18({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var textBlockUser$1 = lib_18({
@@ -4141,7 +4180,7 @@ var textBlockUser$1 = lib_18({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var globalTextBlock$1 = lib_18({
@@ -4161,7 +4200,7 @@ var msgTimeClass$1 = lib_18({
 var flexImageContainer = lib_18({
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: '65%',
+    maxWidth: '250px',
     '@media(max-width: 600px)': {
         maxWidth: '85%',
     },
@@ -4258,21 +4297,43 @@ var closeOnClickStyle = lib_18({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName", "avatar"]);
     var _b = React.useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = React.useState(false), isShown = _c[0], setIsShown = _c[1];
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userType === 'user' ? adminContainer$1 : userContainer$1 : userType === 'user' ? userContainer$1 : adminContainer$1) + className }, rest),
-        !!text && (React.createElement("div", { className: globalTextBlock$1 + " " + (consumer === 'user' ? userType === 'user' ? textBlockAdmin$1 : textBlockUser$1 : userType === 'user' ? textBlockUser$1 : textBlockAdmin$1) + " " + elementClassName, style: elementStyle }, text)),
-        React.createElement("div", { className: "" + flexImageContainer }, !!images &&
-            images.length > 0 &&
-            images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
-                    if (showPreview) {
-                        setCurrentImage(i);
-                        setIsShown(true);
-                    }
-                } },
-                React.createElement("img", { className: "" + flexImageContainerElement, src: imageItem, key: i, width: '250px' }))); })),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$1 },
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
+            ? userType === 'user'
+                ? adminContainer$1
+                : userContainer$1
+            : userType === 'user'
+                ? userContainer$1
+                : adminContainer$1) + className }, rest),
+        !!text && (React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { className: globalTextBlock$1 + " " + (consumer === 'user'
+                    ? userType === 'user'
+                        ? textBlockAdmin$1
+                        : textBlockUser$1
+                    : userType === 'user'
+                        ? textBlockUser$1
+                        : textBlockAdmin$1) + " " + elementClassName, style: elementStyle }, text))),
+        React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { className: "" + flexImageContainer }, !!images &&
+                images.length > 0 &&
+                images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
+                        if (showPreview) {
+                            setCurrentImage(i);
+                            setIsShown(true);
+                        }
+                    } },
+                    React.createElement("img", { className: "" + flexImageContainerElement, src: imageItem, key: i, width: '250px' }))); }))),
+        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$1, style: avatar
+                ? consumer === 'user'
+                    ? userType === 'user'
+                        ? { marginRight: '30px' }
+                        : { marginLeft: '30px' }
+                    : userType === 'user'
+                        ? { marginLeft: '30px' }
+                        : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -4330,6 +4391,7 @@ ImageMessage.propTypes = {
     consumer: propTypes.oneOf(['user', 'admin', 'bot']),
     elementStyle: propTypes.object,
     elementClassName: propTypes.string,
+    avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
 };
 ImageMessage.defaultProps = {
     style: {},
@@ -4337,6 +4399,7 @@ ImageMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     showPreview: false,
+    avatar: '',
 };
 
 var adminContainer$2 = lib_18({
@@ -4356,7 +4419,7 @@ var textBlockAdmin$2 = lib_18({
     borderRadius: 16,
     marginBottom: 10,
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var buttonBlockAdmin = lib_18({
@@ -4414,14 +4477,23 @@ var msgTimeClass$2 = lib_18({
     color: '#c0cbd0',
 });
 var ButtonMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy", "avatar"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$2 : adminContainer$2) + className }, rest),
-        React.createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 + " " + elementClassName, style: elementStyle }, text),
-        !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin }, buttonData.map(function (_a, i) {
+        React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
+            React.createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 + " " + elementClassName, style: elementStyle }, text)),
+        !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin, style: avatar
+                ? consumer === 'user'
+                    ? { marginLeft: '30px' }
+                    : { marginRight: '30px' }
+                : {} }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
             return methodType === 'url' && !!!isDisabled ? (React.createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title));
         }))),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$2 },
+        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$2, style: avatar
+                ? consumer === 'user'
+                    ? { marginLeft: '30px' }
+                    : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -4441,12 +4513,14 @@ ButtonMessage.propTypes = {
     consumer: propTypes.oneOf(['user', 'admin', 'bot']),
     elementStyle: propTypes.object,
     elementClassName: propTypes.string,
+    avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
 };
 ButtonMessage.defaultProps = {
     style: {},
     className: '',
     text: '',
     showRepliedBy: false,
+    avatar: '',
 };
 
 var adminContainer$3 = lib_18({
@@ -4508,7 +4582,7 @@ var btnElement$1 = lib_18({
     },
 });
 var aLinkWidthFix$1 = lib_18({
-    width: '96%!important',
+    width: '96% !important',
     whiteSpace: 'no-wrap',
 });
 var globalTextBlock$3 = lib_18({
@@ -4526,14 +4600,23 @@ var msgTimeClass$3 = lib_18({
     color: '#c0cbd0',
 });
 var QuickReplyMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$3 : adminContainer$3) + className }, rest),
-        React.createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 + " " + elementClassName, style: elementStyle }, text),
-        !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1 }, buttonData.map(function (_a, i) {
+        React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
+            React.createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 + " " + elementClassName, style: elementStyle }, text)),
+        !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1, style: avatar
+                ? consumer === 'user'
+                    ? { marginLeft: '30px' }
+                    : { marginRight: '30px' }
+                : {} }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
             return methodType === 'url' && !!!isDisabled ? (React.createElement("a", __assign({ href: url, className: btnElement$1 + " " + aLinkWidthFix$1 + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (React.createElement("button", __assign({ disabled: isDisabled, className: btnElement$1 + " " + className, style: style, onClick: action, key: i }, rest), title));
         }))),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$3 },
+        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$3, style: avatar
+                ? consumer === 'user'
+                    ? { marginLeft: '30px' }
+                    : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -4550,12 +4633,14 @@ QuickReplyMessage.propTypes = {
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
     buttonData: propTypes.any,
+    avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
 };
 QuickReplyMessage.defaultProps = {
     style: {},
     className: '',
     text: '',
     showRepliedBy: false,
+    avatar: '',
 };
 
 var feedContainer = lib_18({
@@ -4725,10 +4810,10 @@ var FeedPost = function (_a) {
                         React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
                     React.createElement("p", { className: "" + postTimeStyle },
                         reply.time,
-                        "   ",
-                        !!reply.messageType && (React.createElement("span", null,
+                        ' ',
+                        !!reply.messageType && React.createElement("span", null,
                             " \u2022 ",
-                            reply.messageType))),
+                            reply.messageType)),
                     !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
                     getReplyContent(reply)))); }))));
 };

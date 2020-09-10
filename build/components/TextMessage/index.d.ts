@@ -11,6 +11,7 @@ interface Props {
     elementStyle?: object;
     elementClassName?: string;
     showInfo?: boolean;
+    avatar?: string | React.ReactNode;
     [key: string]: any;
 }
 declare const TextMessage: React.FC<Props>;
