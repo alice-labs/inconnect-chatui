@@ -17,7 +17,7 @@ npm i inconnect-chat-ui --save
 or if you use yarn
 
 ```js
-yarn install inconnect-chat-ui
+yarn add inconnect-chat-ui
 ```
 
 In your component first import
