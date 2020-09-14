@@ -16,6 +16,7 @@ const AvatarContainer: React.FC<Props> = ({
   return avatar ? (
     <div
       style={{
+        width: '100%',
         display: 'flex',
         flexDirection:
           consumer === 'user'
