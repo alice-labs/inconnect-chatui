@@ -3987,13 +3987,37 @@ var AvatarContainer = function (_a) {
                     ? 'row'
                     : 'row-reverse',
         } },
-        typeof avatar === 'string' ? (createElement("img", { width: '25', height: '25', style: consumer === 'user'
+        typeof avatar === 'string' ? (createElement("img", { style: consumer === 'user'
                 ? userType === 'user'
-                    ? { marginLeft: '5px' }
-                    : { marginRight: '5px' }
+                    ? {
+                        width: '25px',
+                        height: '25px',
+                        borderRadius: '50px',
+                        objectFit: 'cover',
+                        marginLeft: '5px',
+                    }
+                    : {
+                        width: '25px',
+                        height: '25px',
+                        borderRadius: '50px',
+                        objectFit: 'cover',
+                        marginRight: '5px',
+                    }
                 : userType === 'user'
-                    ? { marginRight: '5px' }
-                    : { marginLeft: '5px' }, src: avatar, alt: 'Avatar' })) : (createElement("span", { style: __assign({ width: '25px', height: '25px' }, (consumer === 'user'
+                    ? {
+                        width: '25px',
+                        height: '25px',
+                        borderRadius: '50px',
+                        objectFit: 'cover',
+                        marginRight: '5px',
+                    }
+                    : {
+                        width: '25px',
+                        height: '25px',
+                        borderRadius: '50px',
+                        objectFit: 'cover',
+                        marginLeft: '5px',
+                    }, src: avatar, alt: 'Avatar' })) : (createElement("span", { style: __assign({ width: '25px', height: '25px' }, (consumer === 'user'
                 ? userType === 'user'
                     ? { marginLeft: '5px' }
                     : { marginRight: '5px' }
