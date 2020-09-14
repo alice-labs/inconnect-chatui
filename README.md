@@ -115,3 +115,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 10 Sep 2020 - 1.0.13
 
 - [x] Adds avatar support for all the chat components
+
+# 14 Sep 2020 - 1.0.13
+
+- [x] Fix minor style issue for avatar components

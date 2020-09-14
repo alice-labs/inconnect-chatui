@@ -3977,6 +3977,7 @@ if (process.env.NODE_ENV !== 'production') {
 var AvatarContainer = function (_a) {
     var userType = _a.userType, consumer = _a.consumer, avatar = _a.avatar, children = _a.children;
     return avatar ? (createElement("div", { style: {
+            width: '100%',
             display: 'flex',
             flexDirection: consumer === 'user'
                 ? userType === 'user'
