@@ -30,16 +30,38 @@ const AvatarContainer: React.FC<Props> = ({
     >
       {typeof avatar === 'string' ? (
         <img
-          width='25'
-          height='25'
           style={
             consumer === 'user'
               ? userType === 'user'
-                ? { marginLeft: '5px' }
-                : { marginRight: '5px' }
+                ? {
+                    width: '25px',
+                    height: '25px',
+                    borderRadius: '50px',
+                    objectFit: 'cover',
+                    marginLeft: '5px',
+                  }
+                : {
+                    width: '25px',
+                    height: '25px',
+                    borderRadius: '50px',
+                    objectFit: 'cover',
+                    marginRight: '5px',
+                  }
               : userType === 'user'
-              ? { marginRight: '5px' }
-              : { marginLeft: '5px' }
+              ? {
+                  width: '25px',
+                  height: '25px',
+                  borderRadius: '50px',
+                  objectFit: 'cover',
+                  marginRight: '5px',
+                }
+              : {
+                  width: '25px',
+                  height: '25px',
+                  borderRadius: '50px',
+                  objectFit: 'cover',
+                  marginLeft: '5px',
+                }
           }
           src={avatar}
           alt='Avatar'
