@@ -113,11 +113,23 @@ const replyContentImage = css({
 });
 
 const linkStyle = css({
-  textDecoration: 'none',
-  color: '#184D47',
-  ':hover': {
-    textDecoration: 'underline',
-  },
+    textDecoration: 'none',
+    color: '#184D47',
+    ':hover': {
+        textDecoration: 'underline',
+    },
+});
+const flexWrapContainer = css({
+    display: 'flex',
+    flexWrap: 'wrap',
+});
+const imageHolder = css({
+    width: 'calc(50% - 20px)',
+    borderRadius: 10,
+    margin: 10,
+    '@media(max-width: 400px)': {
+        maxWidth: '100%',
+    },
 });
 
 const highLighted = css({
@@ -156,6 +168,7 @@ interface Props {
   replyContent: replyProps[];
   pageLink: string;
   commentData: replyProps;
+  contentItem?: any;
   [key: string]: any;
 }
 
@@ -173,12 +186,37 @@ const FeedPost: React.FC<Props> = ({
   replyContent,
   pageLink,
   commentData,
+  contentItem,
   ...rest
 }) => {
   const getContents = () => {
+    console.log(contentType);
     switch (contentType) {
       case 'text':
         return content;
+        case 'video':
+            return (
+                <>
+                    <p>{content}</p>
+                    {!!contentItem && (
+                        <video controls style={{ width: '100%', maxWidth: 650}}>
+                            <source src={contentItem} type='video/mp4' />
+                            Your browser does not support HTML video.
+                        </video>
+                    )}
+                </>
+            );
+        case 'image':
+            return (
+                <>
+                    <p>{content}</p>
+                    <div className={`${flexWrapContainer}`}>
+                        {!!contentItem && (
+                            contentItem.map((elem:string, index: number)=><img src={elem} className={`${imageHolder}`} alt={index+""} key={index}  width={'fit-content'} />)
+                        )}
+                    </div>
+                </>
+            );
       default:
         return 'No contentType matched';
     }
@@ -297,6 +335,7 @@ FeedPost.propTypes = {
   content: PropTypes.any,
   contentType: PropTypes.string,
   replyContent: PropTypes.any,
+  contentItem: PropTypes.any,
 };
 
 FeedPost.defaultProps = {

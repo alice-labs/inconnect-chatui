@@ -4771,6 +4771,18 @@ var linkStyle = lib_18({
         textDecoration: 'underline',
     },
 });
+var flexWrapContainer = lib_18({
+    display: 'flex',
+    flexWrap: 'wrap',
+});
+var imageHolder = lib_18({
+    width: 'calc(50% - 20px)',
+    borderRadius: 10,
+    margin: 10,
+    '@media(max-width: 400px)': {
+        maxWidth: '100%',
+    },
+});
 var highLighted = lib_18({
     background: '#d0e43b2e',
     borderRadius: '20px',
@@ -4784,11 +4796,22 @@ var highLighted = lib_18({
     top: 3,
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem"]);
     var getContents = function () {
+        console.log(contentType);
         switch (contentType) {
             case 'text':
                 return content;
+            case 'video':
+                return (createElement(Fragment, null,
+                    createElement("p", null, content),
+                    !!contentItem && (createElement("video", { controls: true, style: { width: '100%', maxWidth: 650 } },
+                        createElement("source", { src: contentItem, type: 'video/mp4' }),
+                        "Your browser does not support HTML video."))));
+            case 'image':
+                return (createElement(Fragment, null,
+                    createElement("p", null, content),
+                    createElement("div", { className: "" + flexWrapContainer }, !!contentItem && (contentItem.map(function (elem, index) { return createElement("img", { src: elem, className: "" + imageHolder, alt: index + "", key: index, width: 'fit-content' }); })))));
             default:
                 return 'No contentType matched';
         }
@@ -4847,6 +4870,7 @@ FeedPost.propTypes = {
     content: propTypes.any,
     contentType: propTypes.string,
     replyContent: propTypes.any,
+    contentItem: propTypes.any,
 };
 FeedPost.defaultProps = {
     style: {},

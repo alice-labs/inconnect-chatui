@@ -123,3 +123,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 ### 14 Sep 2020 - 1.0.15
 
 - [x] Fix image avatar style issue for avatar components
+
+# 10 Sep 2020 - 1.0.16
+
+- [x] Added Video Type for Feed
+- [x] Added Image Type for Feed

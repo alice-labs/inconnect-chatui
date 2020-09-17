@@ -130,6 +130,18 @@ var linkStyle = css({
         textDecoration: 'underline',
     },
 });
+var flexWrapContainer = css({
+    display: 'flex',
+    flexWrap: 'wrap',
+});
+var imageHolder = css({
+    width: 'calc(50% - 20px)',
+    borderRadius: 10,
+    margin: 10,
+    '@media(max-width: 400px)': {
+        maxWidth: '100%',
+    },
+});
 var highLighted = css({
     background: '#d0e43b2e',
     borderRadius: '20px',
@@ -143,11 +155,22 @@ var highLighted = css({
     top: 3,
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem"]);
     var getContents = function () {
+        console.log(contentType);
         switch (contentType) {
             case 'text':
                 return content;
+            case 'video':
+                return (React.createElement(React.Fragment, null,
+                    React.createElement("p", null, content),
+                    !!contentItem && (React.createElement("video", { controls: true, style: { width: '100%', maxWidth: 650 } },
+                        React.createElement("source", { src: contentItem, type: 'video/mp4' }),
+                        "Your browser does not support HTML video."))));
+            case 'image':
+                return (React.createElement(React.Fragment, null,
+                    React.createElement("p", null, content),
+                    React.createElement("div", { className: "" + flexWrapContainer }, !!contentItem && (contentItem.map(function (elem, index) { return React.createElement("img", { src: elem, className: "" + imageHolder, alt: index + "", key: index, width: 'fit-content' }); })))));
             default:
                 return 'No contentType matched';
         }
@@ -190,10 +213,10 @@ var FeedPost = function (_a) {
                         React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
                     React.createElement("p", { className: "" + postTimeStyle },
                         reply.time,
-                        "   ",
-                        !!reply.messageType && (React.createElement("span", null,
+                        ' ',
+                        !!reply.messageType && React.createElement("span", null,
                             " \u2022 ",
-                            reply.messageType))),
+                            reply.messageType)),
                     !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
                     getReplyContent(reply)))); }))));
 };
@@ -206,6 +229,7 @@ FeedPost.propTypes = {
     content: PropTypes.any,
     contentType: PropTypes.string,
     replyContent: PropTypes.any,
+    contentItem: PropTypes.any,
 };
 FeedPost.defaultProps = {
     style: {},

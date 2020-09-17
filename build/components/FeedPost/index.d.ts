@@ -22,6 +22,7 @@ interface Props {
     replyContent: replyProps[];
     pageLink: string;
     commentData: replyProps;
+    contentItem?: any;
     [key: string]: any;
 }
 declare const FeedPost: React.FC<Props>;
