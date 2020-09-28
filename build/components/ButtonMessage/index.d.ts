@@ -21,6 +21,7 @@ interface Props {
     elementStyle?: object;
     elementClassName?: string;
     avatar?: string | React.ReactNode;
+    buttonContainerStyle?: object;
     [key: string]: any;
 }
 declare const ButtonMessage: React.FC<Props>;

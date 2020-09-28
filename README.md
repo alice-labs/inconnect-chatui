@@ -124,7 +124,12 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Fix image avatar style issue for avatar components
 
-# 10 Sep 2020 - 1.0.16
+# 16 Sep 2020 - 1.0.16
 
 - [x] Added Video Type for Feed
 - [x] Added Image Type for Feed
+
+# 28 Sep 2020 - 1.0.17
+
+- [x] ButtonGroupContainer style added
+- [x] font size for msg time synced to 0.7rem

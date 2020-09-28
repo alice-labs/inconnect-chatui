@@ -31,8 +31,8 @@ export var Example = function () { return (React.createElement("div", { style: s
                 },
                 isDisabled: true,
             },
-        ] }),
-    React.createElement(ButtonMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'user', elementStyle: { background: '#c0cbd0', color: 'white' }, elementClassName: 'some-style', buttonData: [
+        ], avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg' }),
+    React.createElement(ButtonMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'user', elementStyle: { background: '#c0cbd0', color: 'white' }, elementClassName: 'some-style', buttonContainerStyle: { background: 'purple' }, buttonData: [
             {
                 title: 'Button One',
                 methodType: 'url',
@@ -53,12 +53,12 @@ export var Example = function () { return (React.createElement("div", { style: s
                 },
                 isDisabled: true,
             },
-        ] }))); };
+        ], avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg' }))); };
 Example.story = {
     parameters: {
         info: {
             inline: true,
-            text: "Interface List\n \n   ~~~js\n    <ButtonMessage\n    style={{width: '100px'}}\n    className={'abcd'}\n    userType='user'\n    text={'hello admin'}};\n    buttonData={[{\n        title: 'Button Title',\n        methodType: 'url',\n        url: 'https://google.com',\n        className: 'some-class__name',\n        style: {{custom style pass to specific button}}\n        rest: 'any key will pass directly to button'\n     },\n    ...more\n    ]}\n    msgTime={'4h Ago'}\n    repliedBy={'Admin name'};\n    showRepliedBy={true};\n    rest={'any it wil pass to container div};\n    />\n   ~~~\n  ",
+            text: "Interface List\n \n   ~~~js\n    <ButtonMessage\n    style={{width: '100px'}}\n    className={'abcd'}\n    userType='user'\n    text={'hello admin'}};\n    buttonContainerStyle={{...styleObject}}\n    buttonData={[{\n        title: 'Button Title',\n        methodType: 'url',\n        url: 'https://google.com',\n        className: 'some-class__name',\n        style: {{custom style pass to specific button}}\n        rest: 'any key will pass directly to button'\n     },\n    ...more\n    ]}\n    msgTime={'4h Ago'}\n    repliedBy={'Admin name'};\n    showRepliedBy={true};\n    rest={'any it wil pass to container div};\n    />\n   ~~~\n  ",
         },
     },
 };

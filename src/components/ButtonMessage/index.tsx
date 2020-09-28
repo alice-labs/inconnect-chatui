@@ -76,7 +76,7 @@ const globalTextBlock = css({
 });
 
 const msgTimeClass = css({
-  fontSize: '0.8rem',
+  fontSize: '0.7rem',
   marginBottom: 5,
   marginTop: 3,
   color: '#c0cbd0',
@@ -103,6 +103,7 @@ interface Props {
   elementStyle?: object;
   elementClassName?: string;
   avatar?: string | React.ReactNode;
+  buttonContainerStyle?: object;
   [key: string]: any;
 }
 
@@ -118,6 +119,7 @@ const ButtonMessage: React.FC<Props> = ({
   elementStyle,
   showRepliedBy,
   avatar,
+  buttonContainerStyle,
   ...rest
 }) => {
   return (
@@ -142,8 +144,8 @@ const ButtonMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px' }
-                : { marginRight: '30px' }
+                ? { marginLeft: '30px', ...buttonContainerStyle }
+                : { marginRight: '30px', ...buttonContainerStyle }
               : {}
           }
         >
@@ -217,6 +219,7 @@ ButtonMessage.propTypes = {
   consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
+  buttonContainerStyle: PropTypes.object,
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 

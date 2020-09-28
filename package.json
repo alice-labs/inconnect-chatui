@@ -1,6 +1,6 @@
 {
   "name": "inconnect-chat-ui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Inconnect Chat UI Library",
   "main": "build/index.js",
   "files": [

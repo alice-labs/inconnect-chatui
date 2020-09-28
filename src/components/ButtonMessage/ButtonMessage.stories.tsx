@@ -48,6 +48,7 @@ export const Example = () => (
       consumer={'user'}
       elementStyle={{ background: '#c0cbd0', color: 'white' }}
       elementClassName={'some-style'}
+      buttonContainerStyle={{background: 'purple'}}
       buttonData={[
         {
           title: 'Button One',
@@ -87,6 +88,7 @@ Example.story = {
     className={'abcd'}
     userType='user'
     text={'hello admin'}};
+    buttonContainerStyle={{...styleObject}}
     buttonData={[{
         title: 'Button Title',
         methodType: 'url',

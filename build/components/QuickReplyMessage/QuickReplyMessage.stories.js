@@ -39,7 +39,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 },
                 isDisabled: false,
             },
-        ] }),
+        ], avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg' }),
     React.createElement(QuickReplyMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'admin', buttonData: [
             {
                 title: 'Button One',
@@ -70,7 +70,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 isDisabled: false,
                 style: { background: 'purple', color: 'white' },
             },
-        ] }))); };
+        ], avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg' }))); };
 Example.story = {
     parameters: {
         info: {

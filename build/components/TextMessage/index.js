@@ -23,6 +23,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 var userContainer = css({
     display: 'flex',
     flexDirection: 'column',
@@ -67,7 +68,7 @@ var msgTimeClass = css({
     color: '#c0cbd0',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy", "avatar"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
             ? userType === 'user'
                 ? adminContainer
@@ -75,14 +76,23 @@ var TextMessage = function (_a) {
             : userType === 'user'
                 ? userContainer
                 : adminContainer) + className }, rest),
-        React.createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
-                ? userType === 'user'
-                    ? textBlockAdmin
-                    : textBlockUser
-                : userType === 'user'
-                    ? textBlockUser
-                    : textBlockAdmin) + " " + elementClassName }, text),
-        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
+        React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { style: elementStyle, className: globalTextBlock + " " + (consumer === 'user'
+                    ? userType === 'user'
+                        ? textBlockAdmin
+                        : textBlockUser
+                    : userType === 'user'
+                        ? textBlockUser
+                        : textBlockAdmin) + " " + elementClassName }, text)),
+        showInfo && (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass, style: avatar
+                ? consumer === 'user'
+                    ? userType === 'user'
+                        ? { marginRight: '30px' }
+                        : { marginLeft: '30px' }
+                    : userType === 'user'
+                        ? { marginLeft: '30px' }
+                        : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -103,6 +113,7 @@ TextMessage.propTypes = {
     elementStyle: PropTypes.object,
     elementClassName: PropTypes.string,
     showInfo: PropTypes.bool,
+    avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 TextMessage.defaultProps = {
     style: {},
@@ -110,6 +121,7 @@ TextMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     showInfo: true,
+    avatar: '',
 };
 export default TextMessage;
 //# sourceMappingURL=index.js.map

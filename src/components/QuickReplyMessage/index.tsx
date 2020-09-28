@@ -77,7 +77,7 @@ const globalTextBlock = css({
 });
 
 const msgTimeClass = css({
-  fontSize: '0.8rem',
+  fontSize: '0.7rem',
   marginBottom: 5,
   marginTop: 3,
   color: '#c0cbd0',

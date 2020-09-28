@@ -23,6 +23,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
+import AvatarContainer from '../Common/AvatarContainer';
 var userContainer = css({
     display: 'flex',
     flexDirection: 'column',
@@ -39,7 +40,7 @@ var textBlockAdmin = css({
     cursor: 'pointer',
     borderRadius: 16,
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var textBlockUser = css({
@@ -48,7 +49,7 @@ var textBlockUser = css({
     borderRadius: 16,
     cursor: 'pointer',
     ':hover': {
-        filter: 'brightness(0.95)'
+        filter: 'brightness(0.95)',
     },
 });
 var globalTextBlock = css({
@@ -60,7 +61,7 @@ var globalTextBlock = css({
     marginBottom: 6,
 });
 var msgTimeClass = css({
-    fontSize: '0.8rem',
+    fontSize: '0.7rem',
     marginBottom: 10,
     marginTop: 3,
     color: '#c0cbd0',
@@ -68,7 +69,7 @@ var msgTimeClass = css({
 var flexImageContainer = css({
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: '65%',
+    maxWidth: '250px',
     '@media(max-width: 600px)': {
         maxWidth: '85%',
     },
@@ -165,21 +166,43 @@ var closeOnClickStyle = css({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName", "avatar"]);
     var _b = React.useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = React.useState(false), isShown = _c[0], setIsShown = _c[1];
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userType === 'user' ? adminContainer : userContainer : userType === 'user' ? userContainer : adminContainer) + className }, rest),
-        !!text && (React.createElement("div", { className: globalTextBlock + " " + (consumer === 'user' ? userType === 'user' ? textBlockAdmin : textBlockUser : userType === 'user' ? textBlockUser : textBlockAdmin) + " " + elementClassName, style: elementStyle }, text)),
-        React.createElement("div", { className: "" + flexImageContainer }, !!images &&
-            images.length > 0 &&
-            images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
-                    if (showPreview) {
-                        setCurrentImage(i);
-                        setIsShown(true);
-                    }
-                } },
-                React.createElement("img", { className: "" + flexImageContainerElement, src: imageItem, key: i, width: '250px' }))); })),
-        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass },
+    return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
+            ? userType === 'user'
+                ? adminContainer
+                : userContainer
+            : userType === 'user'
+                ? userContainer
+                : adminContainer) + className }, rest),
+        !!text && (React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { className: globalTextBlock + " " + (consumer === 'user'
+                    ? userType === 'user'
+                        ? textBlockAdmin
+                        : textBlockUser
+                    : userType === 'user'
+                        ? textBlockUser
+                        : textBlockAdmin) + " " + elementClassName, style: elementStyle }, text))),
+        React.createElement(AvatarContainer, { avatar: avatar, userType: userType, consumer: consumer },
+            React.createElement("div", { className: "" + flexImageContainer }, !!images &&
+                images.length > 0 &&
+                images.map(function (imageItem, i) { return (React.createElement("div", { className: "" + flexImageContainerDiv, key: i, onClick: function () {
+                        if (showPreview) {
+                            setCurrentImage(i);
+                            setIsShown(true);
+                        }
+                    } },
+                    React.createElement("img", { className: "" + flexImageContainerElement, src: imageItem, key: i, width: '250px' }))); }))),
+        (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass, style: avatar
+                ? consumer === 'user'
+                    ? userType === 'user'
+                        ? { marginRight: '30px' }
+                        : { marginLeft: '30px' }
+                    : userType === 'user'
+                        ? { marginLeft: '30px' }
+                        : { marginRight: '30px' }
+                : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
                 " \u00A0 "),
@@ -237,6 +260,7 @@ ImageMessage.propTypes = {
     consumer: PropTypes.oneOf(['user', 'admin', 'bot']),
     elementStyle: PropTypes.object,
     elementClassName: PropTypes.string,
+    avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 ImageMessage.defaultProps = {
     style: {},
@@ -244,6 +268,7 @@ ImageMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     showPreview: false,
+    avatar: '',
 };
 export default ImageMessage;
 //# sourceMappingURL=index.js.map
