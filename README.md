@@ -133,3 +133,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] ButtonGroupContainer style added
 - [x] font size for msg time synced to 0.7rem
+
+# 29 Sep 2020 - 1.0.18
+
+- [x] Fix repliedBy only for admin issue
