@@ -127,7 +127,7 @@ const TextMessage: React.FC<Props> = ({
           }
         >
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
-          {userType === 'admin' && showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {showRepliedBy && <>• &nbsp; {repliedBy}</>}
         </p>
       )}
     </div>
