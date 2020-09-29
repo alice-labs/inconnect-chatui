@@ -4100,7 +4100,7 @@ var TextMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             ' ',
-            userType === 'admin' && showRepliedBy && createElement(Fragment, null,
+            showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy)))));
 };
@@ -4359,7 +4359,7 @@ var ImageMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             ' ',
-            userType === 'admin' && showRepliedBy && createElement(Fragment, null,
+            showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy))),
         isShown && currentImage >= 0 && (createElement("div", { className: "" + imageViewerStyle, style: { background: "rgba(0, 0, 0, 0.8)" } },

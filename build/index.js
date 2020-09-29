@@ -4104,7 +4104,7 @@ var TextMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             ' ',
-            userType === 'admin' && showRepliedBy && React.createElement(React.Fragment, null,
+            showRepliedBy && React.createElement(React.Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy)))));
 };
@@ -4363,7 +4363,7 @@ var ImageMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             ' ',
-            userType === 'admin' && showRepliedBy && React.createElement(React.Fragment, null,
+            showRepliedBy && React.createElement(React.Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy))),
         isShown && currentImage >= 0 && (React.createElement("div", { className: "" + imageViewerStyle, style: { background: "rgba(0, 0, 0, 0.8)" } },
