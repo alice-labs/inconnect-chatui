@@ -4750,7 +4750,7 @@ var postContentStyle = lib_18({
 });
 var replyContentText = lib_18({
     marginTop: 5,
-    marginBottom: '1rem',
+    marginBottom: 5,
 });
 var replyContentNote = lib_18({
     background: '#feefc3',
@@ -4760,13 +4760,13 @@ var replyContentNote = lib_18({
     borderRadius: '0.88rem',
     transform: 'translateX(-5px)',
     color: '#333',
-    marginBottom: '1rem',
+    marginBottom: 5,
 });
 var replyContentImage = lib_18({
     borderRadius: 5,
-    width: '50%',
+    width: '20rem',
     marginTop: 10,
-    marginBottom: '1rem',
+    marginBottom: 5,
 });
 var linkStyle = lib_18({
     textDecoration: 'none',
@@ -4796,13 +4796,44 @@ var highLighted = lib_18({
     color: '#184d47',
     textTranform: 'uppercase',
     position: 'absolute',
-    right: 0,
-    top: 3,
+    right: '16px',
+    top: '8px',
+});
+var moreButton = lib_18({
+    background: '#f2f2f2',
+    width: 15,
+    height: 15,
+    borderRadius: 20,
+    marginLeft: 10,
+    cursor: 'pointer',
+    padding: 5,
+    ':hover': {
+        background: '#dcdcdc',
+    },
+});
+var moreButtonContainer = lib_18({
+    background: 'white',
+    borderRadius: 5,
+    boxShadow: '0px 0px 8px #90909066',
+    marginTop: 5,
+    position: 'absolute',
+    zIndex: 999,
+    width: 100,
+});
+var moreButtonElement = lib_18({
+    padding: '5px 10px',
+    margin: 3,
+    cursor: 'pointer',
+    fontSize: 12,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+    ':hover': {
+        background: '#E9E9E9',
+    },
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick"]);
     var getContents = function () {
-        console.log(contentType);
         switch (contentType) {
             case 'text':
                 return content;
@@ -4815,7 +4846,8 @@ var FeedPost = function (_a) {
             case 'image':
                 return (React.createElement(React.Fragment, null,
                     React.createElement("p", null, content),
-                    React.createElement("div", { className: "" + flexWrapContainer }, !!contentItem && (contentItem.map(function (elem, index) { return React.createElement("img", { src: elem, className: "" + imageHolder, alt: index + "", key: index, width: 'fit-content' }); })))));
+                    React.createElement("div", { className: "" + flexWrapContainer }, !!contentItem &&
+                        contentItem.map(function (elem, index) { return (React.createElement("img", { src: elem, className: "" + imageHolder, alt: index + '', key: index, width: 'fit-content' })); }))));
             default:
                 return 'No contentType matched';
         }
@@ -4832,6 +4864,7 @@ var FeedPost = function (_a) {
                 return 'No contentType matched';
         }
     };
+    var _b = React.useState(null), showPopover = _b[0], setShowPopover = _b[1];
     return (React.createElement("div", __assign({ style: __assign({}, style), className: feedContainer + " " + className }, rest),
         React.createElement("div", { className: "" + feedPostContainer },
             React.createElement("div", { className: "" + postInfoContainer },
@@ -4853,17 +4886,66 @@ var FeedPost = function (_a) {
                     getReplyContent(commentData))),
             replyContent.map(function (reply, i) { return (React.createElement("div", { className: "" + replyInfoContainer, key: i },
                 React.createElement("img", { src: reply.avatar, className: "" + avatarSmallStyle }),
-                React.createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    !!reply.link ? (React.createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
-                        React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
-                    React.createElement("p", { className: "" + postTimeStyle },
-                        reply.time,
-                        ' ',
-                        !!reply.messageType && React.createElement("span", null,
-                            " \u2022 ",
-                            reply.messageType)),
-                    !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
-                    getReplyContent(reply)))); }))));
+                React.createElement("div", { style: {
+                        marginLeft: 10,
+                        flex: 10,
+                        display: 'flex',
+                        alignItems: 'center',
+                    } },
+                    React.createElement("div", { style: {
+                            background: reply.contentType !== 'note' ? commentBg : 'transparent',
+                            padding: '10px 30px 10px 20px',
+                            borderRadius: 5,
+                            maxWidth: 'fit-content',
+                            position: 'relative',
+                            marginBottom: 8,
+                        } },
+                        !!reply.link ? (React.createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                            React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
+                        React.createElement("p", { className: "" + postTimeStyle },
+                            reply.time,
+                            ' ',
+                            !!reply.messageType && React.createElement("span", null,
+                                " \u2022 ",
+                                reply.messageType)),
+                        !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
+                        getReplyContent(reply)),
+                    showAction && reply.contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
+                        React.createElement("div", { className: "" + moreButton, onClick: function () {
+                                if (reply.id === showPopover) {
+                                    setShowPopover(null);
+                                }
+                                else {
+                                    setShowPopover(reply.id);
+                                }
+                            } },
+                            React.createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', className: 'ub-w_16px ub-h_16px ub-box-szg_border-box', style: { fill: 'rgb(102, 120, 138)' } },
+                                React.createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
+                        showPopover === reply.id && (React.createElement("div", { className: "" + moreButtonContainer },
+                            React.createElement("div", { onClick: function () {
+                                    if (!!handleEdit) {
+                                        handleEdit(reply);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Edit"),
+                            React.createElement("div", { onClick: function () {
+                                    if (!!handleDelete) {
+                                        handleDelete(reply);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Delete"),
+                            React.createElement("div", { onClick: function () {
+                                    if (!!handleHide) {
+                                        handleHide(reply);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Hide")))))))); }))));
 };
 FeedPost.propTypes = {
     style: propTypes.object,
@@ -4875,12 +4957,30 @@ FeedPost.propTypes = {
     contentType: propTypes.string,
     replyContent: propTypes.any,
     contentItem: propTypes.any,
+    commentBg: propTypes.string,
+    showAction: propTypes.bool,
+    handleDelete: propTypes.func,
+    handleHide: propTypes.func,
+    handleEdit: propTypes.func,
+    closeOnActionClick: propTypes.bool,
 };
 FeedPost.defaultProps = {
     style: {},
     className: '',
     contentType: 'text',
     replyContent: [],
+    commentBg: '#f2f2f2',
+    showAction: false,
+    closeOnActionClick: true,
+    handleDelete: function () {
+        console.log('delete button clicked');
+    },
+    handleHide: function () {
+        console.log('hide button clicked');
+    },
+    handleEdit: function () {
+        console.log('edit button clicked');
+    },
 };
 
 exports.ButtonMessage = ButtonMessage;

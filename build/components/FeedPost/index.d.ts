@@ -23,6 +23,12 @@ interface Props {
     pageLink: string;
     commentData: replyProps;
     contentItem?: any;
+    commentBg?: string;
+    showAction?: boolean;
+    handleDelete?: (reply: replyProps) => void;
+    handleHide?: (reply: replyProps) => void;
+    handleEdit?: (reply: replyProps) => void;
+    closeOnActionClick?: boolean;
     [key: string]: any;
 }
 declare const FeedPost: React.FC<Props>;

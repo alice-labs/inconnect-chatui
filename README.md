@@ -137,3 +137,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 29 Sep 2020 - 1.0.18
 
 - [x] Fix repliedBy only for admin issue
+
+# 23 Nov 2020 - 1.0.21
+
+- [x] Added Action as hide delete edit for Feed Post
+- [x] added some minor flow props to give user more control like, `closeOnActionClick, showAction, commentBg` etc

@@ -97,7 +97,7 @@ var TextMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             ' ',
-            userType === 'admin' && showRepliedBy && React.createElement(React.Fragment, null,
+            showRepliedBy && React.createElement(React.Fragment, null,
                 "\u2022 \u00A0 ",
                 repliedBy)))));
 };

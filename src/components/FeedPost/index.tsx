@@ -91,7 +91,7 @@ const postContentStyle = css({
 
 const replyContentText = css({
   marginTop: 5,
-  marginBottom: '1rem',
+  marginBottom: 5,
 });
 
 const replyContentNote = css({
@@ -102,34 +102,34 @@ const replyContentNote = css({
   borderRadius: '0.88rem',
   transform: 'translateX(-5px)',
   color: '#333',
-  marginBottom: '1rem',
+  marginBottom: 5,
 });
 
 const replyContentImage = css({
   borderRadius: 5,
-  width: '50%',
+  width: '20rem',
   marginTop: 10,
-  marginBottom: '1rem',
+  marginBottom: 5,
 });
 
 const linkStyle = css({
-    textDecoration: 'none',
-    color: '#184D47',
-    ':hover': {
-        textDecoration: 'underline',
-    },
+  textDecoration: 'none',
+  color: '#184D47',
+  ':hover': {
+    textDecoration: 'underline',
+  },
 });
 const flexWrapContainer = css({
-    display: 'flex',
-    flexWrap: 'wrap',
+  display: 'flex',
+  flexWrap: 'wrap',
 });
 const imageHolder = css({
-    width: 'calc(50% - 20px)',
-    borderRadius: 10,
-    margin: 10,
-    '@media(max-width: 400px)': {
-        maxWidth: '100%',
-    },
+  width: 'calc(50% - 20px)',
+  borderRadius: 10,
+  margin: 10,
+  '@media(max-width: 400px)': {
+    maxWidth: '100%',
+  },
 });
 
 const highLighted = css({
@@ -141,8 +141,43 @@ const highLighted = css({
   color: '#184d47',
   textTranform: 'uppercase',
   position: 'absolute',
-  right: 0,
-  top: 3,
+  right: '16px',
+  top: '8px',
+});
+
+const moreButton = css({
+  background: '#f2f2f2',
+  width: 15,
+  height: 15,
+  borderRadius: 20,
+  marginLeft: 10,
+  cursor: 'pointer',
+  padding: 5,
+  ':hover': {
+    background: '#dcdcdc',
+  },
+});
+
+const moreButtonContainer = css({
+  background: 'white',
+  borderRadius: 5,
+  boxShadow: '0px 0px 8px #90909066',
+  marginTop: 5,
+  position: 'absolute',
+  zIndex: 999,
+  width: 100,
+});
+
+const moreButtonElement = css({
+  padding: '5px 10px',
+  margin: 3,
+  cursor: 'pointer',
+  fontSize: 12,
+  textAlign: 'left',
+  textTransform: 'uppercase',
+  ':hover': {
+    background: '#E9E9E9',
+  },
 });
 
 interface replyProps {
@@ -169,6 +204,12 @@ interface Props {
   pageLink: string;
   commentData: replyProps;
   contentItem?: any;
+  commentBg?: string;
+  showAction?: boolean;
+  handleDelete?: (reply: replyProps) => void;
+  handleHide?: (reply: replyProps) => void;
+  handleEdit?: (reply: replyProps) => void;
+  closeOnActionClick?: boolean;
   [key: string]: any;
 }
 
@@ -187,36 +228,48 @@ const FeedPost: React.FC<Props> = ({
   pageLink,
   commentData,
   contentItem,
+  commentBg,
+  showAction,
+  handleDelete,
+  handleEdit,
+  handleHide,
+  closeOnActionClick,
   ...rest
 }) => {
   const getContents = () => {
-    console.log(contentType);
     switch (contentType) {
       case 'text':
         return content;
-        case 'video':
-            return (
-                <>
-                    <p>{content}</p>
-                    {!!contentItem && (
-                        <video controls style={{ width: '100%', maxWidth: 650}}>
-                            <source src={contentItem} type='video/mp4' />
-                            Your browser does not support HTML video.
-                        </video>
-                    )}
-                </>
-            );
-        case 'image':
-            return (
-                <>
-                    <p>{content}</p>
-                    <div className={`${flexWrapContainer}`}>
-                        {!!contentItem && (
-                            contentItem.map((elem:string, index: number)=><img src={elem} className={`${imageHolder}`} alt={index+""} key={index}  width={'fit-content'} />)
-                        )}
-                    </div>
-                </>
-            );
+      case 'video':
+        return (
+          <>
+            <p>{content}</p>
+            {!!contentItem && (
+              <video controls style={{ width: '100%', maxWidth: 650 }}>
+                <source src={contentItem} type='video/mp4' />
+                Your browser does not support HTML video.
+              </video>
+            )}
+          </>
+        );
+      case 'image':
+        return (
+          <>
+            <p>{content}</p>
+            <div className={`${flexWrapContainer}`}>
+              {!!contentItem &&
+                contentItem.map((elem: string, index: number) => (
+                  <img
+                    src={elem}
+                    className={`${imageHolder}`}
+                    alt={index + ''}
+                    key={index}
+                    width={'fit-content'}
+                  />
+                ))}
+            </div>
+          </>
+        );
       default:
         return 'No contentType matched';
     }
@@ -241,6 +294,7 @@ const FeedPost: React.FC<Props> = ({
     }
   };
 
+  const [showPopover, setShowPopover] = React.useState<any>(null);
   return (
     <div
       style={{ ...style }}
@@ -297,27 +351,115 @@ const FeedPost: React.FC<Props> = ({
         {replyContent.map((reply: replyProps, i: number) => (
           <div className={`${replyInfoContainer}`} key={i}>
             <img src={reply.avatar} className={`${avatarSmallStyle}`} />
-            <div style={{ marginLeft: 10, flex: 10 }}>
-              {!!reply.link ? (
-                <a
-                  href={reply.link}
-                  className={`${linkStyle}`}
-                  target='_blank'
-                  rel='noreferrer noopener'
-                >
+            <div
+              style={{
+                marginLeft: 10,
+                flex: 10,
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                style={{
+                  background:
+                    reply.contentType !== 'note' ? commentBg : 'transparent',
+                  padding: '10px 30px 10px 20px',
+                  borderRadius: 5,
+                  maxWidth: 'fit-content',
+                  position: 'relative',
+                  marginBottom: 8,
+                }}
+              >
+                {!!reply.link ? (
+                  <a
+                    href={reply.link}
+                    className={`${linkStyle}`}
+                    target='_blank'
+                    rel='noreferrer noopener'
+                  >
+                    <p className={`${postNameStyle}`}>{reply.name}</p>
+                  </a>
+                ) : (
                   <p className={`${postNameStyle}`}>{reply.name}</p>
-                </a>
-              ) : (
-                <p className={`${postNameStyle}`}>{reply.name}</p>
+                )}
+                <p className={`${postTimeStyle}`}>
+                  {reply.time}{' '}
+                  {!!reply.messageType && <span> • {reply.messageType}</span>}
+                </p>
+                {!!reply.isHighlighted && (
+                  <span className={`${highLighted}`}>Highlighted</span>
+                )}
+                {getReplyContent(reply)}
+              </div>
+              {showAction && reply.contentType !== 'note' && (
+                <div style={{ position: 'relative' }}>
+                  <div
+                    className={`${moreButton}`}
+                    onClick={() => {
+                      if (reply.id === showPopover) {
+                        setShowPopover(null);
+                      } else {
+                        setShowPopover(reply.id);
+                      }
+                    }}
+                  >
+                    <svg
+                      data-icon='more'
+                      viewBox='0 0 16 16'
+                      className='ub-w_16px ub-h_16px ub-box-szg_border-box'
+                      style={{ fill: 'rgb(102, 120, 138)' }}
+                    >
+                      <path
+                        d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
+                        fillRule='evenodd'
+                      />
+                    </svg>
+                  </div>
+                  {showPopover === reply.id && (
+                    <div className={`${moreButtonContainer}`}>
+                      <div
+                        onClick={() => {
+                          if (!!handleEdit) {
+                            handleEdit(reply);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Edit
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleDelete) {
+                            handleDelete(reply);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleHide) {
+                            handleHide(reply);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Hide
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
-              <p className={`${postTimeStyle}`}>
-                {reply.time}{' '}
-                {!!reply.messageType && <span> • {reply.messageType}</span>}
-              </p>
-              {!!reply.isHighlighted && (
-                <span className={`${highLighted}`}>Highlighted</span>
-              )}
-              {getReplyContent(reply)}
             </div>
           </div>
         ))}
@@ -336,6 +478,12 @@ FeedPost.propTypes = {
   contentType: PropTypes.string,
   replyContent: PropTypes.any,
   contentItem: PropTypes.any,
+  commentBg: PropTypes.string,
+  showAction: PropTypes.bool,
+  handleDelete: PropTypes.func,
+  handleHide: PropTypes.func,
+  handleEdit: PropTypes.func,
+  closeOnActionClick: PropTypes.bool,
 };
 
 FeedPost.defaultProps = {
@@ -343,6 +491,18 @@ FeedPost.defaultProps = {
   className: '',
   contentType: 'text',
   replyContent: [],
+  commentBg: '#f2f2f2',
+  showAction: false,
+  closeOnActionClick: true,
+  handleDelete: () => {
+    console.log('delete button clicked');
+  },
+  handleHide: () => {
+    console.log('hide button clicked');
+  },
+  handleEdit: () => {
+    console.log('edit button clicked');
+  },
 };
 
 export default FeedPost;

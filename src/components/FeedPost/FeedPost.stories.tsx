@@ -25,6 +25,11 @@ export const Example = () => (
       postTime={'10h ago'}
       content='Donec et libero purus. Quisque ac erat nec tortor consectetur scelerisque a sed urna. Cras placerat tincidunt lacus. Phasellus ultrices diam vitae enim ornare, id tristique lectus lacinia. Morbi nec consequat nisl. Morbi et faucibus sem. Ut scelerisque turpis vel turpis pharetra dapibus. Vivamus quis neque a turpis sodales luctus in vitae lorem. Etiam varius, ante sed blandit egestas, arcu lacus consectetur ante, sit amet accumsan est lacus eget ipsum. Vivamus aliquet diam ac cursus convallis.'
       contentType='text'
+      showAction={true}
+      handleDelete={(reply: any) => console.log(reply, 'is Clicked for Delete')}
+      handleEdit={(reply: any) => console.log(reply, 'is Clicked for Edit')}
+      handleHide={(reply: any) => console.log(reply, 'is Clicked for Hide')}
+      closeOnActionClick={true}
       commentData={{
         id: 0,
         name: 'A Ranodom Comment User',
@@ -160,7 +165,7 @@ export const ExampleImage = () => (
       postTime={'10h ago'}
       contentItem={[
         'https://images.unsplash.com/photo-1600196245390-039527aad831?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-          'https://images.unsplash.com/photo-1600185947497-9efadf13d099?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
+        'https://images.unsplash.com/photo-1600185947497-9efadf13d099?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
       ]}
       content='Donec et libero purus. Quisque ac erat nec tortor consectetur scelerisque a sed urna. Cras placerat tincidunt lacus. Phasellus ultrices diam vitae enim ornare, id tristique lectus lacinia. Morbi nec consequat nisl. Morbi et faucibus sem. Ut scelerisque turpis vel turpis pharetra dapibus. Vivamus quis neque a turpis sodales luctus in vitae lorem. Etiam varius, ante sed blandit egestas, arcu lacus consectetur ante, sit amet accumsan est lacus eget ipsum. Vivamus aliquet diam ac cursus convallis.'
       contentType='image'
@@ -177,6 +182,7 @@ export const ExampleImage = () => (
           'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
         isHighlighted: true,
       }}
+      commentBg={'#eff9ff'}
       replyContent={[
         {
           id: 0,
