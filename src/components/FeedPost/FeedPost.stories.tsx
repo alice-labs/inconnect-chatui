@@ -42,6 +42,7 @@ export const Example = () => (
         link:
           'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
         isHighlighted: true,
+          status: 'active',
       }}
       replyContent={[
         {
@@ -57,6 +58,7 @@ export const Example = () => (
             'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
           isHighlighted: true,
           messageType: 'comment',
+          status: 'active',
         },
         {
           id: 1,
@@ -68,6 +70,7 @@ export const Example = () => (
           content: 'Note Created by Bot from the system',
           source: 'bot',
           isHighlighted: false,
+          status: 'active',
         },
         {
           id: 2,
@@ -80,6 +83,31 @@ export const Example = () => (
             'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
           source: 'bot',
           messageType: 'Message',
+          status: 'edited',
+        },
+        {
+          id: 3,
+          name: 'A Ranodom User',
+          avatar:
+            'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+          time: '2h ago',
+          contentType: 'text',
+          content: 'This is Hidden',
+          source: 'bot',
+          isHighlighted: false,
+          status: 'hidden',
+        },
+        {
+          id: 3,
+          name: 'A Ranodom User',
+          avatar:
+            'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+          time: '2h ago',
+          contentType: 'text',
+          content: 'This is Deleted',
+          source: 'bot',
+          isHighlighted: false,
+          status: 'deleted',
         },
       ]}
     />

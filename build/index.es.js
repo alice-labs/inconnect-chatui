@@ -4735,8 +4735,9 @@ var postNameStyle = lib_18({
 });
 var postTimeStyle = lib_18({
     fontSize: '0.7rem',
-    margin: 0,
-    color: '#c0cbd0',
+    margin: '5px 0 0 0',
+    color: '#91999d',
+    textTransform: 'capitalize',
 });
 var postContentStyle = lib_18({
     marginTop: 20,
@@ -4784,13 +4785,12 @@ var imageHolder = lib_18({
     },
 });
 var highLighted = lib_18({
-    background: '#d0e43b2e',
-    borderRadius: '20px',
-    fontSize: '0.6rem',
-    padding: '2px 8px',
-    border: '1px solid #184d47',
+    background: 'rgba(0, 123, 101, 0.19)',
+    borderRadius: '3px',
+    fontSize: '0.7rem',
+    padding: '5px 10px',
     color: '#184d47',
-    textTranform: 'uppercase',
+    textTransform: 'uppercase',
     position: 'absolute',
     right: '16px',
     top: '8px',
@@ -4828,7 +4828,8 @@ var moreButtonElement = lib_18({
     },
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "status"]);
+    var statustoExcludeAction = ['note', 'hidden', 'deleted'];
     var getContents = function () {
         switch (contentType) {
             case 'text':
@@ -4851,7 +4852,9 @@ var FeedPost = function (_a) {
     var getReplyContent = function (reply) {
         switch (reply.contentType) {
             case 'text':
-                return createElement("p", { className: "" + replyContentText }, reply.content);
+                return (createElement("p", { className: "" + replyContentText, style: reply.status === 'deleted'
+                        ? { textDecoration: 'line-through' }
+                        : {} }, reply.content));
             case 'note':
                 return createElement("div", { className: "" + replyContentNote }, reply.content);
             case 'image':
@@ -4867,19 +4870,72 @@ var FeedPost = function (_a) {
                 createElement("img", { src: postAvatar, className: "" + avatarStyle }),
                 createElement("div", { style: { marginLeft: 10, flex: 10 } },
                     !!pageLink ? (createElement("a", { href: pageLink, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
-                        ' ',
                         createElement("p", { className: "" + postNameStyle }, postName))) : (createElement("p", { className: "" + postNameStyle }, postName)),
                     createElement("p", { className: "" + postTimeStyle }, postTime))),
             createElement("div", { className: "" + postContentStyle }, getContents()),
             createElement("div", { className: "" + commentInfoContainer, key: 'reply-comment' },
                 createElement("img", { src: commentData.avatar, className: "" + avatarSmallStyle }),
-                createElement("div", { style: { marginLeft: 10, flex: 10 } },
-                    !!commentData.link ? (createElement("a", { href: commentData.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
-                        createElement("p", { className: "" + postNameStyle }, commentData.name))) : (createElement("p", { className: "" + postNameStyle }, commentData.name)),
-                    createElement("p", { className: "" + postTimeStyle },
-                        commentData.time,
-                        commentData.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted"))),
-                    getReplyContent(commentData))),
+                createElement("div", { style: {
+                        marginLeft: 10,
+                        flex: 10,
+                        display: 'flex',
+                        alignItems: 'center',
+                    } },
+                    createElement("div", { style: {
+                            maxWidth: '70%',
+                            marginBottom: 8,
+                            opacity: commentData.status === 'hidden' ? 0.5 : 1,
+                        } },
+                        createElement("div", { style: {
+                                background: contentType !== 'note' ? commentBg : 'transparent',
+                                padding: '10px 30px 10px 20px',
+                                borderRadius: 5,
+                            } },
+                            !!commentData.link ? (createElement("a", { href: commentData.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                                createElement("p", { className: "" + postNameStyle }, commentData.name))) : (createElement("p", { className: "" + postNameStyle }, commentData.name)),
+                            commentData.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted")),
+                            getReplyContent(commentData)),
+                        createElement("p", { className: "" + postTimeStyle }, commentData.time)),
+                    showAction &&
+                        statustoExcludeAction.includes("" + commentData.status) ===
+                            false &&
+                        contentType !== 'note' &&
+                        contentType !== 'image' && (createElement("div", { style: { position: 'relative' } },
+                        createElement("div", { className: "" + moreButton, onClick: function () {
+                                if (commentData.id + '-comment' === showPopover) {
+                                    setShowPopover(null);
+                                }
+                                else {
+                                    setShowPopover(commentData.id + '-comment');
+                                }
+                            } },
+                            createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', className: 'ub-w_16px ub-h_16px ub-box-szg_border-box', style: { fill: 'rgb(102, 120, 138)' } },
+                                createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
+                        showPopover === commentData.id + '-comment' && (createElement("div", { className: "" + moreButtonContainer },
+                            createElement("div", { onClick: function () {
+                                    if (!!handleEdit) {
+                                        handleEdit(commentData);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Edit"),
+                            createElement("div", { onClick: function () {
+                                    if (!!handleDelete) {
+                                        handleDelete(commentData);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Delete"),
+                            createElement("div", { onClick: function () {
+                                    if (!!handleHide) {
+                                        handleHide(commentData);
+                                        if (closeOnActionClick) {
+                                            setShowPopover(null);
+                                        }
+                                    }
+                                }, className: "" + moreButtonElement }, "Hide"))))))),
             replyContent.map(function (reply, i) { return (createElement("div", { className: "" + replyInfoContainer, key: i },
                 createElement("img", { src: reply.avatar, className: "" + avatarSmallStyle }),
                 createElement("div", { style: {
@@ -4889,24 +4945,46 @@ var FeedPost = function (_a) {
                         alignItems: 'center',
                     } },
                     createElement("div", { style: {
-                            background: reply.contentType !== 'note' ? commentBg : 'transparent',
-                            padding: '10px 30px 10px 20px',
-                            borderRadius: 5,
-                            maxWidth: 'fit-content',
-                            position: 'relative',
+                            maxWidth: '70%',
                             marginBottom: 8,
+                            opacity: reply.status === 'hidden' ? 0.5 : 1,
+                            cursor: reply.status === 'hidden' ? 'not-allowed' : 'default'
                         } },
-                        !!reply.link ? (createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
-                            createElement("p", { className: "" + postNameStyle }, reply.name))) : (createElement("p", { className: "" + postNameStyle }, reply.name)),
-                        createElement("p", { className: "" + postTimeStyle },
+                        createElement("div", { style: reply.contentType === 'note'
+                                ? {
+                                    background: reply.contentType !== 'note'
+                                        ? commentBg
+                                        : 'transparent',
+                                    padding: '10px 30px 10px 5px',
+                                    borderRadius: 5,
+                                }
+                                : {
+                                    background: reply.contentType !== 'note'
+                                        ? commentBg
+                                        : 'transparent',
+                                    padding: '10px 30px 10px 20px',
+                                    borderRadius: 5,
+                                } },
+                            !!reply.link ? (createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
+                                createElement("p", { className: "" + postNameStyle }, reply.name))) : (createElement("p", { className: "" + postNameStyle }, reply.name)),
+                            !!reply.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted")),
+                            getReplyContent(reply)),
+                        createElement("p", { className: "" + postTimeStyle, style: reply.contentType === 'note'
+                                ? { margin: '-10px 0 0 10px' }
+                                : {} },
                             reply.time,
                             ' ',
                             !!reply.messageType && createElement("span", null,
                                 " \u2022 ",
-                                reply.messageType)),
-                        !!reply.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted")),
-                        getReplyContent(reply)),
-                    showAction && reply.contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
+                                reply.messageType),
+                            !!reply.status && reply.status === 'edited' && (createElement("span", null,
+                                ' ',
+                                "\u2022 ",
+                                reply.status)))),
+                    showAction &&
+                        statustoExcludeAction.includes("" + reply.status) === false &&
+                        reply.contentType !== 'note' &&
+                        reply.contentType !== 'image' && (createElement("div", { style: { position: 'relative' } },
                         createElement("div", { className: "" + moreButton, onClick: function () {
                                 if (reply.id === showPopover) {
                                     setShowPopover(null);
@@ -4968,6 +5046,7 @@ FeedPost.defaultProps = {
     commentBg: '#f2f2f2',
     showAction: false,
     closeOnActionClick: true,
+    status: 'active',
     handleDelete: function () {
         console.log('delete button clicked');
     },

@@ -10,6 +10,7 @@ interface replyProps {
     link?: string;
     isHighlighted?: boolean;
     messageType?: string;
+    status?: string;
 }
 interface Props {
     style?: object;

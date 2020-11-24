@@ -78,8 +78,9 @@ const postNameStyle = css({
 });
 const postTimeStyle = css({
   fontSize: '0.7rem',
-  margin: 0,
-  color: '#c0cbd0',
+  margin: '5px 0 0 0',
+  color: '#91999d',
+  textTransform: 'capitalize',
 });
 
 const postContentStyle = css({
@@ -133,13 +134,12 @@ const imageHolder = css({
 });
 
 const highLighted = css({
-  background: '#d0e43b2e',
-  borderRadius: '20px',
-  fontSize: '0.6rem',
-  padding: '2px 8px',
-  border: '1px solid #184d47',
+  background: 'rgba(0, 123, 101, 0.19)',
+  borderRadius: '3px',
+  fontSize: '0.7rem',
+  padding: '5px 10px',
   color: '#184d47',
-  textTranform: 'uppercase',
+  textTransform: 'uppercase',
   position: 'absolute',
   right: '16px',
   top: '8px',
@@ -191,6 +191,7 @@ interface replyProps {
   link?: string;
   isHighlighted?: boolean;
   messageType?: string;
+  status?: string;
 }
 interface Props {
   style?: object;
@@ -234,8 +235,10 @@ const FeedPost: React.FC<Props> = ({
   handleEdit,
   handleHide,
   closeOnActionClick,
+  status,
   ...rest
 }) => {
+  const statustoExcludeAction = ['note', 'hidden', 'deleted'];
   const getContents = () => {
     switch (contentType) {
       case 'text':
@@ -278,7 +281,18 @@ const FeedPost: React.FC<Props> = ({
   const getReplyContent = (reply: replyProps) => {
     switch (reply.contentType) {
       case 'text':
-        return <p className={`${replyContentText}`}>{reply.content}</p>;
+        return (
+          <p
+            className={`${replyContentText}`}
+            style={
+              reply.status === 'deleted'
+                ? { textDecoration: 'line-through' }
+                : {}
+            }
+          >
+            {reply.content}
+          </p>
+        );
       case 'note':
         return <div className={`${replyContentNote}`}>{reply.content}</div>;
       case 'image':
@@ -312,7 +326,6 @@ const FeedPost: React.FC<Props> = ({
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                {' '}
                 <p className={`${postNameStyle}`}>{postName}</p>
               </a>
             ) : (
@@ -325,26 +338,122 @@ const FeedPost: React.FC<Props> = ({
         <div className={`${postContentStyle}`}>{getContents()}</div>
         <div className={`${commentInfoContainer}`} key={'reply-comment'}>
           <img src={commentData.avatar} className={`${avatarSmallStyle}`} />
-          <div style={{ marginLeft: 10, flex: 10 }}>
-            {!!commentData.link ? (
-              <a
-                href={commentData.link}
-                className={`${linkStyle}`}
-                target='_blank'
-                rel='noreferrer noopener'
+          <div
+            style={{
+              marginLeft: 10,
+              flex: 10,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                maxWidth: '70%',
+                marginBottom: 8,
+                opacity: commentData.status === 'hidden' ? 0.5 : 1,
+              }}
+            >
+              <div
+                style={{
+                  background:
+                    contentType !== 'note' ? commentBg : 'transparent',
+                  padding: '10px 30px 10px 20px',
+                  borderRadius: 5,
+                }}
               >
-                <p className={`${postNameStyle}`}>{commentData.name}</p>
-              </a>
-            ) : (
-              <p className={`${postNameStyle}`}>{commentData.name}</p>
-            )}
-            <p className={`${postTimeStyle}`}>
-              {commentData.time}
-              {commentData.isHighlighted && (
-                <span className={`${highLighted}`}>Highlighted</span>
+                {!!commentData.link ? (
+                  <a
+                    href={commentData.link}
+                    className={`${linkStyle}`}
+                    target='_blank'
+                    rel='noreferrer noopener'
+                  >
+                    <p className={`${postNameStyle}`}>{commentData.name}</p>
+                  </a>
+                ) : (
+                  <p className={`${postNameStyle}`}>{commentData.name}</p>
+                )}
+                {commentData.isHighlighted && (
+                  <span className={`${highLighted}`}>Highlighted</span>
+                )}
+                {getReplyContent(commentData)}
+              </div>
+              <p className={`${postTimeStyle}`}>{commentData.time}</p>
+            </div>
+
+            {showAction &&
+              statustoExcludeAction.includes(`${commentData.status}`) ===
+                false &&
+              contentType !== 'note' &&
+              contentType !== 'image' && (
+                <div style={{ position: 'relative' }}>
+                  <div
+                    className={`${moreButton}`}
+                    onClick={() => {
+                      if (commentData.id + '-comment' === showPopover) {
+                        setShowPopover(null);
+                      } else {
+                        setShowPopover(commentData.id + '-comment');
+                      }
+                    }}
+                  >
+                    <svg
+                      data-icon='more'
+                      viewBox='0 0 16 16'
+                      className='ub-w_16px ub-h_16px ub-box-szg_border-box'
+                      style={{ fill: 'rgb(102, 120, 138)' }}
+                    >
+                      <path
+                        d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
+                        fillRule='evenodd'
+                      />
+                    </svg>
+                  </div>
+                  {showPopover === commentData.id + '-comment' && (
+                    <div className={`${moreButtonContainer}`}>
+                      <div
+                        onClick={() => {
+                          if (!!handleEdit) {
+                            handleEdit(commentData);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Edit
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleDelete) {
+                            handleDelete(commentData);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleHide) {
+                            handleHide(commentData);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Hide
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
-            </p>
-            {getReplyContent(commentData)}
           </div>
         </div>
 
@@ -361,105 +470,140 @@ const FeedPost: React.FC<Props> = ({
             >
               <div
                 style={{
-                  background:
-                    reply.contentType !== 'note' ? commentBg : 'transparent',
-                  padding: '10px 30px 10px 20px',
-                  borderRadius: 5,
-                  maxWidth: 'fit-content',
-                  position: 'relative',
+                  maxWidth: '70%',
                   marginBottom: 8,
+                  opacity: reply.status === 'hidden' ? 0.5 : 1,
+                  cursor: reply.status === 'hidden' ? 'not-allowed': 'default'
                 }}
               >
-                {!!reply.link ? (
-                  <a
-                    href={reply.link}
-                    className={`${linkStyle}`}
-                    target='_blank'
-                    rel='noreferrer noopener'
-                  >
+                <div
+                  style={
+                    reply.contentType === 'note'
+                      ? {
+                          background:
+                            reply.contentType !== 'note'
+                              ? commentBg
+                              : 'transparent',
+                          padding: '10px 30px 10px 5px',
+                          borderRadius: 5,
+                        }
+                      : {
+                          background:
+                            reply.contentType !== 'note'
+                              ? commentBg
+                              : 'transparent',
+                          padding: '10px 30px 10px 20px',
+                          borderRadius: 5,
+                        }
+                  }
+                >
+                  {!!reply.link ? (
+                    <a
+                      href={reply.link}
+                      className={`${linkStyle}`}
+                      target='_blank'
+                      rel='noreferrer noopener'
+                    >
+                      <p className={`${postNameStyle}`}>{reply.name}</p>
+                    </a>
+                  ) : (
                     <p className={`${postNameStyle}`}>{reply.name}</p>
-                  </a>
-                ) : (
-                  <p className={`${postNameStyle}`}>{reply.name}</p>
-                )}
-                <p className={`${postTimeStyle}`}>
+                  )}
+                  {!!reply.isHighlighted && (
+                    <span className={`${highLighted}`}>Highlighted</span>
+                  )}
+                  {getReplyContent(reply)}
+                </div>
+                <p
+                  className={`${postTimeStyle}`}
+                  style={
+                    reply.contentType === 'note'
+                      ? { margin: '-10px 0 0 10px' }
+                      : {}
+                  }
+                >
                   {reply.time}{' '}
                   {!!reply.messageType && <span> • {reply.messageType}</span>}
-                </p>
-                {!!reply.isHighlighted && (
-                  <span className={`${highLighted}`}>Highlighted</span>
-                )}
-                {getReplyContent(reply)}
-              </div>
-              {showAction && reply.contentType !== 'note' && (
-                <div style={{ position: 'relative' }}>
-                  <div
-                    className={`${moreButton}`}
-                    onClick={() => {
-                      if (reply.id === showPopover) {
-                        setShowPopover(null);
-                      } else {
-                        setShowPopover(reply.id);
-                      }
-                    }}
-                  >
-                    <svg
-                      data-icon='more'
-                      viewBox='0 0 16 16'
-                      className='ub-w_16px ub-h_16px ub-box-szg_border-box'
-                      style={{ fill: 'rgb(102, 120, 138)' }}
-                    >
-                      <path
-                        d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
-                        fillRule='evenodd'
-                      />
-                    </svg>
-                  </div>
-                  {showPopover === reply.id && (
-                    <div className={`${moreButtonContainer}`}>
-                      <div
-                        onClick={() => {
-                          if (!!handleEdit) {
-                            handleEdit(reply);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Edit
-                      </div>
-                      <div
-                        onClick={() => {
-                          if (!!handleDelete) {
-                            handleDelete(reply);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Delete
-                      </div>
-                      <div
-                        onClick={() => {
-                          if (!!handleHide) {
-                            handleHide(reply);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Hide
-                      </div>
-                    </div>
+                  {!!reply.status && reply.status === 'edited' && (
+                    <span>
+                      {' '}
+                      • {reply.status}
+                    </span>
                   )}
-                </div>
-              )}
+                </p>
+              </div>
+              {showAction &&
+                statustoExcludeAction.includes(`${reply.status}`) === false &&
+                reply.contentType !== 'note' &&
+                reply.contentType !== 'image' && (
+                  <div style={{ position: 'relative' }}>
+                    <div
+                      className={`${moreButton}`}
+                      onClick={() => {
+                        if (reply.id === showPopover) {
+                          setShowPopover(null);
+                        } else {
+                          setShowPopover(reply.id);
+                        }
+                      }}
+                    >
+                      <svg
+                        data-icon='more'
+                        viewBox='0 0 16 16'
+                        className='ub-w_16px ub-h_16px ub-box-szg_border-box'
+                        style={{ fill: 'rgb(102, 120, 138)' }}
+                      >
+                        <path
+                          d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
+                          fillRule='evenodd'
+                        />
+                      </svg>
+                    </div>
+                    {showPopover === reply.id && (
+                      <div className={`${moreButtonContainer}`}>
+                        <div
+                          onClick={() => {
+                            if (!!handleEdit) {
+                              handleEdit(reply);
+                              if (closeOnActionClick) {
+                                setShowPopover(null);
+                              }
+                            }
+                          }}
+                          className={`${moreButtonElement}`}
+                        >
+                          Edit
+                        </div>
+                        <div
+                          onClick={() => {
+                            if (!!handleDelete) {
+                              handleDelete(reply);
+                              if (closeOnActionClick) {
+                                setShowPopover(null);
+                              }
+                            }
+                          }}
+                          className={`${moreButtonElement}`}
+                        >
+                          Delete
+                        </div>
+                        <div
+                          onClick={() => {
+                            if (!!handleHide) {
+                              handleHide(reply);
+                              if (closeOnActionClick) {
+                                setShowPopover(null);
+                              }
+                            }
+                          }}
+                          className={`${moreButtonElement}`}
+                        >
+                          Hide
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
             </div>
           </div>
         ))}
@@ -494,6 +638,7 @@ FeedPost.defaultProps = {
   commentBg: '#f2f2f2',
   showAction: false,
   closeOnActionClick: true,
+  status: 'active',
   handleDelete: () => {
     console.log('delete button clicked');
   },
