@@ -142,3 +142,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Added Action as hide delete edit for Feed Post
 - [x] added some minor flow props to give user more control like, `closeOnActionClick, showAction, commentBg` etc
+
+# 24 Nov 2020 - 1.0.22
+
+- [x] Feed Post added design for Hide Delete edited
+- [x] Few design Changes for Feed post
