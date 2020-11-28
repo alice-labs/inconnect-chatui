@@ -147,3 +147,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Feed Post added design for Hide Delete edited
 - [x] Few design Changes for Feed post
+
+# 27 Nov 2020 - 1.0.23
+
+- [x] Added Props `moreButtonHeightWidth` to adjust action button height width

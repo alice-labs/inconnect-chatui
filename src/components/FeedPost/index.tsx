@@ -147,8 +147,6 @@ const highLighted = css({
 
 const moreButton = css({
   background: '#f2f2f2',
-  width: 15,
-  height: 15,
   borderRadius: 20,
   marginLeft: 10,
   cursor: 'pointer',
@@ -211,6 +209,7 @@ interface Props {
   handleHide?: (reply: replyProps) => void;
   handleEdit?: (reply: replyProps) => void;
   closeOnActionClick?: boolean;
+  moreButtonHeightWidth?: number;
   [key: string]: any;
 }
 
@@ -235,6 +234,7 @@ const FeedPost: React.FC<Props> = ({
   handleEdit,
   handleHide,
   closeOnActionClick,
+  moreButtonHeightWidth,
   status,
   ...rest
 }) => {
@@ -389,6 +389,10 @@ const FeedPost: React.FC<Props> = ({
                 <div style={{ position: 'relative' }}>
                   <div
                     className={`${moreButton}`}
+                    style={{
+                      height: moreButtonHeightWidth,
+                      width: moreButtonHeightWidth,
+                    }}
                     onClick={() => {
                       if (commentData.id + '-comment' === showPopover) {
                         setShowPopover(null);
@@ -473,7 +477,7 @@ const FeedPost: React.FC<Props> = ({
                   maxWidth: '70%',
                   marginBottom: 8,
                   opacity: reply.status === 'hidden' ? 0.5 : 1,
-                  cursor: reply.status === 'hidden' ? 'not-allowed': 'default'
+                  cursor: reply.status === 'hidden' ? 'not-allowed' : 'default',
                 }}
               >
                 <div
@@ -525,10 +529,7 @@ const FeedPost: React.FC<Props> = ({
                   {reply.time}{' '}
                   {!!reply.messageType && <span> • {reply.messageType}</span>}
                   {!!reply.status && reply.status === 'edited' && (
-                    <span>
-                      {' '}
-                      • {reply.status}
-                    </span>
+                    <span> • {reply.status}</span>
                   )}
                 </p>
               </div>
@@ -539,6 +540,7 @@ const FeedPost: React.FC<Props> = ({
                   <div style={{ position: 'relative' }}>
                     <div
                       className={`${moreButton}`}
+                      style={{height: moreButtonHeightWidth, width: moreButtonHeightWidth}}
                       onClick={() => {
                         if (reply.id === showPopover) {
                           setShowPopover(null);
@@ -628,6 +630,7 @@ FeedPost.propTypes = {
   handleHide: PropTypes.func,
   handleEdit: PropTypes.func,
   closeOnActionClick: PropTypes.bool,
+  moreButtonHeightWidth: PropTypes.number,
 };
 
 FeedPost.defaultProps = {
@@ -639,6 +642,7 @@ FeedPost.defaultProps = {
   showAction: false,
   closeOnActionClick: true,
   status: 'active',
+  moreButtonHeightWidth: 15,
   handleDelete: () => {
     console.log('delete button clicked');
   },

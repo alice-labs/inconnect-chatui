@@ -30,6 +30,7 @@ interface Props {
     handleHide?: (reply: replyProps) => void;
     handleEdit?: (reply: replyProps) => void;
     closeOnActionClick?: boolean;
+    moreButtonHeightWidth?: number;
     [key: string]: any;
 }
 declare const FeedPost: React.FC<Props>;
