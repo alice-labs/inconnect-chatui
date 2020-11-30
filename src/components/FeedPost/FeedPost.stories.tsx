@@ -25,7 +25,10 @@ export const Example = () => (
       postTime={'10h ago'}
       content='Donec et libero purus. Quisque ac erat nec tortor consectetur scelerisque a sed urna. Cras placerat tincidunt lacus. Phasellus ultrices diam vitae enim ornare, id tristique lectus lacinia. Morbi nec consequat nisl. Morbi et faucibus sem. Ut scelerisque turpis vel turpis pharetra dapibus. Vivamus quis neque a turpis sodales luctus in vitae lorem. Etiam varius, ante sed blandit egestas, arcu lacus consectetur ante, sit amet accumsan est lacus eget ipsum. Vivamus aliquet diam ac cursus convallis.'
       contentType='text'
-      showAction={true}
+      showAction={false}
+      showCommentAction={true}
+      handleCommentDelete={(comment:any)=> console.log(comment,'is clicked for delete')}
+      handleCommentHide={(comment:any)=> console.log(comment,'is clicked for hide')}
       handleDelete={(reply: any) => console.log(reply, 'is Clicked for Delete')}
       handleEdit={(reply: any) => console.log(reply, 'is Clicked for Edit')}
       handleHide={(reply: any) => console.log(reply, 'is Clicked for Hide')}

@@ -4830,7 +4830,7 @@ var moreButtonElement = lib_18({
     },
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "status"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
     var statustoExcludeAction = ['note', 'hidden', 'deleted'];
     var getContents = function () {
         switch (contentType) {
@@ -4898,11 +4898,10 @@ var FeedPost = function (_a) {
                             commentData.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
                             getReplyContent(commentData)),
                         React.createElement("p", { className: "" + postTimeStyle }, commentData.time)),
-                    showAction &&
+                    showCommentAction &&
                         statustoExcludeAction.includes("" + commentData.status) ===
                             false &&
-                        contentType !== 'note' &&
-                        contentType !== 'image' && (React.createElement("div", { style: { position: 'relative' } },
+                        contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
                         React.createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -4918,29 +4917,21 @@ var FeedPost = function (_a) {
                                 React.createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
                         showPopover === commentData.id + '-comment' && (React.createElement("div", { className: "" + moreButtonContainer },
                             React.createElement("div", { onClick: function () {
-                                    if (!!handleEdit) {
-                                        handleEdit(commentData);
+                                    if (!!handleCommentHide) {
+                                        handleCommentHide(commentData);
                                         if (closeOnActionClick) {
                                             setShowPopover(null);
                                         }
                                     }
-                                }, className: "" + moreButtonElement }, "Edit"),
+                                }, className: "" + moreButtonElement }, "Hide"),
                             React.createElement("div", { onClick: function () {
-                                    if (!!handleDelete) {
-                                        handleDelete(commentData);
+                                    if (!!handleCommentDelete) {
+                                        handleCommentDelete(commentData);
                                         if (closeOnActionClick) {
                                             setShowPopover(null);
                                         }
                                     }
-                                }, className: "" + moreButtonElement }, "Delete"),
-                            React.createElement("div", { onClick: function () {
-                                    if (!!handleHide) {
-                                        handleHide(commentData);
-                                        if (closeOnActionClick) {
-                                            setShowPopover(null);
-                                        }
-                                    }
-                                }, className: "" + moreButtonElement }, "Hide"))))))),
+                                }, className: "" + moreButtonElement }, "Delete"))))))),
             replyContent.map(function (reply, i) { return (React.createElement("div", { className: "" + replyInfoContainer, key: i },
                 React.createElement("img", { src: reply.avatar, className: "" + avatarSmallStyle }),
                 React.createElement("div", { style: {
@@ -4987,9 +4978,11 @@ var FeedPost = function (_a) {
                                 reply.status)))),
                     showAction &&
                         statustoExcludeAction.includes("" + reply.status) === false &&
-                        reply.contentType !== 'note' &&
-                        reply.contentType !== 'image' && (React.createElement("div", { style: { position: 'relative' } },
-                        React.createElement("div", { className: "" + moreButton, style: { height: moreButtonHeightWidth, width: moreButtonHeightWidth }, onClick: function () {
+                        reply.contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
+                        React.createElement("div", { className: "" + moreButton, style: {
+                                height: moreButtonHeightWidth,
+                                width: moreButtonHeightWidth,
+                            }, onClick: function () {
                                 if (reply.id === showPopover) {
                                     setShowPopover(null);
                                 }
@@ -5042,6 +5035,9 @@ FeedPost.propTypes = {
     handleEdit: propTypes.func,
     closeOnActionClick: propTypes.bool,
     moreButtonHeightWidth: propTypes.number,
+    handleCommentDelete: propTypes.func,
+    handleCommentHide: propTypes.func,
+    showCommentAction: propTypes.bool,
 };
 FeedPost.defaultProps = {
     style: {},
@@ -5053,6 +5049,7 @@ FeedPost.defaultProps = {
     closeOnActionClick: true,
     status: 'active',
     moreButtonHeightWidth: 15,
+    showCommentAction: false,
     handleDelete: function () {
         console.log('delete button clicked');
     },
@@ -5061,6 +5058,12 @@ FeedPost.defaultProps = {
     },
     handleEdit: function () {
         console.log('edit button clicked');
+    },
+    handleCommentDelete: function () {
+        console.log('Comment Delete button clicked');
+    },
+    handleCommentHide: function () {
+        console.log('Comment Hide button clicked');
     },
 };
 

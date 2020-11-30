@@ -210,6 +210,9 @@ interface Props {
   handleEdit?: (reply: replyProps) => void;
   closeOnActionClick?: boolean;
   moreButtonHeightWidth?: number;
+  handleCommentDelete?: (comment: any) => void;
+  handleCommentHide?: (comment: any) => void;
+  showCommentAction?: boolean;
   [key: string]: any;
 }
 
@@ -235,6 +238,9 @@ const FeedPost: React.FC<Props> = ({
   handleHide,
   closeOnActionClick,
   moreButtonHeightWidth,
+  handleCommentDelete,
+  handleCommentHide,
+    showCommentAction,
   status,
   ...rest
 }) => {
@@ -381,11 +387,10 @@ const FeedPost: React.FC<Props> = ({
               <p className={`${postTimeStyle}`}>{commentData.time}</p>
             </div>
 
-            {showAction &&
+            {showCommentAction &&
               statustoExcludeAction.includes(`${commentData.status}`) ===
                 false &&
-              contentType !== 'note' &&
-              contentType !== 'image' && (
+              contentType !== 'note' && (
                 <div style={{ position: 'relative' }}>
                   <div
                     className={`${moreButton}`}
@@ -417,34 +422,8 @@ const FeedPost: React.FC<Props> = ({
                     <div className={`${moreButtonContainer}`}>
                       <div
                         onClick={() => {
-                          if (!!handleEdit) {
-                            handleEdit(commentData);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Edit
-                      </div>
-                      <div
-                        onClick={() => {
-                          if (!!handleDelete) {
-                            handleDelete(commentData);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Delete
-                      </div>
-                      <div
-                        onClick={() => {
-                          if (!!handleHide) {
-                            handleHide(commentData);
+                          if (!!handleCommentHide) {
+                            handleCommentHide(commentData);
                             if (closeOnActionClick) {
                               setShowPopover(null);
                             }
@@ -453,6 +432,19 @@ const FeedPost: React.FC<Props> = ({
                         className={`${moreButtonElement}`}
                       >
                         Hide
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleCommentDelete) {
+                            handleCommentDelete(commentData);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Delete
                       </div>
                     </div>
                   )}
@@ -535,12 +527,14 @@ const FeedPost: React.FC<Props> = ({
               </div>
               {showAction &&
                 statustoExcludeAction.includes(`${reply.status}`) === false &&
-                reply.contentType !== 'note' &&
-                reply.contentType !== 'image' && (
+                reply.contentType !== 'note' && (
                   <div style={{ position: 'relative' }}>
                     <div
                       className={`${moreButton}`}
-                      style={{height: moreButtonHeightWidth, width: moreButtonHeightWidth}}
+                      style={{
+                        height: moreButtonHeightWidth,
+                        width: moreButtonHeightWidth,
+                      }}
                       onClick={() => {
                         if (reply.id === showPopover) {
                           setShowPopover(null);
@@ -631,6 +625,9 @@ FeedPost.propTypes = {
   handleEdit: PropTypes.func,
   closeOnActionClick: PropTypes.bool,
   moreButtonHeightWidth: PropTypes.number,
+  handleCommentDelete: PropTypes.func,
+  handleCommentHide: PropTypes.func,
+  showCommentAction: PropTypes.bool,
 };
 
 FeedPost.defaultProps = {
@@ -643,6 +640,7 @@ FeedPost.defaultProps = {
   closeOnActionClick: true,
   status: 'active',
   moreButtonHeightWidth: 15,
+  showCommentAction: false,
   handleDelete: () => {
     console.log('delete button clicked');
   },
@@ -651,6 +649,12 @@ FeedPost.defaultProps = {
   },
   handleEdit: () => {
     console.log('edit button clicked');
+  },
+  handleCommentDelete: () => {
+    console.log('Comment Delete button clicked');
+  },
+  handleCommentHide: () => {
+    console.log('Comment Hide button clicked');
   },
 };
 
