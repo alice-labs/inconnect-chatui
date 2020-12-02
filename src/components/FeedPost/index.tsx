@@ -244,7 +244,7 @@ const FeedPost: React.FC<Props> = ({
   status,
   ...rest
 }) => {
-  const statustoExcludeAction = ['note', 'hidden', 'deleted'];
+  const statustoExcludeAction = ['note', 'hide', 'deleted'];
   const getContents = () => {
     switch (contentType) {
       case 'text':
@@ -356,7 +356,7 @@ const FeedPost: React.FC<Props> = ({
               style={{
                 maxWidth: '70%',
                 marginBottom: 8,
-                opacity: commentData.status === 'hidden' ? 0.5 : 1,
+                opacity: commentData.status === 'hide' ? 0.5 : 1,
               }}
             >
               <div
@@ -468,8 +468,8 @@ const FeedPost: React.FC<Props> = ({
                 style={{
                   maxWidth: '70%',
                   marginBottom: 8,
-                  opacity: reply.status === 'hidden' ? 0.5 : 1,
-                  cursor: reply.status === 'hidden' ? 'not-allowed' : 'default',
+                  opacity: reply.status === 'hide' ? 0.5 : 1,
+                  cursor: reply.status === 'hide' ? 'not-allowed' : 'default',
                 }}
               >
                 <div
@@ -638,7 +638,7 @@ FeedPost.defaultProps = {
   commentBg: '#f2f2f2',
   showAction: false,
   closeOnActionClick: true,
-  status: 'active',
+  status: 'add',
   moreButtonHeightWidth: 15,
   showCommentAction: false,
   handleDelete: () => {

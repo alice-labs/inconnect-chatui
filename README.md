@@ -152,6 +152,10 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Added Props `moreButtonHeightWidth` to adjust action button height width
 
-# 2- Nov 2020 - 1.0.24
+# 29 Nov 2020 - 1.0.24
 
 - [x] changed comment action control using `showCommentAction` and their handle method for hide and delete only
+
+# 02 Dec 2020 - 1.0.25
+
+- [x] fixed status from `hidden` to `hide` and `active` to `add`

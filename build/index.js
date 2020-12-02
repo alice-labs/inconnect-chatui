@@ -4831,7 +4831,7 @@ var moreButtonElement = lib_18({
 });
 var FeedPost = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
-    var statustoExcludeAction = ['note', 'hidden', 'deleted'];
+    var statustoExcludeAction = ['note', 'hide', 'deleted'];
     var getContents = function () {
         switch (contentType) {
             case 'text':
@@ -4886,7 +4886,7 @@ var FeedPost = function (_a) {
                     React.createElement("div", { style: {
                             maxWidth: '70%',
                             marginBottom: 8,
-                            opacity: commentData.status === 'hidden' ? 0.5 : 1,
+                            opacity: commentData.status === 'hide' ? 0.5 : 1,
                         } },
                         React.createElement("div", { style: {
                                 background: contentType !== 'note' ? commentBg : 'transparent',
@@ -4943,8 +4943,8 @@ var FeedPost = function (_a) {
                     React.createElement("div", { style: {
                             maxWidth: '70%',
                             marginBottom: 8,
-                            opacity: reply.status === 'hidden' ? 0.5 : 1,
-                            cursor: reply.status === 'hidden' ? 'not-allowed' : 'default',
+                            opacity: reply.status === 'hide' ? 0.5 : 1,
+                            cursor: reply.status === 'hide' ? 'not-allowed' : 'default',
                         } },
                         React.createElement("div", { style: reply.contentType === 'note'
                                 ? {
@@ -5047,7 +5047,7 @@ FeedPost.defaultProps = {
     commentBg: '#f2f2f2',
     showAction: false,
     closeOnActionClick: true,
-    status: 'active',
+    status: 'add',
     moreButtonHeightWidth: 15,
     showCommentAction: false,
     handleDelete: function () {
