@@ -92,5 +92,7 @@
       "git add"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "nuka-carousel": "^4.7.4"
+  }
 }

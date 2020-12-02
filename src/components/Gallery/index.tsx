@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { css } from 'glamor';
+import Carousel from 'nuka-carousel';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
 
@@ -96,8 +97,8 @@ const galleryItemButtonElement = css({
   textDecoration: 'none',
   textAlign: 'center',
   fontFamily: 'inherit',
-    flex: 1,
-    alignItems: 'center',
+  flex: 1,
+  alignItems: 'center',
   ':hover': {
     background: '#f2f9ff',
   },
@@ -182,54 +183,67 @@ const GalleryMessage: React.FC<Props> = ({
         </AvatarContainer>
       )}
       <div style={{ display: 'flex' }}>
-        {galleryData.map((gallery: galleryProps, index: number) => (
-          <div className={`${galleryItemContainer}`} key={index}>
-            <div className={`${galleryItemCover}`}>
-              <img
-                src={
-                  gallery.image ||
-                  'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
-                }
-                style={{overflow: 'hidden', borderRadius: '10px 10px 0 0'}}
-                height={'200px'}
-              />
+        <Carousel
+          slidesToShow={2}
+          slideWidth='220px'
+          width='450px'
+          cellSpacing={20}
+          defaultControlsConfig={{
+            containerClassName: 'inconnect-chat-ui__gallery',
+            pagingDotsStyle: { display: 'none' },
+            nextButtonText: '>',
+            prevButtonText: '<',
+          }}
+        >
+          {galleryData.map((gallery: galleryProps, index: number) => (
+            <div className={`${galleryItemContainer}`} key={index}>
+              <div className={`${galleryItemCover}`}>
+                <img
+                  src={
+                    gallery.image ||
+                    'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
+                  }
+                  style={{ overflow: 'hidden', borderRadius: '10px 10px 0 0' }}
+                  height={'200px'}
+                />
+              </div>
+              <p className={`${galleryItemTitle}`}>
+                {gallery?.title || 'Not Available'}
+              </p>
+              <p className={`${galleryItemSubtitle}`}>
+                {gallery?.subtitle || 'Not Available'}
+              </p>
+              <div className={`${galleryItemButtons}`}>
+                {!!gallery.buttons &&
+                  gallery.buttons.map(
+                    (galleryButton: buttonDataProps, index: number) =>
+                      galleryButton.methodType === 'url' &&
+                      !!!galleryButton.isDisabled ? (
+                        <a
+                          key={index}
+                          className={`${galleryItemButtonElement} ${galleryButton.className}`}
+                          style={{ width: '91%', ...galleryButton.style }}
+                          href={galleryButton.url}
+                          target={'_blank'}
+                        >
+                          {galleryButton.title}
+                        </a>
+                      ) : (
+                        <button
+                          key={index}
+                          className={`${galleryItemButtonElement} ${galleryButton.className}`}
+                          style={galleryButton.style}
+                          onClick={galleryButton.action}
+                          disabled={galleryButton.isDisabled}
+                        >
+                          {galleryButton.title}
+                        </button>
+                      )
+                  )}
+              </div>
             </div>
-            <p className={`${galleryItemTitle}`}>
-              {gallery?.title || 'Not Available'}
-            </p>
-            <p className={`${galleryItemSubtitle}`}>
-              {gallery?.subtitle || 'Not Available'}
-            </p>
-            <div className={`${galleryItemButtons}`}>
-              {!!gallery.buttons &&
-                gallery.buttons.map(
-                  (galleryButton: buttonDataProps, index: number) =>
-                    galleryButton.methodType === 'url' &&
-                    !!!galleryButton.isDisabled ? (
-                      <a
-                        key={index}
-                        className={`${galleryItemButtonElement} ${galleryButton.className}`}
-                        style={{ width: '91%', ...galleryButton.style }}
-                        href={galleryButton.url}
-                        target={'_blank'}
-                      >
-                        {galleryButton.title}
-                      </a>
-                    ) : (
-                      <button
-                        key={index}
-                        className={`${galleryItemButtonElement} ${galleryButton.className}`}
-                        style={galleryButton.style}
-                        onClick={galleryButton.action}
-                        disabled={galleryButton.isDisabled}
-                      >
-                        {galleryButton.title}
-                      </button>
-                    )
-                )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </Carousel>
       </div>
       {(showRepliedBy || !!msgTime) && (
         <p
