@@ -159,3 +159,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 02 Dec 2020 - 1.0.25
 
 - [x] fixed status from `hidden` to `hide` and `active` to `add`
+
+# 02 Dec 2020 - 1.2.0 🎉
+
+- [x] Added Gallery Block component

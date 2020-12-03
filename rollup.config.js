@@ -42,12 +42,4 @@ export default {
       },
     }),
   ],
-  external: [
-    'react-id-swiper',
-    path.resolve(
-      __dirname,
-      'src/some-local-file-that-should-not-be-bundled.js'
-    ),
-    /node_modules/,
-  ],
 };

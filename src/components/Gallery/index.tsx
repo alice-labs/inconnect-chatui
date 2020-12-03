@@ -45,8 +45,7 @@ const msgTimeClass = css({
 const galleryItemContainer = css({
   width: 220,
   background: 'white',
-  boxShadow: '0px 0px 20px #9cbec757',
-  minHeight: 400,
+  boxShadow: '0px 0px 10px #9cbec757',
   borderRadius: 10,
   marginRight: 20,
 });
@@ -111,6 +110,9 @@ const galleryItemButtonElement = css({
   ':first-child': {
     borderTop: '0.5px solid #E3E3E3',
   },
+  ':last-child': {
+    borderBottom: 'none',
+  },
 });
 
 interface buttonDataProps {
@@ -145,6 +147,10 @@ interface Props {
   elementClassName?: string;
   avatar?: string | React.ReactNode;
   hasTitle?: boolean;
+  cellSpacing?: number;
+  carouselWidth?: string;
+  carouselHeight?: string;
+  slideToShow?: number;
   [key: string]: any;
 }
 
@@ -161,7 +167,11 @@ const GalleryMessage: React.FC<Props> = ({
   elementStyle,
   avatar,
   hasTitle,
+  cellSpacing,
   galleryData,
+  carouselHeight,
+  carouselWidth,
+  slideToShow,
   ...rest
 }) => {
   return (
@@ -182,77 +192,100 @@ const GalleryMessage: React.FC<Props> = ({
           </div>
         </AvatarContainer>
       )}
-      <div style={{ display: 'flex' }}>
-        <Carousel
-          slidesToShow={2}
-          slideWidth='220px'
-          width='450px'
-          cellSpacing={20}
-          defaultControlsConfig={{
-            containerClassName: 'inconnect-chat-ui__gallery',
-            pagingDotsStyle: { display: 'none' },
-            nextButtonText: '>',
-            prevButtonText: '<',
-          }}
-        >
-          {galleryData.map((gallery: galleryProps, index: number) => (
-            <div className={`${galleryItemContainer}`} key={index}>
-              <div className={`${galleryItemCover}`}>
-                <img
-                  src={
-                    gallery.image ||
-                    'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
-                  }
-                  style={{ overflow: 'hidden', borderRadius: '10px 10px 0 0' }}
-                  height={'200px'}
-                />
-              </div>
-              <p className={`${galleryItemTitle}`}>
-                {gallery?.title || 'Not Available'}
-              </p>
-              <p className={`${galleryItemSubtitle}`}>
-                {gallery?.subtitle || 'Not Available'}
-              </p>
-              <div className={`${galleryItemButtons}`}>
-                {!!gallery.buttons &&
-                  gallery.buttons.map(
-                    (galleryButton: buttonDataProps, index: number) =>
-                      galleryButton.methodType === 'url' &&
-                      !!!galleryButton.isDisabled ? (
-                        <a
-                          key={index}
-                          className={`${galleryItemButtonElement} ${galleryButton.className}`}
-                          style={{ width: '91%', ...galleryButton.style }}
-                          href={galleryButton.url}
-                          target={'_blank'}
-                        >
-                          {galleryButton.title}
-                        </a>
-                      ) : (
-                        <button
-                          key={index}
-                          className={`${galleryItemButtonElement} ${galleryButton.className}`}
-                          style={galleryButton.style}
-                          onClick={galleryButton.action}
-                          disabled={galleryButton.isDisabled}
-                        >
-                          {galleryButton.title}
-                        </button>
-                      )
-                  )}
-              </div>
+      <Carousel
+        slidesToShow={slideToShow}
+        slideWidth='220px'
+        width={carouselWidth}
+        height={carouselHeight}
+        style={
+          consumer === 'user'
+            ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
+            : { marginRight: 35, paddingLeft: 30, paddingRight: 30 }
+        }
+        cellSpacing={cellSpacing}
+        initialSlideHeight={412}
+        defaultControlsConfig={{
+          containerClassName: 'inconnect-chat-ui__gallery',
+          pagingDotsStyle: { display: 'none' },
+          nextButtonText: '›',
+          prevButtonText: '‹',
+          nextButtonStyle: {
+            borderRadius: 5,
+            background: 'transparent',
+            color: 'gray',
+            fontSize: '70px',
+            position: 'absolute',
+            right: -20,
+            top: -40,
+          },
+          prevButtonStyle: {
+            borderRadius: 5,
+            background: 'transparent',
+            color: 'gray',
+            fontSize: '70px',
+            position: 'absolute',
+            left: -20,
+            top: -40,
+          },
+        }}
+      >
+        {galleryData.map((gallery: galleryProps, index: number) => (
+          <div className={`${galleryItemContainer}`} key={index}>
+            <div className={`${galleryItemCover}`}>
+              <img
+                src={
+                  gallery.image ||
+                  'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
+                }
+                style={{ overflow: 'hidden', borderRadius: '10px 10px 0 0' }}
+                height={'200px'}
+              />
             </div>
-          ))}
-        </Carousel>
-      </div>
+            <p className={`${galleryItemTitle}`}>
+              {gallery?.title || 'Not Available'}
+            </p>
+            <p className={`${galleryItemSubtitle}`}>
+              {gallery?.subtitle || 'Not Available'}
+            </p>
+            <div className={`${galleryItemButtons}`}>
+              {!!gallery.buttons &&
+                gallery.buttons.map(
+                  (galleryButton: buttonDataProps, index: number) =>
+                    galleryButton.methodType === 'url' &&
+                    !!!galleryButton.isDisabled ? (
+                      <a
+                        key={index}
+                        className={`${galleryItemButtonElement} ${galleryButton.className}`}
+                        style={{ width: '91%', ...galleryButton.style }}
+                        href={galleryButton.url}
+                        target={'_blank'}
+                      >
+                        {galleryButton.title}
+                      </a>
+                    ) : (
+                      <button
+                        key={index}
+                        className={`${galleryItemButtonElement} ${galleryButton.className}`}
+                        style={galleryButton.style}
+                        onClick={galleryButton.action}
+                        disabled={galleryButton.isDisabled}
+                      >
+                        {galleryButton.title}
+                      </button>
+                    )
+                )}
+            </div>
+          </div>
+        ))}
+      </Carousel>
       {(showRepliedBy || !!msgTime) && (
         <p
           className={`${msgTimeClass}`}
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px' }
-                : { marginRight: '30px' }
+                ? { marginLeft: '70px' }
+                : { marginRight: '70px' }
               : {}
           }
         >
@@ -274,6 +307,10 @@ GalleryMessage.propTypes = {
   buttonData: PropTypes.any,
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   hasTitle: PropTypes.bool,
+  cellSpacing: PropTypes.number,
+  carouselWidth: PropTypes.string,
+  carouselHeight: PropTypes.string,
+  slideToShow: PropTypes.number,
 };
 
 GalleryMessage.defaultProps = {
@@ -284,6 +321,10 @@ GalleryMessage.defaultProps = {
   avatar: '',
   hasTitle: false,
   galleryData: [],
+  cellSpacing: 25,
+  carouselWidth: '520px',
+  carouselHeight: '415px',
+  slideToShow: 2,
 };
 
 export default GalleryMessage;

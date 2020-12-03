@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import * as React from 'react';
 import { css } from 'glamor';
+import Carousel from 'nuka-carousel';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
 var adminContainer = css({
@@ -61,8 +62,7 @@ var msgTimeClass = css({
 var galleryItemContainer = css({
     width: 220,
     background: 'white',
-    boxShadow: '0px 0px 20px #9cbec757',
-    minHeight: 400,
+    boxShadow: '0px 0px 10px #9cbec757',
     borderRadius: 10,
     marginRight: 20,
 });
@@ -124,13 +124,41 @@ var galleryItemButtonElement = css({
     ':first-child': {
         borderTop: '0.5px solid #E3E3E3',
     },
+    ':last-child': {
+        borderBottom: 'none',
+    },
 });
 var GalleryMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, galleryData = _a.galleryData, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "galleryData"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer : adminContainer) + className }, rest),
         hasTitle && (React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             React.createElement("div", { className: globalTextBlock + " " + textBlockAdmin + " " + elementClassName, style: elementStyle }, text))),
-        React.createElement("div", { style: { display: 'flex' } }, galleryData.map(function (gallery, index) {
+        React.createElement(Carousel, { slidesToShow: slideToShow, slideWidth: '220px', width: carouselWidth, height: carouselHeight, style: consumer === 'user'
+                ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
+                : { marginRight: 35, paddingLeft: 30, paddingRight: 30 }, cellSpacing: cellSpacing, initialSlideHeight: 412, defaultControlsConfig: {
+                containerClassName: 'inconnect-chat-ui__gallery',
+                pagingDotsStyle: { display: 'none' },
+                nextButtonText: '›',
+                prevButtonText: '‹',
+                nextButtonStyle: {
+                    borderRadius: 5,
+                    background: 'transparent',
+                    color: 'gray',
+                    fontSize: '70px',
+                    position: 'absolute',
+                    right: -20,
+                    top: -40,
+                },
+                prevButtonStyle: {
+                    borderRadius: 5,
+                    background: 'transparent',
+                    color: 'gray',
+                    fontSize: '70px',
+                    position: 'absolute',
+                    left: -20,
+                    top: -40,
+                },
+            } }, galleryData.map(function (gallery, index) {
             var _a, _b;
             return (React.createElement("div", { className: "" + galleryItemContainer, key: index },
                 React.createElement("div", { className: "" + galleryItemCover },
@@ -146,8 +174,8 @@ var GalleryMessage = function (_a) {
         })),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass, style: avatar
                 ? consumer === 'user'
-                    ? { marginLeft: '30px' }
-                    : { marginRight: '30px' }
+                    ? { marginLeft: '70px' }
+                    : { marginRight: '70px' }
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
@@ -167,6 +195,10 @@ GalleryMessage.propTypes = {
     buttonData: PropTypes.any,
     avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     hasTitle: PropTypes.bool,
+    cellSpacing: PropTypes.number,
+    carouselWidth: PropTypes.string,
+    carouselHeight: PropTypes.string,
+    slideToShow: PropTypes.number,
 };
 GalleryMessage.defaultProps = {
     style: {},
@@ -176,6 +208,10 @@ GalleryMessage.defaultProps = {
     avatar: '',
     hasTitle: false,
     galleryData: [],
+    cellSpacing: 25,
+    carouselWidth: '520px',
+    carouselHeight: '415px',
+    slideToShow: 2,
 };
 export default GalleryMessage;
 //# sourceMappingURL=index.js.map
