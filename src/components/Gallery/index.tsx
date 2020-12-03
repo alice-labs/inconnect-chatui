@@ -45,9 +45,10 @@ const msgTimeClass = css({
 const galleryItemContainer = css({
   width: 220,
   background: 'white',
-  boxShadow: '0px 0px 10px #9cbec757',
+  boxShadow: '0px 0px 8px #416b7557',
   borderRadius: 10,
   marginRight: 20,
+    marginLeft: 5,
 });
 
 const galleryItemCover = css({
@@ -322,8 +323,8 @@ GalleryMessage.defaultProps = {
   hasTitle: false,
   galleryData: [],
   cellSpacing: 25,
-  carouselWidth: '520px',
-  carouselHeight: '415px',
+  carouselWidth: '525px',
+  carouselHeight: '390px',
   slideToShow: 2,
 };
 

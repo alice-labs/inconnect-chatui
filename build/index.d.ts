@@ -4,4 +4,5 @@ import ImageMessage from './components/ImageMessage';
 import ButtonMessage from './components/ButtonMessage';
 import QuickReplyMessage from './components/QuickReplyMessage';
 import FeedPost from './components/FeedPost';
-export { TextMessage, NoteMessage, ImageMessage, ButtonMessage, QuickReplyMessage, FeedPost, };
+import GalleryMessage from './components/Gallery';
+export { TextMessage, NoteMessage, ImageMessage, ButtonMessage, QuickReplyMessage, FeedPost, GalleryMessage, };

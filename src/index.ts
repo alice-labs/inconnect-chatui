@@ -4,7 +4,7 @@ import ImageMessage from './components/ImageMessage';
 import ButtonMessage from './components/ButtonMessage';
 import QuickReplyMessage from './components/QuickReplyMessage';
 import FeedPost from './components/FeedPost';
-// import Gallery from './components/Gallery';
+import GalleryMessage from './components/Gallery';
 
 export {
     TextMessage,
@@ -13,4 +13,5 @@ export {
     ButtonMessage,
     QuickReplyMessage,
     FeedPost,
+    GalleryMessage,
 };

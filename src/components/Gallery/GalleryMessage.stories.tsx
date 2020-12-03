@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GalleryMessage from './index';
+import {GalleryMessage} from '../../index';
 import { withInfo } from '@storybook/addon-info';
 
 const styleOfStoryContainer = {
@@ -149,7 +149,7 @@ export const Example = () => (
           consumer={'admin'}
           hasTitle={false}
           avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
-          carouselWidth={'280px'}
+          carouselWidth={'290px'}
           slideToShow={1}
           galleryData={[
               {

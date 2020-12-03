@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GalleryMessage from './index';
+import { GalleryMessage } from '../../index';
 import { withInfo } from '@storybook/addon-info';
 var styleOfStoryContainer = {
     border: '1px solid #184D47',
@@ -128,7 +128,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 ],
             },
         ] }),
-    React.createElement(GalleryMessage, { msgTime: '4h ago', consumer: 'admin', hasTitle: false, avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg', carouselWidth: '280px', slideToShow: 1, galleryData: [
+    React.createElement(GalleryMessage, { msgTime: '4h ago', consumer: 'admin', hasTitle: false, avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg', carouselWidth: '290px', slideToShow: 1, galleryData: [
             {
                 id: 0,
                 title: 'Mango',

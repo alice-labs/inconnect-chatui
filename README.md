@@ -163,3 +163,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 02 Dec 2020 - 1.2.0 🎉
 
 - [x] Added Gallery Block component
+
+# 02 Dec 2020 - 1.2.1 🎉
+
+- [x] Minor Style Fix
+- [x] Updated Import for main index file
