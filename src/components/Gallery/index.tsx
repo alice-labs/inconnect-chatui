@@ -48,7 +48,8 @@ const galleryItemContainer = css({
   boxShadow: '0px 0px 8px #416b7557',
   borderRadius: 10,
   marginRight: 20,
-    marginLeft: 5,
+  marginLeft: 5,
+  marginTop: 5,
 });
 
 const galleryItemCover = css({
@@ -152,6 +153,7 @@ interface Props {
   carouselWidth?: string;
   carouselHeight?: string;
   slideToShow?: number;
+  galleryItemClassName?: string;
   [key: string]: any;
 }
 
@@ -173,6 +175,7 @@ const GalleryMessage: React.FC<Props> = ({
   carouselHeight,
   carouselWidth,
   slideToShow,
+  galleryItemClassName,
   ...rest
 }) => {
   return (
@@ -200,8 +203,12 @@ const GalleryMessage: React.FC<Props> = ({
         height={carouselHeight}
         style={
           consumer === 'user'
-            ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
-            : { marginRight: 35, paddingLeft: 30, paddingRight: 30 }
+            ? hasTitle
+              ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
+              : { marginLeft: 5, paddingLeft: 30, paddingRight: 30 }
+            : hasTitle
+            ? { marginRight: 35, paddingLeft: 30, paddingRight: 30 }
+            : { marginRight: 5, paddingLeft: 30, paddingRight: 30 }
         }
         cellSpacing={cellSpacing}
         initialSlideHeight={412}
@@ -232,7 +239,7 @@ const GalleryMessage: React.FC<Props> = ({
       >
         {galleryData.map((gallery: galleryProps, index: number) => (
           <div className={`${galleryItemContainer}`} key={index}>
-            <div className={`${galleryItemCover}`}>
+            <div className={`${galleryItemCover} ${galleryItemClassName}`}>
               <img
                 src={
                   gallery.image ||
@@ -312,6 +319,7 @@ GalleryMessage.propTypes = {
   carouselWidth: PropTypes.string,
   carouselHeight: PropTypes.string,
   slideToShow: PropTypes.number,
+  galleryItemClassName: PropTypes.string,
 };
 
 GalleryMessage.defaultProps = {

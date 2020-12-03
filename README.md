@@ -168,3 +168,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Minor Style Fix
 - [x] Updated Import for main index file
+
+# 02 Dec 2020 - 1.2.2 🎉
+
+- [x] Minor Style Fix,
+- [x] added props `galleryItemClassName` into `GalleryMessage` component

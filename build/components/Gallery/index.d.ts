@@ -34,6 +34,7 @@ interface Props {
     carouselWidth?: string;
     carouselHeight?: string;
     slideToShow?: number;
+    galleryItemClassName?: string;
     [key: string]: any;
 }
 declare const GalleryMessage: React.FC<Props>;

@@ -10090,6 +10090,7 @@ var galleryItemContainer = lib_18({
     borderRadius: 10,
     marginRight: 20,
     marginLeft: 5,
+    marginTop: 5,
 });
 var galleryItemCover = lib_18({
     display: 'flex',
@@ -10154,13 +10155,17 @@ var galleryItemButtonElement = lib_18({
     },
 });
 var GalleryMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$4 : adminContainer$4) + className }, rest),
         hasTitle && (createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             createElement("div", { className: globalTextBlock$4 + " " + textBlockAdmin$4 + " " + elementClassName, style: elementStyle }, text))),
         createElement(Carousel, { slidesToShow: slideToShow, slideWidth: '220px', width: carouselWidth, height: carouselHeight, style: consumer === 'user'
-                ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
-                : { marginRight: 35, paddingLeft: 30, paddingRight: 30 }, cellSpacing: cellSpacing, initialSlideHeight: 412, defaultControlsConfig: {
+                ? hasTitle
+                    ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }
+                    : { marginLeft: 5, paddingLeft: 30, paddingRight: 30 }
+                : hasTitle
+                    ? { marginRight: 35, paddingLeft: 30, paddingRight: 30 }
+                    : { marginRight: 5, paddingLeft: 30, paddingRight: 30 }, cellSpacing: cellSpacing, initialSlideHeight: 412, defaultControlsConfig: {
                 containerClassName: 'inconnect-chat-ui__gallery',
                 pagingDotsStyle: { display: 'none' },
                 nextButtonText: '›',
@@ -10186,7 +10191,7 @@ var GalleryMessage = function (_a) {
             } }, galleryData.map(function (gallery, index) {
             var _a, _b;
             return (createElement("div", { className: "" + galleryItemContainer, key: index },
-                createElement("div", { className: "" + galleryItemCover },
+                createElement("div", { className: galleryItemCover + " " + galleryItemClassName },
                     createElement("img", { src: gallery.image ||
                             'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg', style: { overflow: 'hidden', borderRadius: '10px 10px 0 0' }, height: '200px' })),
                 createElement("p", { className: "" + galleryItemTitle }, ((_a = gallery) === null || _a === void 0 ? void 0 : _a.title) || 'Not Available'),
@@ -10224,6 +10229,7 @@ GalleryMessage.propTypes = {
     carouselWidth: propTypes.string,
     carouselHeight: propTypes.string,
     slideToShow: propTypes.number,
+    galleryItemClassName: propTypes.string,
 };
 GalleryMessage.defaultProps = {
     style: {},
