@@ -30,6 +30,10 @@ interface Props {
     elementClassName?: string;
     avatar?: string | React.ReactNode;
     hasTitle?: boolean;
+    cellSpacing?: number;
+    carouselWidth?: string;
+    carouselHeight?: string;
+    slideToShow?: number;
     [key: string]: any;
 }
 declare const GalleryMessage: React.FC<Props>;

@@ -10,55 +10,242 @@ var styleOfStoryContainer = {
 };
 export default { title: 'GalleryMessage', decorators: [withInfo] };
 export var Example = function () { return (React.createElement("div", { style: styleOfStoryContainer },
-    React.createElement(GalleryMessage, { text: 'hello user this are our product list', msgTime: '4h ago', consumer: 'user', hasTitle: true, avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg', galleryData: [{
+    React.createElement(GalleryMessage, { text: 'Buy Some Fruits From Out Website', msgTime: '4h ago', consumer: 'user', hasTitle: true, avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg', galleryData: [
+            {
                 id: 0,
-                title: 'Pureit Mineral Ultima RO + UV',
-                subtitle: '2500$',
-                image: 'https://images.unsplash.com/photo-1606830079880-e90bd08e9a98?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80',
-                buttons: [{
+                title: 'Mango',
+                subtitle: '2$',
+                image: 'https://images-na.ssl-images-amazon.com/images/I/41EvGpCFECL._SX342_.jpg',
+                buttons: [
+                    {
                         id: 1,
-                        title: 'Button 01',
+                        title: 'Visit Website',
                         methodType: 'url',
                         url: 'https://getalice.ai',
                         isDisabled: false,
-                    }, {
+                    },
+                    {
                         id: 2,
-                        title: 'Button 02',
+                        title: 'Buy Mango',
                         methodType: 'function',
-                        action: function () { return console.log('Button 02 clicked'); },
+                        action: function () { return alert('Function Triggered to Buy Mango'); },
                         isDisabled: false,
-                    }, {
+                    },
+                    {
                         id: 3,
-                        title: 'Button 03',
+                        title: 'Buy From ChatBot',
                         methodType: 'function',
                         action: function () { return console.log('Button 02 clicked'); },
                         isDisabled: true,
-                    }]
-            }, {
+                    },
+                ],
+            },
+            {
                 id: 1,
-                title: 'Random Dear Visit',
-                subtitle: '150$',
-                image: 'https://images.unsplash.com/photo-1606762803100-5b4833aaccc0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1633&q=80',
-                buttons: [{
+                title: 'Banana',
+                subtitle: '1$',
+                image: 'https://api.time.com/wp-content/uploads/2019/11/gettyimages-459761948.jpg?quality=85&w=1024&h=512&crop=1',
+                buttons: [
+                    {
                         id: 1,
-                        title: 'Button 01',
+                        title: 'Visit Website',
                         methodType: 'url',
                         url: 'https://getalice.ai',
                         isDisabled: false,
-                    }, {
+                    },
+                    {
                         id: 2,
-                        title: 'Button 02',
+                        title: 'Buy Banana',
                         methodType: 'function',
-                        action: function () { return console.log('Button 02 clicked'); },
+                        action: function () { return alert('Function Triggered to Buy banana'); },
                         isDisabled: false,
-                    }, {
+                    },
+                    {
                         id: 3,
-                        title: 'Button 03',
+                        title: 'Buy From ChatBot',
                         methodType: 'function',
                         action: function () { return console.log('Button 02 clicked'); },
                         isDisabled: true,
-                    }]
-            }] }))); };
+                    },
+                ],
+            },
+            {
+                id: 2,
+                title: 'Watermelon',
+                subtitle: '10$',
+                image: 'https://i0.wp.com/www.eatthis.com/wp-content/uploads/2020/08/watermelon.jpg?fit=1200%2C879&ssl=1',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Watermelon',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy watermelon'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+            {
+                id: 3,
+                title: 'Pineapple',
+                subtitle: '5$',
+                image: 'https://static.toiimg.com/thumb/msid-69876233,imgsize-506233,width-800,height-600,resizemode-75/69876233.jpg',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Watermelon',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy watermelon'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+        ] }),
+    React.createElement(GalleryMessage, { msgTime: '4h ago', consumer: 'admin', hasTitle: false, avatar: 'https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg', carouselWidth: '280px', slideToShow: 1, galleryData: [
+            {
+                id: 0,
+                title: 'Mango',
+                subtitle: '2$',
+                image: 'https://images-na.ssl-images-amazon.com/images/I/41EvGpCFECL._SX342_.jpg',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Mango',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy Mango'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+            {
+                id: 1,
+                title: 'Banana',
+                subtitle: '1$',
+                image: 'https://api.time.com/wp-content/uploads/2019/11/gettyimages-459761948.jpg?quality=85&w=1024&h=512&crop=1',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Banana',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy banana'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+            {
+                id: 2,
+                title: 'Watermelon',
+                subtitle: '10$',
+                image: 'https://i0.wp.com/www.eatthis.com/wp-content/uploads/2020/08/watermelon.jpg?fit=1200%2C879&ssl=1',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Watermelon',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy watermelon'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+            {
+                id: 3,
+                title: 'Pineapple',
+                subtitle: '5$',
+                image: 'https://static.toiimg.com/thumb/msid-69876233,imgsize-506233,width-800,height-600,resizemode-75/69876233.jpg',
+                buttons: [
+                    {
+                        id: 1,
+                        title: 'Visit Website',
+                        methodType: 'url',
+                        url: 'https://getalice.ai',
+                        isDisabled: false,
+                    },
+                    {
+                        id: 2,
+                        title: 'Buy Watermelon',
+                        methodType: 'function',
+                        action: function () { return alert('Function Triggered to Buy watermelon'); },
+                        isDisabled: false,
+                    },
+                    {
+                        id: 3,
+                        title: 'Buy From ChatBot',
+                        methodType: 'function',
+                        action: function () { return console.log('Button 02 clicked'); },
+                        isDisabled: true,
+                    },
+                ],
+            },
+        ] }))); };
 Example.story = {
     parameters: {
         info: {
