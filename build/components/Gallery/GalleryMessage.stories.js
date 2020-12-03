@@ -250,7 +250,7 @@ Example.story = {
     parameters: {
         info: {
             inline: true,
-            text: "Interface List\n \n   ~~~js\n    <GalleryMessage\n    style={{width: '100px'}}\n    className={'abcd'}\n    userType='user'\n    text={'hello admin'}};\n    buttonData={[{\n        title: 'Button Title',\n        methodType: 'url',\n        url: 'https://google.com',\n        className: 'some-class__name',\n        style: {{custom style pass to specific button}}\n        rest: 'any key will pass directly to button'\n     },\n    ...more\n    ]}\n    msgTime={'4h Ago'}\n    repliedBy={'Admin name'};\n    showRepliedBy={true};\n    rest={'any it wil pass to container div};\n    />\n   ~~~\n  ",
+            text: "Interface List\n \n   ~~~js\n   // see story source\n   ~~~\n  ",
         },
     },
 };

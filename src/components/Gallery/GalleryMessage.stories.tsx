@@ -285,26 +285,7 @@ Example.story = {
       text: `Interface List
  
    ~~~js
-    <GalleryMessage
-    style={{width: '100px'}}
-    className={'abcd'}
-    userType='user'
-    text={'hello admin'}};
-    buttonData={[{
-        title: 'Button Title',
-        methodType: 'url',
-        url: 'https://google.com',
-        className: 'some-class__name',
-        style: {{custom style pass to specific button}}
-        rest: 'any key will pass directly to button'
-     },
-    ...more
-    ]}
-    msgTime={'4h Ago'}
-    repliedBy={'Admin name'};
-    showRepliedBy={true};
-    rest={'any it wil pass to container div};
-    />
+   // see story source
    ~~~
   `,
     },
