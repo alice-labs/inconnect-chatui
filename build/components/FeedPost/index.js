@@ -186,7 +186,7 @@ var moreButtonElement = css({
 });
 var FeedPost = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
-    var statustoExcludeAction = ['note', 'hide', 'deleted'];
+    var statustoExcludeAction = ['note', 'hide', 'remove'];
     var getContents = function () {
         switch (contentType) {
             case 'text':
@@ -209,7 +209,7 @@ var FeedPost = function (_a) {
     var getReplyContent = function (reply) {
         switch (reply.contentType) {
             case 'text':
-                return (React.createElement("p", { className: "" + replyContentText, style: reply.status === 'deleted'
+                return (React.createElement("p", { className: "" + replyContentText, style: reply.status === 'remove'
                         ? { textDecoration: 'line-through' }
                         : {} }, reply.content));
             case 'note':

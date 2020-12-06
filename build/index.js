@@ -4834,7 +4834,7 @@ var moreButtonElement = lib_18({
 });
 var FeedPost = function (_a) {
     var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
-    var statustoExcludeAction = ['note', 'hide', 'deleted'];
+    var statustoExcludeAction = ['note', 'hide', 'remove'];
     var getContents = function () {
         switch (contentType) {
             case 'text':
@@ -4857,7 +4857,7 @@ var FeedPost = function (_a) {
     var getReplyContent = function (reply) {
         switch (reply.contentType) {
             case 'text':
-                return (React.createElement("p", { className: "" + replyContentText, style: reply.status === 'deleted'
+                return (React.createElement("p", { className: "" + replyContentText, style: reply.status === 'remove'
                         ? { textDecoration: 'line-through' }
                         : {} }, reply.content));
             case 'note':
@@ -10162,7 +10162,7 @@ var galleryItemButtonElement = lib_18({
     },
 });
 var GalleryMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName"]);
+    var style = _a.style, className = _a.className, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, rest = __rest(_a, ["style", "className", "text", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$4 : adminContainer$4) + className }, rest),
         hasTitle && (React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             React.createElement("div", { className: globalTextBlock$4 + " " + textBlockAdmin$4 + " " + elementClassName, style: elementStyle }, text))),
@@ -10229,7 +10229,6 @@ GalleryMessage.propTypes = {
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
-    buttonData: propTypes.any,
     avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
     hasTitle: propTypes.bool,
     cellSpacing: propTypes.number,

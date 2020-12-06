@@ -45,7 +45,7 @@ export const Example = () => (
         link:
           'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
         isHighlighted: true,
-          status: 'active',
+          status: 'add',
       }}
       replyContent={[
         {
@@ -61,7 +61,7 @@ export const Example = () => (
             'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
           isHighlighted: true,
           messageType: 'comment',
-          status: 'active',
+          status: 'add',
         },
         {
           id: 1,
@@ -73,7 +73,7 @@ export const Example = () => (
           content: 'Note Created by Bot from the system',
           source: 'bot',
           isHighlighted: false,
-          status: 'active',
+          status: 'add',
         },
         {
           id: 2,
@@ -110,7 +110,7 @@ export const Example = () => (
           content: 'This is Deleted',
           source: 'bot',
           isHighlighted: false,
-          status: 'deleted',
+          status: 'remove',
         },
       ]}
     />

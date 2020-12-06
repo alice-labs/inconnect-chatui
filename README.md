@@ -173,3 +173,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - [x] Minor Style Fix,
 - [x] added props `galleryItemClassName` into `GalleryMessage` component
+
+# 02 Dec 2020 - 1.2.3 🎉
+
+- [x] changed delete status for feedpost from `deleted` to `remove`

@@ -244,7 +244,7 @@ const FeedPost: React.FC<Props> = ({
   status,
   ...rest
 }) => {
-  const statustoExcludeAction = ['note', 'hide', 'deleted'];
+  const statustoExcludeAction = ['note', 'hide', 'remove'];
   const getContents = () => {
     switch (contentType) {
       case 'text':
@@ -291,7 +291,7 @@ const FeedPost: React.FC<Props> = ({
           <p
             className={`${replyContentText}`}
             style={
-              reply.status === 'deleted'
+              reply.status === 'remove'
                 ? { textDecoration: 'line-through' }
                 : {}
             }

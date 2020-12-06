@@ -21,7 +21,7 @@ export var Example = function () { return (React.createElement("div", { style: s
             source: 'customer',
             link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
             isHighlighted: true,
-            status: 'active',
+            status: 'add',
         }, replyContent: [
             {
                 id: 0,
@@ -34,7 +34,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
                 isHighlighted: true,
                 messageType: 'comment',
-                status: 'active',
+                status: 'add',
             },
             {
                 id: 1,
@@ -45,7 +45,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 content: 'Note Created by Bot from the system',
                 source: 'bot',
                 isHighlighted: false,
-                status: 'active',
+                status: 'add',
             },
             {
                 id: 2,
@@ -78,7 +78,7 @@ export var Example = function () { return (React.createElement("div", { style: s
                 content: 'This is Deleted',
                 source: 'bot',
                 isHighlighted: false,
-                status: 'deleted',
+                status: 'remove',
             },
         ] }))); };
 export var ExampleVideo = function () { return (React.createElement("div", { style: styleOfStoryContainer },
