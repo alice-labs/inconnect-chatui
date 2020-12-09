@@ -174,6 +174,68 @@ export var ExampleImage = function () { return (React.createElement("div", { sty
                 messageType: 'Message',
             },
         ] }))); };
+export var ExampleEditReply = function () { return (React.createElement("div", { style: styleOfStoryContainer },
+    React.createElement(FeedPost, { postAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGK-9TBziG0y_mLZKttJBZ_dYlJ_j8tmJp7w&usqp=CAU', postName: 'A Social Media Page Name', pageLink: 'https://google.com', postTime: '10h ago', contentItem: [
+            'https://images.unsplash.com/photo-1600196245390-039527aad831?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
+            'https://images.unsplash.com/photo-1600185947497-9efadf13d099?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
+        ], content: 'Donec et libero purus. Quisque ac erat nec tortor consectetur scelerisque a sed urna. Cras placerat tincidunt lacus. Phasellus ultrices diam vitae enim ornare, id tristique lectus lacinia. Morbi nec consequat nisl. Morbi et faucibus sem. Ut scelerisque turpis vel turpis pharetra dapibus. Vivamus quis neque a turpis sodales luctus in vitae lorem. Etiam varius, ante sed blandit egestas, arcu lacus consectetur ante, sit amet accumsan est lacus eget ipsum. Vivamus aliquet diam ac cursus convallis.', contentType: 'image', showAction: true, showCommentAction: false, commentData: {
+            id: 0,
+            name: 'A Ranodom Comment User',
+            avatar: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+            time: '4h ago',
+            contentType: 'text',
+            content: 'I want to Buy ! What is The price?',
+            source: 'customer',
+            link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+            isHighlighted: true,
+        }, commentBg: '#eff9ff', replyContent: [
+            {
+                id: 0,
+                name: 'A Ranodom User',
+                avatar: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                time: '4h ago',
+                contentType: 'text',
+                content: 'I want to Buy ! What is The price?',
+                source: 'customer',
+                link: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                isHighlighted: true,
+                messageType: 'comment',
+            },
+            {
+                id: 1,
+                name: 'A Ranodom User',
+                avatar: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                time: '2h ago',
+                contentType: 'note',
+                content: 'Note Created by Bot from the system',
+                source: 'bot',
+                isHighlighted: false,
+            },
+            {
+                id: 2,
+                name: 'A Ranodom User',
+                avatar: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                time: '1h ago',
+                contentType: 'image',
+                image: 'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
+                content: 'lorem',
+                source: 'bot',
+                messageType: 'Message',
+            },
+            {
+                id: 3,
+                name: 'A Ranodom User',
+                avatar: 'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
+                time: '1h ago',
+                contentType: 'text',
+                content: 'lorem Dolor Ipsum dolor adaf asfafafafa',
+                source: 'bot',
+                messageType: 'Message',
+            },
+        ], handleReplyCancel: function (reply) { return console.log(reply, 'reply cancelled'); }, handleReplyEdit: function (reply, text, resetCallback) {
+            console.log(reply, text, 'reply Edited');
+            resetCallback();
+        } }))); };
 Example.story = {
     parameters: {
         info: {

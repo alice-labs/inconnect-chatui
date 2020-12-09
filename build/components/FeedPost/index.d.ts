@@ -6,6 +6,7 @@ interface replyProps {
     time: string;
     contentType: string;
     content: any;
+    image?: any;
     source: string;
     link?: string;
     isHighlighted?: boolean;
@@ -34,6 +35,10 @@ interface Props {
     handleCommentDelete?: (comment: any) => void;
     handleCommentHide?: (comment: any) => void;
     showCommentAction?: boolean;
+    editInputStyle?: any;
+    editInputClass?: string;
+    handleReplyEdit?: (reply: replyProps, text: string, resetCallback: () => void) => void;
+    handleReplyCancel?: (reply: replyProps) => void;
     [key: string]: any;
 }
 declare const FeedPost: React.FC<Props>;

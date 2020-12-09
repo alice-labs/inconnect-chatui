@@ -42,6 +42,7 @@ const commentInfoContainer = css({
     borderBottom: '0.5px solid #DFE8F0',
   },
 });
+
 const replyInfoContainer = css({
   display: 'flex',
   justifyContent: 'flex-start',
@@ -62,6 +63,7 @@ const avatarStyle = css({
   borderRadius: 50,
   border: '1px solid rgba(0,0,0,0.08)',
 });
+
 const avatarSmallStyle = css({
   width: 40,
   height: 40,
@@ -76,6 +78,7 @@ const postNameStyle = css({
   margin: 0,
   color: '#184D47',
 });
+
 const postTimeStyle = css({
   fontSize: '0.7rem',
   margin: '5px 0 0 0',
@@ -120,16 +123,55 @@ const linkStyle = css({
     textDecoration: 'underline',
   },
 });
+
 const flexWrapContainer = css({
   display: 'flex',
   flexWrap: 'wrap',
 });
+
 const imageHolder = css({
   width: 'calc(50% - 20px)',
   borderRadius: 10,
   margin: 10,
   '@media(max-width: 400px)': {
     maxWidth: '100%',
+  },
+});
+
+const inputEditClassLocal = css({
+  background: 'white',
+  border: '1px solid #ccc',
+  marginTop: '10px',
+  width: '100%',
+  borderRadius: 5,
+  padding: 10,
+  fontSize: '12px',
+  resize: 'vertical',
+  ':focus': {
+    border: '1px solid #ccc',
+    outline: 'none',
+  },
+});
+
+const editButtonStyle = css({
+  fontSize: '0.75rem',
+  fontWeight: 'bold',
+  color: '#444444',
+  cursor: 'pointer',
+  textTransform: 'uppercase',
+  ':hover': {
+    color: '#035B4C',
+  },
+});
+const editButtonCancelStyle = css({
+  fontSize: '0.7rem',
+  fontWeight: 'bold',
+  color: '#1594F5',
+  cursor: 'pointer',
+  textDecoration: 'underline',
+  textTransform: 'uppercase',
+  ':hover': {
+    color: '#444',
   },
 });
 
@@ -185,6 +227,7 @@ interface replyProps {
   time: string;
   contentType: string;
   content: any;
+  image?: any;
   source: string;
   link?: string;
   isHighlighted?: boolean;
@@ -213,6 +256,10 @@ interface Props {
   handleCommentDelete?: (comment: any) => void;
   handleCommentHide?: (comment: any) => void;
   showCommentAction?: boolean;
+  editInputStyle?: any;
+  editInputClass?: string;
+  handleReplyEdit?: (reply: replyProps,text:string, resetCallback:()=>void) => void;
+  handleReplyCancel?: (reply: replyProps) => void;
   [key: string]: any;
 }
 
@@ -240,11 +287,16 @@ const FeedPost: React.FC<Props> = ({
   moreButtonHeightWidth,
   handleCommentDelete,
   handleCommentHide,
-    showCommentAction,
+  showCommentAction,
+  editInputStyle,
+  editInputClass,
+  handleReplyCancel,
+  handleReplyEdit,
   status,
   ...rest
 }) => {
   const statustoExcludeAction = ['note', 'hide', 'remove'];
+
   const getContents = () => {
     switch (contentType) {
       case 'text':
@@ -303,11 +355,23 @@ const FeedPost: React.FC<Props> = ({
         return <div className={`${replyContentNote}`}>{reply.content}</div>;
       case 'image':
         return (
-          <img
-            className={`${replyContentImage}`}
-            src={reply.content}
-            alt={'image-note'}
-          />
+          <>
+            <p
+              className={`${replyContentText}`}
+              style={
+                reply.status === 'remove'
+                  ? { textDecoration: 'line-through' }
+                  : {}
+              }
+            >
+              {reply.content}
+            </p>
+            <img
+              className={`${replyContentImage}`}
+              src={reply.image}
+              alt={'image-note'}
+            />
+          </>
         );
       default:
         return 'No contentType matched';
@@ -315,6 +379,8 @@ const FeedPost: React.FC<Props> = ({
   };
 
   const [showPopover, setShowPopover] = React.useState<any>(null);
+  const [editReply, setEditReply] = React.useState<any>(null);
+  const [editText, setEditText] = React.useState<any>('');
   return (
     <div
       style={{ ...style }}
@@ -470,6 +536,7 @@ const FeedPost: React.FC<Props> = ({
                   marginBottom: 8,
                   opacity: reply.status === 'hide' ? 0.5 : 1,
                   cursor: reply.status === 'hide' ? 'not-allowed' : 'default',
+                  width: !!editReply ? '100%' : 'auto',
                 }}
               >
                 <div
@@ -508,7 +575,22 @@ const FeedPost: React.FC<Props> = ({
                   {!!reply.isHighlighted && (
                     <span className={`${highLighted}`}>Highlighted</span>
                   )}
-                  {getReplyContent(reply)}
+                  {!!editReply && editReply.id === reply.id ? (
+                    <div>
+                      <textarea
+                        rows={3}
+                        placeholder='Type here...'
+                        value={editText}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                          setEditText(e.target.value)
+                        }
+                        style={editInputStyle}
+                        className={`${inputEditClassLocal} ${editInputClass}`}
+                      />
+                    </div>
+                  ) : (
+                    getReplyContent(reply)
+                  )}
                 </div>
                 <p
                   className={`${postTimeStyle}`}
@@ -518,7 +600,31 @@ const FeedPost: React.FC<Props> = ({
                       : {}
                   }
                 >
-                  {reply.time}{' '}
+                  {!!editReply && editReply.id === reply.id && (
+                    <>
+                      <span
+                        className={`${editButtonStyle}`}
+                        onClick={() => !!handleReplyEdit && handleReplyEdit(reply,editText, ()=>{
+                          setEditReply(null);
+                          setEditText('');
+                        })}
+                      >
+                        Reply
+                      </span>
+                      &nbsp; •&nbsp;
+                      <span
+                        className={`${editButtonCancelStyle}`}
+                        onClick={() => {
+                          setEditText('');
+                          setEditReply(null);
+                          !!handleReplyCancel && handleReplyCancel(reply)
+                        }}
+                      >
+                        Cancel
+                      </span>
+                    </>
+                  )}
+                  &nbsp; &nbsp;{reply.time}{' '}
                   {!!reply.messageType && <span> • {reply.messageType}</span>}
                   {!!reply.status && reply.status === 'edited' && (
                     <span> • {reply.status}</span>
@@ -546,7 +652,6 @@ const FeedPost: React.FC<Props> = ({
                       <svg
                         data-icon='more'
                         viewBox='0 0 16 16'
-                        className='ub-w_16px ub-h_16px ub-box-szg_border-box'
                         style={{ fill: 'rgb(102, 120, 138)' }}
                       >
                         <path
@@ -557,19 +662,23 @@ const FeedPost: React.FC<Props> = ({
                     </div>
                     {showPopover === reply.id && (
                       <div className={`${moreButtonContainer}`}>
-                        <div
-                          onClick={() => {
-                            if (!!handleEdit) {
-                              handleEdit(reply);
-                              if (closeOnActionClick) {
-                                setShowPopover(null);
+                        {reply.source !== 'customer' && (
+                          <div
+                            onClick={() => {
+                              if (!!handleEdit) {
+                                handleEdit(reply);
+                                setEditReply(reply);
+                                setEditText(reply.content);
+                                if (closeOnActionClick) {
+                                  setShowPopover(null);
+                                }
                               }
-                            }
-                          }}
-                          className={`${moreButtonElement}`}
-                        >
-                          Edit
-                        </div>
+                            }}
+                            className={`${moreButtonElement}`}
+                          >
+                            Edit
+                          </div>
+                        )}
                         <div
                           onClick={() => {
                             if (!!handleDelete) {
@@ -628,6 +737,10 @@ FeedPost.propTypes = {
   handleCommentDelete: PropTypes.func,
   handleCommentHide: PropTypes.func,
   showCommentAction: PropTypes.bool,
+  editInputStyle: PropTypes.object,
+  editInputClass: PropTypes.string,
+    handleReplyCancel: PropTypes.func,
+    handleReplyEdit: PropTypes.func,
 };
 
 FeedPost.defaultProps = {
@@ -656,6 +769,13 @@ FeedPost.defaultProps = {
   handleCommentHide: () => {
     console.log('Comment Hide button clicked');
   },
+    handleReplyEdit: (reply, text, resetCallback) => {
+        console.log(reply,text,'Reply Edit button clicked');
+        resetCallback();
+    },
+    handleReplyCancel: () => {
+        console.log('Reply Edit Cancel button clicked');
+    }
 };
 
 export default FeedPost;

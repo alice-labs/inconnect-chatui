@@ -18,3 +18,4 @@ export declare const Example: {
 };
 export declare const ExampleVideo: () => JSX.Element;
 export declare const ExampleImage: () => JSX.Element;
+export declare const ExampleEditReply: () => JSX.Element;

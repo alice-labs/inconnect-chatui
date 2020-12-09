@@ -176,4 +176,8 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 # 02 Dec 2020 - 1.2.3 🎉
 
-- [x] changed delete status for feedpost from `deleted` to `remove`
+- [x] changed delete status for feed post from `deleted` to `remove`
+
+# 09 Dec 2020 - 1.2.4 🎉
+
+- [x] Added Edit Options for Feed post reply see props and storybook for example. customer type users cannot be edited

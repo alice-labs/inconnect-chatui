@@ -4784,6 +4784,41 @@ var imageHolder = lib_18({
         maxWidth: '100%',
     },
 });
+var inputEditClassLocal = lib_18({
+    background: 'white',
+    border: '1px solid #ccc',
+    marginTop: '10px',
+    width: '100%',
+    borderRadius: 5,
+    padding: 10,
+    fontSize: '12px',
+    resize: 'vertical',
+    ':focus': {
+        border: '1px solid #ccc',
+        outline: 'none',
+    },
+});
+var editButtonStyle = lib_18({
+    fontSize: '0.75rem',
+    fontWeight: 'bold',
+    color: '#444444',
+    cursor: 'pointer',
+    textTransform: 'uppercase',
+    ':hover': {
+        color: '#035B4C',
+    },
+});
+var editButtonCancelStyle = lib_18({
+    fontSize: '0.7rem',
+    fontWeight: 'bold',
+    color: '#1594F5',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    textTransform: 'uppercase',
+    ':hover': {
+        color: '#444',
+    },
+});
 var highLighted = lib_18({
     background: 'rgba(0, 123, 101, 0.19)',
     borderRadius: '3px',
@@ -4826,7 +4861,7 @@ var moreButtonElement = lib_18({
     },
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, editInputStyle = _a.editInputStyle, editInputClass = _a.editInputClass, handleReplyCancel = _a.handleReplyCancel, handleReplyEdit = _a.handleReplyEdit, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "editInputStyle", "editInputClass", "handleReplyCancel", "handleReplyEdit", "status"]);
     var statustoExcludeAction = ['note', 'hide', 'remove'];
     var getContents = function () {
         switch (contentType) {
@@ -4856,12 +4891,18 @@ var FeedPost = function (_a) {
             case 'note':
                 return createElement("div", { className: "" + replyContentNote }, reply.content);
             case 'image':
-                return (createElement("img", { className: "" + replyContentImage, src: reply.content, alt: 'image-note' }));
+                return (createElement(Fragment, null,
+                    createElement("p", { className: "" + replyContentText, style: reply.status === 'remove'
+                            ? { textDecoration: 'line-through' }
+                            : {} }, reply.content),
+                    createElement("img", { className: "" + replyContentImage, src: reply.image, alt: 'image-note' })));
             default:
                 return 'No contentType matched';
         }
     };
     var _b = useState(null), showPopover = _b[0], setShowPopover = _b[1];
+    var _c = useState(null), editReply = _c[0], setEditReply = _c[1];
+    var _d = useState(''), editText = _d[0], setEditText = _d[1];
     return (createElement("div", __assign({ style: __assign({}, style), className: feedContainer + " " + className }, rest),
         createElement("div", { className: "" + feedPostContainer },
             createElement("div", { className: "" + postInfoContainer },
@@ -4941,6 +4982,7 @@ var FeedPost = function (_a) {
                             marginBottom: 8,
                             opacity: reply.status === 'hide' ? 0.5 : 1,
                             cursor: reply.status === 'hide' ? 'not-allowed' : 'default',
+                            width: !!editReply ? '100%' : 'auto',
                         } },
                         createElement("div", { style: reply.contentType === 'note'
                                 ? {
@@ -4960,10 +5002,25 @@ var FeedPost = function (_a) {
                             !!reply.link ? (createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                                 createElement("p", { className: "" + postNameStyle }, reply.name))) : (createElement("p", { className: "" + postNameStyle }, reply.name)),
                             !!reply.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted")),
-                            getReplyContent(reply)),
+                            !!editReply && editReply.id === reply.id ? (createElement("div", null,
+                                createElement("textarea", { rows: 3, placeholder: 'Type here...', value: editText, onChange: function (e) {
+                                        return setEditText(e.target.value);
+                                    }, style: editInputStyle, className: inputEditClassLocal + " " + editInputClass }))) : (getReplyContent(reply))),
                         createElement("p", { className: "" + postTimeStyle, style: reply.contentType === 'note'
                                 ? { margin: '-10px 0 0 10px' }
                                 : {} },
+                            !!editReply && editReply.id === reply.id && (createElement(Fragment, null,
+                                createElement("span", { className: "" + editButtonStyle, onClick: function () { return !!handleReplyEdit && handleReplyEdit(reply, editText, function () {
+                                        setEditReply(null);
+                                        setEditText('');
+                                    }); } }, "Reply"),
+                                "\u00A0 \u2022\u00A0",
+                                createElement("span", { className: "" + editButtonCancelStyle, onClick: function () {
+                                        setEditText('');
+                                        setEditReply(null);
+                                        !!handleReplyCancel && handleReplyCancel(reply);
+                                    } }, "Cancel"))),
+                            "\u00A0 \u00A0",
                             reply.time,
                             ' ',
                             !!reply.messageType && createElement("span", null,
@@ -4986,17 +5043,19 @@ var FeedPost = function (_a) {
                                     setShowPopover(reply.id);
                                 }
                             } },
-                            createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', className: 'ub-w_16px ub-h_16px ub-box-szg_border-box', style: { fill: 'rgb(102, 120, 138)' } },
+                            createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', style: { fill: 'rgb(102, 120, 138)' } },
                                 createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
                         showPopover === reply.id && (createElement("div", { className: "" + moreButtonContainer },
-                            createElement("div", { onClick: function () {
+                            reply.source !== 'customer' && (createElement("div", { onClick: function () {
                                     if (!!handleEdit) {
                                         handleEdit(reply);
+                                        setEditReply(reply);
+                                        setEditText(reply.content);
                                         if (closeOnActionClick) {
                                             setShowPopover(null);
                                         }
                                     }
-                                }, className: "" + moreButtonElement }, "Edit"),
+                                }, className: "" + moreButtonElement }, "Edit")),
                             createElement("div", { onClick: function () {
                                     if (!!handleDelete) {
                                         handleDelete(reply);
@@ -5034,6 +5093,10 @@ FeedPost.propTypes = {
     handleCommentDelete: propTypes.func,
     handleCommentHide: propTypes.func,
     showCommentAction: propTypes.bool,
+    editInputStyle: propTypes.object,
+    editInputClass: propTypes.string,
+    handleReplyCancel: propTypes.func,
+    handleReplyEdit: propTypes.func,
 };
 FeedPost.defaultProps = {
     style: {},
@@ -5061,6 +5124,13 @@ FeedPost.defaultProps = {
     handleCommentHide: function () {
         console.log('Comment Hide button clicked');
     },
+    handleReplyEdit: function (reply, text, resetCallback) {
+        console.log(reply, text, 'Reply Edit button clicked');
+        resetCallback();
+    },
+    handleReplyCancel: function () {
+        console.log('Reply Edit Cancel button clicked');
+    }
 };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();

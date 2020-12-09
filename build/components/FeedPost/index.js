@@ -143,6 +143,41 @@ var imageHolder = css({
         maxWidth: '100%',
     },
 });
+var inputEditClassLocal = css({
+    background: 'white',
+    border: '1px solid #ccc',
+    marginTop: '10px',
+    width: '100%',
+    borderRadius: 5,
+    padding: 10,
+    fontSize: '12px',
+    resize: 'vertical',
+    ':focus': {
+        border: '1px solid #ccc',
+        outline: 'none',
+    },
+});
+var editButtonStyle = css({
+    fontSize: '0.75rem',
+    fontWeight: 'bold',
+    color: '#444444',
+    cursor: 'pointer',
+    textTransform: 'uppercase',
+    ':hover': {
+        color: '#035B4C',
+    },
+});
+var editButtonCancelStyle = css({
+    fontSize: '0.7rem',
+    fontWeight: 'bold',
+    color: '#1594F5',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    textTransform: 'uppercase',
+    ':hover': {
+        color: '#444',
+    },
+});
 var highLighted = css({
     background: 'rgba(0, 123, 101, 0.19)',
     borderRadius: '3px',
@@ -185,7 +220,7 @@ var moreButtonElement = css({
     },
 });
 var FeedPost = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "status"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, postAvatar = _a.postAvatar, postName = _a.postName, postTime = _a.postTime, content = _a.content, contentType = _a.contentType, replyContent = _a.replyContent, pageLink = _a.pageLink, commentData = _a.commentData, contentItem = _a.contentItem, commentBg = _a.commentBg, showAction = _a.showAction, handleDelete = _a.handleDelete, handleEdit = _a.handleEdit, handleHide = _a.handleHide, closeOnActionClick = _a.closeOnActionClick, moreButtonHeightWidth = _a.moreButtonHeightWidth, handleCommentDelete = _a.handleCommentDelete, handleCommentHide = _a.handleCommentHide, showCommentAction = _a.showCommentAction, editInputStyle = _a.editInputStyle, editInputClass = _a.editInputClass, handleReplyCancel = _a.handleReplyCancel, handleReplyEdit = _a.handleReplyEdit, status = _a.status, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "postAvatar", "postName", "postTime", "content", "contentType", "replyContent", "pageLink", "commentData", "contentItem", "commentBg", "showAction", "handleDelete", "handleEdit", "handleHide", "closeOnActionClick", "moreButtonHeightWidth", "handleCommentDelete", "handleCommentHide", "showCommentAction", "editInputStyle", "editInputClass", "handleReplyCancel", "handleReplyEdit", "status"]);
     var statustoExcludeAction = ['note', 'hide', 'remove'];
     var getContents = function () {
         switch (contentType) {
@@ -215,12 +250,18 @@ var FeedPost = function (_a) {
             case 'note':
                 return React.createElement("div", { className: "" + replyContentNote }, reply.content);
             case 'image':
-                return (React.createElement("img", { className: "" + replyContentImage, src: reply.content, alt: 'image-note' }));
+                return (React.createElement(React.Fragment, null,
+                    React.createElement("p", { className: "" + replyContentText, style: reply.status === 'remove'
+                            ? { textDecoration: 'line-through' }
+                            : {} }, reply.content),
+                    React.createElement("img", { className: "" + replyContentImage, src: reply.image, alt: 'image-note' })));
             default:
                 return 'No contentType matched';
         }
     };
     var _b = React.useState(null), showPopover = _b[0], setShowPopover = _b[1];
+    var _c = React.useState(null), editReply = _c[0], setEditReply = _c[1];
+    var _d = React.useState(''), editText = _d[0], setEditText = _d[1];
     return (React.createElement("div", __assign({ style: __assign({}, style), className: feedContainer + " " + className }, rest),
         React.createElement("div", { className: "" + feedPostContainer },
             React.createElement("div", { className: "" + postInfoContainer },
@@ -300,6 +341,7 @@ var FeedPost = function (_a) {
                             marginBottom: 8,
                             opacity: reply.status === 'hide' ? 0.5 : 1,
                             cursor: reply.status === 'hide' ? 'not-allowed' : 'default',
+                            width: !!editReply ? '100%' : 'auto',
                         } },
                         React.createElement("div", { style: reply.contentType === 'note'
                                 ? {
@@ -319,10 +361,25 @@ var FeedPost = function (_a) {
                             !!reply.link ? (React.createElement("a", { href: reply.link, className: "" + linkStyle, target: '_blank', rel: 'noreferrer noopener' },
                                 React.createElement("p", { className: "" + postNameStyle }, reply.name))) : (React.createElement("p", { className: "" + postNameStyle }, reply.name)),
                             !!reply.isHighlighted && (React.createElement("span", { className: "" + highLighted }, "Highlighted")),
-                            getReplyContent(reply)),
+                            !!editReply && editReply.id === reply.id ? (React.createElement("div", null,
+                                React.createElement("textarea", { rows: 3, placeholder: 'Type here...', value: editText, onChange: function (e) {
+                                        return setEditText(e.target.value);
+                                    }, style: editInputStyle, className: inputEditClassLocal + " " + editInputClass }))) : (getReplyContent(reply))),
                         React.createElement("p", { className: "" + postTimeStyle, style: reply.contentType === 'note'
                                 ? { margin: '-10px 0 0 10px' }
                                 : {} },
+                            !!editReply && editReply.id === reply.id && (React.createElement(React.Fragment, null,
+                                React.createElement("span", { className: "" + editButtonStyle, onClick: function () { return !!handleReplyEdit && handleReplyEdit(reply, editText, function () {
+                                        setEditReply(null);
+                                        setEditText('');
+                                    }); } }, "Reply"),
+                                "\u00A0 \u2022\u00A0",
+                                React.createElement("span", { className: "" + editButtonCancelStyle, onClick: function () {
+                                        setEditText('');
+                                        setEditReply(null);
+                                        !!handleReplyCancel && handleReplyCancel(reply);
+                                    } }, "Cancel"))),
+                            "\u00A0 \u00A0",
                             reply.time,
                             ' ',
                             !!reply.messageType && React.createElement("span", null,
@@ -345,17 +402,19 @@ var FeedPost = function (_a) {
                                     setShowPopover(reply.id);
                                 }
                             } },
-                            React.createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', className: 'ub-w_16px ub-h_16px ub-box-szg_border-box', style: { fill: 'rgb(102, 120, 138)' } },
+                            React.createElement("svg", { "data-icon": 'more', viewBox: '0 0 16 16', style: { fill: 'rgb(102, 120, 138)' } },
                                 React.createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
                         showPopover === reply.id && (React.createElement("div", { className: "" + moreButtonContainer },
-                            React.createElement("div", { onClick: function () {
+                            reply.source !== 'customer' && (React.createElement("div", { onClick: function () {
                                     if (!!handleEdit) {
                                         handleEdit(reply);
+                                        setEditReply(reply);
+                                        setEditText(reply.content);
                                         if (closeOnActionClick) {
                                             setShowPopover(null);
                                         }
                                     }
-                                }, className: "" + moreButtonElement }, "Edit"),
+                                }, className: "" + moreButtonElement }, "Edit")),
                             React.createElement("div", { onClick: function () {
                                     if (!!handleDelete) {
                                         handleDelete(reply);
@@ -393,6 +452,10 @@ FeedPost.propTypes = {
     handleCommentDelete: PropTypes.func,
     handleCommentHide: PropTypes.func,
     showCommentAction: PropTypes.bool,
+    editInputStyle: PropTypes.object,
+    editInputClass: PropTypes.string,
+    handleReplyCancel: PropTypes.func,
+    handleReplyEdit: PropTypes.func,
 };
 FeedPost.defaultProps = {
     style: {},
@@ -420,6 +483,13 @@ FeedPost.defaultProps = {
     handleCommentHide: function () {
         console.log('Comment Hide button clicked');
     },
+    handleReplyEdit: function (reply, text, resetCallback) {
+        console.log(reply, text, 'Reply Edit button clicked');
+        resetCallback();
+    },
+    handleReplyCancel: function () {
+        console.log('Reply Edit Cancel button clicked');
+    }
 };
 export default FeedPost;
 //# sourceMappingURL=index.js.map
