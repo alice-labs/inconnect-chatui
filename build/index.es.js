@@ -10168,14 +10168,14 @@ var galleryItemCover = lib_18({
     background: '#e8f0f3',
 });
 var galleryItemTitle = lib_18({
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     margin: '10px 15px 0 15px',
     color: '#222222',
     textAlign: 'center',
     fontWeight: 500,
 });
 var galleryItemSubtitle = lib_18({
-    fontSize: '0.88rem',
+    fontSize: '0.8rem',
     margin: '5px 15px 0 15px',
     textAlign: 'center',
     fontWeight: 400,
@@ -10201,7 +10201,7 @@ var galleryItemButtonElement = lib_18({
     width: '100%',
     background: 'white',
     color: '#222222',
-    fontSize: '0.88rem',
+    fontSize: '0.68rem',
     textDecoration: 'none',
     textAlign: 'center',
     fontFamily: 'inherit',
