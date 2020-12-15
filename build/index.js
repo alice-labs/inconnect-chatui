@@ -10284,8 +10284,8 @@ var GalleryMessage = function (_a) {
         })),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$4, style: avatar
                 ? consumer === 'user'
-                    ? { marginLeft: '70px' }
-                    : { marginRight: '70px' }
+                    ? { marginLeft: '70px', marginTop: '-40px' }
+                    : { marginRight: '70px', marginTop: '-40px' }
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,

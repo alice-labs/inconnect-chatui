@@ -10277,8 +10277,8 @@ var GalleryMessage = function (_a) {
         })),
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$4, style: avatar
                 ? consumer === 'user'
-                    ? { marginLeft: '70px' }
-                    : { marginRight: '70px' }
+                    ? { marginLeft: '70px', marginTop: '-40px' }
+                    : { marginRight: '70px', marginTop: '-40px' }
                 : {} },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
