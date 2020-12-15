@@ -10194,7 +10194,6 @@ var galleryItemButtons = lib_18({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
-    height: 122,
 });
 var galleryItemButtonElement = lib_18({
     borderBottom: '0.5px solid #E3E3E3',
@@ -10270,10 +10269,14 @@ var GalleryMessage = function (_a) {
             return (React.createElement("div", { className: "" + galleryItemContainer, key: index },
                 React.createElement("div", { className: galleryItemCover + " " + galleryItemClassName },
                     React.createElement("img", { src: gallery.image ||
-                            'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg', style: { overflow: 'hidden', borderRadius: '10px 10px 0 0' }, height: '200px' })),
+                            'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg', style: {
+                            overflow: 'hidden',
+                            borderRadius: '10px 10px 0 0',
+                            height: "calc(" + carouselHeight + " * .4)",
+                        } })),
                 React.createElement("p", { className: "" + galleryItemTitle }, ((_a = gallery) === null || _a === void 0 ? void 0 : _a.title) || 'Not Available'),
                 React.createElement("p", { className: "" + galleryItemSubtitle }, ((_b = gallery) === null || _b === void 0 ? void 0 : _b.subtitle) || 'Not Available'),
-                React.createElement("div", { className: "" + galleryItemButtons }, !!gallery.buttons &&
+                React.createElement("div", { className: "" + galleryItemButtons, style: { height: "calc(" + carouselHeight + " * .3)" } }, !!gallery.buttons &&
                     gallery.buttons.map(function (galleryButton, index) {
                         return galleryButton.methodType === 'url' &&
                             !!!galleryButton.isDisabled ? (React.createElement("a", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: __assign({ width: '91%' }, galleryButton.style), href: galleryButton.url, target: '_blank' }, galleryButton.title)) : (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: galleryButton.style, onClick: galleryButton.action, disabled: galleryButton.isDisabled }, galleryButton.title));
