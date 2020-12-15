@@ -79,7 +79,6 @@ const galleryItemButtons = css({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-end',
-  height: 122,
 });
 const galleryItemButtonElement = css({
   borderBottom: '0.5px solid #E3E3E3',
@@ -244,8 +243,11 @@ const GalleryMessage: React.FC<Props> = ({
                   gallery.image ||
                   'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
                 }
-                style={{ overflow: 'hidden', borderRadius: '10px 10px 0 0' }}
-                height={'200px'}
+                style={{
+                  overflow: 'hidden',
+                  borderRadius: '10px 10px 0 0',
+                  height: `calc(${carouselHeight} * .4)`,
+                }}
               />
             </div>
             <p className={`${galleryItemTitle}`}>
@@ -254,7 +256,10 @@ const GalleryMessage: React.FC<Props> = ({
             <p className={`${galleryItemSubtitle}`}>
               {gallery?.subtitle || 'Not Available'}
             </p>
-            <div className={`${galleryItemButtons}`}>
+            <div
+              className={`${galleryItemButtons}`}
+              style={{ height: `calc(${carouselHeight} * .3)` }}
+            >
               {!!gallery.buttons &&
                 gallery.buttons.map(
                   (galleryButton: buttonDataProps, index: number) =>
