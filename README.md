@@ -181,3 +181,11 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 09 Dec 2020 - 1.2.4 🎉
 
 - [x] Added Edit Options for Feed post reply see props and storybook for example. customer type users cannot be edited
+
+# 15 Dec 2020 - 1.2.5 🎉
+
+- [x] Fix gallery item height issue
+
+# 15 Dec 2020 - 1.2.6 🎉
+
+- [x] Fix gallery item font sizes
