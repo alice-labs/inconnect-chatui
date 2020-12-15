@@ -189,3 +189,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 15 Dec 2020 - 1.2.6 🎉
 
 - [x] Fix gallery item font sizes
+
+# 15 Dec 2020 - 1.2.7 🎉
+
+- [x] Fix gallery item replied by spacing

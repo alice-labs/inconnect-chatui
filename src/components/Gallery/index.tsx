@@ -296,8 +296,8 @@ const GalleryMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '70px' }
-                : { marginRight: '70px' }
+                ? { marginLeft: '70px', marginTop: '-40px' }
+                : { marginRight: '70px', marginTop: '-40px' }
               : {}
           }
         >
