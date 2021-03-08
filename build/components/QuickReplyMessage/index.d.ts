@@ -21,6 +21,8 @@ interface Props {
     elementStyle?: object;
     elementClassName?: string;
     avatar?: string | React.ReactNode;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
     [key: string]: any;
 }
 declare const QuickReplyMessage: React.FC<Props>;

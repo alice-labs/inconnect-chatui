@@ -14,6 +14,8 @@ interface Props {
     elementStyle?: object;
     elementClassName?: string;
     avatar?: string | React.ReactNode;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
     [key: string]: any;
 }
 declare const ImageMessage: React.FC<Props>;

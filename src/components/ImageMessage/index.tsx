@@ -2,6 +2,9 @@ import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
+import FailedIcon from "../Common/FailedIcon";
+import PendingIcon from "../Common/PendingIcon";
+import SuccessIcon from "../Common/SuccessIcon";
 
 const userContainer = css({
   display: 'flex',
@@ -47,6 +50,8 @@ const msgTimeClass = css({
   marginBottom: 10,
   marginTop: 3,
   color: '#c0cbd0',
+  display: 'flex',
+  alignItems: 'center',
 });
 const flexImageContainer = css({
   display: 'flex',
@@ -170,6 +175,8 @@ interface Props {
   elementStyle?: object;
   elementClassName?: string;
   avatar?: string | React.ReactNode;
+  msgStatus?: 'failed' | 'pending' | 'sent';
+  showMsgStatus?: boolean;
   [key: string]: any;
 }
 
@@ -188,6 +195,8 @@ const ImageMessage: React.FC<Props> = ({
   elementStyle,
   elementClassName,
   avatar,
+  msgStatus,
+  showMsgStatus,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = React.useState<number>(-1);
@@ -270,6 +279,11 @@ const ImageMessage: React.FC<Props> = ({
         >
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
           {showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {!!showMsgStatus &&
+          <>&nbsp;{
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+          </>
+          }
         </p>
       )}
       {isShown && currentImage >= 0 && (
@@ -383,6 +397,8 @@ ImageMessage.propTypes = {
   elementStyle: PropTypes.object,
   elementClassName: PropTypes.string,
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  msgStatus: PropTypes.oneOf(['failed', 'pending', 'sent']),
+  showMsgStatus: PropTypes.bool,
 };
 
 ImageMessage.defaultProps = {
@@ -392,6 +408,7 @@ ImageMessage.defaultProps = {
   showRepliedBy: false,
   showPreview: false,
   avatar: '',
+  showMsgStatus: false,
 };
 
 export default ImageMessage;

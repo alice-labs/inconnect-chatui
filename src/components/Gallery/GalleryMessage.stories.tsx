@@ -142,6 +142,8 @@ export const Example = () => (
           ],
         },
       ]}
+      showMsgStatus={true}
+      msgStatus='sent'
     />
 
     <GalleryMessage
@@ -151,6 +153,8 @@ export const Example = () => (
       avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
       carouselHeight={'380px'}
       slideToShow={1}
+      showMsgStatus={true}
+      msgStatus='pending'
       galleryData={[
         {
           id: 0,

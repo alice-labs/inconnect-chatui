@@ -24,6 +24,8 @@ export const ExampleAdmin = () => (
       text='hello admin'
       consumer={'admin'}
       msgTime={'4h ago'}
+      showMsgStatus={true}
+      msgStatus='sent'
       avatar={
         <svg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'>
           <path
@@ -87,6 +89,8 @@ export const ExampleAdmin = () => (
       consumer={'admin'}
       msgTime={'3h ago'}
       showInfo={false}
+      showMsgStatus={true}
+      msgStatus='pending'
       avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
     />
     <TextMessage
@@ -98,6 +102,8 @@ export const ExampleAdmin = () => (
       showRepliedBy={true}
       repliedBy={'John Doe'}
       showInfo={true}
+      showMsgStatus={true}
+      msgStatus='failed'
       avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
     />
     <TextMessage
