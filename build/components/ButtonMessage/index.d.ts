@@ -22,6 +22,8 @@ interface Props {
     elementClassName?: string;
     avatar?: string | React.ReactNode;
     buttonContainerStyle?: object;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
     [key: string]: any;
 }
 declare const ButtonMessage: React.FC<Props>;

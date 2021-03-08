@@ -19,6 +19,8 @@ export const Example = () => (
       msgTime={'4h ago'}
       consumer={'user'}
       elementStyle={{ background: 'red' }}
+      showMsgStatus={true}
+      msgStatus='sent'
       buttonData={[
         {
           title: 'Button One',

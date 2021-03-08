@@ -35,6 +35,8 @@ interface Props {
     carouselHeight?: string;
     slideToShow?: number;
     galleryItemClassName?: string;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
     [key: string]: any;
 }
 declare const GalleryMessage: React.FC<Props>;

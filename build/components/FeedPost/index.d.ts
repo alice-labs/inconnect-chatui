@@ -12,6 +12,8 @@ interface replyProps {
     isHighlighted?: boolean;
     messageType?: string;
     status?: string;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
 }
 interface Props {
     style?: object;

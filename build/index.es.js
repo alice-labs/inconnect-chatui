@@ -4027,6 +4027,21 @@ var AvatarContainer = function (_a) {
         children)) : (createElement(Fragment, null, children));
 };
 
+var FailedIcon = function () {
+    return (React__default.createElement("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+        React__default.createElement("path", { "fill-rule": "evenodd", "clip-rule": "evenodd", d: "M6.56277 0.111992C6.74113 0.185921 6.90326 0.294285 7.03976 0.430894L11.5688 4.95978C11.7056 5.0963 11.814 5.25845 11.8879 5.43697C11.962 5.6155 12 5.8068 12 6.00002C12 6.19323 11.962 6.38454 11.8879 6.56306C11.814 6.74159 11.7056 6.90374 11.5688 7.04026L7.03976 11.5691C6.90326 11.7057 6.74113 11.8141 6.56277 11.888C6.38434 11.962 6.19313 12 6.00001 12C5.8069 12 5.61569 11.962 5.43726 11.888C5.2589 11.8141 5.09677 11.7057 4.96027 11.5691L0.431201 7.04026C0.294507 6.90374 0.18606 6.74159 0.112074 6.56306C0.0380799 6.38454 0 6.19323 0 6.00002C0 5.8068 0.0380799 5.6155 0.112074 5.43697C0.18606 5.25845 0.294507 5.0963 0.431201 4.95978L4.96027 0.430894C5.09677 0.294285 5.2589 0.185921 5.43726 0.111992C5.61569 0.0380552 5.8069 0 6.00001 0C6.19313 0 6.38434 0.0380552 6.56277 0.111992ZM5.4808 7.2533C5.61848 7.391 5.80528 7.4684 6.00001 7.4684C6.19475 7.4684 6.38155 7.391 6.51923 7.2533C6.6569 7.11561 6.7343 6.92878 6.7343 6.73402V3.06215C6.7343 2.86738 6.6569 2.68059 6.51923 2.54287C6.38155 2.40515 6.19475 2.32777 6.00001 2.32777C5.80528 2.32777 5.61848 2.40515 5.4808 2.54287C5.34312 2.68059 5.26573 2.86738 5.26573 3.06215V6.73402C5.26573 6.92878 5.34312 7.11561 5.4808 7.2533ZM5.4808 9.45642C5.61848 9.59412 5.80528 9.67152 6.00001 9.67152C6.19475 9.67152 6.38155 9.59412 6.51923 9.45642C6.6569 9.31873 6.7343 9.1319 6.7343 8.93715C6.7343 8.74239 6.6569 8.55557 6.51923 8.41787C6.38155 8.2801 6.19475 8.20277 6.00001 8.20277C5.80528 8.20277 5.61848 8.2801 5.4808 8.41787C5.34312 8.55557 5.26573 8.74239 5.26573 8.93715C5.26573 9.1319 5.34312 9.31873 5.4808 9.45642Z", fill: "#DE350B" })));
+};
+
+var PendingIcon = function () {
+    return (React__default.createElement("svg", { width: "14", height: "8", viewBox: "0 0 14 8", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+        React__default.createElement("path", { "fill-rule": "evenodd", "clip-rule": "evenodd", d: "M13.001 0.108955L13.5 0.59573L8.10042 8L5.91166 5.83835L6.83857 4.56645L8.10042 5.30239L13.001 0.108955ZM8.61925 0L9.11822 0.486775L3.71865 7.89105L0 4.23358L0.830331 3.42354L3.71865 5.19343L8.61925 0Z", fill: "#ABB3BA" })));
+};
+
+var SuccessIcon = function () {
+    return (React__default.createElement("svg", { width: "14", height: "8", viewBox: "0 0 14 8", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
+        React__default.createElement("path", { "fill-rule": "evenodd", "clip-rule": "evenodd", d: "M13.001 0.108955L13.5 0.59573L8.10042 8L5.91166 5.83835L6.83857 4.56645L8.10042 5.30239L13.001 0.108955ZM8.61925 0L9.11822 0.486775L3.71865 7.89105L0 4.23358L0.830331 3.42354L3.71865 5.19343L8.61925 0Z", fill: "#3497F9" })));
+};
+
 var userContainer = lib_18({
     display: 'flex',
     flexDirection: 'column',
@@ -4069,9 +4084,11 @@ var msgTimeClass = lib_18({
     marginBottom: 10,
     marginTop: 3,
     color: '#c0cbd0',
+    display: 'flex',
+    alignItems: 'center',
 });
 var TextMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy", "avatar"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, consumer = _a.consumer, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, showInfo = _a.showInfo, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, showMsgStatus = _a.showMsgStatus, msgStatus = _a.msgStatus, rest = __rest(_a, ["style", "className", "userType", "consumer", "text", "msgTime", "repliedBy", "elementStyle", "elementClassName", "showInfo", "showRepliedBy", "avatar", "showMsgStatus", "msgStatus"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
             ? userType === 'user'
                 ? adminContainer
@@ -4099,10 +4116,13 @@ var TextMessage = function (_a) {
             !!msgTime && createElement(Fragment, null,
                 msgTime,
                 " \u00A0 "),
-            ' ',
             showRepliedBy && createElement(Fragment, null,
-                "\u2022 \u00A0 ",
-                repliedBy)))));
+                "\u00A0\u2022 \u00A0 ",
+                repliedBy),
+            !!showMsgStatus &&
+                createElement(Fragment, null,
+                    "\u00A0",
+                    msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null))))));
 };
 TextMessage.propTypes = {
     style: propTypes.object,
@@ -4133,9 +4153,9 @@ var noteContainer = lib_18({
     alignItems: 'center',
 });
 var noteColor = lib_18({
-    background: '#feefc3',
+    background: '#FFEFB7',
     padding: '10px 30px',
-    borderRadius: 16,
+    borderRadius: 5,
     textAlign: 'center',
     width: 'fit-content',
     marginBottom: 5,
@@ -4151,16 +4171,22 @@ var noteInfo = lib_18({
     fontSize: '0.7rem',
     textTransform: 'uppercase',
     color: '#9e9067',
+    display: 'flex',
+    alignItems: 'center',
 });
 var NoteMessage = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy"]);
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "msgStatus", "showMsgStatus"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
         createElement("div", { className: "" + noteColor }, note),
         createElement("p", { className: "" + noteInfo },
             !!msgTime && createElement("span", null, msgTime),
             !!takenBy && createElement("span", null,
                 " \u2022 ",
-                takenBy))));
+                takenBy),
+            !!showMsgStatus &&
+                createElement(Fragment, null,
+                    "\u00A0",
+                    msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null)))));
 };
 NoteMessage.propTypes = {
     style: propTypes.object,
@@ -4169,11 +4195,14 @@ NoteMessage.propTypes = {
     type: propTypes.oneOf(['user', 'admin', 'bot']),
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     takenBy: propTypes.string,
+    msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
+    showMsgStatus: propTypes.bool,
 };
 NoteMessage.defaultProps = {
     style: {},
     className: '',
     note: '',
+    showMsgStatus: false,
 };
 
 var userContainer$1 = lib_18({
@@ -4217,6 +4246,8 @@ var msgTimeClass$1 = lib_18({
     marginBottom: 10,
     marginTop: 3,
     color: '#c0cbd0',
+    display: 'flex',
+    alignItems: 'center',
 });
 var flexImageContainer = lib_18({
     display: 'flex',
@@ -4318,7 +4349,7 @@ var closeOnClickStyle = lib_18({
     zIndex: 1,
 });
 var ImageMessage = function (_a) {
-    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName", "avatar"]);
+    var style = _a.style, className = _a.className, userType = _a.userType, text = _a.text, images = _a.images, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, imagesWidth = _a.imagesWidth, showPreview = _a.showPreview, consumer = _a.consumer, elementStyle = _a.elementStyle, elementClassName = _a.elementClassName, avatar = _a.avatar, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "userType", "text", "images", "msgTime", "repliedBy", "showRepliedBy", "imagesWidth", "showPreview", "consumer", "elementStyle", "elementClassName", "avatar", "msgStatus", "showMsgStatus"]);
     var _b = useState(-1), currentImage = _b[0], setCurrentImage = _b[1];
     var _c = useState(false), isShown = _c[0], setIsShown = _c[1];
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user'
@@ -4361,7 +4392,11 @@ var ImageMessage = function (_a) {
             ' ',
             showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
-                repliedBy))),
+                repliedBy),
+            !!showMsgStatus &&
+                createElement(Fragment, null,
+                    "\u00A0",
+                    msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null)))),
         isShown && currentImage >= 0 && (createElement("div", { className: "" + imageViewerStyle, style: { background: "rgba(0, 0, 0, 0.8)" } },
             createElement("img", { className: "" + imagePreview, src: (!!images && images[currentImage]) ||
                     'https://i.ibb.co/rkCBGSG/Artboard-1.png', alt: 'image-preview' }),
@@ -4413,6 +4448,8 @@ ImageMessage.propTypes = {
     elementStyle: propTypes.object,
     elementClassName: propTypes.string,
     avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
+    msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
+    showMsgStatus: propTypes.bool,
 };
 ImageMessage.defaultProps = {
     style: {},
@@ -4421,6 +4458,7 @@ ImageMessage.defaultProps = {
     showRepliedBy: false,
     showPreview: false,
     avatar: '',
+    showMsgStatus: false,
 };
 
 var adminContainer$2 = lib_18({
@@ -4496,9 +4534,11 @@ var msgTimeClass$2 = lib_18({
     marginBottom: 5,
     marginTop: 3,
     color: '#c0cbd0',
+    display: 'flex',
+    alignItems: 'center',
 });
 var ButtonMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, buttonContainerStyle = _a.buttonContainerStyle, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy", "avatar", "buttonContainerStyle"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, buttonContainerStyle = _a.buttonContainerStyle, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy", "avatar", "buttonContainerStyle", "msgStatus", "showMsgStatus"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$2 : adminContainer$2) + className }, rest),
         createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 + " " + elementClassName, style: elementStyle }, text)),
@@ -4517,10 +4557,12 @@ var ButtonMessage = function (_a) {
             !!msgTime && createElement(Fragment, null,
                 msgTime,
                 " \u00A0 "),
-            ' ',
             showRepliedBy && createElement(Fragment, null,
-                "\u2022 \u00A0 ",
-                repliedBy)))));
+                "\u00A0\u2022 \u00A0 ",
+                repliedBy,
+                " &nsbp;"),
+            !!showMsgStatus &&
+                createElement(Fragment, null, msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null))))));
 };
 ButtonMessage.propTypes = {
     style: propTypes.object,
@@ -4535,6 +4577,8 @@ ButtonMessage.propTypes = {
     elementClassName: propTypes.string,
     buttonContainerStyle: propTypes.object,
     avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
+    msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
+    showMsgStatus: propTypes.bool,
 };
 ButtonMessage.defaultProps = {
     style: {},
@@ -4542,6 +4586,7 @@ ButtonMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     avatar: '',
+    showMsgStatus: false,
 };
 
 var adminContainer$3 = lib_18({
@@ -4619,9 +4664,11 @@ var msgTimeClass$3 = lib_18({
     marginBottom: 5,
     marginTop: 3,
     color: '#c0cbd0',
+    display: 'flex',
+    alignItems: 'center',
 });
 var QuickReplyMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar"]);
+    var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "msgStatus", "showMsgStatus"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$3 : adminContainer$3) + className }, rest),
         createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 + " " + elementClassName, style: elementStyle }, text)),
@@ -4644,7 +4691,11 @@ var QuickReplyMessage = function (_a) {
             ' ',
             showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
-                repliedBy)))));
+                repliedBy),
+            !!showMsgStatus &&
+                createElement(Fragment, null,
+                    "\u00A0",
+                    msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null))))));
 };
 QuickReplyMessage.propTypes = {
     style: propTypes.object,
@@ -4655,6 +4706,8 @@ QuickReplyMessage.propTypes = {
     showRepliedBy: propTypes.bool,
     buttonData: propTypes.any,
     avatar: propTypes.oneOfType([propTypes.string, propTypes.node]),
+    msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
+    showMsgStatus: propTypes.bool,
 };
 QuickReplyMessage.defaultProps = {
     style: {},
@@ -4662,6 +4715,7 @@ QuickReplyMessage.defaultProps = {
     text: '',
     showRepliedBy: false,
     avatar: '',
+    showMsgStatus: false,
 };
 
 var feedContainer = lib_18({
@@ -4738,6 +4792,8 @@ var postTimeStyle = lib_18({
     margin: '5px 0 0 0',
     color: '#91999d',
     textTransform: 'capitalize',
+    display: 'flex',
+    alignItems: 'center',
 });
 var postContentStyle = lib_18({
     marginTop: 20,
@@ -4934,11 +4990,14 @@ var FeedPost = function (_a) {
                                 createElement("p", { className: "" + postNameStyle }, commentData.name))) : (createElement("p", { className: "" + postNameStyle }, commentData.name)),
                             commentData.isHighlighted && (createElement("span", { className: "" + highLighted }, "Highlighted")),
                             getReplyContent(commentData)),
-                        createElement("p", { className: "" + postTimeStyle }, commentData.time)),
-                    showCommentAction &&
-                        statustoExcludeAction.includes("" + commentData.status) ===
-                            false &&
-                        contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
+                        createElement("p", { className: "" + postTimeStyle },
+                            commentData.time,
+                            !!commentData.showMsgStatus &&
+                                createElement(Fragment, null,
+                                    "\u00A0",
+                                    commentData.msgStatus === 'failed' ? createElement(FailedIcon, null) : commentData.msgStatus === 'pending' ?
+                                        createElement(PendingIcon, null) : createElement(SuccessIcon, null)))),
+                    showCommentAction && !statustoExcludeAction.includes("" + commentData.status) && contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
                         createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -5022,16 +5081,19 @@ var FeedPost = function (_a) {
                                     } }, "Cancel"))),
                             "\u00A0 \u00A0",
                             reply.time,
-                            ' ',
                             !!reply.messageType && createElement("span", null,
-                                " \u2022 ",
+                                "\u00A0 \u2022 ",
                                 reply.messageType),
                             !!reply.status && reply.status === 'edited' && (createElement("span", null,
                                 " \u2022 ",
-                                reply.status)))),
-                    showAction &&
-                        statustoExcludeAction.includes("" + reply.status) === false &&
-                        reply.contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
+                                reply.status,
+                                " \u00A0")),
+                            !!reply.showMsgStatus &&
+                                createElement(Fragment, null,
+                                    "\u00A0",
+                                    reply.msgStatus === 'failed' ? createElement(FailedIcon, null) : reply.msgStatus === 'pending' ?
+                                        createElement(PendingIcon, null) : createElement(SuccessIcon, null)))),
+                    showAction && !statustoExcludeAction.includes("" + reply.status) && reply.contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
                         createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -10152,6 +10214,8 @@ var msgTimeClass$4 = lib_18({
     marginBottom: 5,
     marginTop: 3,
     color: '#c0cbd0',
+    display: 'flex',
+    alignItems: 'center',
 });
 var galleryItemContainer = lib_18({
     width: 220,
@@ -10224,7 +10288,7 @@ var galleryItemButtonElement = lib_18({
     },
 });
 var GalleryMessage = function (_a) {
-    var style = _a.style, className = _a.className, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, rest = __rest(_a, ["style", "className", "text", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName"]);
+    var style = _a.style, className = _a.className, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName", "msgStatus", "showMsgStatus"]);
     return (createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$4 : adminContainer$4) + className }, rest),
         hasTitle && (createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
             createElement("div", { className: globalTextBlock$4 + " " + textBlockAdmin$4 + " " + elementClassName, style: elementStyle }, text))),
@@ -10278,7 +10342,7 @@ var GalleryMessage = function (_a) {
         (showRepliedBy || !!msgTime) && (createElement("p", { className: "" + msgTimeClass$4, style: avatar
                 ? consumer === 'user'
                     ? { marginLeft: '70px', marginTop: '-40px' }
-                    : { marginRight: '70px', marginTop: '-40px' }
+                    : { marginRight: '35px', marginTop: '-40px' }
                 : {} },
             !!msgTime && createElement(Fragment, null,
                 msgTime,
@@ -10286,7 +10350,9 @@ var GalleryMessage = function (_a) {
             ' ',
             showRepliedBy && createElement(Fragment, null,
                 "\u2022 \u00A0 ",
-                repliedBy)))));
+                repliedBy),
+            !!showMsgStatus &&
+                createElement(Fragment, null, msgStatus === 'failed' ? createElement(FailedIcon, null) : msgStatus === 'pending' ? createElement(PendingIcon, null) : createElement(SuccessIcon, null))))));
 };
 GalleryMessage.propTypes = {
     style: propTypes.object,
@@ -10302,6 +10368,8 @@ GalleryMessage.propTypes = {
     carouselHeight: propTypes.string,
     slideToShow: propTypes.number,
     galleryItemClassName: propTypes.string,
+    msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
+    showMsgStatus: propTypes.bool,
 };
 GalleryMessage.defaultProps = {
     style: {},
@@ -10315,6 +10383,7 @@ GalleryMessage.defaultProps = {
     carouselWidth: '525px',
     carouselHeight: '390px',
     slideToShow: 2,
+    showMsgStatus: false,
 };
 
 export { ButtonMessage, FeedPost, GalleryMessage, ImageMessage, NoteMessage, QuickReplyMessage, TextMessage };

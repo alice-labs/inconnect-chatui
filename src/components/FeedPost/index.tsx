@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { css } from 'glamor';
+import {css} from 'glamor';
 import PropTypes from 'prop-types';
+import FailedIcon from "../Common/FailedIcon";
+import PendingIcon from "../Common/PendingIcon";
+import SuccessIcon from "../Common/SuccessIcon";
 
 const feedContainer = css({
   display: 'flex',
@@ -84,6 +87,8 @@ const postTimeStyle = css({
   margin: '5px 0 0 0',
   color: '#91999d',
   textTransform: 'capitalize',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const postContentStyle = css({
@@ -233,7 +238,10 @@ interface replyProps {
   isHighlighted?: boolean;
   messageType?: string;
   status?: string;
+  msgStatus?: 'failed' | 'pending' | 'sent';
+  showMsgStatus?: boolean;
 }
+
 interface Props {
   style?: object;
   className?: string;
@@ -258,43 +266,44 @@ interface Props {
   showCommentAction?: boolean;
   editInputStyle?: any;
   editInputClass?: string;
-  handleReplyEdit?: (reply: replyProps,text:string, resetCallback:()=>void) => void;
+  handleReplyEdit?: (reply: replyProps, text: string, resetCallback: () => void) => void;
   handleReplyCancel?: (reply: replyProps) => void;
+
   [key: string]: any;
 }
 
 const FeedPost: React.FC<Props> = ({
-  style,
-  className,
-  note,
-  msgTime,
-  takenBy,
-  postAvatar,
-  postName,
-  postTime,
-  content,
-  contentType,
-  replyContent,
-  pageLink,
-  commentData,
-  contentItem,
-  commentBg,
-  showAction,
-  handleDelete,
-  handleEdit,
-  handleHide,
-  closeOnActionClick,
-  moreButtonHeightWidth,
-  handleCommentDelete,
-  handleCommentHide,
-  showCommentAction,
-  editInputStyle,
-  editInputClass,
-  handleReplyCancel,
-  handleReplyEdit,
-  status,
-  ...rest
-}) => {
+                                     style,
+                                     className,
+                                     note,
+                                     msgTime,
+                                     takenBy,
+                                     postAvatar,
+                                     postName,
+                                     postTime,
+                                     content,
+                                     contentType,
+                                     replyContent,
+                                     pageLink,
+                                     commentData,
+                                     contentItem,
+                                     commentBg,
+                                     showAction,
+                                     handleDelete,
+                                     handleEdit,
+                                     handleHide,
+                                     closeOnActionClick,
+                                     moreButtonHeightWidth,
+                                     handleCommentDelete,
+                                     handleCommentHide,
+                                     showCommentAction,
+                                     editInputStyle,
+                                     editInputClass,
+                                     handleReplyCancel,
+                                     handleReplyEdit,
+                                     status,
+                                     ...rest
+                                   }) => {
   const statustoExcludeAction = ['note', 'hide', 'remove'];
 
   const getContents = () => {
@@ -306,8 +315,8 @@ const FeedPost: React.FC<Props> = ({
           <>
             <p>{content}</p>
             {!!contentItem && (
-              <video controls style={{ width: '100%', maxWidth: 650 }}>
-                <source src={contentItem} type='video/mp4' />
+              <video controls style={{width: '100%', maxWidth: 650}}>
+                <source src={contentItem} type='video/mp4'/>
                 Your browser does not support HTML video.
               </video>
             )}
@@ -319,15 +328,15 @@ const FeedPost: React.FC<Props> = ({
             <p>{content}</p>
             <div className={`${flexWrapContainer}`}>
               {!!contentItem &&
-                contentItem.map((elem: string, index: number) => (
-                  <img
-                    src={elem}
-                    className={`${imageHolder}`}
-                    alt={index + ''}
-                    key={index}
-                    width={'fit-content'}
-                  />
-                ))}
+              contentItem.map((elem: string, index: number) => (
+                <img
+                  src={elem}
+                  className={`${imageHolder}`}
+                  alt={index + ''}
+                  key={index}
+                  width={'fit-content'}
+                />
+              ))}
             </div>
           </>
         );
@@ -344,7 +353,7 @@ const FeedPost: React.FC<Props> = ({
             className={`${replyContentText}`}
             style={
               reply.status === 'remove'
-                ? { textDecoration: 'line-through' }
+                ? {textDecoration: 'line-through'}
                 : {}
             }
           >
@@ -360,7 +369,7 @@ const FeedPost: React.FC<Props> = ({
               className={`${replyContentText}`}
               style={
                 reply.status === 'remove'
-                  ? { textDecoration: 'line-through' }
+                  ? {textDecoration: 'line-through'}
                   : {}
               }
             >
@@ -383,14 +392,14 @@ const FeedPost: React.FC<Props> = ({
   const [editText, setEditText] = React.useState<any>('');
   return (
     <div
-      style={{ ...style }}
+      style={{...style}}
       className={`${feedContainer} ${className}`}
       {...rest}
     >
       <div className={`${feedPostContainer}`}>
         <div className={`${postInfoContainer}`}>
-          <img src={postAvatar} className={`${avatarStyle}`} />
-          <div style={{ marginLeft: 10, flex: 10 }}>
+          <img src={postAvatar} className={`${avatarStyle}`}/>
+          <div style={{marginLeft: 10, flex: 10}}>
             {!!pageLink ? (
               <a
                 href={pageLink}
@@ -409,7 +418,7 @@ const FeedPost: React.FC<Props> = ({
 
         <div className={`${postContentStyle}`}>{getContents()}</div>
         <div className={`${commentInfoContainer}`} key={'reply-comment'}>
-          <img src={commentData.avatar} className={`${avatarSmallStyle}`} />
+          <img src={commentData.avatar} className={`${avatarSmallStyle}`}/>
           <div
             style={{
               marginLeft: 10,
@@ -450,78 +459,82 @@ const FeedPost: React.FC<Props> = ({
                 )}
                 {getReplyContent(commentData)}
               </div>
-              <p className={`${postTimeStyle}`}>{commentData.time}</p>
+              <p className={`${postTimeStyle}`}>
+                {commentData.time}
+                {!!commentData.showMsgStatus &&
+                <>&nbsp;
+                  {commentData.msgStatus === 'failed' ? <FailedIcon/> : commentData.msgStatus === 'pending' ?
+                    <PendingIcon/> : <SuccessIcon/>}
+                </>}
+              </p>
             </div>
 
-            {showCommentAction &&
-              statustoExcludeAction.includes(`${commentData.status}`) ===
-                false &&
-              contentType !== 'note' && (
-                <div style={{ position: 'relative' }}>
-                  <div
-                    className={`${moreButton}`}
-                    style={{
-                      height: moreButtonHeightWidth,
-                      width: moreButtonHeightWidth,
-                    }}
-                    onClick={() => {
-                      if (commentData.id + '-comment' === showPopover) {
-                        setShowPopover(null);
-                      } else {
-                        setShowPopover(commentData.id + '-comment');
-                      }
-                    }}
+            {showCommentAction && !statustoExcludeAction.includes(`${commentData.status}`) && contentType !== 'note' && (
+              <div style={{position: 'relative'}}>
+                <div
+                  className={`${moreButton}`}
+                  style={{
+                    height: moreButtonHeightWidth,
+                    width: moreButtonHeightWidth,
+                  }}
+                  onClick={() => {
+                    if (commentData.id + '-comment' === showPopover) {
+                      setShowPopover(null);
+                    } else {
+                      setShowPopover(commentData.id + '-comment');
+                    }
+                  }}
+                >
+                  <svg
+                    data-icon='more'
+                    viewBox='0 0 16 16'
+                    className='ub-w_16px ub-h_16px ub-box-szg_border-box'
+                    style={{fill: 'rgb(102, 120, 138)'}}
                   >
-                    <svg
-                      data-icon='more'
-                      viewBox='0 0 16 16'
-                      className='ub-w_16px ub-h_16px ub-box-szg_border-box'
-                      style={{ fill: 'rgb(102, 120, 138)' }}
-                    >
-                      <path
-                        d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
-                        fillRule='evenodd'
-                      />
-                    </svg>
-                  </div>
-                  {showPopover === commentData.id + '-comment' && (
-                    <div className={`${moreButtonContainer}`}>
-                      <div
-                        onClick={() => {
-                          if (!!handleCommentHide) {
-                            handleCommentHide(commentData);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Hide
-                      </div>
-                      <div
-                        onClick={() => {
-                          if (!!handleCommentDelete) {
-                            handleCommentDelete(commentData);
-                            if (closeOnActionClick) {
-                              setShowPopover(null);
-                            }
-                          }
-                        }}
-                        className={`${moreButtonElement}`}
-                      >
-                        Delete
-                      </div>
-                    </div>
-                  )}
+                    <path
+                      d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
+                      fillRule='evenodd'
+                    />
+                  </svg>
                 </div>
-              )}
+                {showPopover === commentData.id + '-comment' && (
+                  <div className={`${moreButtonContainer}`}>
+                    <div
+                      onClick={() => {
+                        if (!!handleCommentHide) {
+                          handleCommentHide(commentData);
+                          if (closeOnActionClick) {
+                            setShowPopover(null);
+                          }
+                        }
+                      }}
+                      className={`${moreButtonElement}`}
+                    >
+                      Hide
+                    </div>
+                    <div
+                      onClick={() => {
+                        if (!!handleCommentDelete) {
+                          handleCommentDelete(commentData);
+                          if (closeOnActionClick) {
+                            setShowPopover(null);
+                          }
+                        }
+                      }}
+                      className={`${moreButtonElement}`}
+                    >
+                      Delete
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
         {replyContent.map((reply: replyProps, i: number) => (
           <div className={`${replyInfoContainer}`} key={i}>
-            <img src={reply.avatar} className={`${avatarSmallStyle}`} />
+            <img src={reply.avatar} className={`${avatarSmallStyle}`}/>
             <div
               style={{
                 marginLeft: 10,
@@ -543,21 +556,21 @@ const FeedPost: React.FC<Props> = ({
                   style={
                     reply.contentType === 'note'
                       ? {
-                          background:
-                            reply.contentType !== 'note'
-                              ? commentBg
-                              : 'transparent',
-                          padding: '10px 30px 10px 5px',
-                          borderRadius: 5,
-                        }
+                        background:
+                          reply.contentType !== 'note'
+                            ? commentBg
+                            : 'transparent',
+                        padding: '10px 30px 10px 5px',
+                        borderRadius: 5,
+                      }
                       : {
-                          background:
-                            reply.contentType !== 'note'
-                              ? commentBg
-                              : 'transparent',
-                          padding: '10px 30px 10px 20px',
-                          borderRadius: 5,
-                        }
+                        background:
+                          reply.contentType !== 'note'
+                            ? commentBg
+                            : 'transparent',
+                        padding: '10px 30px 10px 20px',
+                        borderRadius: 5,
+                      }
                   }
                 >
                   {!!reply.link ? (
@@ -596,7 +609,7 @@ const FeedPost: React.FC<Props> = ({
                   className={`${postTimeStyle}`}
                   style={
                     reply.contentType === 'note'
-                      ? { margin: '-10px 0 0 10px' }
+                      ? {margin: '-10px 0 0 10px'}
                       : {}
                   }
                 >
@@ -604,7 +617,7 @@ const FeedPost: React.FC<Props> = ({
                     <>
                       <span
                         className={`${editButtonStyle}`}
-                        onClick={() => !!handleReplyEdit && handleReplyEdit(reply,editText, ()=>{
+                        onClick={() => !!handleReplyEdit && handleReplyEdit(reply, editText, () => {
                           setEditReply(null);
                           setEditText('');
                         })}
@@ -624,91 +637,94 @@ const FeedPost: React.FC<Props> = ({
                       </span>
                     </>
                   )}
-                  &nbsp; &nbsp;{reply.time}{' '}
-                  {!!reply.messageType && <span> • {reply.messageType}</span>}
+                  &nbsp; &nbsp;{reply.time}
+                  {!!reply.messageType && <span>&nbsp; • {reply.messageType}</span>}
                   {!!reply.status && reply.status === 'edited' && (
-                    <span> • {reply.status}</span>
+                    <span> • {reply.status} &nbsp;</span>
                   )}
+                  {!!reply.showMsgStatus &&
+                  <>&nbsp;
+                    {reply.msgStatus === 'failed' ? <FailedIcon/> : reply.msgStatus === 'pending' ?
+                      <PendingIcon/> : <SuccessIcon/>}
+                  </>}
                 </p>
               </div>
-              {showAction &&
-                statustoExcludeAction.includes(`${reply.status}`) === false &&
-                reply.contentType !== 'note' && (
-                  <div style={{ position: 'relative' }}>
-                    <div
-                      className={`${moreButton}`}
-                      style={{
-                        height: moreButtonHeightWidth,
-                        width: moreButtonHeightWidth,
-                      }}
-                      onClick={() => {
-                        if (reply.id === showPopover) {
-                          setShowPopover(null);
-                        } else {
-                          setShowPopover(reply.id);
-                        }
-                      }}
+              {showAction && !statustoExcludeAction.includes(`${reply.status}`) && reply.contentType !== 'note' && (
+                <div style={{position: 'relative'}}>
+                  <div
+                    className={`${moreButton}`}
+                    style={{
+                      height: moreButtonHeightWidth,
+                      width: moreButtonHeightWidth,
+                    }}
+                    onClick={() => {
+                      if (reply.id === showPopover) {
+                        setShowPopover(null);
+                      } else {
+                        setShowPopover(reply.id);
+                      }
+                    }}
+                  >
+                    <svg
+                      data-icon='more'
+                      viewBox='0 0 16 16'
+                      style={{fill: 'rgb(102, 120, 138)'}}
                     >
-                      <svg
-                        data-icon='more'
-                        viewBox='0 0 16 16'
-                        style={{ fill: 'rgb(102, 120, 138)' }}
-                      >
-                        <path
-                          d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
-                          fillRule='evenodd'
-                        />
-                      </svg>
-                    </div>
-                    {showPopover === reply.id && (
-                      <div className={`${moreButtonContainer}`}>
-                        {reply.source !== 'customer' && (
-                          <div
-                            onClick={() => {
-                              if (!!handleEdit) {
-                                handleEdit(reply);
-                                setEditReply(reply);
-                                setEditText(reply.content);
-                                if (closeOnActionClick) {
-                                  setShowPopover(null);
-                                }
-                              }
-                            }}
-                            className={`${moreButtonElement}`}
-                          >
-                            Edit
-                          </div>
-                        )}
-                        <div
-                          onClick={() => {
-                            if (!!handleDelete) {
-                              handleDelete(reply);
-                              if (closeOnActionClick) {
-                                setShowPopover(null);
-                              }
-                            }
-                          }}
-                          className={`${moreButtonElement}`}
-                        >
-                          Delete
-                        </div>
-                        <div
-                          onClick={() => {
-                            if (!!handleHide) {
-                              handleHide(reply);
-                              if (closeOnActionClick) {
-                                setShowPopover(null);
-                              }
-                            }
-                          }}
-                          className={`${moreButtonElement}`}
-                        >
-                          Hide
-                        </div>
-                      </div>
-                    )}
+                      <path
+                        d='M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z'
+                        fillRule='evenodd'
+                      />
+                    </svg>
                   </div>
-                )}
+                  {showPopover === reply.id && (
+                    <div className={`${moreButtonContainer}`}>
+                      {reply.source !== 'customer' && (
+                        <div
+                          onClick={() => {
+                            if (!!handleEdit) {
+                              handleEdit(reply);
+                              setEditReply(reply);
+                              setEditText(reply.content);
+                              if (closeOnActionClick) {
+                                setShowPopover(null);
+                              }
+                            }
+                          }}
+                          className={`${moreButtonElement}`}
+                        >
+                          Edit
+                        </div>
+                      )}
+                      <div
+                        onClick={() => {
+                          if (!!handleDelete) {
+                            handleDelete(reply);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => {
+                          if (!!handleHide) {
+                            handleHide(reply);
+                            if (closeOnActionClick) {
+                              setShowPopover(null);
+                            }
+                          }
+                        }}
+                        className={`${moreButtonElement}`}
+                      >
+                        Hide
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -739,8 +755,8 @@ FeedPost.propTypes = {
   showCommentAction: PropTypes.bool,
   editInputStyle: PropTypes.object,
   editInputClass: PropTypes.string,
-    handleReplyCancel: PropTypes.func,
-    handleReplyEdit: PropTypes.func,
+  handleReplyCancel: PropTypes.func,
+  handleReplyEdit: PropTypes.func,
 };
 
 FeedPost.defaultProps = {
@@ -769,13 +785,13 @@ FeedPost.defaultProps = {
   handleCommentHide: () => {
     console.log('Comment Hide button clicked');
   },
-    handleReplyEdit: (reply, text, resetCallback) => {
-        console.log(reply,text,'Reply Edit button clicked');
-        resetCallback();
-    },
-    handleReplyCancel: () => {
-        console.log('Reply Edit Cancel button clicked');
-    }
+  handleReplyEdit: (reply, text, resetCallback) => {
+    console.log(reply, text, 'Reply Edit button clicked');
+    resetCallback();
+  },
+  handleReplyCancel: () => {
+    console.log('Reply Edit Cancel button clicked');
+  }
 };
 
 export default FeedPost;

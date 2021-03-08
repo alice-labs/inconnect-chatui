@@ -2,6 +2,9 @@ import * as React from 'react';
 import { css } from 'glamor';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
+import FailedIcon from "../Common/FailedIcon";
+import PendingIcon from "../Common/PendingIcon";
+import SuccessIcon from "../Common/SuccessIcon";
 
 const userContainer = css({
   display: 'flex',
@@ -48,6 +51,8 @@ const msgTimeClass = css({
   marginBottom: 10,
   marginTop: 3,
   color: '#c0cbd0',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 interface Props {
@@ -63,6 +68,8 @@ interface Props {
   elementClassName?: string;
   showInfo?: boolean;
   avatar?: string | React.ReactNode;
+  msgStatus?: 'failed' | 'pending' | 'sent';
+  showMsgStatus?: boolean;
   [key: string]: any;
 }
 
@@ -79,6 +86,8 @@ const TextMessage: React.FC<Props> = ({
   showInfo,
   showRepliedBy,
   avatar,
+  showMsgStatus,
+  msgStatus,
   ...rest
 }) => {
   return (
@@ -126,8 +135,13 @@ const TextMessage: React.FC<Props> = ({
               : {}
           }
         >
-          {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
-          {showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {!!msgTime &&<>{msgTime} &nbsp; </>}
+          {showRepliedBy && <>&nbsp;• &nbsp; {repliedBy}</>}
+          {!!showMsgStatus &&
+          <>&nbsp;{
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+          </>
+          }
         </p>
       )}
     </div>

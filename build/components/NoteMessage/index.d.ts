@@ -5,6 +5,8 @@ interface Props {
     note?: string;
     msgTime?: string | number;
     takenBy?: string;
+    msgStatus?: 'failed' | 'pending' | 'sent';
+    showMsgStatus?: boolean;
     [key: string]: any;
 }
 declare const NoteMessage: React.FC<Props>;

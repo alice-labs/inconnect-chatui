@@ -97,7 +97,6 @@ interface buttonDataProps {
   isDisabled?: boolean;
   className?: string;
   style?: object;
-
   [key: string]: any;
 }
 
@@ -116,7 +115,6 @@ interface Props {
   buttonContainerStyle?: object;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
-
   [key: string]: any;
 }
 

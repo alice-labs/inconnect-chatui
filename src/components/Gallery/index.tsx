@@ -3,6 +3,9 @@ import { css } from 'glamor';
 import Carousel from 'nuka-carousel';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
+import FailedIcon from "../Common/FailedIcon";
+import PendingIcon from "../Common/PendingIcon";
+import SuccessIcon from "../Common/SuccessIcon";
 
 const adminContainer = css({
   display: 'flex',
@@ -40,6 +43,8 @@ const msgTimeClass = css({
   marginBottom: 5,
   marginTop: 3,
   color: '#c0cbd0',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const galleryItemContainer = css({
@@ -153,6 +158,8 @@ interface Props {
   carouselHeight?: string;
   slideToShow?: number;
   galleryItemClassName?: string;
+  msgStatus?: 'failed' | 'pending' | 'sent';
+  showMsgStatus?: boolean;
   [key: string]: any;
 }
 
@@ -174,6 +181,8 @@ const GalleryMessage: React.FC<Props> = ({
   carouselWidth,
   slideToShow,
   galleryItemClassName,
+  msgStatus,
+  showMsgStatus,
   ...rest
 }) => {
   return (
@@ -297,12 +306,17 @@ const GalleryMessage: React.FC<Props> = ({
             avatar
               ? consumer === 'user'
                 ? { marginLeft: '70px', marginTop: '-40px' }
-                : { marginRight: '70px', marginTop: '-40px' }
+                : { marginRight: '35px', marginTop: '-40px' }
               : {}
           }
         >
           {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
           {showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {!!showMsgStatus &&
+          <>{
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+          </>
+          }
         </p>
       )}
     </div>
@@ -323,6 +337,8 @@ GalleryMessage.propTypes = {
   carouselHeight: PropTypes.string,
   slideToShow: PropTypes.number,
   galleryItemClassName: PropTypes.string,
+  msgStatus: PropTypes.oneOf(['failed', 'pending', 'sent']),
+  showMsgStatus: PropTypes.bool,
 };
 
 GalleryMessage.defaultProps = {
@@ -337,6 +353,7 @@ GalleryMessage.defaultProps = {
   carouselWidth: '525px',
   carouselHeight: '390px',
   slideToShow: 2,
+  showMsgStatus: false,
 };
 
 export default GalleryMessage;
