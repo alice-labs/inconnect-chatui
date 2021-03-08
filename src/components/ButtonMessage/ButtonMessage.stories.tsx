@@ -18,6 +18,8 @@ export const Example = () => (
       text='hello user this are our product list'
       msgTime={'4h ago'}
       consumer={'admin'}
+      showMsgStatus={true}
+      msgStatus='sent'
       buttonData={[
         {
           title: 'Button One',
@@ -49,6 +51,41 @@ export const Example = () => (
       elementStyle={{ background: '#c0cbd0', color: 'white' }}
       elementClassName={'some-style'}
       buttonContainerStyle={{background: 'purple'}}
+      showMsgStatus={true}
+      msgStatus='pending'
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
+    />
+    <ButtonMessage
+      text='hello user this are our product list'
+      msgTime={'4h ago'}
+      consumer={'user'}
+      elementStyle={{ background: '#c0cbd0', color: 'white' }}
+      elementClassName={'some-style'}
+      buttonContainerStyle={{background: 'purple'}}
+      showMsgStatus={true}
+      msgStatus='failed'
       buttonData={[
         {
           title: 'Button One',
@@ -81,7 +118,6 @@ Example.story = {
     info: {
       inline: true,
       text: `Interface List
- 
    ~~~js
     <ButtonMessage
     style={{width: '100px'}}
