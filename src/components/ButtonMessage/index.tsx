@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { css } from 'glamor';
+import {css} from 'glamor';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
+import FailedIcon from "../Common/FailedIcon";
+import PendingIcon from "../Common/PendingIcon";
+import SuccessIcon from "../Common/SuccessIcon";
+
 
 const adminContainer = css({
   display: 'flex',
@@ -80,7 +84,11 @@ const msgTimeClass = css({
   marginBottom: 5,
   marginTop: 3,
   color: '#c0cbd0',
+  display: 'flex',
+  alignItems: 'center',
 });
+
+
 interface buttonDataProps {
   title: string;
   methodType?: 'url' | 'function';
@@ -89,8 +97,10 @@ interface buttonDataProps {
   isDisabled?: boolean;
   className?: string;
   style?: object;
+
   [key: string]: any;
 }
+
 interface Props {
   style?: object;
   className?: string;
@@ -104,27 +114,34 @@ interface Props {
   elementClassName?: string;
   avatar?: string | React.ReactNode;
   buttonContainerStyle?: object;
+  msgStatus?: 'failed' | 'pending' | 'sent';
+  showMsgStatus?: boolean;
+
   [key: string]: any;
 }
 
-const ButtonMessage: React.FC<Props> = ({
-  style,
-  className,
-  text,
-  buttonData,
-  consumer,
-  msgTime,
-  repliedBy,
-  elementClassName,
-  elementStyle,
-  showRepliedBy,
-  avatar,
-  buttonContainerStyle,
-  ...rest
-}) => {
+
+const ButtonMessage: React.FC<Props> = (
+  {
+    style,
+    className,
+    text,
+    buttonData,
+    consumer,
+    msgTime,
+    repliedBy,
+    elementClassName,
+    elementStyle,
+    showRepliedBy,
+    avatar,
+    buttonContainerStyle,
+    msgStatus,
+    showMsgStatus,
+    ...rest
+  }) => {
   return (
     <div
-      style={{ ...style }}
+      style={{...style}}
       className={`${
         consumer === 'user' ? userContainer : adminContainer
       }${className}`}
@@ -144,8 +161,8 @@ const ButtonMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px', ...buttonContainerStyle }
-                : { marginRight: '30px', ...buttonContainerStyle }
+              ? {marginLeft: '30px', ...buttonContainerStyle}
+              : {marginRight: '30px', ...buttonContainerStyle}
               : {}
           }
         >
@@ -195,13 +212,18 @@ const ButtonMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px' }
-                : { marginRight: '30px' }
+              ? {marginLeft: '30px'}
+              : {marginRight: '30px'}
               : {}
           }
         >
-          {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
-          {showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {!!msgTime && <>{msgTime} &nbsp; </>}
+          {showRepliedBy && <>&nbsp;• &nbsp; {repliedBy} &nsbp;</>}
+          {!!showMsgStatus &&
+          <>{
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+          </>
+          }
         </p>
       )}
     </div>
@@ -221,6 +243,8 @@ ButtonMessage.propTypes = {
   elementClassName: PropTypes.string,
   buttonContainerStyle: PropTypes.object,
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  msgStatus: PropTypes.oneOf(['failed', 'pending', 'sent']),
+  showMsgStatus: PropTypes.bool,
 };
 
 ButtonMessage.defaultProps = {
@@ -229,6 +253,7 @@ ButtonMessage.defaultProps = {
   text: '',
   showRepliedBy: false,
   avatar: '',
+  showMsgStatus: false,
 };
 
 export default ButtonMessage;
