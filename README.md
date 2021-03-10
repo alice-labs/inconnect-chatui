@@ -193,3 +193,9 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 # 15 Dec 2020 - 1.2.7 🎉
 
 - [x] Fix gallery item replied by spacing
+
+# March 2021 - 1.2.8 -1.3.0 🎉
+
+- [x] Send status and prop to control it
+- [x] Minor Css fixes
+- [x] Avatar Container will show avatar from top

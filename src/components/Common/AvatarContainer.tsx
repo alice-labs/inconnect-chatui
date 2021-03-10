@@ -26,6 +26,8 @@ const AvatarContainer: React.FC<Props> = ({
             : userType === 'user'
             ? 'row'
             : 'row-reverse',
+        alignItems: 'flex-start',
+        marginBottom: 5,
       }}
     >
       {typeof avatar === 'string' ? (

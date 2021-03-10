@@ -3993,6 +3993,8 @@ var AvatarContainer = function (_a) {
                 : userType === 'user'
                     ? 'row'
                     : 'row-reverse',
+            alignItems: 'flex-start',
+            marginBottom: 5,
         } },
         typeof avatar === 'string' ? (React.createElement("img", { style: consumer === 'user'
                 ? userType === 'user'
@@ -10203,7 +10205,6 @@ var textBlockAdmin$4 = lib_18({
     color: '#0B1D2B',
     cursor: 'pointer',
     borderRadius: 16,
-    marginBottom: 10,
     ':hover': {
         filter: 'brightness(0.95)',
     },
@@ -10225,7 +10226,7 @@ var msgTimeClass$4 = lib_18({
     alignItems: 'center',
 });
 var galleryItemContainer = lib_18({
-    width: 220,
+    width: 210,
     background: 'white',
     boxShadow: '0px 0px 8px #416b7557',
     borderRadius: 10,

@@ -23,7 +23,6 @@ const textBlockAdmin = css({
   color: '#0B1D2B',
   cursor: 'pointer',
   borderRadius: 16,
-  marginBottom: 10,
   ':hover': {
     filter: 'brightness(0.95)',
   },
@@ -48,7 +47,7 @@ const msgTimeClass = css({
 });
 
 const galleryItemContainer = css({
-  width: 220,
+  width: 210,
   background: 'white',
   boxShadow: '0px 0px 8px #416b7557',
   borderRadius: 10,
