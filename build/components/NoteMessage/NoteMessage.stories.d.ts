@@ -16,3 +16,4 @@ export declare const Example: {
         };
     };
 };
+export declare const IntentExample: () => JSX.Element;

@@ -7,6 +7,9 @@ interface Props {
     takenBy?: string;
     msgStatus?: 'failed' | 'pending' | 'sent';
     showMsgStatus?: boolean;
+    intent?: 'notes' | 'success' | 'info' | 'lime' | 'danger';
+    noteContainerClassName?: string;
+    noteContainerStyle?: object;
     [key: string]: any;
 }
 declare const NoteMessage: React.FC<Props>;

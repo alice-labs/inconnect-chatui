@@ -199,3 +199,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 - [x] Send status and prop to control it
 - [x] Minor Css fixes
 - [x] Avatar Container will show avatar from top
+
+# 10 March 2021 - 1.3.1 🎉
+
+- [x] Change note style, added intents to it (will implement popover later)

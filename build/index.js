@@ -4158,39 +4158,82 @@ TextMessage.defaultProps = {
 
 var noteContainer = lib_18({
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-});
-var noteColor = lib_18({
-    background: '#FFEFB7',
-    padding: '10px 30px',
-    borderRadius: 5,
     textAlign: 'center',
-    width: 'fit-content',
-    marginBottom: 5,
-    marginTop: 20,
-    maxWidth: '50%',
-    ':hover': {
-        filter: 'brightness(0.98)',
+    fontSize: '0.75rem',
+    padding: '20px 10px 5px',
+    ':before': {
+        content: ' ',
+        flex: 1,
+        borderBottom: '1px solid #DFE1E6',
+        marginRight: '0.25em',
     },
+    ':after': {
+        content: ' ',
+        flex: 1,
+        borderBottom: '1px solid #DFE1E6',
+        marginLeft: '0.25em',
+    }
 });
+var noteContentContainer = lib_18({
+    textTransform: 'uppercase',
+    fontSize: '12px',
+    padding: '10px 20px',
+    borderRadius: 5,
+    fontWeight: 500,
+});
+var intentNote = lib_18({
+    background: '#FFEFB7',
+    color: '#172B4D'
+});
+var intentSuccess = lib_18({
+    background: '#9CF3CF',
+    color: '#172B4D'
+});
+var intentInfo = lib_18({
+    background: '#B6F0F9',
+    color: '#172B4D'
+});
+var intentLime = lib_18({
+    background: '#D6EFC7',
+    color: '#172B4D'
+});
+var intentDanger = lib_18({
+    background: '#DE350B',
+    color: '#FFFFFF'
+});
+// const noteColor = css({
+//   background: '#FFEFB7',
+//   padding: '10px 30px',
+//   borderRadius: 5,
+//   textAlign: 'center',
+//   width: 'fit-content',
+//   marginBottom: 5,
+//   marginTop: 20,
+//   maxWidth: '50%',
+//   ':hover': {
+//     filter: 'brightness(0.98)',
+//   },
+// });
 var noteInfo = lib_18({
-    textAlign: 'right',
+    textAlign: 'center',
     margin: '0px 0px 5px',
     fontSize: '0.7rem',
     textTransform: 'uppercase',
-    color: '#9e9067',
+    color: '#a8a9ae',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center'
 });
 var NoteMessage = function (_a) {
-    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "msgStatus", "showMsgStatus"]);
-    return (React.createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
-        React.createElement("div", { className: "" + noteColor }, note),
+    var style = _a.style, className = _a.className, note = _a.note, msgTime = _a.msgTime, takenBy = _a.takenBy, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, intent = _a.intent, noteContainerClassName = _a.noteContainerClassName, noteContainerStyle = _a.noteContainerStyle, rest = __rest(_a, ["style", "className", "note", "msgTime", "takenBy", "msgStatus", "showMsgStatus", "intent", "noteContainerClassName", "noteContainerStyle"]);
+    return (React.createElement("div", null,
+        React.createElement("div", __assign({ style: __assign({}, style), className: noteContainer + " " + className }, rest),
+            React.createElement("div", { className: "\n              " + noteContentContainer + " \n              " + (!!noteContainerClassName && noteContainerClassName) + " \n              " + (intent === 'notes' ? intentNote : intent === 'success' ? intentSuccess : intent === 'info' ? intentInfo : intent === 'lime' ? intentLime : intent === 'danger' ? intentDanger : ''), style: !!noteContainerStyle ? noteContainerStyle : {} }, note)),
         React.createElement("p", { className: "" + noteInfo },
             !!msgTime && React.createElement("span", null, msgTime),
             !!takenBy && React.createElement("span", null,
-                " \u2022 ",
+                "\u00A0\u2022 ",
                 takenBy),
             !!showMsgStatus &&
                 React.createElement(React.Fragment, null,
@@ -4206,12 +4249,16 @@ NoteMessage.propTypes = {
     takenBy: propTypes.string,
     msgStatus: propTypes.oneOf(['failed', 'pending', 'sent']),
     showMsgStatus: propTypes.bool,
+    intent: propTypes.oneOf(['notes', 'success', 'info', 'lime', 'danger']),
+    noteContainerClassName: propTypes.string,
+    noteContainerStyle: propTypes.object,
 };
 NoteMessage.defaultProps = {
     style: {},
     className: '',
     note: '',
     showMsgStatus: false,
+    intent: 'notes'
 };
 
 var userContainer$1 = lib_18({

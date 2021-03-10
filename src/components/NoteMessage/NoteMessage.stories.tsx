@@ -29,6 +29,51 @@ export const Example = () => (
   </div>
 );
 
+export const IntentExample = () => (
+  <div style={styleOfStoryContainer}>
+    <NoteMessage
+      note='Redirected to Product Team! please fix this As soon as possible'
+      msgTime={'4h ago'}
+      takenBy={'Mehran Kader'}
+      showMsgStatus={true}
+      intent='notes'
+      msgStatus='pending'
+    />
+    <NoteMessage
+      note='Redirected to Product Team! please fix this As soon as possible'
+      msgTime={'4h ago'}
+      takenBy={'Mehran Kader'}
+      showMsgStatus={true}
+      intent='success'
+      msgStatus='sent'
+    />
+    <NoteMessage
+      note='Redirected to Product Team! please fix this As soon as possible'
+      msgTime={'4h ago'}
+      takenBy={'Mehran Kader'}
+      showMsgStatus={true}
+      intent='info'
+      msgStatus='failed'
+    />
+    <NoteMessage
+      note='Redirected to Product Team! please fix this As soon as possible'
+      msgTime={'4h ago'}
+      takenBy={'Mehran Kader'}
+      showMsgStatus={true}
+      intent='lime'
+      msgStatus='sent'
+    />
+    <NoteMessage
+      note='Redirected to Product Team! please fix this As soon as possible'
+      msgTime={'4h ago'}
+      takenBy={'Mehran Kader'}
+      showMsgStatus={true}
+      intent='danger'
+      msgStatus='sent'
+    />
+  </div>
+);
+
 Example.story = {
   parameters: {
     info: {
