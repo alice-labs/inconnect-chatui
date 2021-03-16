@@ -125,9 +125,9 @@ const NoteMessage: React.FC<Props> = (
       </div>
       <p className={`${noteInfo}`}>
         {!!msgTime && <span>{msgTime}</span>}
-        {!!takenBy && <span>&nbsp;• {takenBy}</span>}
+        {!!takenBy && <span>&nbsp; |&nbsp; {takenBy}&nbsp;</span>}
         {!!showMsgStatus &&
-        <>&nbsp;{
+        <>&nbsp; | &nbsp;{
           msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon/> : <SuccessIcon/>}
         </>
         }

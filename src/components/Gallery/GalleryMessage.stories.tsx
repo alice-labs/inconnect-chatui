@@ -155,6 +155,8 @@ export const Example = () => (
       slideToShow={1}
       showMsgStatus={true}
       msgStatus='pending'
+      repliedBy='Mehran Kader'
+      showRepliedBy={true}
       galleryData={[
         {
           id: 0,

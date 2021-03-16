@@ -62,144 +62,150 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 ## Release log
 
-### 16 July 2020 - v 1.0.0-alpha
+### 16 July 2020 - v 1.0.0-alpha 🎉
 
-- [x] Updated ChatUI Container
+- Updated ChatUI Container
 
-### 19 July 2020 - v1.0.1
+### 19 July 2020 - v1.0.1 🎉
 
-- [x] Removed Container
-- [x] Add TextMessage
-- [x] Add NoteMessage
+- Removed Container
+- Add TextMessage
+- Add NoteMessage
 
-### 19 July 2020 - v1.0.2
+### 19 July 2020 - v1.0.2 🎉
 
-- [x] Fixed Import
+- Fixed Import
 
-### 20 July 2020 - v1.0.3
+### 20 July 2020 - v1.0.3 🎉
 
-- [x] Image Message
-- [x] Button Message
+- Image Message
+- Button Message
 
-### 21 July 2020 - v1.0.4
+### 21 July 2020 - v1.0.4 🎉
 
-- [x] QuickReply Message
+- QuickReply Message
 
-### 21 July 2020 - v1.0.5
+### 21 July 2020 - v1.0.5 🎉
 
-- [x] Added Consumer - this is chat window from perspective of user or admin (user | admin)
-- [x] Added element style and element class name for all chat bubble . using it for manual design override
+- Added Consumer - this is chat window from perspective of user or admin (user | admin)
+- Added element style and element class name for all chat bubble . using it for manual design override
 
-### 22 July 2020 - v1.0.6
+### 22 July 2020 - v1.0.6 🎉
 
-- [x] Minor Style Fixes
+- Minor Style Fixes
 
-### 22 July 2020 - v1.0.7
+### 22 July 2020 - v1.0.7 🎉
 
-- [x] Note Style Fixes
+- Note Style Fixes
 
-### 22 July 2020 - v1.0.7
+### 22 July 2020 - v1.0.7 🎉
 
-- [x] Note Style Fixes
+- Note Style Fixes
 
-### 27 July 2020 - 1.0.8
+### 27 July 2020 - 1.0.8 🎉
 
-- [x] Feed Post for Feed Type CRM
+- Feed Post for Feed Type CRM
 
 ...
 
-### 6 Aug 2020 - 1.0.12
+### 6 Aug 2020 - 1.0.12 🎉
 
-- [x] Updated Feed For CRM
+- Updated Feed For CRM
 
-### 10 Sep 2020 - 1.0.13
+### 10 Sep 2020 - 1.0.13 🎉
 
-- [x] Adds avatar support for all the chat components
+- Adds avatar support for all the chat components
 
-### 14 Sep 2020 - 1.0.14
+### 14 Sep 2020 - 1.0.14 🎉
 
-- [x] Fix minor style issue for avatar components
+- Fix minor style issue for avatar components
 
-### 14 Sep 2020 - 1.0.15
+### 14 Sep 2020 - 1.0.15 🎉
 
-- [x] Fix image avatar style issue for avatar components
+- Fix image avatar style issue for avatar components
 
-# 16 Sep 2020 - 1.0.16
+### 16 Sep 2020 - 1.0.16 🎉
 
-- [x] Added Video Type for Feed
-- [x] Added Image Type for Feed
+- Added Video Type for Feed
+- Added Image Type for Feed
 
-# 28 Sep 2020 - 1.0.17
+### 28 Sep 2020 - 1.0.17 🎉
 
-- [x] ButtonGroupContainer style added
-- [x] font size for msg time synced to 0.7rem
+- ButtonGroupContainer style added
+- font size for msg time synced to 0.7rem
 
-# 29 Sep 2020 - 1.0.18
+### 29 Sep 2020 - 1.0.18 🎉
 
-- [x] Fix repliedBy only for admin issue
+- Fix repliedBy only for admin issue
 
-# 23 Nov 2020 - 1.0.21
+### 23 Nov 2020 - 1.0.21 🎉
 
-- [x] Added Action as hide delete edit for Feed Post
-- [x] added some minor flow props to give user more control like, `closeOnActionClick, showAction, commentBg` etc
+- Added Action as hide delete edit for Feed Post
+- added some minor flow props to give user more control like, `closeOnActionClick, showAction, commentBg` etc
 
-# 24 Nov 2020 - 1.0.22
+### 24 Nov 2020 - 1.0.22 🎉
 
-- [x] Feed Post added design for Hide Delete edited
-- [x] Few design Changes for Feed post
+- Feed Post added design for Hide Delete edited
+- Few design Changes for Feed post
 
-# 27 Nov 2020 - 1.0.23
+### 27 Nov 2020 - 1.0.23 🎉
 
-- [x] Added Props `moreButtonHeightWidth` to adjust action button height width
+- Added Props `moreButtonHeightWidth` to adjust action button height width
 
-# 29 Nov 2020 - 1.0.24
+### 29 Nov 2020 - 1.0.24 🎉
 
-- [x] changed comment action control using `showCommentAction` and their handle method for hide and delete only
+- changed comment action control using `showCommentAction` and their handle method for hide and delete only
 
-# 02 Dec 2020 - 1.0.25
+### 02 Dec 2020 - 1.0.25 🎉
 
-- [x] fixed status from `hidden` to `hide` and `active` to `add`
+- fixed status from `hidden` to `hide` and `active` to `add`
 
-# 02 Dec 2020 - 1.2.0 🎉
+### 02 Dec 2020 - 1.2.0 🎉
 
-- [x] Added Gallery Block component
+- Added Gallery Block component
 
-# 02 Dec 2020 - 1.2.1 🎉
+### 02 Dec 2020 - 1.2.1 🎉
 
-- [x] Minor Style Fix
-- [x] Updated Import for main index file
+- Minor Style Fix
+- Updated Import for main index file
 
-# 02 Dec 2020 - 1.2.2 🎉
+### 02 Dec 2020 - 1.2.2 🎉
 
-- [x] Minor Style Fix,
-- [x] added props `galleryItemClassName` into `GalleryMessage` component
+- Minor Style Fix,
+- added props `galleryItemClassName` into `GalleryMessage` component
 
-# 02 Dec 2020 - 1.2.3 🎉
+### 02 Dec 2020 - 1.2.3 🎉
 
-- [x] changed delete status for feed post from `deleted` to `remove`
+- changed delete status for feed post from `deleted` to `remove`
 
-# 09 Dec 2020 - 1.2.4 🎉
+### 09 Dec 2020 - 1.2.4 🎉
 
-- [x] Added Edit Options for Feed post reply see props and storybook for example. customer type users cannot be edited
+- Added Edit Options for Feed post reply see props and storybook for example. customer type users cannot be edited
 
-# 15 Dec 2020 - 1.2.5 🎉
+### 15 Dec 2020 - 1.2.5 🎉
 
-- [x] Fix gallery item height issue
+- Fix gallery item height issue
 
-# 15 Dec 2020 - 1.2.6 🎉
+### 15 Dec 2020 - 1.2.6 🎉
 
-- [x] Fix gallery item font sizes
+- Fix gallery item font sizes
 
-# 15 Dec 2020 - 1.2.7 🎉
+### 15 Dec 2020 - 1.2.7 🎉
 
-- [x] Fix gallery item replied by spacing
+- Fix gallery item replied by spacing
 
-# March 2021 - 1.2.8 -1.3.0 🎉
+### March 2021 - 1.2.8 -1.3.0 🎉
 
-- [x] Send status and prop to control it
-- [x] Minor Css fixes
-- [x] Avatar Container will show avatar from top
+- Send status and prop to control it
+- Minor Css fixes
+- Avatar Container will show avatar from top
 
-# 10 March 2021 - 1.3.1 🎉
+### 10 March 2021 - 1.3.1 🎉
 
-- [x] Change note style, added intents to it (will implement popover later)
+- Change note style, added intents to it (will implement popover later)
+
+### 16 March 2021 - 1.3.2 🎉
+
+- Fixed Text Message default Style
+- Fixed Message time typo `&nsbp;`
+- Added `|` in interval of showing time or other info

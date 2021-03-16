@@ -216,9 +216,9 @@ const ButtonMessage: React.FC<Props> = (
           }
         >
           {!!msgTime && <>{msgTime} &nbsp; </>}
-          {showRepliedBy && <>&nbsp;• &nbsp; {repliedBy} &nsbp;</>}
+          {showRepliedBy && <>|&nbsp; {repliedBy} &nbsp;</>}
           {!!showMsgStatus &&
-          <>{
+          <>| &nbsp;{
             msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
           </>
           }

@@ -4062,18 +4062,20 @@ var adminContainer = lib_18({
     alignItems: 'flex-end',
 });
 var textBlockAdmin = lib_18({
-    background: '#184D47',
-    color: 'white',
+    background: '#e5e9ee',
+    border: '1px solid transparent',
+    color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 16,
+    borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
     },
 });
 var textBlockUser = lib_18({
-    background: '#e5e9ee',
+    background: 'white',
+    border: '1px solid #e5e9ee',
     color: '#232c41',
-    borderRadius: 16,
+    borderRadius: 5,
     cursor: 'pointer',
     ':hover': {
         filter: 'brightness(0.95)',
@@ -4124,13 +4126,14 @@ var TextMessage = function (_a) {
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
-                " \u00A0 "),
+                " \u00A0"),
             showRepliedBy && React.createElement(React.Fragment, null,
-                "\u00A0\u2022 \u00A0 ",
-                repliedBy),
+                "| \u00A0",
+                repliedBy,
+                " \u00A0"),
             !!showMsgStatus &&
                 React.createElement(React.Fragment, null,
-                    "\u00A0",
+                    "| \u00A0 ",
                     msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
 };
 TextMessage.propTypes = {
@@ -4233,11 +4236,12 @@ var NoteMessage = function (_a) {
         React.createElement("p", { className: "" + noteInfo },
             !!msgTime && React.createElement("span", null, msgTime),
             !!takenBy && React.createElement("span", null,
-                "\u00A0\u2022 ",
-                takenBy),
+                "\u00A0 |\u00A0 ",
+                takenBy,
+                "\u00A0"),
             !!showMsgStatus &&
                 React.createElement(React.Fragment, null,
-                    "\u00A0",
+                    "\u00A0 | \u00A0",
                     msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))));
 };
 NoteMessage.propTypes = {
@@ -4444,14 +4448,14 @@ var ImageMessage = function (_a) {
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
-                " \u00A0 "),
-            ' ',
+                " \u00A0"),
             showRepliedBy && React.createElement(React.Fragment, null,
-                "\u2022 \u00A0 ",
-                repliedBy),
+                "| \u00A0",
+                repliedBy,
+                " \u00A0"),
             !!showMsgStatus &&
                 React.createElement(React.Fragment, null,
-                    "\u00A0",
+                    "| \u00A0 ",
                     msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))),
         isShown && currentImage >= 0 && (React.createElement("div", { className: "" + imageViewerStyle, style: { background: "rgba(0, 0, 0, 0.8)" } },
             React.createElement("img", { className: "" + imagePreview, src: (!!images && images[currentImage]) ||
@@ -4614,11 +4618,13 @@ var ButtonMessage = function (_a) {
                 msgTime,
                 " \u00A0 "),
             showRepliedBy && React.createElement(React.Fragment, null,
-                "\u00A0\u2022 \u00A0 ",
+                "|\u00A0 ",
                 repliedBy,
-                " &nsbp;"),
+                " \u00A0"),
             !!showMsgStatus &&
-                React.createElement(React.Fragment, null, msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
+                React.createElement(React.Fragment, null,
+                    "| \u00A0",
+                    msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
 };
 ButtonMessage.propTypes = {
     style: propTypes.object,
@@ -4743,14 +4749,14 @@ var QuickReplyMessage = function (_a) {
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
-                " \u00A0 "),
-            ' ',
+                " \u00A0"),
             showRepliedBy && React.createElement(React.Fragment, null,
-                "\u2022 \u00A0 ",
-                repliedBy),
+                "| \u00A0",
+                repliedBy,
+                " \u00A0"),
             !!showMsgStatus &&
                 React.createElement(React.Fragment, null,
-                    "\u00A0",
+                    "| \u00A0 ",
                     msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
 };
 QuickReplyMessage.propTypes = {
@@ -4860,6 +4866,7 @@ var postContentStyle = lib_18({
 var replyContentText = lib_18({
     marginTop: 5,
     marginBottom: 5,
+    wordBreak: 'break-word',
 });
 var replyContentNote = lib_18({
     background: '#feefc3',
@@ -5050,7 +5057,7 @@ var FeedPost = function (_a) {
                             commentData.time,
                             !!commentData.showMsgStatus &&
                                 React.createElement(React.Fragment, null,
-                                    "\u00A0",
+                                    "\u00A0 | \u00A0",
                                     commentData.msgStatus === 'failed' ? React.createElement(FailedIcon, null) : commentData.msgStatus === 'pending' ?
                                         React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))),
                     showCommentAction && !statustoExcludeAction.includes("" + commentData.status) && contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
@@ -5129,24 +5136,24 @@ var FeedPost = function (_a) {
                                         setEditReply(null);
                                         setEditText('');
                                     }); } }, "Reply"),
-                                "\u00A0 \u2022\u00A0",
+                                "\u00A0 | \u00A0",
                                 React.createElement("span", { className: "" + editButtonCancelStyle, onClick: function () {
                                         setEditText('');
                                         setEditReply(null);
                                         !!handleReplyCancel && handleReplyCancel(reply);
-                                    } }, "Cancel"))),
-                            "\u00A0 \u00A0",
+                                    } }, "Cancel"),
+                                "\u00A0|")),
+                            "\u00A0",
                             reply.time,
                             !!reply.messageType && React.createElement("span", null,
-                                "\u00A0 \u2022 ",
+                                "\u00A0 | ",
                                 reply.messageType),
                             !!reply.status && reply.status === 'edited' && (React.createElement("span", null,
-                                " \u2022 ",
-                                reply.status,
-                                " \u00A0")),
+                                " \u00A0 | ",
+                                reply.status)),
                             !!reply.showMsgStatus &&
                                 React.createElement(React.Fragment, null,
-                                    "\u00A0",
+                                    "\u00A0| \u00A0",
                                     reply.msgStatus === 'failed' ? React.createElement(FailedIcon, null) : reply.msgStatus === 'pending' ?
                                         React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))),
                     showAction && !statustoExcludeAction.includes("" + reply.status) && reply.contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
@@ -10401,13 +10408,15 @@ var GalleryMessage = function (_a) {
                 : {} },
             !!msgTime && React.createElement(React.Fragment, null,
                 msgTime,
-                " \u00A0 "),
-            ' ',
+                " \u00A0"),
             showRepliedBy && React.createElement(React.Fragment, null,
-                "\u2022 \u00A0 ",
-                repliedBy),
+                "| \u00A0",
+                repliedBy,
+                " \u00A0"),
             !!showMsgStatus &&
-                React.createElement(React.Fragment, null, msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
+                React.createElement(React.Fragment, null,
+                    "| \u00A0 ",
+                    msgStatus === 'failed' ? React.createElement(FailedIcon, null) : msgStatus === 'pending' ? React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null))))));
 };
 GalleryMessage.propTypes = {
     style: propTypes.object,

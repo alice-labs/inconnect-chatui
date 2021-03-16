@@ -86,6 +86,8 @@ export const Example = () => (
       buttonContainerStyle={{background: 'purple'}}
       showMsgStatus={true}
       msgStatus='failed'
+      showRepliedBy={true}
+      repliedBy='mehran'
       buttonData={[
         {
           title: 'Button One',

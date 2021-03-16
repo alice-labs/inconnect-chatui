@@ -101,6 +101,7 @@ const postContentStyle = css({
 const replyContentText = css({
   marginTop: 5,
   marginBottom: 5,
+  wordBreak: 'break-word',
 });
 
 const replyContentNote = css({
@@ -272,38 +273,39 @@ interface Props {
   [key: string]: any;
 }
 
-const FeedPost: React.FC<Props> = ({
-                                     style,
-                                     className,
-                                     note,
-                                     msgTime,
-                                     takenBy,
-                                     postAvatar,
-                                     postName,
-                                     postTime,
-                                     content,
-                                     contentType,
-                                     replyContent,
-                                     pageLink,
-                                     commentData,
-                                     contentItem,
-                                     commentBg,
-                                     showAction,
-                                     handleDelete,
-                                     handleEdit,
-                                     handleHide,
-                                     closeOnActionClick,
-                                     moreButtonHeightWidth,
-                                     handleCommentDelete,
-                                     handleCommentHide,
-                                     showCommentAction,
-                                     editInputStyle,
-                                     editInputClass,
-                                     handleReplyCancel,
-                                     handleReplyEdit,
-                                     status,
-                                     ...rest
-                                   }) => {
+const FeedPost: React.FC<Props> = (
+  {
+    style,
+    className,
+    note,
+    msgTime,
+    takenBy,
+    postAvatar,
+    postName,
+    postTime,
+    content,
+    contentType,
+    replyContent,
+    pageLink,
+    commentData,
+    contentItem,
+    commentBg,
+    showAction,
+    handleDelete,
+    handleEdit,
+    handleHide,
+    closeOnActionClick,
+    moreButtonHeightWidth,
+    handleCommentDelete,
+    handleCommentHide,
+    showCommentAction,
+    editInputStyle,
+    editInputClass,
+    handleReplyCancel,
+    handleReplyEdit,
+    status,
+    ...rest
+  }) => {
   const statustoExcludeAction = ['note', 'hide', 'remove'];
 
   const getContents = () => {
@@ -462,7 +464,7 @@ const FeedPost: React.FC<Props> = ({
               <p className={`${postTimeStyle}`}>
                 {commentData.time}
                 {!!commentData.showMsgStatus &&
-                <>&nbsp;
+                <>&nbsp; | &nbsp;
                   {commentData.msgStatus === 'failed' ? <FailedIcon/> : commentData.msgStatus === 'pending' ?
                     <PendingIcon/> : <SuccessIcon/>}
                 </>}
@@ -624,7 +626,7 @@ const FeedPost: React.FC<Props> = ({
                       >
                         Reply
                       </span>
-                      &nbsp; •&nbsp;
+                      &nbsp; | &nbsp;
                       <span
                         className={`${editButtonCancelStyle}`}
                         onClick={() => {
@@ -635,15 +637,16 @@ const FeedPost: React.FC<Props> = ({
                       >
                         Cancel
                       </span>
+                      &nbsp;|
                     </>
                   )}
-                  &nbsp; &nbsp;{reply.time}
-                  {!!reply.messageType && <span>&nbsp; • {reply.messageType}</span>}
+                  &nbsp;{reply.time}
+                  {!!reply.messageType && <span>&nbsp; | {reply.messageType}</span>}
                   {!!reply.status && reply.status === 'edited' && (
-                    <span> • {reply.status} &nbsp;</span>
+                    <span> &nbsp; | {reply.status}</span>
                   )}
                   {!!reply.showMsgStatus &&
-                  <>&nbsp;
+                  <>&nbsp;| &nbsp;
                     {reply.msgStatus === 'failed' ? <FailedIcon/> : reply.msgStatus === 'pending' ?
                       <PendingIcon/> : <SuccessIcon/>}
                   </>}

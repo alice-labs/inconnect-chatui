@@ -208,10 +208,10 @@ const QuickReplyMessage: React.FC<Props> = ({
               : {}
           }
         >
-          {!!msgTime && <>{msgTime} &nbsp; </>}{' '}
-          {showRepliedBy && <>• &nbsp; {repliedBy}</>}
+          {!!msgTime && <>{msgTime} &nbsp;</>}
+          {showRepliedBy && <>| &nbsp;{repliedBy} &nbsp;</>}
           {!!showMsgStatus &&
-          <>&nbsp;{
+          <>| &nbsp; {
             msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
           </>
           }
