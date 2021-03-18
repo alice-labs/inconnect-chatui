@@ -20,19 +20,30 @@ const userContainer = css({
 });
 
 const textBlockAdmin = css({
-  background: '#184D47',
-  color: 'white',
+  background: '#e5e9ee',
+  border: '1px solid transparent',
+  color: '#232c41',
   cursor: 'pointer',
-  borderRadius: 16,
-  marginBottom: 10,
+  borderRadius: 5,
   ':hover': {
     filter: 'brightness(0.95)',
   },
 });
+
+const textBlockUser = css({
+  background: 'white',
+  border: '1px solid #e5e9ee',
+  color: '#232c41',
+  cursor: 'pointer',
+  borderRadius: 5,
+  ':hover': {
+    filter: 'brightness(0.95)',
+  },
+})
 const buttonBlockAdmin = css({
   background: '#e5e9ee',
   color: '#232c41',
-  borderRadius: 16,
+  borderRadius: 5,
   cursor: 'pointer',
   display: 'flex',
   flexDirection: 'column',
@@ -147,7 +158,7 @@ const ButtonMessage: React.FC<Props> = (
     >
       <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
         <div
-          className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
+          className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser:textBlockAdmin} ${elementClassName}`}
           style={elementStyle}
         >
           {text}

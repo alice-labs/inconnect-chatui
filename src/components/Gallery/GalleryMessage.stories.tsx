@@ -148,8 +148,9 @@ export const Example = () => (
 
     <GalleryMessage
       msgTime={'4h ago'}
+      text='Buy Some Fruits From Out Website'
       consumer={'admin'}
-      hasTitle={false}
+      hasTitle={true}
       avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
       carouselHeight={'380px'}
       slideToShow={1}

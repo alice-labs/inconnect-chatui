@@ -4276,18 +4276,20 @@ var adminContainer$1 = lib_18({
     alignItems: 'flex-end',
 });
 var textBlockAdmin$1 = lib_18({
-    background: '#184D47',
-    color: 'white',
+    background: '#e5e9ee',
+    border: '1px solid transparent',
+    color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 16,
+    borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
     },
 });
 var textBlockUser$1 = lib_18({
-    background: '#e5e9ee',
+    background: 'white',
+    border: '1px solid #e5e9ee',
     color: '#232c41',
-    borderRadius: 16,
+    borderRadius: 5,
     cursor: 'pointer',
     ':hover': {
         filter: 'brightness(0.95)',
@@ -4532,11 +4534,21 @@ var userContainer$2 = lib_18({
     alignItems: 'flex-start',
 });
 var textBlockAdmin$2 = lib_18({
-    background: '#184D47',
-    color: 'white',
+    background: '#e5e9ee',
+    border: '1px solid transparent',
+    color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 16,
-    marginBottom: 10,
+    borderRadius: 5,
+    ':hover': {
+        filter: 'brightness(0.95)',
+    },
+});
+var textBlockUser$2 = lib_18({
+    background: 'white',
+    border: '1px solid #e5e9ee',
+    color: '#232c41',
+    cursor: 'pointer',
+    borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
     },
@@ -4544,7 +4556,7 @@ var textBlockAdmin$2 = lib_18({
 var buttonBlockAdmin = lib_18({
     background: '#e5e9ee',
     color: '#232c41',
-    borderRadius: 16,
+    borderRadius: 5,
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
@@ -4601,7 +4613,7 @@ var ButtonMessage = function (_a) {
     var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, consumer = _a.consumer, msgTime = _a.msgTime, repliedBy = _a.repliedBy, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, showRepliedBy = _a.showRepliedBy, avatar = _a.avatar, buttonContainerStyle = _a.buttonContainerStyle, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "buttonData", "consumer", "msgTime", "repliedBy", "elementClassName", "elementStyle", "showRepliedBy", "avatar", "buttonContainerStyle", "msgStatus", "showMsgStatus"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$2 : adminContainer$2) + className }, rest),
         React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
-            React.createElement("div", { className: globalTextBlock$2 + " " + textBlockAdmin$2 + " " + elementClassName, style: elementStyle }, text)),
+            React.createElement("div", { className: globalTextBlock$2 + " " + (consumer === 'user' ? textBlockUser$2 : textBlockAdmin$2) + " " + elementClassName, style: elementStyle }, text)),
         !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$2 + " " + buttonBlockAdmin, style: avatar
                 ? consumer === 'user'
                     ? __assign({ marginLeft: '30px' }, buttonContainerStyle) : __assign({ marginRight: '30px' }, buttonContainerStyle)
@@ -4662,10 +4674,21 @@ var userContainer$3 = lib_18({
     alignItems: 'flex-start',
 });
 var textBlockAdmin$3 = lib_18({
-    background: '#184D47',
-    color: 'white',
+    background: '#e5e9ee',
+    border: '1px solid transparent',
+    color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 16,
+    borderRadius: 5,
+    marginBottom: 10,
+    ':hover': {
+        filter: 'brightness(0.95)',
+    },
+});
+var textBlockUser$3 = lib_18({
+    background: 'white',
+    border: '1px solid #e5e9ee',
+    color: '#232c41',
+    borderRadius: 5,
     marginBottom: 10,
     ':hover': {
         filter: 'brightness(0.95)',
@@ -4673,7 +4696,7 @@ var textBlockAdmin$3 = lib_18({
 });
 var buttonBlockAdmin$1 = lib_18({
     color: '#232c41',
-    borderRadius: 16,
+    borderRadius: 5,
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
@@ -4688,7 +4711,7 @@ var btnElement$1 = lib_18({
     width: '100%',
     margin: 3,
     padding: '5px 10px',
-    background: '#184D47',
+    background: '#e5e9ee',
     boxShadow: '0px 0px 0px 1px #d2d2d2',
     font: '400 13.3333px Arial',
     flex: 1,
@@ -4696,11 +4719,11 @@ var btnElement$1 = lib_18({
         filter: 'brightness(0.95)',
         boxShadow: '0px 0px 7px 1px #d2d2d2',
     },
-    borderRadius: 50,
+    borderRadius: 5,
     textDecoration: 'none',
     cursor: 'pointer',
     border: 'none',
-    color: 'white',
+    color: '#232c41',
     fontSize: '0.88rem',
     whiteSpace: 'nowrap',
     ':disabled': {
@@ -4708,6 +4731,9 @@ var btnElement$1 = lib_18({
         background: '#c0cbd0',
         color: '#7c8386',
     },
+    ':focus': {
+        outline: 'none',
+    }
 });
 var aLinkWidthFix$1 = lib_18({
     width: '96% !important',
@@ -4733,7 +4759,7 @@ var QuickReplyMessage = function (_a) {
     var style = _a.style, className = _a.className, text = _a.text, buttonData = _a.buttonData, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "buttonData", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "msgStatus", "showMsgStatus"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$3 : adminContainer$3) + className }, rest),
         React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
-            React.createElement("div", { className: globalTextBlock$3 + " " + textBlockAdmin$3 + " " + elementClassName, style: elementStyle }, text)),
+            React.createElement("div", { className: globalTextBlock$3 + " " + (consumer === 'user' ? textBlockUser$3 : textBlockAdmin$3) + " " + elementClassName, style: elementStyle }, text)),
         !!buttonData && buttonData.length > 0 && (React.createElement("div", { className: globalTextBlock$3 + " " + buttonBlockAdmin$1, style: avatar
                 ? consumer === 'user'
                     ? { marginLeft: '30px' }
@@ -10255,10 +10281,21 @@ var userContainer$4 = lib_18({
     alignItems: 'flex-start',
 });
 var textBlockAdmin$4 = lib_18({
-    background: '#C8E1DD',
-    color: '#0B1D2B',
+    background: '#e5e9ee',
+    border: '1px solid transparent',
+    color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 16,
+    borderRadius: 5,
+    ':hover': {
+        filter: 'brightness(0.95)',
+    },
+});
+var textBlockUser$4 = lib_18({
+    background: 'white',
+    border: '1px solid #e5e9ee',
+    color: '#232c41',
+    cursor: 'pointer',
+    borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
     },
@@ -10353,7 +10390,7 @@ var GalleryMessage = function (_a) {
     var style = _a.style, className = _a.className, text = _a.text, msgTime = _a.msgTime, repliedBy = _a.repliedBy, showRepliedBy = _a.showRepliedBy, consumer = _a.consumer, elementClassName = _a.elementClassName, elementStyle = _a.elementStyle, avatar = _a.avatar, hasTitle = _a.hasTitle, cellSpacing = _a.cellSpacing, galleryData = _a.galleryData, carouselHeight = _a.carouselHeight, carouselWidth = _a.carouselWidth, slideToShow = _a.slideToShow, galleryItemClassName = _a.galleryItemClassName, msgStatus = _a.msgStatus, showMsgStatus = _a.showMsgStatus, rest = __rest(_a, ["style", "className", "text", "msgTime", "repliedBy", "showRepliedBy", "consumer", "elementClassName", "elementStyle", "avatar", "hasTitle", "cellSpacing", "galleryData", "carouselHeight", "carouselWidth", "slideToShow", "galleryItemClassName", "msgStatus", "showMsgStatus"]);
     return (React.createElement("div", __assign({ style: __assign({}, style), className: "" + (consumer === 'user' ? userContainer$4 : adminContainer$4) + className }, rest),
         hasTitle && (React.createElement(AvatarContainer, { avatar: avatar, userType: 'bot', consumer: consumer },
-            React.createElement("div", { className: globalTextBlock$4 + " " + textBlockAdmin$4 + " " + elementClassName, style: elementStyle }, text))),
+            React.createElement("div", { className: globalTextBlock$4 + " " + (consumer === 'user' ? textBlockUser$4 : textBlockAdmin$4) + " " + elementClassName, style: elementStyle }, text))),
         React.createElement(Carousel, { slidesToShow: slideToShow, slideWidth: '220px', width: carouselWidth, height: carouselHeight, style: consumer === 'user'
                 ? hasTitle
                     ? { marginLeft: 35, paddingLeft: 30, paddingRight: 30 }

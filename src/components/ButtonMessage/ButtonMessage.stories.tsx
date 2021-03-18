@@ -81,9 +81,7 @@ export const Example = () => (
       text='hello user this are our product list'
       msgTime={'4h ago'}
       consumer={'user'}
-      elementStyle={{ background: '#c0cbd0', color: 'white' }}
       elementClassName={'some-style'}
-      buttonContainerStyle={{background: 'purple'}}
       showMsgStatus={true}
       msgStatus='failed'
       showRepliedBy={true}
@@ -120,7 +118,7 @@ Example.story = {
     info: {
       inline: true,
       text: `Interface List
-   ~~~js
+   ~~~jsx
     <ButtonMessage
     style={{width: '100px'}}
     className={'abcd'}

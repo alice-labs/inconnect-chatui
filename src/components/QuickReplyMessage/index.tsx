@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { css } from 'glamor';
+import {css} from 'glamor';
 import PropTypes from 'prop-types';
 import AvatarContainer from '../Common/AvatarContainer';
 import FailedIcon from "../Common/FailedIcon";
@@ -18,10 +18,21 @@ const userContainer = css({
 });
 
 const textBlockAdmin = css({
-  background: '#184D47',
-  color: 'white',
+  background: '#e5e9ee',
+  border: '1px solid transparent',
+  color: '#232c41',
   cursor: 'pointer',
-  borderRadius: 16,
+  borderRadius: 5,
+  marginBottom: 10,
+  ':hover': {
+    filter: 'brightness(0.95)',
+  },
+});
+const textBlockUser = css({
+  background: 'white',
+  border: '1px solid #e5e9ee',
+  color: '#232c41',
+  borderRadius: 5,
   marginBottom: 10,
   ':hover': {
     filter: 'brightness(0.95)',
@@ -29,7 +40,7 @@ const textBlockAdmin = css({
 });
 const buttonBlockAdmin = css({
   color: '#232c41',
-  borderRadius: 16,
+  borderRadius: 5,
   cursor: 'pointer',
   display: 'flex',
   flexDirection: 'row',
@@ -44,7 +55,7 @@ const btnElement = css({
   width: '100%',
   margin: 3,
   padding: '5px 10px',
-  background: '#184D47',
+  background: '#e5e9ee',
   boxShadow: '0px 0px 0px 1px #d2d2d2',
   font: '400 13.3333px Arial',
   flex: 1,
@@ -52,11 +63,11 @@ const btnElement = css({
     filter: 'brightness(0.95)',
     boxShadow: '0px 0px 7px 1px #d2d2d2',
   },
-  borderRadius: 50,
+  borderRadius: 5,
   textDecoration: 'none',
   cursor: 'pointer',
   border: 'none',
-  color: 'white',
+  color: '#232c41',
   fontSize: '0.88rem',
   whiteSpace: 'nowrap',
   ':disabled': {
@@ -64,6 +75,9 @@ const btnElement = css({
     background: '#c0cbd0',
     color: '#7c8386',
   },
+  ':focus': {
+    outline: 'none',
+  }
 });
 const aLinkWidthFix = css({
   width: '96% !important',
@@ -87,6 +101,7 @@ const msgTimeClass = css({
   display: 'flex',
   alignItems: 'center',
 });
+
 interface buttonDataProps {
   title: string;
   methodType?: 'url' | 'function';
@@ -95,8 +110,10 @@ interface buttonDataProps {
   isDisabled?: boolean;
   className?: string;
   style?: object;
+
   [key: string]: any;
 }
+
 interface Props {
   style?: object;
   className?: string;
@@ -111,28 +128,29 @@ interface Props {
   avatar?: string | React.ReactNode;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+
   [key: string]: any;
 }
 
 const QuickReplyMessage: React.FC<Props> = ({
-  style,
-  className,
-  text,
-  buttonData,
-  msgTime,
-  repliedBy,
-  showRepliedBy,
-  consumer,
-  elementClassName,
-  elementStyle,
-  avatar,
-  msgStatus,
-  showMsgStatus,
-  ...rest
-}) => {
+                                              style,
+                                              className,
+                                              text,
+                                              buttonData,
+                                              msgTime,
+                                              repliedBy,
+                                              showRepliedBy,
+                                              consumer,
+                                              elementClassName,
+                                              elementStyle,
+                                              avatar,
+                                              msgStatus,
+                                              showMsgStatus,
+                                              ...rest
+                                            }) => {
   return (
     <div
-      style={{ ...style }}
+      style={{...style}}
       className={`${
         consumer === 'user' ? userContainer : adminContainer
       }${className}`}
@@ -140,7 +158,7 @@ const QuickReplyMessage: React.FC<Props> = ({
     >
       <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
         <div
-          className={`${globalTextBlock} ${textBlockAdmin} ${elementClassName}`}
+          className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser : textBlockAdmin} ${elementClassName}`}
           style={elementStyle}
         >
           {text}
@@ -152,8 +170,8 @@ const QuickReplyMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px' }
-                : { marginRight: '30px' }
+              ? {marginLeft: '30px'}
+              : {marginRight: '30px'}
               : {}
           }
         >
@@ -203,8 +221,8 @@ const QuickReplyMessage: React.FC<Props> = ({
           style={
             avatar
               ? consumer === 'user'
-                ? { marginLeft: '30px' }
-                : { marginRight: '30px' }
+              ? {marginLeft: '30px'}
+              : {marginRight: '30px'}
               : {}
           }
         >
@@ -212,7 +230,7 @@ const QuickReplyMessage: React.FC<Props> = ({
           {showRepliedBy && <>| &nbsp;{repliedBy} &nbsp;</>}
           {!!showMsgStatus &&
           <>| &nbsp; {
-            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon/> : <SuccessIcon/>}
           </>
           }
         </p>

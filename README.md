@@ -209,3 +209,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 - Fixed Text Message default Style
 - Fixed Message time typo `&nsbp;`
 - Added `|` in interval of showing time or other info
+
+### 16 March 2021 - 1.3.3 🎉
+
+- Fixed Elements Style for QuickReply, Image Message, Gallery, Button

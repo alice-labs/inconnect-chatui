@@ -18,18 +18,20 @@ const adminContainer = css({
 });
 
 const textBlockAdmin = css({
-  background: '#184D47',
-  color: 'white',
+  background: '#e5e9ee',
+  border: '1px solid transparent',
+  color: '#232c41',
   cursor: 'pointer',
-  borderRadius: 16,
+  borderRadius: 5,
   ':hover': {
     filter: 'brightness(0.95)',
   },
 });
 const textBlockUser = css({
-  background: '#e5e9ee',
+  background: 'white',
+  border: '1px solid #e5e9ee',
   color: '#232c41',
-  borderRadius: 16,
+  borderRadius: 5,
   cursor: 'pointer',
   ':hover': {
     filter: 'brightness(0.95)',
