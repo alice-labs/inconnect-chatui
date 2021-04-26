@@ -241,6 +241,7 @@ interface replyProps {
   status?: string;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+  repliedBy?: string;
 }
 
 interface Props {
@@ -642,6 +643,7 @@ const FeedPost: React.FC<Props> = (
                   )}
                   &nbsp;{reply.time}
                   {!!reply.messageType && <span>&nbsp; | {reply.messageType}</span>}
+                  {!!reply.repliedBy && reply.source !== 'customer' && <span>&nbsp; | {reply.repliedBy}</span>}
                   {!!reply.status && reply.status === 'edited' && (
                     <span> &nbsp; | {reply.status}</span>
                   )}

@@ -66,6 +66,7 @@ export const Example = () => (
           status: 'add',
           msgStatus: 'pending',
           showMsgStatus: true,
+          repliedBy: 'agent 007'
         },
         {
           id: 1,
@@ -80,6 +81,8 @@ export const Example = () => (
           status: 'add',
           msgStatus: 'sent',
           showMsgStatus: true,
+          messageType: 'comment',
+          repliedBy: 'agent 007'
         },
         {
           id: 2,
@@ -88,7 +91,8 @@ export const Example = () => (
             'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
           time: '1h ago',
           contentType: 'image',
-          content:
+          content: 'abcd',
+          image:
             'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
           source: 'bot',
           messageType: 'Message',
