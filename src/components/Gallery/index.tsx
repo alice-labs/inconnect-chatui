@@ -277,7 +277,7 @@ const GalleryMessage: React.FC<Props> = ({
             </p>
             <div
               className={`${galleryItemButtons}`}
-              style={{ height: `calc(${carouselHeight} * .3)` }}
+              style={{ height: `calc(${carouselHeight} * .3)`, overflow: 'hidden' }}
             >
               {!!gallery.buttons &&
                 gallery.buttons.map(
@@ -287,7 +287,7 @@ const GalleryMessage: React.FC<Props> = ({
                       <a
                         key={index}
                         className={`${galleryItemButtonElement} ${galleryButton.className}`}
-                        style={{ width: '91%', ...galleryButton.style }}
+                        style={{...galleryButton.style }}
                         href={galleryButton.url}
                         target={'_blank'}
                       >

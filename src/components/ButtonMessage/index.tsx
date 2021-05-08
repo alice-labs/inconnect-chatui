@@ -11,12 +11,14 @@ const adminContainer = css({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-end',
+  marginTop: 10,
 });
 
 const userContainer = css({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
+  marginTop: 10,
 });
 
 const textBlockAdmin = css({
@@ -25,23 +27,16 @@ const textBlockAdmin = css({
   color: '#232c41',
   cursor: 'pointer',
   borderRadius: 5,
-  ':hover': {
-    filter: 'brightness(0.95)',
-  },
+  textAlign: 'right',
 });
 
 const textBlockUser = css({
-  background: 'white',
-  border: '1px solid #e5e9ee',
   color: '#232c41',
   cursor: 'pointer',
-  borderRadius: 5,
-  ':hover': {
-    filter: 'brightness(0.95)',
-  },
+  paddingLeft: 5,
+  textAlign: 'left',
 })
 const buttonBlockAdmin = css({
-  background: '#e5e9ee',
   color: '#232c41',
   borderRadius: 5,
   cursor: 'pointer',
@@ -50,9 +45,6 @@ const buttonBlockAdmin = css({
   alignItems: 'center',
   minWidth: '200px',
   marginTop: 0,
-  ':hover': {
-    background: '#e1e5ea',
-  },
 });
 const btnElement = css({
   textAlign: 'center',
@@ -62,10 +54,6 @@ const btnElement = css({
   background: 'white',
   boxShadow: '0px 0px 0px 1px #d2d2d2',
   font: '400 13.3333px Arial',
-  ':hover': {
-    background: 'white',
-    boxShadow: '0px 0px 7px 1px #d2d2d2',
-  },
   borderRadius: 5,
   textDecoration: 'none',
   cursor: 'pointer',
@@ -82,9 +70,8 @@ const aLinkWidthFix = css({
 });
 
 const globalTextBlock = css({
-  maxWidth: '60%',
+  maxWidth: '70%',
   wordWrap: 'break-word',
-  padding: '8px 16px 8px',
   fontSize: '1rem',
   width: 'fit-content',
   marginBottom: 2,

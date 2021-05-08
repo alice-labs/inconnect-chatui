@@ -14,6 +14,7 @@ interface replyProps {
     status?: string;
     msgStatus?: 'failed' | 'pending' | 'sent';
     showMsgStatus?: boolean;
+    repliedBy?: string;
 }
 interface Props {
     style?: object;

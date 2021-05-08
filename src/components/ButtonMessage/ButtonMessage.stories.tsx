@@ -15,7 +15,7 @@ export default { title: 'ButtonMessage', decorators: [withInfo] };
 export const Example = () => (
   <div style={styleOfStoryContainer}>
     <ButtonMessage
-      text='hello user this are our product list'
+      text='hello user this are our product list kfasnfasf asfliassfas faskhfas fasfhaslfasf asfkasnflasf asfkasf'
       msgTime={'4h ago'}
       consumer={'admin'}
       showMsgStatus={true}

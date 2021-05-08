@@ -4527,11 +4527,13 @@ var adminContainer$2 = lib_18({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
+    marginTop: 10,
 });
 var userContainer$2 = lib_18({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
+    marginTop: 10,
 });
 var textBlockAdmin$2 = lib_18({
     background: '#e5e9ee',
@@ -4539,22 +4541,15 @@ var textBlockAdmin$2 = lib_18({
     color: '#232c41',
     cursor: 'pointer',
     borderRadius: 5,
-    ':hover': {
-        filter: 'brightness(0.95)',
-    },
+    textAlign: 'right',
 });
 var textBlockUser$2 = lib_18({
-    background: 'white',
-    border: '1px solid #e5e9ee',
     color: '#232c41',
     cursor: 'pointer',
-    borderRadius: 5,
-    ':hover': {
-        filter: 'brightness(0.95)',
-    },
+    paddingLeft: 5,
+    textAlign: 'left',
 });
 var buttonBlockAdmin = lib_18({
-    background: '#e5e9ee',
     color: '#232c41',
     borderRadius: 5,
     cursor: 'pointer',
@@ -4563,9 +4558,6 @@ var buttonBlockAdmin = lib_18({
     alignItems: 'center',
     minWidth: '200px',
     marginTop: 0,
-    ':hover': {
-        background: '#e1e5ea',
-    },
 });
 var btnElement = lib_18({
     textAlign: 'center',
@@ -4575,10 +4567,6 @@ var btnElement = lib_18({
     background: 'white',
     boxShadow: '0px 0px 0px 1px #d2d2d2',
     font: '400 13.3333px Arial',
-    ':hover': {
-        background: 'white',
-        boxShadow: '0px 0px 7px 1px #d2d2d2',
-    },
     borderRadius: 5,
     textDecoration: 'none',
     cursor: 'pointer',
@@ -4594,9 +4582,8 @@ var aLinkWidthFix = lib_18({
     width: '96%!important',
 });
 var globalTextBlock$2 = lib_18({
-    maxWidth: '60%',
+    maxWidth: '70%',
     wordWrap: 'break-word',
-    padding: '8px 16px 8px',
     fontSize: '1rem',
     width: 'fit-content',
     marginBottom: 2,
@@ -5174,6 +5161,9 @@ var FeedPost = function (_a) {
                             !!reply.messageType && React.createElement("span", null,
                                 "\u00A0 | ",
                                 reply.messageType),
+                            !!reply.repliedBy && reply.source !== 'customer' && React.createElement("span", null,
+                                "\u00A0 | ",
+                                reply.repliedBy),
                             !!reply.status && reply.status === 'edited' && (React.createElement("span", null,
                                 " \u00A0 | ",
                                 reply.status)),
@@ -10432,10 +10422,10 @@ var GalleryMessage = function (_a) {
                         } })),
                 React.createElement("p", { className: "" + galleryItemTitle }, ((_a = gallery) === null || _a === void 0 ? void 0 : _a.title) || 'Not Available'),
                 React.createElement("p", { className: "" + galleryItemSubtitle }, ((_b = gallery) === null || _b === void 0 ? void 0 : _b.subtitle) || 'Not Available'),
-                React.createElement("div", { className: "" + galleryItemButtons, style: { height: "calc(" + carouselHeight + " * .3)" } }, !!gallery.buttons &&
+                React.createElement("div", { className: "" + galleryItemButtons, style: { height: "calc(" + carouselHeight + " * .3)", overflow: 'hidden' } }, !!gallery.buttons &&
                     gallery.buttons.map(function (galleryButton, index) {
                         return galleryButton.methodType === 'url' &&
-                            !!!galleryButton.isDisabled ? (React.createElement("a", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: __assign({ width: '91%' }, galleryButton.style), href: galleryButton.url, target: '_blank' }, galleryButton.title)) : (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: galleryButton.style, onClick: galleryButton.action, disabled: galleryButton.isDisabled }, galleryButton.title));
+                            !!!galleryButton.isDisabled ? (React.createElement("a", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: __assign({}, galleryButton.style), href: galleryButton.url, target: '_blank' }, galleryButton.title)) : (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: galleryButton.style, onClick: galleryButton.action, disabled: galleryButton.isDisabled }, galleryButton.title));
                     }))));
         })),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$4, style: avatar
