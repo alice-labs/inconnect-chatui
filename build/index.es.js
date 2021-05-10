@@ -4534,13 +4534,19 @@ var textBlockAdmin$2 = lib_18({
     color: '#232c41',
     cursor: 'pointer',
     borderRadius: 5,
-    textAlign: 'right',
+    ':hover': {
+        filter: 'brightness(0.95)',
+    },
 });
 var textBlockUser$2 = lib_18({
+    background: 'white',
+    border: '1px solid #e5e9ee',
     color: '#232c41',
+    borderRadius: 5,
     cursor: 'pointer',
-    paddingLeft: 5,
-    textAlign: 'left',
+    ':hover': {
+        filter: 'brightness(0.95)',
+    },
 });
 var buttonBlockAdmin = lib_18({
     color: '#232c41',
@@ -4577,8 +4583,10 @@ var aLinkWidthFix = lib_18({
 var globalTextBlock$2 = lib_18({
     maxWidth: '70%',
     wordWrap: 'break-word',
-    fontSize: '1rem',
+    padding: '8px 16px 8px',
+    fontSize: '0.88rem',
     width: 'fit-content',
+    whiteSpace: 'pre-line',
     marginBottom: 2,
 });
 var msgTimeClass$2 = lib_18({
