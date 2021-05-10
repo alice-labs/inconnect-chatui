@@ -27,14 +27,20 @@ const textBlockAdmin = css({
   color: '#232c41',
   cursor: 'pointer',
   borderRadius: 5,
-  textAlign: 'right',
+  ':hover': {
+    filter: 'brightness(0.95)',
+  },
 });
 
 const textBlockUser = css({
+  background: 'white',
+  border: '1px solid #e5e9ee',
   color: '#232c41',
+  borderRadius: 5,
   cursor: 'pointer',
-  paddingLeft: 5,
-  textAlign: 'left',
+  ':hover': {
+    filter: 'brightness(0.95)',
+  },
 })
 const buttonBlockAdmin = css({
   color: '#232c41',
@@ -72,8 +78,10 @@ const aLinkWidthFix = css({
 const globalTextBlock = css({
   maxWidth: '70%',
   wordWrap: 'break-word',
-  fontSize: '1rem',
+  padding: '8px 16px 8px',
+  fontSize: '0.88rem',
   width: 'fit-content',
+  whiteSpace: 'pre-line',
   marginBottom: 2,
 });
 
@@ -95,6 +103,7 @@ interface buttonDataProps {
   isDisabled?: boolean;
   className?: string;
   style?: object;
+
   [key: string]: any;
 }
 
@@ -113,6 +122,7 @@ interface Props {
   buttonContainerStyle?: object;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+
   [key: string]: any;
 }
 
@@ -145,7 +155,7 @@ const ButtonMessage: React.FC<Props> = (
     >
       <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
         <div
-          className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser:textBlockAdmin} ${elementClassName}`}
+          className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser : textBlockAdmin} ${elementClassName}`}
           style={elementStyle}
         >
           {text}
@@ -217,7 +227,7 @@ const ButtonMessage: React.FC<Props> = (
           {showRepliedBy && <>|&nbsp; {repliedBy} &nbsp;</>}
           {!!showMsgStatus &&
           <>| &nbsp;{
-            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon /> : <SuccessIcon/>}
+            msgStatus === 'failed' ? <FailedIcon/> : msgStatus === 'pending' ? <PendingIcon/> : <SuccessIcon/>}
           </>
           }
         </p>
