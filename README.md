@@ -218,6 +218,6 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 
 - Fixed Button Style, fixed gallery issues
 
-### 16 March 2021 - 1.3.6 🎉
+### 16 March 2021 - 1.3.6-8 🎉
 
 - Fixed Button Style
