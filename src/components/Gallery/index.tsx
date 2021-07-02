@@ -6,8 +6,6 @@ import AvatarContainer from '../Common/AvatarContainer';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
-import Linkify from "react-linkify";
-import {linkColor} from "../../util";
 
 const adminContainer = css({
   display: 'flex',
@@ -48,7 +46,6 @@ const globalTextBlock = css({
   fontSize: '1rem',
   width: 'fit-content',
   marginBottom: 2,
-  whiteSpace: 'pre-line',
 });
 
 const msgTimeClass = css({
@@ -173,7 +170,6 @@ interface Props {
   galleryItemClassName?: string;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
-  linkClassName?: string;
   [key: string]: any;
 }
 
@@ -197,7 +193,6 @@ const GalleryMessage: React.FC<Props> = ({
   galleryItemClassName,
   msgStatus,
   showMsgStatus,
-  linkClassName,
   ...rest
 }) => {
   return (
@@ -210,19 +205,12 @@ const GalleryMessage: React.FC<Props> = ({
     >
       {hasTitle && (
         <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
-          <Linkify
-            componentDecorator={(decoratedHref, decoratedText, key) => (
-              <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
-                {decoratedText}
-              </a>
-            )}>
-            <div
+          <div
             className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser : textBlockAdmin} ${elementClassName}`}
             style={elementStyle}
           >
             {text}
           </div>
-          </Linkify>
         </AvatarContainer>
       )}
       <Carousel
@@ -376,7 +364,6 @@ GalleryMessage.defaultProps = {
   carouselHeight: '390px',
   slideToShow: 2,
   showMsgStatus: false,
-  linkClassName: '',
 };
 
 export default GalleryMessage;

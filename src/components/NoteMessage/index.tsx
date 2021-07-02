@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
-import Linkify from "react-linkify";
-import {linkColor} from "../../util";
 
 const noteContainer = css({
   display: 'flex',
@@ -92,7 +90,6 @@ interface Props {
   intent?: 'notes' | 'success' | 'info' | 'lime' | 'danger';
   noteContainerClassName?: string;
   noteContainerStyle?: object;
-  linkClassName?: string;
 
   [key: string]: any;
 }
@@ -109,7 +106,6 @@ const NoteMessage: React.FC<Props> = (
     intent,
     noteContainerClassName,
     noteContainerStyle,
-    linkClassName,
     ...rest
   }) => {
   return (
@@ -119,19 +115,13 @@ const NoteMessage: React.FC<Props> = (
         className={`${noteContainer} ${className}`}
         {...rest}
       >
-        <Linkify
-          componentDecorator={(decoratedHref, decoratedText, key) => (
-            <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
-              {decoratedText}
-            </a>
-          )}> <div
+        <div
           className={`
               ${noteContentContainer} 
               ${!!noteContainerClassName && noteContainerClassName} 
               ${intent === 'notes' ? intentNote : intent === 'success' ? intentSuccess : intent === 'info' ? intentInfo : intent === 'lime' ? intentLime : intent === 'danger' ? intentDanger : ''}`}
           style={!!noteContainerStyle ? noteContainerStyle : {}}
         >{note}</div>
-        </Linkify>
       </div>
       <p className={`${noteInfo}`}>
         {!!msgTime && <span>{msgTime}</span>}
@@ -163,7 +153,6 @@ NoteMessage.propTypes = {
 NoteMessage.defaultProps = {
   style: {},
   className: '',
-  linkClassName: '',
   note: '',
   showMsgStatus: false,
   intent: 'notes'

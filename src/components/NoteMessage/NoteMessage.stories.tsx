@@ -23,7 +23,7 @@ export const Example = () => (
       msgStatus='sent'
     />
     <NoteMessage
-      note='Redirected to Product Team! please fix this As soon as possible,Redirected to Product Team! visit: https://myalice.ai'
+      note='Redirected to Product Team! please fix this As soon as possible,Redirected to Product Team! please fix this As soon as possible'
       msgTime={'4h ago'}
     />
   </div>

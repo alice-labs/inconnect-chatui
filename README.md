@@ -221,7 +221,3 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 ### 16 March 2021 - 1.3.6 🎉
 
 - Fixed Button Style
-
-### 2 July 2021 - 1.3.7
-
-- added react-linkify to all text based layout now any text has link will show

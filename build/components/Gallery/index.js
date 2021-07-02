@@ -52,7 +52,6 @@ var globalTextBlock = css({
     fontSize: '1rem',
     width: 'fit-content',
     marginBottom: 2,
-    whiteSpace: 'pre-line',
 });
 var msgTimeClass = css({
     fontSize: '0.7rem',

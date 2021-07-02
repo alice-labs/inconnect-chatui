@@ -1,6 +1,6 @@
 {
   "name": "inconnect-chat-ui",
-  "version": "1.3.7",
+  "version": "1.3.6",
   "description": "Inconnect Chat UI Library",
   "main": "build/index.js",
   "files": [
@@ -93,8 +93,6 @@
     ]
   },
   "dependencies": {
-    "@types/react-linkify": "^1.0.0",
-    "nuka-carousel": "^4.7.4",
-    "react-linkify": "^1.0.0-alpha"
+    "nuka-carousel": "^4.7.4"
   }
 }
