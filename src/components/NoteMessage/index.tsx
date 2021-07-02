@@ -82,7 +82,7 @@ const noteInfo = css({
 interface Props {
   style?: object;
   className?: string;
-  note?: string;
+  text?: string | React.ReactNode;
   msgTime?: string | number;
   takenBy?: string;
   msgStatus?: 'failed' | 'pending' | 'sent';

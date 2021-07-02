@@ -221,3 +221,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 ### 16 March 2021 - 1.3.6-8 🎉
 
 - Fixed Button Style
+
+### 2 July 2021 - 1.3.9 🎉
+
+- Support Dom or text for text supporting react-linkify

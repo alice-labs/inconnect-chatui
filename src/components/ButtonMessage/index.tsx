@@ -110,7 +110,7 @@ interface buttonDataProps {
 interface Props {
   style?: object;
   className?: string;
-  text?: string;
+  text?: string | React.ReactNode;
   buttonData?: buttonDataProps[];
   msgTime?: string | number;
   repliedBy?: string;

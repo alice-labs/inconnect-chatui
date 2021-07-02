@@ -117,7 +117,7 @@ interface buttonDataProps {
 interface Props {
   style?: object;
   className?: string;
-  text?: string;
+  text?: string | React.ReactNode;
   buttonData?: buttonDataProps[];
   msgTime?: string | number;
   repliedBy?: string;
@@ -132,22 +132,23 @@ interface Props {
   [key: string]: any;
 }
 
-const QuickReplyMessage: React.FC<Props> = ({
-                                              style,
-                                              className,
-                                              text,
-                                              buttonData,
-                                              msgTime,
-                                              repliedBy,
-                                              showRepliedBy,
-                                              consumer,
-                                              elementClassName,
-                                              elementStyle,
-                                              avatar,
-                                              msgStatus,
-                                              showMsgStatus,
-                                              ...rest
-                                            }) => {
+const QuickReplyMessage: React.FC<Props> = (
+  {
+    style,
+    className,
+    text,
+    buttonData,
+    msgTime,
+    repliedBy,
+    showRepliedBy,
+    consumer,
+    elementClassName,
+    elementStyle,
+    avatar,
+    msgStatus,
+    showMsgStatus,
+    ...rest
+  }) => {
   return (
     <div
       style={{...style}}
