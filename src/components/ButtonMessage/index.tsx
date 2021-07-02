@@ -5,7 +5,8 @@ import AvatarContainer from '../Common/AvatarContainer';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
-
+import Linkify from 'react-linkify';
+import {linkColor} from '../../util';
 
 const adminContainer = css({
   display: 'flex',
@@ -122,6 +123,7 @@ interface Props {
   buttonContainerStyle?: object;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+  linkClassName?: string;
 
   [key: string]: any;
 }
@@ -143,6 +145,7 @@ const ButtonMessage: React.FC<Props> = (
     buttonContainerStyle,
     msgStatus,
     showMsgStatus,
+    linkClassName,
     ...rest
   }) => {
   return (
@@ -154,12 +157,18 @@ const ButtonMessage: React.FC<Props> = (
       {...rest}
     >
       <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
-        <div
+        <Linkify
+          componentDecorator={(decoratedHref, decoratedText, key) => (
+            <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+              {decoratedText}
+            </a>
+          )}><div
           className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser : textBlockAdmin} ${elementClassName}`}
           style={elementStyle}
         >
           {text}
         </div>
+        </Linkify>
       </AvatarContainer>
       {!!buttonData && buttonData.length > 0 && (
         <div
@@ -260,6 +269,7 @@ ButtonMessage.defaultProps = {
   showRepliedBy: false,
   avatar: '',
   showMsgStatus: false,
+  linkClassName: ''
 };
 
 export default ButtonMessage;

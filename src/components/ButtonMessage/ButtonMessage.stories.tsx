@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ButtonMessage from './index';
-import { withInfo } from '@storybook/addon-info';
+import {withInfo} from '@storybook/addon-info';
 
 const styleOfStoryContainer = {
   border: '1px solid #184D47',
@@ -10,7 +10,7 @@ const styleOfStoryContainer = {
   padding: 20,
 };
 
-export default { title: 'ButtonMessage', decorators: [withInfo] };
+export default {title: 'ButtonMessage', decorators: [withInfo]};
 
 export const Example = () => (
   <div style={styleOfStoryContainer}>
@@ -48,7 +48,109 @@ export const Example = () => (
       text='hello user this are our product list'
       msgTime={'4h ago'}
       consumer={'user'}
-      elementStyle={{ background: '#c0cbd0', color: 'white' }}
+      elementStyle={{background: '#c0cbd0', color: 'white'}}
+      elementClassName={'some-style'}
+      buttonContainerStyle={{background: 'purple'}}
+      showMsgStatus={true}
+      msgStatus='pending'
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
+    />
+    <ButtonMessage
+      text='hello user this are our product list'
+      msgTime={'4h ago'}
+      consumer={'user'}
+      elementClassName={'some-style'}
+      showMsgStatus={true}
+      msgStatus='failed'
+      showRepliedBy={true}
+      repliedBy='mehran'
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
+    />
+  </div>
+);
+
+export const ExampleWithLink = () => (
+  <div style={styleOfStoryContainer}>
+    <ButtonMessage
+      text='hello user this are our product list kfasnfasf asfliassfas faskhfas fasfhaslfasf asfkasnflasf
+            https://myalice.ai'
+      msgTime={'4h ago'}
+      consumer={'admin'}
+      showMsgStatus={true}
+      msgStatus='sent'
+      buttonData={[
+        {
+          title: 'Button One',
+          methodType: 'url',
+          url: 'https://getalice.ai',
+        },
+        {
+          title: 'Button Two',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+        },
+        {
+          title: 'Button Three',
+          methodType: 'function',
+          action: () => {
+            console.log('clicked on  button two');
+          },
+          isDisabled: true,
+        },
+      ]}
+      avatar='https://misx-assets.s3-ap-southeast-1.amazonaws.com/robot.svg'
+    />
+    <ButtonMessage
+      text='hello user this are our product list'
+      msgTime={'4h ago'}
+      consumer={'user'}
+      elementStyle={{background: '#c0cbd0', color: 'white'}}
       elementClassName={'some-style'}
       buttonContainerStyle={{background: 'purple'}}
       showMsgStatus={true}

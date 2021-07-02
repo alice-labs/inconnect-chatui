@@ -85,7 +85,7 @@ export const ExampleAdmin = () => (
     />
     <TextMessage
       userType='admin'
-      text='How Can we help you?'
+      text='How Can we help you? visit: https://getalice.ai'
       consumer={'admin'}
       msgTime={'3h ago'}
       showInfo={false}

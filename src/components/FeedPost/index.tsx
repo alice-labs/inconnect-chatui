@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
+import {linkColor} from "../../util";
+import Linkify from "react-linkify";
 
 const feedContainer = css({
   display: 'flex',
@@ -96,6 +98,7 @@ const postContentStyle = css({
   paddingBottom: 30,
   borderBottom: '0.5px solid #DFE8F0',
   marginBottom: 10,
+  whiteSpace: 'pre-wrap',
 });
 
 const replyContentText = css({
@@ -270,6 +273,7 @@ interface Props {
   editInputClass?: string;
   handleReplyEdit?: (reply: replyProps, text: string, resetCallback: () => void) => void;
   handleReplyCancel?: (reply: replyProps) => void;
+  linkClassName?: string;
 
   [key: string]: any;
 }
@@ -305,6 +309,7 @@ const FeedPost: React.FC<Props> = (
     handleReplyCancel,
     handleReplyEdit,
     status,
+    linkClassName,
     ...rest
   }) => {
   const statustoExcludeAction = ['note', 'hide', 'remove'];
@@ -419,7 +424,16 @@ const FeedPost: React.FC<Props> = (
           </div>
         </div>
 
-        <div className={`${postContentStyle}`}>{getContents()}</div>
+        <div className={`${postContentStyle}`}>
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}>
+            {getContents()}
+          </Linkify>
+          </div>
         <div className={`${commentInfoContainer}`} key={'reply-comment'}>
           <img src={commentData.avatar} className={`${avatarSmallStyle}`}/>
           <div
@@ -460,7 +474,14 @@ const FeedPost: React.FC<Props> = (
                 {commentData.isHighlighted && (
                   <span className={`${highLighted}`}>Highlighted</span>
                 )}
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+                      {decoratedText}
+                    </a>
+                  )}>
                 {getReplyContent(commentData)}
+                </Linkify>
               </div>
               <p className={`${postTimeStyle}`}>
                 {commentData.time}
@@ -605,7 +626,14 @@ const FeedPost: React.FC<Props> = (
                       />
                     </div>
                   ) : (
-                    getReplyContent(reply)
+                    <Linkify
+                      componentDecorator={(decoratedHref, decoratedText, key) => (
+                        <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+                          {decoratedText}
+                        </a>
+                      )}>
+                      {getReplyContent(reply)}
+                    </Linkify>
                   )}
                 </div>
                 <p
@@ -766,6 +794,7 @@ FeedPost.propTypes = {
 
 FeedPost.defaultProps = {
   style: {},
+  linkClassName: '',
   className: '',
   contentType: 'text',
   replyContent: [],

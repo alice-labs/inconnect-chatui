@@ -5,6 +5,8 @@ import AvatarContainer from '../Common/AvatarContainer';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
+import Linkify from "react-linkify";
+import {linkColor} from "../../util";
 
 const adminContainer = css({
   display: 'flex',
@@ -91,6 +93,7 @@ const globalTextBlock = css({
   fontSize: '1rem',
   width: 'fit-content',
   marginBottom: 2,
+  whiteSpace: 'pre-line',
 });
 
 const msgTimeClass = css({
@@ -128,26 +131,29 @@ interface Props {
   avatar?: string | React.ReactNode;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+  linkClassName?: string;
 
   [key: string]: any;
 }
 
-const QuickReplyMessage: React.FC<Props> = ({
-                                              style,
-                                              className,
-                                              text,
-                                              buttonData,
-                                              msgTime,
-                                              repliedBy,
-                                              showRepliedBy,
-                                              consumer,
-                                              elementClassName,
-                                              elementStyle,
-                                              avatar,
-                                              msgStatus,
-                                              showMsgStatus,
-                                              ...rest
-                                            }) => {
+const QuickReplyMessage: React.FC<Props> = (
+  {
+    style,
+    className,
+    text,
+    buttonData,
+    msgTime,
+    repliedBy,
+    showRepliedBy,
+    consumer,
+    elementClassName,
+    elementStyle,
+    avatar,
+    msgStatus,
+    showMsgStatus,
+    linkClassName,
+    ...rest
+  }) => {
   return (
     <div
       style={{...style}}
@@ -157,12 +163,18 @@ const QuickReplyMessage: React.FC<Props> = ({
       {...rest}
     >
       <AvatarContainer avatar={avatar} userType='bot' consumer={consumer}>
-        <div
+        <Linkify
+          componentDecorator={(decoratedHref, decoratedText, key) => (
+            <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+              {decoratedText}
+            </a>
+          )}> <div
           className={`${globalTextBlock} ${consumer === 'user' ? textBlockUser : textBlockAdmin} ${elementClassName}`}
           style={elementStyle}
         >
           {text}
         </div>
+        </Linkify>
       </AvatarContainer>
       {!!buttonData && buttonData.length > 0 && (
         <div
@@ -250,10 +262,12 @@ QuickReplyMessage.propTypes = {
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   msgStatus: PropTypes.oneOf(['failed', 'pending', 'sent']),
   showMsgStatus: PropTypes.bool,
+  linkClassName: PropTypes.string
 };
 
 QuickReplyMessage.defaultProps = {
   style: {},
+  linkClassName: '',
   className: '',
   text: '',
   showRepliedBy: false,

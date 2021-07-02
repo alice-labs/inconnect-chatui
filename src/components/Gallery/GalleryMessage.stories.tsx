@@ -15,7 +15,7 @@ export default { title: 'GalleryMessage', decorators: [withInfo] };
 export const Example = () => (
   <div style={styleOfStoryContainer}>
     <GalleryMessage
-      text='Buy Some Fruits From Out Website'
+      text='Buy Some Fruits From Out Website https://myalice.ai'
       msgTime={'4h ago'}
       consumer={'user'}
       hasTitle={true}

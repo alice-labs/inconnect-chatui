@@ -5,6 +5,8 @@ import AvatarContainer from '../Common/AvatarContainer';
 import FailedIcon from "../Common/FailedIcon";
 import PendingIcon from "../Common/PendingIcon";
 import SuccessIcon from "../Common/SuccessIcon";
+import {linkColor} from "../../util";
+import Linkify from "react-linkify";
 
 const userContainer = css({
   display: 'flex',
@@ -72,6 +74,7 @@ interface Props {
   avatar?: string | React.ReactNode;
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
+  linkClassName?: string;
   [key: string]: any;
 }
 
@@ -90,6 +93,7 @@ const TextMessage: React.FC<Props> = ({
   avatar,
   showMsgStatus,
   msgStatus,
+  linkClassName,
   ...rest
 }) => {
   return (
@@ -107,7 +111,13 @@ const TextMessage: React.FC<Props> = ({
       {...rest}
     >
       <AvatarContainer avatar={avatar} userType={userType} consumer={consumer}>
-        <div
+        <Linkify
+          componentDecorator={(decoratedHref, decoratedText, key) => (
+            <a target="blank" className={linkClassName} style={!!linkClassName ? {}:{color: linkColor}} href={decoratedHref} key={key}>
+              {decoratedText}
+            </a>
+          )}>
+          <div
           style={elementStyle}
           className={`${globalTextBlock} ${
             consumer === 'user'
@@ -121,6 +131,7 @@ const TextMessage: React.FC<Props> = ({
         >
           {text}
         </div>
+        </Linkify>
       </AvatarContainer>
       {showInfo && (showRepliedBy || !!msgTime) && (
         <p
@@ -163,6 +174,7 @@ TextMessage.propTypes = {
   elementClassName: PropTypes.string,
   showInfo: PropTypes.bool,
   avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  linkClassName: PropTypes.string,
 };
 
 TextMessage.defaultProps = {
@@ -172,6 +184,7 @@ TextMessage.defaultProps = {
   showRepliedBy: false,
   showInfo: true,
   avatar: '',
+  linkClassName: '',
 };
 
 export default TextMessage;
