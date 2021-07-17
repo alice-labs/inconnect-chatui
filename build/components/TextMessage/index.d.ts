@@ -3,7 +3,7 @@ interface Props {
     style?: object;
     className?: string;
     userType?: 'user' | 'admin' | 'bot';
-    text?: string;
+    text?: string | React.ReactNode;
     consumer?: 'user' | 'admin' | 'bot';
     msgTime?: string | number;
     repliedBy?: string;

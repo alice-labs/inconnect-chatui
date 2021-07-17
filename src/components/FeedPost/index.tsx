@@ -689,7 +689,12 @@ const FeedPost: React.FC<Props> = (
                             if (!!handleEdit) {
                               handleEdit(reply);
                               setEditReply(reply);
-                              setEditText(reply.content);
+                             if(typeof reply.content === 'string') {
+                               setEditText(reply.content);
+                             }else {
+                               //react Node
+                               setEditText(reply.content?.props?.children || '')
+                             }
                               if (closeOnActionClick) {
                                 setShowPopover(null);
                               }

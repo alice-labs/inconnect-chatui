@@ -20,7 +20,7 @@ interface galleryProps {
 interface Props {
     style?: object;
     className?: string;
-    text?: string;
+    text?: string | React.ReactNode;
     galleryData: galleryProps[];
     msgTime?: string | number;
     repliedBy?: string;

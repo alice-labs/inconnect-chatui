@@ -5189,10 +5189,17 @@ var FeedPost = function (_a) {
                                 createElement("path", { d: 'M2 6.03a2 2 0 100 4 2 2 0 100-4zM14 6.03a2 2 0 100 4 2 2 0 100-4zM8 6.03a2 2 0 100 4 2 2 0 100-4z', fillRule: 'evenodd' }))),
                         showPopover === reply.id && (createElement("div", { className: "" + moreButtonContainer },
                             reply.source !== 'customer' && (createElement("div", { onClick: function () {
+                                    var _a, _b;
                                     if (!!handleEdit) {
                                         handleEdit(reply);
                                         setEditReply(reply);
-                                        setEditText(reply.content);
+                                        if (typeof reply.content === 'string') {
+                                            setEditText(reply.content);
+                                        }
+                                        else {
+                                            //react Node
+                                            setEditText(((_b = (_a = reply.content) === null || _a === void 0 ? void 0 : _a.props) === null || _b === void 0 ? void 0 : _b.children) || '');
+                                        }
                                         if (closeOnActionClick) {
                                             setShowPopover(null);
                                         }
