@@ -34,29 +34,14 @@ export const Example = () => (
               methodType: 'url',
               url: 'https://getalice.ai',
               isDisabled: false,
-            },
-            {
-              id: 2,
-              title: 'Buy Mango',
-              methodType: 'function',
-              action: () => alert('Function Triggered to Buy Mango'),
-              isDisabled: false,
-            },
-            {
-              id: 3,
-              title: 'Buy From ChatBot',
-              methodType: 'function',
-              action: () => console.log('Button 02 clicked'),
-              isDisabled: true,
-            },
+            }
           ],
         },
         {
           id: 1,
           title: 'Banana',
           subtitle: '1$',
-          image:
-            'https://api.time.com/wp-content/uploads/2019/11/gettyimages-459761948.jpg?quality=85&w=1024&h=512&crop=1',
+          image: '',
           buttons: [
             {
               id: 1,

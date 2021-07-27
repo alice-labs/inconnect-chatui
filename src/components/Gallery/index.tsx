@@ -22,7 +22,6 @@ const textBlockAdmin = css({
   background: '#e5e9ee',
   border: '1px solid transparent',
   color: '#232c41',
-  cursor: 'pointer',
   borderRadius: 5,
   ':hover': {
     filter: 'brightness(0.95)',
@@ -32,7 +31,6 @@ const textBlockUser = css({
   background: 'white',
   border: '1px solid #e5e9ee',
   color: '#232c41',
-  cursor: 'pointer',
   borderRadius: 5,
   ':hover': {
     filter: 'brightness(0.95)',
@@ -60,30 +58,30 @@ const msgTimeClass = css({
 const galleryItemContainer = css({
   width: 210,
   background: 'white',
-  boxShadow: '0px 0px 8px #416b7557',
   borderRadius: 10,
   marginRight: 20,
   marginLeft: 5,
   marginTop: 5,
+  border: '1px solid #efefef'
 });
 
 const galleryItemCover = css({
   display: 'flex',
   justifyContent: 'center',
-  background: '#e8f0f3',
+   borderBottom: '1px solid #efefef'
 });
 
 const galleryItemTitle = css({
   fontSize: '0.9rem',
   margin: '10px 15px 0 15px',
   color: '#222222',
-  textAlign: 'center',
+  textAlign: 'left',
   fontWeight: 500,
 });
 const galleryItemSubtitle = css({
   fontSize: '0.8rem',
   margin: '5px 15px 0 15px',
-  textAlign: 'center',
+  textAlign: 'left',
   fontWeight: 400,
   color: '#7A7A7A',
 });
@@ -108,7 +106,7 @@ const galleryItemButtonElement = css({
   width: '100%',
   background: 'white',
   color: '#222222',
-  fontSize: '0.68rem',
+  fontSize: '0.75rem',
   textDecoration: 'none',
   textAlign: 'center',
   fontFamily: 'inherit',
@@ -118,10 +116,7 @@ const galleryItemButtonElement = css({
     background: '#f2f9ff',
   },
   ':disabled': {
-    background: '#f7f8f9',
     cursor: 'not-allowed',
-    borderTop: '0.5px solid #E3E3E3',
-    borderBottom: '0.5px solid #E3E3E3',
   },
   ':first-child': {
     borderTop: '0.5px solid #E3E3E3',
@@ -238,7 +233,7 @@ const GalleryMessage: React.FC<Props> = ({
             borderRadius: 5,
             background: 'transparent',
             color: 'gray',
-            fontSize: '70px',
+            fontSize: '30px',
             position: 'absolute',
             right: -20,
             top: -40,
@@ -247,7 +242,7 @@ const GalleryMessage: React.FC<Props> = ({
             borderRadius: 5,
             background: 'transparent',
             color: 'gray',
-            fontSize: '70px',
+            fontSize: '30px',
             position: 'absolute',
             left: -20,
             top: -40,
@@ -256,11 +251,12 @@ const GalleryMessage: React.FC<Props> = ({
       >
         {galleryData.map((gallery: galleryProps, index: number) => (
           <div className={`${galleryItemContainer}`} key={index}>
+            {gallery.image &&
             <div className={`${galleryItemCover} ${galleryItemClassName}`}>
+
               <img
                 src={
-                  gallery.image ||
-                  'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg'
+                  gallery.image
                 }
                 style={{
                   overflow: 'hidden',
@@ -268,7 +264,7 @@ const GalleryMessage: React.FC<Props> = ({
                   height: `calc(${carouselHeight} * .4)`,
                 }}
               />
-            </div>
+            </div>}
             <p className={`${galleryItemTitle}`}>
               {gallery?.title || 'Not Available'}
             </p>
@@ -277,22 +273,21 @@ const GalleryMessage: React.FC<Props> = ({
             </p>
             <div
               className={`${galleryItemButtons}`}
-              style={{ height: `calc(${carouselHeight} * .3)`, overflow: 'hidden' }}
+              style={{ overflow: 'hidden' }}
             >
               {!!gallery.buttons &&
                 gallery.buttons.map(
                   (galleryButton: buttonDataProps, index: number) =>
                     galleryButton.methodType === 'url' &&
                     !!!galleryButton.isDisabled ? (
-                      <a
+                      <button
                         key={index}
                         className={`${galleryItemButtonElement} ${galleryButton.className}`}
                         style={{...galleryButton.style }}
-                        href={galleryButton.url}
-                        target={'_blank'}
+                        onClick={()=>window.open(galleryButton.url,'_blank')}
                       >
                         {galleryButton.title}
-                      </a>
+                      </button>
                     ) : (
                       <button
                         key={index}
@@ -361,7 +356,7 @@ GalleryMessage.defaultProps = {
   galleryData: [],
   cellSpacing: 25,
   carouselWidth: '525px',
-  carouselHeight: '390px',
+  carouselHeight: 'auto',
   slideToShow: 2,
   showMsgStatus: false,
 };
