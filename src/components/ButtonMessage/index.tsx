@@ -72,7 +72,7 @@ const btnElement = css({
   },
 });
 const aLinkWidthFix = css({
-  width: '96%!important',
+  textDecoration: 'underline'
 });
 
 const globalTextBlock = css({
@@ -186,17 +186,16 @@ const ButtonMessage: React.FC<Props> = (
               }: buttonDataProps,
               i: number
             ) =>
-              methodType === 'url' && !!!isDisabled ? (
-                <a
-                  href={url}
+              methodType === 'url' ? (
+                <button
+                  onClick={()=>window.open(url,'_blank')}
                   className={`${btnElement} ${aLinkWidthFix} ${className}`}
                   style={style}
-                  target='_blank'
                   key={i}
                   {...rest}
                 >
                   {title}
-                </a>
+                </button>
               ) : (
                 <button
                   disabled={isDisabled}
