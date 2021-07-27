@@ -188,6 +188,7 @@ const ButtonMessage: React.FC<Props> = (
             ) =>
               methodType === 'url' ? (
                 <button
+                    disabled={isDisabled}
                   onClick={()=>window.open(url,'_blank')}
                   className={`${btnElement} ${aLinkWidthFix} ${className}`}
                   style={style}
