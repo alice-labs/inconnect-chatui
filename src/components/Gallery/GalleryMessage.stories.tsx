@@ -41,7 +41,7 @@ export const Example = () => (
           id: 1,
           title: 'Banana',
           subtitle: '1$',
-          image: '',
+          image: 'https://api.time.com/wp-content/uploads/2019/11/gettyimages-459761948.jpg?quality=85&w=1024&h=512&crop=1',
           buttons: [
             {
               id: 1,
