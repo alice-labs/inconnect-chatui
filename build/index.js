@@ -4585,7 +4585,7 @@ var btnElement = lib_18({
     },
 });
 var aLinkWidthFix = lib_18({
-    width: '96%!important',
+    textDecoration: 'underline'
 });
 var globalTextBlock$2 = lib_18({
     maxWidth: '70%',
@@ -4614,7 +4614,7 @@ var ButtonMessage = function (_a) {
                     ? __assign({ marginLeft: '30px' }, buttonContainerStyle) : __assign({ marginRight: '30px' }, buttonContainerStyle)
                 : {} }, buttonData.map(function (_a, i) {
             var title = _a.title, methodType = _a.methodType, url = _a.url, action = _a.action, className = _a.className, style = _a.style, isDisabled = _a.isDisabled, rest = __rest(_a, ["title", "methodType", "url", "action", "className", "style", "isDisabled"]);
-            return methodType === 'url' && !!!isDisabled ? (React.createElement("a", __assign({ href: url, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, target: '_blank', key: i }, rest), title)) : (React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title));
+            return methodType === 'url' ? (React.createElement("button", __assign({ disabled: isDisabled, onClick: function () { return window.open(url, '_blank'); }, className: btnElement + " " + aLinkWidthFix + " " + className, style: style, key: i }, rest), title)) : (React.createElement("button", __assign({ disabled: isDisabled, className: btnElement + " " + className, style: style, onClick: action, key: i }, rest), title));
         }))),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$2, style: avatar
                 ? consumer === 'user'
@@ -10289,7 +10289,6 @@ var textBlockAdmin$4 = lib_18({
     background: '#e5e9ee',
     border: '1px solid transparent',
     color: '#232c41',
-    cursor: 'pointer',
     borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
@@ -10299,7 +10298,6 @@ var textBlockUser$4 = lib_18({
     background: 'white',
     border: '1px solid #e5e9ee',
     color: '#232c41',
-    cursor: 'pointer',
     borderRadius: 5,
     ':hover': {
         filter: 'brightness(0.95)',
@@ -10324,28 +10322,28 @@ var msgTimeClass$4 = lib_18({
 var galleryItemContainer = lib_18({
     width: 210,
     background: 'white',
-    boxShadow: '0px 0px 8px #416b7557',
     borderRadius: 10,
     marginRight: 20,
     marginLeft: 5,
     marginTop: 5,
+    border: '1px solid #efefef'
 });
 var galleryItemCover = lib_18({
     display: 'flex',
     justifyContent: 'center',
-    background: '#e8f0f3',
+    borderBottom: '1px solid #efefef'
 });
 var galleryItemTitle = lib_18({
     fontSize: '0.9rem',
     margin: '10px 15px 0 15px',
     color: '#222222',
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 500,
 });
 var galleryItemSubtitle = lib_18({
     fontSize: '0.8rem',
     margin: '5px 15px 0 15px',
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 400,
     color: '#7A7A7A',
 });
@@ -10369,7 +10367,7 @@ var galleryItemButtonElement = lib_18({
     width: '100%',
     background: 'white',
     color: '#222222',
-    fontSize: '0.68rem',
+    fontSize: '0.75rem',
     textDecoration: 'none',
     textAlign: 'center',
     fontFamily: 'inherit',
@@ -10379,10 +10377,7 @@ var galleryItemButtonElement = lib_18({
         background: '#f2f9ff',
     },
     ':disabled': {
-        background: '#f7f8f9',
         cursor: 'not-allowed',
-        borderTop: '0.5px solid #E3E3E3',
-        borderBottom: '0.5px solid #E3E3E3',
     },
     ':first-child': {
         borderTop: '0.5px solid #E3E3E3',
@@ -10411,7 +10406,7 @@ var GalleryMessage = function (_a) {
                     borderRadius: 5,
                     background: 'transparent',
                     color: 'gray',
-                    fontSize: '70px',
+                    fontSize: '30px',
                     position: 'absolute',
                     right: -20,
                     top: -40,
@@ -10420,7 +10415,7 @@ var GalleryMessage = function (_a) {
                     borderRadius: 5,
                     background: 'transparent',
                     color: 'gray',
-                    fontSize: '70px',
+                    fontSize: '30px',
                     position: 'absolute',
                     left: -20,
                     top: -40,
@@ -10428,19 +10423,19 @@ var GalleryMessage = function (_a) {
             } }, galleryData.map(function (gallery, index) {
             var _a, _b;
             return (React.createElement("div", { className: "" + galleryItemContainer, key: index },
-                React.createElement("div", { className: galleryItemCover + " " + galleryItemClassName },
-                    React.createElement("img", { src: gallery.image ||
-                            'https://drohnenspital.com/wp-content/uploads/2020/10/M2-JS02-1.jpg', style: {
-                            overflow: 'hidden',
-                            borderRadius: '10px 10px 0 0',
-                            height: "calc(" + carouselHeight + " * .4)",
-                        } })),
+                gallery.image &&
+                    React.createElement("div", { className: galleryItemCover + " " + galleryItemClassName },
+                        React.createElement("img", { src: gallery.image, style: {
+                                overflow: 'hidden',
+                                borderRadius: '10px 10px 0 0',
+                                height: "calc(" + carouselHeight + " * .4)",
+                            } })),
                 React.createElement("p", { className: "" + galleryItemTitle }, ((_a = gallery) === null || _a === void 0 ? void 0 : _a.title) || 'Not Available'),
                 React.createElement("p", { className: "" + galleryItemSubtitle }, ((_b = gallery) === null || _b === void 0 ? void 0 : _b.subtitle) || 'Not Available'),
-                React.createElement("div", { className: "" + galleryItemButtons, style: { height: "calc(" + carouselHeight + " * .3)", overflow: 'hidden' } }, !!gallery.buttons &&
+                React.createElement("div", { className: "" + galleryItemButtons, style: { overflow: 'hidden' } }, !!gallery.buttons &&
                     gallery.buttons.map(function (galleryButton, index) {
                         return galleryButton.methodType === 'url' &&
-                            !!!galleryButton.isDisabled ? (React.createElement("a", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: __assign({}, galleryButton.style), href: galleryButton.url, target: '_blank' }, galleryButton.title)) : (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: galleryButton.style, onClick: galleryButton.action, disabled: galleryButton.isDisabled }, galleryButton.title));
+                            !!!galleryButton.isDisabled ? (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: __assign({}, galleryButton.style), onClick: function () { return window.open(galleryButton.url, '_blank'); } }, galleryButton.title)) : (React.createElement("button", { key: index, className: galleryItemButtonElement + " " + galleryButton.className, style: galleryButton.style, onClick: galleryButton.action, disabled: galleryButton.isDisabled }, galleryButton.title));
                     }))));
         })),
         (showRepliedBy || !!msgTime) && (React.createElement("p", { className: "" + msgTimeClass$4, style: avatar
@@ -10487,7 +10482,7 @@ GalleryMessage.defaultProps = {
     galleryData: [],
     cellSpacing: 25,
     carouselWidth: '525px',
-    carouselHeight: '390px',
+    carouselHeight: 'auto',
     slideToShow: 2,
     showMsgStatus: false,
 };

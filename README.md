@@ -225,3 +225,7 @@ Fork the repo. pull the master branch if required. [**Create a issue**](https://
 ### 2 July 2021 - 1.3.9 🎉
 
 - Support Dom or text for text supporting react-linkify
+
+### 4th Aug 2021 - 1.4.0-1.4.1
+
+- gallery design fix and button anchor
