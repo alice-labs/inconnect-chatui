@@ -4247,7 +4247,7 @@ var NoteMessage = function (_a) {
 NoteMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
-    note: propTypes.string,
+    note: propTypes.any,
     type: propTypes.oneOf(['user', 'admin', 'bot']),
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     takenBy: propTypes.string,

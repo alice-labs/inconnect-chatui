@@ -88,6 +88,7 @@ interface Props {
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
   intent?: 'notes' | 'success' | 'info' | 'lime' | 'danger';
+  note?: string | React.ReactNode;
   noteContainerClassName?: string;
   noteContainerStyle?: object;
 
@@ -139,7 +140,7 @@ const NoteMessage: React.FC<Props> = (
 NoteMessage.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
-  note: PropTypes.string,
+  note: PropTypes.any,
   type: PropTypes.oneOf(['user', 'admin', 'bot']),
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   takenBy: PropTypes.string,

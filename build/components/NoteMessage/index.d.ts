@@ -8,6 +8,7 @@ interface Props {
     msgStatus?: 'failed' | 'pending' | 'sent';
     showMsgStatus?: boolean;
     intent?: 'notes' | 'success' | 'info' | 'lime' | 'danger';
+    note?: string | React.ReactNode;
     noteContainerClassName?: string;
     noteContainerStyle?: object;
     [key: string]: any;
