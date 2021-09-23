@@ -242,6 +242,7 @@ interface replyProps {
   msgStatus?: 'failed' | 'pending' | 'sent';
   showMsgStatus?: boolean;
   repliedBy?: string;
+  repliedPrivately?: boolean;
 }
 
 interface Props {
@@ -464,6 +465,7 @@ const FeedPost: React.FC<Props> = (
               </div>
               <p className={`${postTimeStyle}`}>
                 {commentData.time}
+                {!!commentData.repliedPrivately && <>&nbsp;|&nbsp;Responded Privately</> }
                 {!!commentData.showMsgStatus &&
                 <>&nbsp; | &nbsp;
                   {commentData.msgStatus === 'failed' ? <FailedIcon/> : commentData.msgStatus === 'pending' ?
@@ -647,6 +649,7 @@ const FeedPost: React.FC<Props> = (
                   {!!reply.status && reply.status === 'edited' && (
                     <span> &nbsp; | {reply.status}</span>
                   )}
+                  {!!reply.repliedPrivately && <>&nbsp;|&nbsp;Responded Privately</> }
                   {!!reply.showMsgStatus &&
                   <>&nbsp;| &nbsp;
                     {reply.msgStatus === 'failed' ? <FailedIcon/> : reply.msgStatus === 'pending' ?
@@ -689,12 +692,12 @@ const FeedPost: React.FC<Props> = (
                             if (!!handleEdit) {
                               handleEdit(reply);
                               setEditReply(reply);
-                             if(typeof reply.content === 'string') {
-                               setEditText(reply.content);
-                             }else {
-                               //react Node
-                               setEditText(reply.content?.props?.children || '')
-                             }
+                              if(typeof reply.content === 'string') {
+                                setEditText(reply.content);
+                              }else {
+                                //react Node
+                                setEditText(reply.content?.props?.children || '')
+                              }
                               if (closeOnActionClick) {
                                 setShowPopover(null);
                               }

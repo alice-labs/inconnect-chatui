@@ -48,6 +48,7 @@ export const Example = () => (
         status: 'add',
         msgStatus: 'pending',
         showMsgStatus: true,
+        repliedPrivately: true,
       }}
       replyContent={[
         {
@@ -127,6 +128,7 @@ export const Example = () => (
           status: 'remove',
           msgStatus: 'pending',
           showMsgStatus: true,
+          repliedPrivately: true,
         },
       ]}
     />
