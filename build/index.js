@@ -4139,7 +4139,7 @@ var TextMessage = function (_a) {
 TextMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
-    text: propTypes.string,
+    text: propTypes.any,
     userType: propTypes.oneOf(['user', 'admin', 'bot']),
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
@@ -4636,7 +4636,7 @@ var ButtonMessage = function (_a) {
 ButtonMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
-    text: propTypes.string,
+    text: propTypes.any,
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,
@@ -4783,7 +4783,7 @@ var QuickReplyMessage = function (_a) {
 QuickReplyMessage.propTypes = {
     style: propTypes.object,
     className: propTypes.string,
-    text: propTypes.string,
+    text: propTypes.any,
     msgTime: propTypes.oneOfType([propTypes.string, propTypes.number]),
     repliedBy: propTypes.string,
     showRepliedBy: propTypes.bool,

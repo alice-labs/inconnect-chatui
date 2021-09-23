@@ -243,7 +243,7 @@ const QuickReplyMessage: React.FC<Props> = (
 QuickReplyMessage.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.any,
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   repliedBy: PropTypes.string,
   showRepliedBy: PropTypes.bool,

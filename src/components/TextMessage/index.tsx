@@ -153,7 +153,7 @@ const TextMessage: React.FC<Props> = ({
 TextMessage.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.any,
   userType: PropTypes.oneOf(['user', 'admin', 'bot']),
   msgTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   repliedBy: PropTypes.string,
