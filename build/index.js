@@ -5076,6 +5076,7 @@ var FeedPost = function (_a) {
                             getReplyContent(commentData)),
                         React.createElement("p", { className: "" + postTimeStyle },
                             commentData.time,
+                            !!commentData.repliedPrivately && React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately"),
                             !!commentData.showMsgStatus &&
                                 React.createElement(React.Fragment, null,
                                     "\u00A0 | \u00A0",
@@ -5175,6 +5176,7 @@ var FeedPost = function (_a) {
                             !!reply.status && reply.status === 'edited' && (React.createElement("span", null,
                                 " \u00A0 | ",
                                 reply.status)),
+                            !!reply.repliedPrivately && React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately"),
                             !!reply.showMsgStatus &&
                                 React.createElement(React.Fragment, null,
                                     "\u00A0| \u00A0",
