@@ -4881,6 +4881,7 @@ var replyContentText = lib_18({
     marginTop: 5,
     marginBottom: 5,
     wordBreak: 'break-word',
+    whiteSpace: 'pre',
 });
 var replyContentNote = lib_18({
     background: '#feefc3',
@@ -5069,13 +5070,13 @@ var FeedPost = function (_a) {
                             getReplyContent(commentData)),
                         createElement("p", { className: "" + postTimeStyle },
                             commentData.time,
-                            !!commentData.repliedPrivately && createElement(Fragment, null, "\u00A0|\u00A0Responded Privately"),
-                            !!commentData.showMsgStatus &&
-                                createElement(Fragment, null,
-                                    "\u00A0 | \u00A0",
-                                    commentData.msgStatus === 'failed' ? createElement(FailedIcon, null) : commentData.msgStatus === 'pending' ?
-                                        createElement(PendingIcon, null) : createElement(SuccessIcon, null)))),
-                    showCommentAction && !statustoExcludeAction.includes("" + commentData.status) && contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
+                            !!commentData.repliedPrivately && (createElement(Fragment, null, "\u00A0|\u00A0Responded Privately")),
+                            !!commentData.showMsgStatus && (createElement(Fragment, null,
+                                "\u00A0 | \u00A0",
+                                commentData.msgStatus === 'failed' ? (createElement(FailedIcon, null)) : commentData.msgStatus === 'pending' ? (createElement(PendingIcon, null)) : (createElement(SuccessIcon, null)))))),
+                    showCommentAction &&
+                        !statustoExcludeAction.includes("" + commentData.status) &&
+                        contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
                         createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -5147,10 +5148,13 @@ var FeedPost = function (_a) {
                                 ? { margin: '-10px 0 0 10px' }
                                 : {} },
                             !!editReply && editReply.id === reply.id && (createElement(Fragment, null,
-                                createElement("span", { className: "" + editButtonStyle, onClick: function () { return !!handleReplyEdit && handleReplyEdit(reply, editText, function () {
-                                        setEditReply(null);
-                                        setEditText('');
-                                    }); } }, "Reply"),
+                                createElement("span", { className: "" + editButtonStyle, onClick: function () {
+                                        return !!handleReplyEdit &&
+                                            handleReplyEdit(reply, editText, function () {
+                                                setEditReply(null);
+                                                setEditText('');
+                                            });
+                                    } }, "Reply"),
                                 "\u00A0 | \u00A0",
                                 createElement("span", { className: "" + editButtonCancelStyle, onClick: function () {
                                         setEditText('');
@@ -5160,22 +5164,22 @@ var FeedPost = function (_a) {
                                 "\u00A0|")),
                             "\u00A0",
                             reply.time,
-                            !!reply.messageType && createElement("span", null,
+                            !!reply.messageType && (createElement("span", null,
                                 "\u00A0 | ",
-                                reply.messageType),
-                            !!reply.repliedBy && reply.source !== 'customer' && createElement("span", null,
+                                reply.messageType)),
+                            !!reply.repliedBy && reply.source !== 'customer' && (createElement("span", null,
                                 "\u00A0 | ",
-                                reply.repliedBy),
+                                reply.repliedBy)),
                             !!reply.status && reply.status === 'edited' && (createElement("span", null,
                                 " \u00A0 | ",
                                 reply.status)),
-                            !!reply.repliedPrivately && createElement(Fragment, null, "\u00A0|\u00A0Responded Privately"),
-                            !!reply.showMsgStatus &&
-                                createElement(Fragment, null,
-                                    "\u00A0| \u00A0",
-                                    reply.msgStatus === 'failed' ? createElement(FailedIcon, null) : reply.msgStatus === 'pending' ?
-                                        createElement(PendingIcon, null) : createElement(SuccessIcon, null)))),
-                    showAction && !statustoExcludeAction.includes("" + reply.status) && reply.contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
+                            !!reply.repliedPrivately && (createElement(Fragment, null, "\u00A0|\u00A0Responded Privately")),
+                            !!reply.showMsgStatus && (createElement(Fragment, null,
+                                "\u00A0| \u00A0",
+                                reply.msgStatus === 'failed' ? (createElement(FailedIcon, null)) : reply.msgStatus === 'pending' ? (createElement(PendingIcon, null)) : (createElement(SuccessIcon, null)))))),
+                    showAction &&
+                        !statustoExcludeAction.includes("" + reply.status) &&
+                        reply.contentType !== 'note' && (createElement("div", { style: { position: 'relative' } },
                         createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -5281,7 +5285,7 @@ FeedPost.defaultProps = {
     },
     handleReplyCancel: function () {
         console.log('Reply Edit Cancel button clicked');
-    }
+    },
 };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();

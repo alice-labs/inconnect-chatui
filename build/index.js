@@ -4888,6 +4888,7 @@ var replyContentText = lib_18({
     marginTop: 5,
     marginBottom: 5,
     wordBreak: 'break-word',
+    whiteSpace: 'pre',
 });
 var replyContentNote = lib_18({
     background: '#feefc3',
@@ -5076,13 +5077,13 @@ var FeedPost = function (_a) {
                             getReplyContent(commentData)),
                         React.createElement("p", { className: "" + postTimeStyle },
                             commentData.time,
-                            !!commentData.repliedPrivately && React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately"),
-                            !!commentData.showMsgStatus &&
-                                React.createElement(React.Fragment, null,
-                                    "\u00A0 | \u00A0",
-                                    commentData.msgStatus === 'failed' ? React.createElement(FailedIcon, null) : commentData.msgStatus === 'pending' ?
-                                        React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))),
-                    showCommentAction && !statustoExcludeAction.includes("" + commentData.status) && contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
+                            !!commentData.repliedPrivately && (React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately")),
+                            !!commentData.showMsgStatus && (React.createElement(React.Fragment, null,
+                                "\u00A0 | \u00A0",
+                                commentData.msgStatus === 'failed' ? (React.createElement(FailedIcon, null)) : commentData.msgStatus === 'pending' ? (React.createElement(PendingIcon, null)) : (React.createElement(SuccessIcon, null)))))),
+                    showCommentAction &&
+                        !statustoExcludeAction.includes("" + commentData.status) &&
+                        contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
                         React.createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -5154,10 +5155,13 @@ var FeedPost = function (_a) {
                                 ? { margin: '-10px 0 0 10px' }
                                 : {} },
                             !!editReply && editReply.id === reply.id && (React.createElement(React.Fragment, null,
-                                React.createElement("span", { className: "" + editButtonStyle, onClick: function () { return !!handleReplyEdit && handleReplyEdit(reply, editText, function () {
-                                        setEditReply(null);
-                                        setEditText('');
-                                    }); } }, "Reply"),
+                                React.createElement("span", { className: "" + editButtonStyle, onClick: function () {
+                                        return !!handleReplyEdit &&
+                                            handleReplyEdit(reply, editText, function () {
+                                                setEditReply(null);
+                                                setEditText('');
+                                            });
+                                    } }, "Reply"),
                                 "\u00A0 | \u00A0",
                                 React.createElement("span", { className: "" + editButtonCancelStyle, onClick: function () {
                                         setEditText('');
@@ -5167,22 +5171,22 @@ var FeedPost = function (_a) {
                                 "\u00A0|")),
                             "\u00A0",
                             reply.time,
-                            !!reply.messageType && React.createElement("span", null,
+                            !!reply.messageType && (React.createElement("span", null,
                                 "\u00A0 | ",
-                                reply.messageType),
-                            !!reply.repliedBy && reply.source !== 'customer' && React.createElement("span", null,
+                                reply.messageType)),
+                            !!reply.repliedBy && reply.source !== 'customer' && (React.createElement("span", null,
                                 "\u00A0 | ",
-                                reply.repliedBy),
+                                reply.repliedBy)),
                             !!reply.status && reply.status === 'edited' && (React.createElement("span", null,
                                 " \u00A0 | ",
                                 reply.status)),
-                            !!reply.repliedPrivately && React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately"),
-                            !!reply.showMsgStatus &&
-                                React.createElement(React.Fragment, null,
-                                    "\u00A0| \u00A0",
-                                    reply.msgStatus === 'failed' ? React.createElement(FailedIcon, null) : reply.msgStatus === 'pending' ?
-                                        React.createElement(PendingIcon, null) : React.createElement(SuccessIcon, null)))),
-                    showAction && !statustoExcludeAction.includes("" + reply.status) && reply.contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
+                            !!reply.repliedPrivately && (React.createElement(React.Fragment, null, "\u00A0|\u00A0Responded Privately")),
+                            !!reply.showMsgStatus && (React.createElement(React.Fragment, null,
+                                "\u00A0| \u00A0",
+                                reply.msgStatus === 'failed' ? (React.createElement(FailedIcon, null)) : reply.msgStatus === 'pending' ? (React.createElement(PendingIcon, null)) : (React.createElement(SuccessIcon, null)))))),
+                    showAction &&
+                        !statustoExcludeAction.includes("" + reply.status) &&
+                        reply.contentType !== 'note' && (React.createElement("div", { style: { position: 'relative' } },
                         React.createElement("div", { className: "" + moreButton, style: {
                                 height: moreButtonHeightWidth,
                                 width: moreButtonHeightWidth,
@@ -5288,7 +5292,7 @@ FeedPost.defaultProps = {
     },
     handleReplyCancel: function () {
         console.log('Reply Edit Cancel button clicked');
-    }
+    },
 };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
