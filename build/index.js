@@ -4888,7 +4888,7 @@ var replyContentText = lib_18({
     marginTop: 5,
     marginBottom: 5,
     wordBreak: 'break-word',
-    whiteSpace: 'pre',
+    whiteSpace: 'pre-line',
 });
 var replyContentNote = lib_18({
     background: '#feefc3',

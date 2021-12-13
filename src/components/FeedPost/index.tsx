@@ -102,7 +102,7 @@ const replyContentText = css({
   marginTop: 5,
   marginBottom: 5,
   wordBreak: 'break-word',
-  whiteSpace: 'pre',
+  whiteSpace: 'pre-line',
 });
 
 const replyContentNote = css({
