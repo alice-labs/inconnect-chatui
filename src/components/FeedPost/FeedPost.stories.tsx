@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FeedPost from './index';
 
-import {withInfo} from '@storybook/addon-info';
+import { withInfo } from '@storybook/addon-info';
 
 const styleOfStoryContainer = {
   border: '1px solid #184D47',
@@ -12,7 +12,7 @@ const styleOfStoryContainer = {
   background: '#f2f6f7',
 };
 
-export default {title: 'FeedPost', decorators: [withInfo]};
+export default { title: 'FeedPost', decorators: [withInfo] };
 
 export const Example = () => (
   <div style={styleOfStoryContainer}>
@@ -27,8 +27,12 @@ export const Example = () => (
       contentType='text'
       showAction={false}
       showCommentAction={true}
-      handleCommentDelete={(comment: any) => console.log(comment, 'is clicked for delete')}
-      handleCommentHide={(comment: any) => console.log(comment, 'is clicked for hide')}
+      handleCommentDelete={(comment: any) =>
+        console.log(comment, 'is clicked for delete')
+      }
+      handleCommentHide={(comment: any) =>
+        console.log(comment, 'is clicked for hide')
+      }
       handleDelete={(reply: any) => console.log(reply, 'is Clicked for Delete')}
       handleEdit={(reply: any) => console.log(reply, 'is Clicked for Edit')}
       handleHide={(reply: any) => console.log(reply, 'is Clicked for Hide')}
@@ -67,7 +71,7 @@ export const Example = () => (
           status: 'add',
           msgStatus: 'pending',
           showMsgStatus: true,
-          repliedBy: 'agent 007'
+          repliedBy: 'agent 007',
         },
         {
           id: 1,
@@ -83,7 +87,7 @@ export const Example = () => (
           msgStatus: 'sent',
           showMsgStatus: true,
           messageType: 'comment',
-          repliedBy: 'agent 007'
+          repliedBy: 'agent 007',
         },
         {
           id: 2,
@@ -305,8 +309,13 @@ export const ExampleEditReply = () => (
       ]}
       content='Donec et libero purus. Quisque ac erat nec tortor consectetur scelerisque a sed urna. Cras placerat tincidunt lacus. Phasellus ultrices diam vitae enim ornare, id tristique lectus lacinia. Morbi nec consequat nisl. Morbi et faucibus sem. Ut scelerisque turpis vel turpis pharetra dapibus. Vivamus quis neque a turpis sodales luctus in vitae lorem. Etiam varius, ante sed blandit egestas, arcu lacus consectetur ante, sit amet accumsan est lacus eget ipsum. Vivamus aliquet diam ac cursus convallis.'
       contentType='image'
+      showCommentAction={true}
+      showHideCommentAction={true} //these are manual triggers to control each segment
+      showDeleteCommentAction={true}
       showAction={true}
-      showCommentAction={false}
+      showEditReplyAction={true}
+      showHideReplyAction={true}
+      showDeleteReplyAction={true}
       commentData={{
         id: 0,
         name: 'A Ranodom Comment User',
@@ -360,7 +369,8 @@ export const ExampleEditReply = () => (
             'https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png',
           time: '1h ago',
           contentType: 'image',
-          image: 'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
+          image:
+            'https://images.unsplash.com/photo-1595996403906-5548d25dd865?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1789&q=80',
           content: 'lorem',
           source: 'bot',
           messageType: 'Message',
@@ -386,7 +396,6 @@ export const ExampleEditReply = () => (
         console.log(reply, text, 'reply Edited');
         resetCallback();
       }}
-
     />
   </div>
 );
